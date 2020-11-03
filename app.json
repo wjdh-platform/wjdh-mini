@@ -1,0 +1,36 @@
+{
+  "pages": [
+    "pages/property/property",
+    "pages/personal/personal",
+    "pages/personal/getCode/getCode",
+    "pages/login/login"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "万家灯火",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#707070",
+    "selectedColor": "#1D96FF",
+    "borderStyle": "black",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/property/property",
+        "text": "物业",
+        "iconPath": "/static/tabBar/property.png",
+        "selectedIconPath": "/static/tabBar/propertyA.png"
+      },
+      {
+        "pagePath": "pages/personal/personal",
+        "text": "我的",
+        "iconPath": "/static/tabBar/personal.png",
+        "selectedIconPath": "/static/tabBar/personalA.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

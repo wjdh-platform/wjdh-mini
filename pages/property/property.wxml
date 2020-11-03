@@ -1,0 +1,14 @@
+<!--pages/property/property.wxml-->
+<view class="propertyMain">
+  <image class="banner" src='/static/image/banner.jpeg'></image>
+<view class="tabList">
+  <view class="tabCol" bindtap="bindCell">
+    <image src="/static/image/bindCell.png"></image>
+    <view class="bindText">绑定小区</view>
+  </view>
+  <view class="tabCol" bindtap="bindFamily">
+    <image src="/static/image/bindFa.png"></image>
+    <view class="bindText">添加家属</view>
+  </view>
+</view>
+</view>
