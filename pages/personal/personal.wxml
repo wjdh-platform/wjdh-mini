@@ -1,2 +1,28 @@
 <!--pages/personal/personal.wxml-->
-<text>pages/personal/personal.wxml</text>
+<view class="personal">
+    <view class="headerBg">
+    <view class="userCont" bindtap="getLogin">
+    <!-- <button  wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> </button> -->
+    <!-- <button  wx:else bindtap="getLogin"> </button> -->
+        <view class="userImg">
+          <image src="{{userInfo?userInfo.avatarUrl:defUserImg}}"></image>
+        </view>
+        <view class="userName">{{userNameType?'已登录':'请点击登录'}}</view>
+         
+      </view>
+    </view>
+    <view class="personalCont">
+      <view class="list">
+        <view class="listColumn" bindtap="houseListO">
+          <image src="./../../static/image/houseList.png" class="houseList"></image>
+          <view class="listText">房屋列表</view>
+          <image src="./../../static/image/arrow.png" class="arrow"></image>
+        </view>
+        <view class="listColumn">
+          <image src="./../../static/image/perListF.png" class="houseList"></image>
+          <view class="listText">家属/租客</view>
+          <image src="./../../static/image/arrow.png" class="arrow"></image>
+        </view>
+      </view>
+    </view>
+</view>

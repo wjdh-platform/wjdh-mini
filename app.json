@@ -2,8 +2,10 @@
   "pages": [
     "pages/property/property",
     "pages/personal/personal",
-    "pages/personal/getCode/getCode",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/bindCell/bindCell",
+    "pages/houseList/ownerHouseList/ownerHouseList",
+    "pages/login/register/register"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,0 +1,5 @@
+/* pages/property/property.wxss */
+.banner{
+  width: 750rpx;
+  height: 350rpx;
+}

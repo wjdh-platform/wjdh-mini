@@ -1,0 +1,128 @@
+<!--pages/bindCell/bindCell.wxml-->
+<view class="bindCell">
+<!-- 校验手机号 -->
+<view class="verificationPhoto" wx:if="{{popupType}}">
+  <view class="phoneCode">
+    <view class="closePopup" bindtap="closePopup"></view>
+    <view class="popupTitle">校验手机号</view>
+    <view class="photoText">
+      <image src="./../../static/image/photoIcon.png" class="photoIcon"></image>
+      <input placeholder="请输入手机号"  bindblur="phoneBlur" placeholder-class="phototextPP" class="phototextP"></input>
+    </view>
+    <view class="photoText">
+      <image src="./../../static/image/codeIcon.png" class="photoIcon codeIcon"></image>
+      <input placeholder="请输入验证码" placeholder-class="phototextPP" class="phototextP" bindblur="codeBlur"></input>
+      <view class="codeBtn" bindtap="obtainCode">{{codeBtnText}}</view>
+    </view>
+    <view class="verificationBtn" bindtap="verificationBtn">确定</view>
+  </view>
+</view>
+<form bindsubmit="submitCell">
+  <view class="houseCont">
+    <view class="column">
+      <view class="title">小区</view>
+      <picker bindchange="bindvillageList" value="{{villageIdx}}" range="{{villageList}}" range-key="community_name">
+    <view class="picker">
+      {{villageList[villageIdx].community_name}}
+    </view>
+  </picker>
+      <image class="arrow" src="./../../static/image/arrow.png"></image>
+    </view>
+    <view class="column" wx:if="{{buildingsList}}">
+      <view class="title">楼栋</view>
+      <picker bindchange="bindBuildingsList" value="{{buildingsIdx}}" range="{{buildingsList}}" range-key="building_name" data-id="{{buildingsList[buildingsIdx].id}}">
+    <view class="picker">
+      {{buildingsList[buildingsIdx].building_name}}
+    </view>
+  </picker>
+      <image class="arrow" src="./../../static/image/arrow.png"></image>
+    </view>
+    <view class="column" wx:if="{{unitsList}}">
+      <view class="title">单元</view>
+      <picker bindchange="bindUnitsList" value="{{unitsIdx}}" range="{{unitsList}}" range-key="unit_name" data-id="{{unitsList[unitsIdx].id}}">
+    <view class="picker">
+      {{unitsList[unitsIdx].unit_name}}
+    </view>
+  </picker>
+      <image class="arrow" src="./../../static/image/arrow.png"></image>
+    </view>
+    <view class="column" wx:if="{{floorList}}">
+      <view class="title">楼层</view>
+      <picker bindchange="bindFloorList" value="{{floorIdx}}" range="{{floorList}}" range-key="floor_name" data-id="{{floorList[floorIdx].id}}">
+    <view class="picker">
+      {{floorList[floorIdx].floor_name}}
+    </view>
+  </picker>
+      <image class="arrow" src="./../../static/image/arrow.png"></image>
+    </view>
+    <view class="column" wx:if="{{roomList}}">
+      <view class="title">房间号</view>
+      <picker bindchange="bindRoomList" value="{{roomIdx}}" range="{{roomList}}" range-key="house_name" data-id="{{roomList[roomIdx].id}}">
+    <view class="picker">
+      {{roomList[roomIdx].house_name}}
+    </view>
+  </picker>
+      <image class="arrow" src="./../../static/image/arrow.png"></image>
+    </view>
+  </view>
+  <view class="msgCont" wx:if="{{yezhuOldPhone}}">
+    <view class="msgColumn">
+      <view class="msgTitle">业主手机号</view>
+      <input type="text" name="sex" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value=""></input>
+      <view class="codeBtn" bindtap="obtainCode">{{codeBtnText}}</view>
+    </view>
+  </view>
+  <view class="msgCont">
+    <view class="msgColumn">
+      <view class="msgTitle">身份证号</view>
+      <input type="text" name="IDNumber" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{codeText}}"></input>
+      <view class="photograph" bindtap="uploadImg">
+        <image src="./../../static/image/photoID.png"></image>
+        <text>拍照识别</text>
+      </view>
+    </view>
+    <view class="msgColumn">
+      <view class="msgTitle">真实姓名</view>
+      <input type="text" name="userName" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{name}}"></input>
+    </view>
+    <view class="msgColumn">
+      <view class="msgTitle">民族</view>
+      <input type="text" name="nation" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{nation}}"></input>
+    </view>
+    <view class="msgColumn">
+      <view class="msgTitle">性别</view>
+      <input type="text" name="sex" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{sex}}"></input>
+    </view>
+    <view class="msgColumn">
+      <view class="msgTitle">联系电话</view>
+      <input type="text" name="phone" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{phoneVal}}"></input>
+    </view>
+    <view class="msgColumn">
+      <view class="msgTitle">户籍地址</view>
+      <input type="text" name="address" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{address}}"></input>
+    </view>
+    <view class="msgColumnO">
+      <view class="msgTitle">上传人脸照片</view>
+      <view class="uploadPhoto">
+        <view class="photoClo">
+        <image src="./../../static/image/banner.jpeg" class="photoImg"></image>
+        <image src="./../../static/image/imgClose.png" class="imgClose"></image>
+        </view>
+        <view class="addImg" bindtap="addImg"></view>
+      </view>
+    </view>
+    <view class="btn-area">
+        <button style="margin: 30rpx 0" type="primary" formType="submit">Submit</button>
+      </view>
+
+
+
+
+    
+  </view>
+
+
+
+
+</form>
+</view>

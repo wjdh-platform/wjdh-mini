@@ -42,10 +42,12 @@ function checkLogin() {
 
 //提示框
 function showToast(title, icon) {
+  setTimeout(() => {
   wx.showToast({
     title: title,
     icon: icon
   })
+  },300)
 }
 
 // function shareLogin(fn) {

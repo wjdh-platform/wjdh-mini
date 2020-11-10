@@ -10,11 +10,31 @@ Page({
   data: {
     
   },
+//绑定家属
+  bindFamily(){
+    let t = this;
+    let tocken = utils.getItem('accessToken')
+    if (tocken && tocken != '') {
 
+    } else {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
+  },
+
+
+//绑定小区
   bindCell(){
     let t = this;
-    //utils.shareLogin()
-    
+    let tocken = utils.getItem('accessToken')
+    if(tocken&&tocken!=''){
+      utils.showToast("开发中", "none")
+    }else{
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
   },
   
 
@@ -23,6 +43,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let tocken = utils.getItem('accessToken');
+    wx.login({
+      success(res) {
+        if (tocken && tocken != '') {
+          api.getTockenN({}, (res) => {
+            utils.setItem('accessToken', res.data.access_token)
+          })
+        } else {
+          api.getTocken({
+            code:res.code
+          }, (res) => {
+            utils.setItem('accessToken', res.data.access_token)
+          })
+        }
+      }
+    })
+    
     
   },
 
@@ -37,7 +74,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+  
   },
 
   /**
