@@ -15,7 +15,9 @@ Page({
     let t = this;
     let tocken = utils.getItem('accessToken')
     if (tocken && tocken != '') {
-
+      wx.navigateTo({
+        url: '/pages/bindCell/bindCell?type=family',
+      })
     } else {
       wx.navigateTo({
         url: '/pages/login/login',
@@ -29,7 +31,9 @@ Page({
     let t = this;
     let tocken = utils.getItem('accessToken')
     if(tocken&&tocken!=''){
-      utils.showToast("开发中", "none")
+      wx.navigateTo({
+        url: '/pages/bindCell/bindCell?type=owner',
+      })
     }else{
       wx.navigateTo({
         url: '/pages/login/login',
@@ -49,12 +53,16 @@ Page({
         if (tocken && tocken != '') {
           api.getTockenN({}, (res) => {
             utils.setItem('accessToken', res.data.access_token)
+            app.globalData.roles = res.data.roles
           })
         } else {
           api.getTocken({
             code:res.code
           }, (res) => {
-            utils.setItem('accessToken', res.data.access_token)
+            if(res.data.code == 0){
+              utils.setItem('accessToken', res.data.access_token)
+              app.globalData.roles = res.data.roles
+            }
           })
         }
       }

@@ -1,4 +1,4 @@
-<!--pages/property/property.wxml-->
+
 <view class="propertyMain">
   <image class="banner" src='/static/image/banner.jpeg'></image>
 <view class="tabList">

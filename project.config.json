@@ -1,103 +1,112 @@
 {
-	"description": "项目配置文件",
-	"packOptions": {
-		"ignore": []
-	},
-	"setting": {
-		"urlCheck": false,
-		"es6": true,
-		"postcss": true,
-		"minified": true,
-		"newFeature": true,
-		"coverView": true,
-		"autoAudits": false,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false,
-		"checkInvalidKey": true,
-		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
-		}
-	},
-	"compileType": "miniprogram",
-	"libVersion": "2.13.2",
-	"appid": "wxd1d8a7847e4d52cd",
-	"projectname": "wjdh-miniP",
-	"debugOptions": {
-		"hidedInDevtools": []
-	},
-	"isGameTourist": false,
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"currentL": -1,
-			"list": []
-		},
-		"gamePlugin": {
-			"current": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": -1,
-			"list": [
-				{
-					"id": 0,
-					"name": "pages/personal/getCode/getCode",
-					"pathName": "pages/personal/getCode/getCode",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "登录",
-					"pathName": "pages/login/login",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的",
-					"pathName": "pages/personal/personal",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "业主房屋列表",
-					"pathName": "pages/houseList/ownerHouseList/ownerHouseList",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "注册",
-					"pathName": "pages/login/register/register",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "绑定小区",
-					"pathName": "pages/bindCell/bindCell",
-					"scene": null
-				}
-			]
-		}
-	}
+  "description": "项目配置文件",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.13.2",
+  "appid": "wxd1d8a7847e4d52cd",
+  "projectname": "wjdh-miniP",
+  "debugOptions": {
+    "hidedInDevtools": []
+  },
+  "isGameTourist": false,
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": 0,
+          "name": "pages/personal/getCode/getCode",
+          "pathName": "pages/personal/getCode/getCode",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "登录",
+          "pathName": "pages/login/login",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的",
+          "pathName": "pages/personal/personal",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "业主房屋列表",
+          "pathName": "pages/houseList/ownerHouseList/ownerHouseList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "注册",
+          "pathName": "pages/login/register/register",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "绑定小区",
+          "pathName": "pages/bindCell/bindCell",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "小区列表",
+          "pathName": "pages/houseList/ownerHouseList/ownerHouseList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

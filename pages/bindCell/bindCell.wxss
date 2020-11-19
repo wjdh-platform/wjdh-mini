@@ -6,6 +6,9 @@ page{
   margin-top: 30rpx;
   background: #fff;
 }
+.msgCont{
+  padding-bottom: 40rpx;
+}
 .column{
   display: flex;
   align-items: center;
@@ -164,13 +167,17 @@ picker{
   padding: 60rpx 0 10rpx;
   position: relative;
 }
-.codeBtn{
+.codeBtn,.codeBtnYZ{
   position: absolute;
   right: 0;
   top: 60rpx;
   z-index: 4;
   font-size: 28rpx;
   color: #50DABE;
+}
+.codeBtnYZ{
+  top: 30rpx;
+  right: 40rpx;
 }
 .verificationBtn{
   width: 338rpx;
@@ -183,3 +190,43 @@ picker{
   font-size: 24rpx;
   color: #fff;
 }
+.checkMoreBtn{
+  width: 184rpx;
+  height: 59rpx;
+  border: 2rpx solid #50DABE;
+  border-radius: 8rpx;
+  margin: 0 auto 40rpx;
+  font-size: 25rpx;
+  color: #50DABE;
+ text-align: center;
+ line-height: 59rpx;
+}
+.btn-area button{
+  width: 653rpx !important;
+  height: 73rpx !important;
+  background: #50DABE !important;
+  border-radius: 8rpx;
+  font-size: 26rpx !important;
+  color: #fff;
+}
+
+radio .wx-radio-input{ 
+  /* 自定义样式.... */
+    height: 40rpx; 
+    width: 40rpx;
+    margin-top: -4rpx;
+    border-radius: 50%;
+    border: 2rpx solid #999;
+    background: transparent;
+ }
+ label{
+   padding: 30rpx 40rpx;
+  display: inline-block;
+  font-size: 30rpx;
+  color: #424242
+
+ }
+ .cellName{
+   font-size: 30rpx;
+   color: #424242;
+ }

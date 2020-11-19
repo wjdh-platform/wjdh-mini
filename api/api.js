@@ -64,5 +64,16 @@ export const yezhu = (params, cb) => {
 export const bellInitialize = (params, cb) => {
   request('api/v1/weapp/initialize', params, cb, 'post')
 }
-
+//提交一标三实
+export const yibiaosanshi = (params, cb) => {
+  request('api/v1/weapp/yibiaosanshi', params, cb, 'post')
+}
+//业主手机校验
+export const yezhuCode = (params, cb) => {
+  request('api/v1/security/yezhu-code', params, cb, 'post')
+}
+//小区列表
+export const housesList = (params, cb) => {
+  request('api/v1/user/housesList', params, cb, 'post')
+}
 
