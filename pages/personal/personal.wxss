@@ -42,18 +42,19 @@
   height: 110rpx;
   width: 690rpx;
   margin: 0 auto;
-  border-bottom: solid 1rpx #9A9A9A;
+  border-bottom: solid 1rpx #e8e8e8;
   display: flex;
   align-items: center;
 }
 .houseList{
-  width: 44rpx;
-  height: 50rpx;
+  width: 39rpx;
+  height: 42rpx;
 }
 .listText{
   flex: 1;
   text-align: left;
   margin-left: 30rpx;
+  color: #393939;
 }
 .arrow{
   width:14rpx;

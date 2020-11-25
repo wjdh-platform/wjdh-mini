@@ -32,16 +32,17 @@
   color: #50DABE;
 }
 .registerBtn{
-  width: 610rpx;
+  width: 610rpx !important;
   height: 88rpx;
   margin: 0 auto;
   text-align: center;
-  line-height: 88rpx;
+  line-height: 88rpx !important;
   color: #fff;
-  font-size: 34rpx;
+  font-size: 34rpx !important;
   background: #50DABE;
-  border-radius: 44rpx;
+  border-radius: 44rpx !important;
   margin-top: 75rpx;
+  padding: 0 !important;
   box-shadow: 0rpx 5rpx 10rpx #50DABE;
 }
 .form .title{

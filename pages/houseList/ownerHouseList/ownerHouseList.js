@@ -9,29 +9,52 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list:[{
-      houseId:'1',
-      cellName:'秦皇小区',
-      examineType:'已绑定'
-    },
-      {
-        houseId: '2',
-        cellName: '盛达鑫苑',
-        examineType: '未通过'
-      }]
+    listType:false
   },
 
   bindListDetail(e){
-    console.log(e.currentTarget.dataset.houseId)
-    wx.navigateTo({
-      url: '/pages/bindCell/bindCell?type=cellList',
-    })
+    console.log(e.currentTarget.dataset)
+    let id = e.currentTarget.dataset.houseid,
+         shenhe_id = e.currentTarget.dataset.shenheid,
+         role = e.currentTarget.dataset.role
+         if(id){
+          wx.navigateTo({
+            url: '/pages/houseDetails/houseDetails?houseId='+id+'&role='+role,
+          })
+         }else{
+         }
   },
 
   //获取列表
   housesList(){
+    let t = this
     api.housesList({},(res)=>{
-
+      let list = res.data.data
+      if(list == []){
+        t.setData({
+          listType: false
+        })
+      }else{
+        t.setData({
+          listType: true,
+        })
+      for(let i = 0; i<list.length;i++){
+        switch(list[i].status){
+          case 0: 
+          list[i].statusVal = '未通过审核'
+          break;
+          case 1: 
+          list[i].statusVal = '已通过审核'
+          break;
+          case 2: 
+          list[i].statusVal = '待审核'
+          break;
+        }
+      }
+      t.setData({
+        houseList:res.data.data,
+      })
+    }
     })
   },
 

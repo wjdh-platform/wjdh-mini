@@ -28,7 +28,8 @@
     "userConfirmedUseCompilerModuleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "bundle": false
   },
   "compileType": "miniprogram",
   "libVersion": "2.13.2",
@@ -104,6 +105,13 @@
         {
           "name": "pages/index/index",
           "pathName": "pages/index/index",
+          "scene": null,
+          "query": ""
+        },
+        {
+          "name": "小区详情",
+          "pathName": "pages/houseDetails/houseDetails",
+          "query": "id=1&role=1",
           "scene": null
         }
       ]

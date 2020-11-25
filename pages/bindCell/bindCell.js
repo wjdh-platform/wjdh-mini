@@ -42,6 +42,9 @@ Page({
     cellList:false,
     pagesType:false,
     ownerType:false,
+    codeAgain:true,
+    codeAgainYZ:true,
+    pageType:true
   },
   bindFwyt(e){
     this.setData({
@@ -145,6 +148,10 @@ Page({
     var that = this;
     var phone = that.data.yezhuOldPhone;
     var currentTime = that.data.currentTimeYZ
+    if(that.data.codeAgainYZ){
+      that.setData({
+        codeAgainYZ:false
+      })
       api.getCode({
         phone: that.data.yezhuOldPhone,
         type: "verify",
@@ -167,6 +174,7 @@ Page({
               that.setData({
                 codeBtnTextYZ: '重新发送',
                 currentTimeYZ: 61,
+                codeAgainYZ:true
               })
             }
           }, 1000);
@@ -175,6 +183,7 @@ Page({
           })
         }
       })
+    }
     // };
   },
 
@@ -183,6 +192,10 @@ Page({
     var that = this;
     var phone = that.data.phoneVal;
     var currentTime = that.data.currentTime
+    if(that.data.codeAgain){
+      that.setData({
+        codeAgain:false
+      })
     if (phone == '') {
       utils.showToast("手机号码不能为空", "none")
     } else if (phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
@@ -210,6 +223,7 @@ Page({
               that.setData({
                 codeBtnText: '重新发送',
                 currentTime: 61,
+                codeAgain: true
               })
             }
           }, 1000);
@@ -218,6 +232,7 @@ Page({
           })
         }
       })
+    }
     };
   },
 
@@ -235,12 +250,17 @@ Page({
         verification_key: t.data.getCodeKeyLogin,
         verification_code:t.data.codeVal
       },(res)=>{
-        if(res.data.code == 1){
+        if(res.data.code == 0){
           utils.showToast(res.data.msg,"none")
           t.setData({
             popupType: false
           })
-        }else if(res.data.code == 0){
+          wx.navigateTo({
+            url: '/pages/houseList/ownerHouseList/ownerHouseList',
+          })
+        }else if(res.data.code == 1){
+          utils.showToast(res.data.msg,"none")
+        }else{
           t.setData({
             popupType: false
           })
@@ -265,7 +285,7 @@ Page({
     t.setData({
       villageIdx: idx
     })
-    api.getBuildings({ id: list[idx].id},(res)=>{
+    api.getBuildings({ id: list[idx].community_identifier},(res)=>{
       let data = res.data
       if(data.code == 0){
         utils.showToast(res.data.message,"none")
@@ -411,7 +431,12 @@ Page({
     let t = this
     api.bellInitialize({}, (res) => {
       if (res.data.code == 1) {
-        
+        if(!t.data.pageType){
+          let arr = res.data.data.role,
+               arrChange=arr.shift()
+          console.log(arr)
+          console.log(arrChange)
+        }
         t.setData({
           dataList: res.data.data
         })
@@ -424,33 +449,33 @@ Page({
     console.log(e.detail.errMsg)
   },
   // 获取百度access_token
-  getBaiduToken: function () {
-    const apiKey = 'aEo4u7peePL39qjpEfYbc7Dv';
-    const seckey = 'pozj20ovr7SSudqyAKQFPjQFGEL8sx6o';
-    const tokenUrl = `https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=${apiKey}&client_secret=${seckey}`;
+  // getBaiduToken: function () {
+  //   const apiKey = 'aEo4u7peePL39qjpEfYbc7Dv';
+  //   const seckey = 'pozj20ovr7SSudqyAKQFPjQFGEL8sx6o';
+  //   const tokenUrl = `https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=${apiKey}&client_secret=${seckey}`;
 
-    let that = this;
-    wx.request({
-      url: tokenUrl,
-      method: 'POST',
-      dataType: 'json',
-      header: {
-        'content-type': 'application/json; charset=UTF-8'
-      },
-      success: function (res) {
-        console.log('getBaiduToken提示pass', res);
-        that.setData({
-          baiduToken: res.data.access_token
-        })
-      },
-      fail: function (res) {
-        console.log('getBaiduToken提示fail', res);
-      }
-    })
-  },
+  //   let that = this;
+  //   wx.request({
+  //     url: tokenUrl,
+  //     method: 'POST',
+  //     dataType: 'json',
+  //     header: {
+  //       'content-type': 'application/json; charset=UTF-8'
+  //     },
+  //     success: function (res) {
+  //       console.log('getBaiduToken提示pass', res);
+  //       that.setData({
+  //         baiduToken: res.data.access_token
+  //       })
+  //     },
+  //     fail: function (res) {
+  //       console.log('getBaiduToken提示fail', res);
+  //     }
+  //   })
+  // },
   // 上传图片
   uploadImg: function () {
-    let that = this;
+    let t = this;
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
@@ -464,8 +489,15 @@ Page({
           filePath: tempFilePaths[0],
           encoding: 'base64',
           success: res => {
-            // console.log('读图片数据pass', res.data);
-            that.scanImageInfo(res.data);
+            console.log('data:image/png;base64,' + res.data)
+            api.idcard({
+              image: res.data
+            },(res)=>{
+              console.log(res.data.data)
+              t.setData({
+                idcardData:res.data.data
+              })
+            })
           },
           fail: res => {
             console.log('读图片数据fail', res.data);
@@ -475,100 +507,44 @@ Page({
     })
   },
   // 扫描图片中的数据
-  scanImageInfo: function (imageData) {
-    let that = this;
-    const detecUrl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/idcard?access_token=' + this.data.baiduToken;
-    wx.showLoading({
-      title: '加载中',
-    });
-    wx.request({
-      url: detecUrl,
-      data: {
-        image: imageData,
-        id_card_side: 'front'
-      },
-      method: 'POST',
-      dataType: 'json',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: res => {
-        this.setData({
-          address: res.data.words_result.住址.words,
-          name: res.data.words_result.姓名.words,
-          sex: res.data.words_result.性别.words,
-          codeText: res.data.words_result.公民身份号码.words,
-          nation: res.data.words_result.民族.words,
-          birth: res.data.words_result.出生.words
-        })
-      },
-      fail: res => {
-        console.log('fail')
-      },
-      complete: res => {
-        wx.hideLoading();
-      }
-    })
-  },
+  // scanImageInfo: function (imageData) {
+  //   let that = this;
+  //   const detecUrl = 'https://yixi.market.alicloudapi.com/ocr/idcard';
+  //   wx.showLoading({
+  //     title: '加载中',
+  //   });
+  //   wx.request({
+  //     url: detecUrl,
+  //     data: {
+  //       image: imageData,
+  //       side: 'front'
+  //     },
+  //     method: 'POST',
+  //     header: {
+  //       'Authorization': 'APPCODE 498b3a6f9e484f5fbbacf77e4a3f147c'
+  //     },
+  //     success: res => {
+  //       console.log(res)
 
-  dataURLtoFile(dataURL, fileName, fileType) {
-    var arr = dataURL.split(','), mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new File([u8arr], fileName, { type: fileType || 'image/jpg' });  //返回file对象
-  },
-
-  // addImg(){
-  //   let that = this
-  //   wx.chooseImage({
-  //     count: 1,
-  //     sizeType: ['compressed'],
-  //     sourceType: ['album', 'camera'],
-  //     success(res) {
-  //       const tempFilePaths = res.tempFilePaths
-  //       that.setData({
-  //         imgSrc: tempFilePaths[0]
-  //       })
-
-  //       wx.getFileSystemManager().readFile({
-  //         filePath: tempFilePaths[0],
-  //         encoding: 'base64',
-  //         success: res => {
-  //           console.log('读图片数据pass', res.data);
-  //           let url = "data:image/png;base64,"+res.data,
-  //             files = that.dataURLtoFile(url, "fileName")
-  //           console.log(files)
-  //         },
-  //         fail: res => {
-  //           console.log('读图片数据fail', res.data);
-  //         }
-  //       })
-  //       // wx.uploadFile({
-  //       //   url: 'https://tc.mg.cool/api/v1/peoplephoto',
-  //       //   filePath: tempFilePaths[0],
-  //       //   name: 'file',
-  //       //   success(res) {
-  //       //     const data = JSON.parse(res.data)
-  //       //     if(data.code == 0){
-  //       //       that.setData({
-  //       //         photoUrl: data.data
-  //       //       })
-  //       //       utils.showToast(data.msg,'none')
-  
-  //       //     }
-  
-  //       //   }
-  //       // })
-  
-  
+  //     },
+  //     fail: res => {
+  //       console.log('fail')
+  //     },
+  //     complete: res => {
+  //       wx.hideLoading();
   //     }
   //   })
   // },
 
+
+
   addImg(e) {
-    var _this = this;
+    var _this = this,
+          data = _this.data
+          if(data.roomIdx == 0){
+            utils.showToast('请先选择要绑定的房子','none')
+            return
+          }
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'],
@@ -578,7 +554,7 @@ Page({
           success: function (res) {
             console.log(res)
             var ctx = wx.createCanvasContext('photo_canvas');
-            var ratio = 5;
+            var ratio = 0;
             var canvasWidth = res.width
             var canvasHeight = res.height;
             _this.setData({
@@ -587,7 +563,7 @@ Page({
               canvasHeight2: res.height
             })
             // 保证宽高均在200以内
-            while (canvasWidth > 200 || canvasHeight > 200) {
+            while (canvasWidth > 300 || canvasHeight > 300) {
               //比例取整
               canvasWidth = Math.trunc(res.width / ratio)
               canvasHeight = Math.trunc(res.height / ratio)
@@ -606,7 +582,26 @@ Page({
                 success: function (res) {
                   console.log(res.tempFilePath)
                   _this.setData({
-                    bbb: res.tempFilePath
+                    imgSrc: res.tempFilePath
+                  })
+                  wx.uploadFile({
+                    filePath: res.tempFilePath,
+                    formData:{
+                      'community_identifier':data.villageList[data.villageIdx].community_identifier,
+                      'building_number':data.buildingsList[data.buildingsIdx].building_number,
+                      'unit_number':data.unitsList[data.unitsIdx].unit_number,
+                      'floor_number':data.floorList[data.floorIdx].floor_number,
+                      'house_number':data.roomList[data.roomIdx].house_number
+                    },
+                    name: 'file',
+                    url: 'https://tc.mg.cool/api/v1/people/photo',
+                    success(res){
+                      // console.log(JSON.parse(res.data))
+                      let data = JSON.parse(res.data)
+                      _this.setData({
+                        photoUrl:data.data
+                      })
+                    }
                   })
                 },
                 fail: function (error) {
@@ -619,7 +614,6 @@ Page({
             console.log(error)
           }
         })
-
       },
       error: function (res) {
         console.log(res);
@@ -655,58 +649,17 @@ Page({
     let t = this,
          val = e.detail.value,
          data = t.data,
-         dataList =t.data.dataList
-    // if (data.yezhuOldPhone){
-    //   if (val.radio == '') {
-    //     utils.showToast('请选择与业主', 'none')
-    //   }
-    // }
-    // if (verificationPhoneVal == '验证成功'){
-    //   if (val.codeValYZ == '') {
-    //     utils.showToast('请输入业主手机验证码', 'none')
-    //   }
-    // }
-    // if (data.villageIdx == 0) {
-    //   utils.showToast('请选择小区', 'none')
-    // } else if (data.buildingsIdx == 0) {
-    //   utils.showToast('请选择楼栋', 'none')
-    // } else if (data.unitsIdx == 0) {
-    //   utils.showToast('请选择单元', 'none')
-    // } else if (data.floorIdx == 0) {
-    //   utils.showToast('请选择楼层', 'none')
-    // } else if (data.roomIdx == 0) {
-    //   utils.showToast('请选择房间号', 'none')
-    // } else if (val.IDNumber == ''){
-    //   utils.showToast('请输入身份证号','none')
-    // } else if (val.address == '') {
-    //   utils.showToast('请输入户籍地址', 'none')
-    // } else if (val.nation == '') {
-    //   utils.showToast('请输入民族', 'none')
-    // } else if (val.phone == '') {
-    //   utils.showToast('请输入联系电话', 'none')
-    // } else if (val.sex == '') {
-    //   utils.showToast('请输入性别', 'none')
-    // } else if (val.userName == '') {
-    //   utils.showToast('请输入真实姓名', 'none')
-    // } else if (val.birth == '') {
-    //   utils.showToast('请输入生日', 'none')
-    // } else if (val.job == '') {
-    //   utils.showToast('请输入职业', 'none')
-    // } else if (val.company == '') {
-    //   utils.showToast('请输入工作单位', 'none')
-    // } else if (data.photoBase64==''){
-    //   utils.showToast('请上传人脸照片', 'none')
-    //   }else{
-        let param = {
+         dataList =t.data.dataList,
+         param = {
           phone:data.phoneVal,
-          idcard: data.codeText ? data.codeText:'',
-          name: data.name ? data.name:'',
+          idcard: data.idcardData ? data.idcardData.idcard:val.IDNumber,
+          name: data.idcardData ? data.idcardData.name:val.userName,
           // photo: data.photoBase64 == ''?'':'data:image/png;base64,'+data.photoBase64,
           photo: data.photoUrl ? data.photoUrl:'',
-          sex: data.sex ? data.sex:'',
-          birth: val.birth ? val.birth:'',
-          nation: data.nation ? data.nation:'',
-          address: data.address ? data.address:'',
+          sex: data.idcardData ? data.idcardData.gender:val.sex,
+          birth: data.idcardData ? data.idcardData.birthday:val.birth,
+          nation: data.idcardData ? data.idcardData.nation:val.nation,
+          address: data.idcardData ? data.idcardData.address:val.address,
           zzmm: dataList.zzmm[data.zzmmIdx].key,
           tyjr: dataList.tyjr[data.twjrIdx].key,
           dibao:dataList.dibao[data.sfdbIdx].key,
@@ -722,10 +675,13 @@ Page({
           type:dataList.type[data.zhlxIdx].key
         }
       api.yibiaosanshi(param,(res)=>{
-        if(res.data.code == 0){
+        if(res.data.code == 1){
           utils.showToast(res.data.msg,'none')
-        } else if (res.data.code == 1){
+        } else if (res.data.code == 0){
           utils.showToast(res.data.msg, 'none')
+          wx.redirectTo({
+            url: '/pages/houseList/ownerHouseList/ownerHouseList',
+          })
         }
       })
       // }
@@ -754,11 +710,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     let t = this,
-         roles = app.globalData.roles
-    t.getBaiduToken();
+         roles = utils.getItem('userRoles')
+    // t.getBaiduToken();
+    this.bellInitialize()
     t.getVillage();
-    console.log(roles)
     if (roles.includes('NewMember')){
       t.setData({
         popupType:true
@@ -776,7 +733,7 @@ Page({
         break;
       case "family":
         t.setData({
-          // pagesType: false //家属进入
+          pageType: false //家属进入
         })
         break;
       case "cellList":
@@ -792,7 +749,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.bellInitialize()
+    
   },
 
   /**

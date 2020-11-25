@@ -26,5 +26,5 @@
         <input placeholder="请再次输入密码" placeholder-class="placeholderClass"password="true"  bindblur="passwordBlurAgain"></input>
       </view>
     </view>
-    <view class="registerBtn" bindtap="registerBtn">注册</view>
+    <button class="registerBtn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">注册</button>
   </view>

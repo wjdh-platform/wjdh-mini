@@ -2,12 +2,10 @@
 <view class="personal">
     <view class="headerBg">
     <view class="userCont" bindtap="getLogin">
-    <!-- <button  wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> </button> -->
-    <!-- <button  wx:else bindtap="getLogin"> </button> -->
         <view class="userImg">
-          <image src="{{userInfo?userInfo.avatarUrl:defUserImg}}"></image>
+          <image src="{{avatar?avatar:defUserImg}}"></image>
         </view>
-        <view class="userName">{{userNameType?'已登录':'请点击登录'}}</view>
+        <view class="userName">{{name?name:"登录"}}</view>
          
       </view>
     </view>

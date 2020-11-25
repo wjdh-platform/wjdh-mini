@@ -2,9 +2,40 @@ import * as api from '../api/api.js';
 import utils from './../utils/util.js'
 let weChatLoginFlag = true;
 export default (url, data, cb, method) => {
-  let timestamp1 = wx.getStorageSync('timestamp1'),
-       timestampNow= Date.parse(new Date()),
-       token = wx.getStorageSync('accessToken'); //token
+  
+  let  token = wx.getStorageSync('accessToken'),//token
+        currentTime = Date.parse(new Date()),//当前时间
+        timestamp1 = wx.getStorageSync('timestamp1')
+        wx.showLoading({
+          title: '加载中',
+          mask: true
+        })
+        let header = {};
+        
+        if (token) header.Authorization = 'Bearer '+token;
+        header['content-type'] = method == 'get' ? 'application/json' : 'application/x-www-form-urlencoded';
+        header['Accept'] = "application/json";
+        let app = getApp();
+        url = app.servers + '' + url;
+        // if(token){
+        //   if(currentTime>timestamp1+60000){
+        //     console.log("token过期")
+        //     wx.request({
+        //       url: app.servers+'api/v1/authorizations/current', 
+        //       header,
+        //       success (res) {
+        //         console.log(res.data)
+        //       }
+        //     })
+        //     // api.getTockenN({}, (res) => {
+        //     //     // utils.setItem('accessToken', res.data.access_token)
+        //     //     // app.globalData.roles = res.data.roles
+        //     //   })
+        //    }else{
+        //     console.log("token未过期")
+        //    }
+        // }
+  
     // if (timestamp1&&timestampNow > timestamp1 + 3600){
     //   api.getTockenN({}, (res) => {
     //     debugger
@@ -12,17 +43,7 @@ export default (url, data, cb, method) => {
     //     app.globalData.roles = res.data.roles
     //   })
     // }
-  wx.showLoading({
-    title: '加载中',
-    mask: true
-  })
-  let header = {};
   
-  if (token) header.Authorization = 'Bearer '+token;
-  header['content-type'] = method == 'get' ? 'application/json' : 'application/x-www-form-urlencoded';
-  header['Accept'] = "application/json";
-  let app = getApp();
-  url = app.servers + '' + url;
   wx.request({
     url,
     data,

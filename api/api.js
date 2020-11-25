@@ -77,3 +77,13 @@ export const housesList = (params, cb) => {
   request('api/v1/user/housesList', params, cb, 'post')
 }
 
+//小区详情
+export const housesDetails = (params, cb) => {
+  request('api/v1/house/detail', params, cb, 'post')
+}
+
+//身份证验证
+export const idcard = (params, cb) => {
+  request('api/v1/idcard/photo', params, cb, 'post')
+}
+

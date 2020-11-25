@@ -66,12 +66,6 @@
     </view>
     
   </view>
-  <view class="houseCont" wx:if="{{!cellDetail}}">
-    <view class="column">
-      <view class="title">小区</view>
-      <view class="cellName">秦皇小区</view>
-    </view>
-  </view>
   <view class="houseCont" wx:if="{{yezhuOldPhone&&roomType}}">
     <view class="msgColumn">
       <view class="msgTitle">业主手机号</view>
@@ -82,20 +76,20 @@
       <view class="msgTitle">验证码</view>
       <view class="code">
           <input placeholder="请输入验证码" placeholder-class="placeholderClass"  bindblur="codeBlurYZ" name="codeValYZ"></input>
-          <view class="codeBtnYZ" bindtap="verificationPhone">{{verificationPhoneVal}}</view>
+          <view class="codeBtnYZB" bindtap="verificationPhone">{{verificationPhoneVal}}</view>
         </view>
       
     </view>
   </view>
   <!-- <view class="houseCont"> -->
-  <view class="houseCont" wx:if="{{verificationPhoneVal == '验证成功'}}">
+  <view class="houseCont" wx:if="{{verificationPhoneVal == '验证成功'&&pageType}}">
     <radio-group name="radio" bindchange="radioChange">
       <label><radio value="{{dataList.choice[0].key}}"/>{{dataList.choice[0].value}}</label>
       <label><radio value="{{dataList.choice[1].key}}"/>{{dataList.choice[1].value}}</label>
     </radio-group>
   </view>
   <view class="houseCont"> 
-  <view class="column" wx:if="{{shipType||pagesType}}">
+  <view class="column" wx:if="{{shipType||!pageType}}">
     <view class="title">与业主关系</view>
       <picker bindchange="bindShip" value="{{shipIdx}}" range="{{dataList.role}}" range-key="value">
       {{dataList.role[shipIdx].value}}
@@ -132,10 +126,11 @@
     </view>
   </view>
   
-  <view class="msgCont">
+  <!-- <view class="msgCont" wx:if="{{popupType||!pageType}}"> -->
+    <view class="msgCont">
     <view class="msgColumn">
       <view class="msgTitle">身份证号</view>
-      <input type="text" name="IDNumber" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{codeText}}" disabled="{{cellList}}"></input>
+      <input type="number" name="IDNumber" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{idcardData.idcard}}" disabled="{{cellList}}"></input>
       <view class="photograph" bindtap="uploadImg" wx:if="{{!cellList}}">
         <image src="./../../static/image/photoID.png"></image>
         <text>拍照识别</text>
@@ -143,27 +138,27 @@
     </view>
     <view class="msgColumn">
       <view class="msgTitle">真实姓名</view>
-      <input type="text" name="userName" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{name}}" disabled="{{cellList}}"></input>
+      <input type="text" name="userName" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{idcardData.name}}" disabled="{{cellList}}"></input>
     </view>
     <view class="msgColumn">
       <view class="msgTitle">民族</view>
-      <input type="text" name="nation" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{nation}}"></input>
+      <input type="text" name="nation" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{idcardData.nation}}"></input>
     </view>
     <view class="msgColumn">
       <view class="msgTitle">性别</view>
-      <input name="sex" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{sex}}"></input>
+      <input name="sex" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{idcardData.gender}}"></input>
     </view>
     <view class="msgColumn">
       <view class="msgTitle">生日</view>
-      <input name="birth" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{birth}}"></input>
+      <input name="birth" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{idcardData.birthday}}"></input>
     </view>
     <view class="msgColumn">
       <view class="msgTitle">联系电话</view>
-      <input name="phone" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{phoneVal}}"></input>
+      <input type="number" name="phone" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{phoneVal}}"></input>
     </view>
     <view class="msgColumn">
       <view class="msgTitle">户籍地址</view>
-      <input type="text" name="address" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{address}}"></input>
+      <input type="text" name="address" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{idcardData.address}}"></input>
     </view>
     <view class="msgColumn">
       <view class="msgTitle">职业</view>
@@ -206,12 +201,14 @@
       <view class="msgTitle">上传人脸照片</view>
       <view class="uploadPhoto">
         <view class="photoClo" wx:if="{{imgSrc}}">
-        <image src="{{imgSrc}}" class="photoImg" data-number="0" src="{{ uploadPic[0] }}" alt="" mode="widthFix"></image>
+        <image class="photoImg" src="{{ imgSrc}}" alt="" mode="heightFix"></image>
         <image src="./../../static/image/imgClose.png" class="imgClose" bindtap="delPhoto"></image>
-        <canvas canvas-id= "photo_canvas" style= "width:{{canvasWidth}}rpx;height:{{canvasHeight}}rpx;position: absolute;left:-300rpx;top:-300rpx;" ></canvas >
         </view>
         <view class="addImg" bindtap="addImg"></view>
       </view>
+<canvas canvas-id= "photo_canvas" style= "width:{{canvasWidth}}px;height:{{canvasHeight}}px;position: absolute;left:-300px;top:-300px;" ></canvas >
+
+
     </view>
     
     <!-- <view class="checkMoreBtn" bindtap="checkMoreBtn">{{moreText}}</view> -->
@@ -225,10 +222,10 @@
     </view>
     
     
-    <view class="btn-area">
+  </view><view class="btn-area">
   <button  type="primary" formType="submit">提交</button>
 </view>
-  </view>
+
 
 
 

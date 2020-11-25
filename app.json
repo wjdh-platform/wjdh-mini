@@ -6,7 +6,7 @@
     "pages/bindCell/bindCell",
     "pages/houseList/ownerHouseList/ownerHouseList",
     "pages/login/register/register",
-    "pages/index/index"
+    "pages/houseDetails/houseDetails"
   ],
   "window": {
     "backgroundTextStyle": "light",

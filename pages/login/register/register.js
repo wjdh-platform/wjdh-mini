@@ -15,7 +15,9 @@ Page({
     passwordText:'',
     passwordTextAgain:'',
     getCodeKeyLogin:'',
-    clearInterval:''
+    clearInterval:'',
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
   },
   //注册时手机号框失焦
   phoneBlur(e) {
@@ -43,6 +45,8 @@ Page({
       })
     }
   },
+
+
 
   codeBlur(e) {
     this.setData({
@@ -129,28 +133,87 @@ Page({
     }
   },
 
+  getUserInfo: function (e) {
+    let t = this,
+        data = t.data;
+      app.globalData.userInfo = e.detail.userInfo
+      t.setData({
+        userInfo: e.detail.userInfo,
+        hasUserInfo: true
+      })
+      if (data.phone == ""){
+        utils.showToast('请输入手机号',"none")
+      } else if (data.codeText == ""){
+        utils.showToast('请输入验证码', "none")
+      } else if (data.passwordText == "" || data.passwordText<8) {
+        utils.showToast('请输入不少于8位的密码', "none")
+      } else if (data.passwordTextAgain == "" || data.passwordTextAgain < 8) {
+        utils.showToast('请输入不少于8位的密码', "none")
+      }else if (data.passwordText !== data.passwordTextAgain) {
+        utils.showToast('您两次输入的密码不相符', 'none')
+      } else {
+        wx.login({
+          success: res => {
+            if(res.code){
+              let param = {
+                verification_key: data.getCodeKeyLogin,
+                verification_code: data.codeText,
+                password: data.passwordText,
+                code: res.code,
+                name: data.userInfo.nickName,
+                avatar: data.userInfo.avatarUrl
+              }
+              api.registerBtn(param, (res) => {
+                console.log(res.data)
+                if (res.data.code == 1) {
+                  utils.showToast(res.data.message,"none")
+                  
+                }else{
+                  utils.showToast("已登录", "none")
+                  utils.setItem('accessToken', res.data.access_token)
+                  utils.setItem('avatar', res.data.avatar)
+                  utils.setItem('name', res.data.name)
+                  wx.navigateBack({
+  
+                  })
+                }
+  
+              })
+            }else{
+              utils.showToast('code不存在')
+            }
+          }
+        })
+        
+  
+      }
+  },
+
   //点击注册按钮
   registerBtn() {
-    let t = this;
-    if (t.data.phone == ""){
+    let t = this,
+         data = t.data
+    if (data.phone == ""){
       utils.showToast('请输入手机号',"none")
-    } else if (t.data.codeText == ""){
+    } else if (data.codeText == ""){
       utils.showToast('请输入验证码', "none")
-    } else if (t.data.passwordText == "" || t.data.passwordText<8) {
+    } else if (data.passwordText == "" || data.passwordText<8) {
       utils.showToast('请输入不少于8位的密码', "none")
-    } else if (t.data.passwordTextAgain == "" || t.data.passwordTextAgain < 8) {
+    } else if (data.passwordTextAgain == "" || data.passwordTextAgain < 8) {
       utils.showToast('请输入不少于8位的密码', "none")
-    }else if (t.data.passwordText !== t.data.passwordTextAgain) {
+    }else if (data.passwordText !== data.passwordTextAgain) {
       utils.showToast('您两次输入的密码不相符', 'none')
     } else {
       wx.login({
         success: res => {
           if(res.code){
             let param = {
-              verification_key: t.data.getCodeKeyLogin,
-              verification_code: t.data.codeText,
-              password: t.data.passwordText,
+              verification_key: data.getCodeKeyLogin,
+              verification_code: data.codeText,
+              password: data.passwordText,
               code: res.code,
+              name: data.userInfo.nickName,
+              avatar: data.userInfo.avatarUrl
             }
             api.registerBtn(param, (res) => {
               console.log(res.data)
@@ -183,7 +246,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else if (this.data.canIUse) {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
   },
 
   /**

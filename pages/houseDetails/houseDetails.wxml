@@ -1,0 +1,65 @@
+<!--pages/houseDetails/houseDetails.wxml-->
+<view class="houseDetails">
+  <view class="column">
+  <view class="title">{{detailsData.introduction}}<view class="addMember" bindtap="addFamily">增加人员</view></view>
+  <!-- <view class="title">{{detailsData.introduction}}</view> -->
+    <view class="item">
+      <view class="itemTitle">房屋类别</view>
+      <view class="itemText">{{detailsData.house_type}}</view>
+    </view>
+    <view class="item">
+      <view class="itemTitle">房屋用途</view>
+      <view class="itemText">{{detailsData.use}}</view>
+    </view>
+    <view class="item">
+      <view class="itemTitle">房屋性质</view>
+      <view class="itemText">{{detailsData.xingzhi}}</view>
+    </view>
+    <view class="item">
+      <view class="itemTitle">居住现状</view>
+      <view class="itemText">{{detailsData.status}}</view>
+    </view>
+    <view class="item">
+      <view class="itemTitle">住户类型</view>
+      <view class="itemText">{{detailsData.zhuhuleixing}}</view>
+    </view>
+  </view>
+  <view class="column">
+    <view class="tabCont">
+      <view class="tabs  {{currentTab == 0?'active':''}}" data-current="0" bindtap="tabTap">已绑定</view>
+      <view class="tabs {{currentTab == 1?'active':''}}" data-current="1" bindtap="tabTap">未绑定</view>
+      <view class="tabs {{currentTab == 2?'active':''}}" data-current="2" bindtap="tabTap">已激活</view>
+      <view class="tabs {{currentTab == 3?'active':''}}" data-current="3" bindtap="tabTap">未激活</view>
+    </view>
+    <view class="memberList" wx:if="{{currentTab == 0}}">
+      <view class="columnMe" wx:for="{{detailsData.yibangding}}" wx:if="{{detailsData.yibangding!=[]}}">
+        <view class="name">{{item.name}}（{{item.role}}）</view>
+        <!-- <view class="jiebang">解绑</view>  -->
+      </view>
+      <view class="noData"  wx:if="{{detailsData.yibangding.length === 0}}">暂无数据</view>
+    </view>
+    <view class="memberList" wx:if="{{currentTab == 1}}">
+      <view class="columnMe" wx:for="{{detailsData.weibangding}}" wx:if="{{detailsData.weibangding!=[]}}">
+        <view class="name">{{item.name}}（{{item.role}}）</view>
+        <!-- <view class="jiebang">录入</view> -->
+      </view>
+      <view class="noData" wx:if="{{detailsData.weibangding.length === 0}}">暂无数据</view>
+    </view>
+    <view class="memberList" wx:if="{{currentTab == 2}}">
+      <view class="columnMe" wx:for="{{detailsData.yijihuo}}" wx:if="{{detailsData.yijihuo!=[]}}">
+        <view class="name">{{item.name}}（{{item.role}}）</view>
+        <!-- <view class="jiebang">解绑</view> -->
+      </view>
+      <view class="noData" wx:if="{{detailsData.yijihuo.length === 0}}">暂无数据</view>
+    </view>
+    <view class="memberList" wx:if="{{currentTab == 3}}">
+      <view class="columnMe" wx:for="{{detailsData.weijihuo}}" wx:if="{{detailsData.weijihuo!=[]}}">
+        <view class="name">{{item.name}}（{{item.role}}）</view>
+        <!-- <view class="jiebang">解绑</view> -->
+      </view>
+      <view class="noData" wx:if="{{detailsData.weijihuo.length === 0}}">暂无数据</view>
+    </view>
+
+
+  </view>
+</view>

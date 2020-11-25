@@ -47,28 +47,64 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let tocken = utils.getItem('accessToken');
+    let tocken = utils.getItem('accessToken'),
+         currentTime = Date.parse(new Date()),//当前时间
+         timestamp1 = wx.getStorageSync('timestamp1'),
+         t = this
     wx.login({
       success(res) {
+        t.setData({
+          code: res.code
+        })
         if (tocken && tocken != '') {
-          api.getTockenN({}, (res) => {
-            utils.setItem('accessToken', res.data.access_token)
-            app.globalData.roles = res.data.roles
-          })
-        } else {
-          api.getTocken({
-            code:res.code
-          }, (res) => {
-            if(res.data.code == 0){
+          if(currentTime>timestamp1+3600000){
+            console.log("token过期")
+            api.getTockenN({}, (res) => {
+              if(res.data.code == 0){
               utils.setItem('accessToken', res.data.access_token)
-              app.globalData.roles = res.data.roles
+              utils.setItem('userRoles', res.data.roles)
+              if(utils.getItem('avatar')){
+                return true
+              }else{
+                utils.setItem('avatar', res.data.avatar)
+                utils.setItem('name', res.data.name)
+              }
+            }else{
+              t.codeToken()
             }
-          })
+            })
+          }else{
+            console.log("token未过期")
+          }
+        } else {
+          t.codeToken()
         }
       }
     })
     
     
+  },
+
+  //code换token
+  codeToken(){
+    let t = this
+    api.getTocken({
+      code:t.data.code
+    }, (res) => {
+      if(res.data.code == 0){
+        utils.setItem('accessToken', res.data.access_token)
+        utils.setItem('userRoles', res.data.roles)
+        if(utils.getItem('avatar')){
+          return true
+        }else{
+          utils.setItem('avatar', res.data.avatar)
+          utils.setItem('name', res.data.name)
+        }
+        
+      }else if (res.data.code == 1){
+        //游客身份
+      }
+    })
   },
 
   /**

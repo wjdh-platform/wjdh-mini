@@ -1,0 +1,81 @@
+/* pages/houseDetails/houseDetails.wxss */
+page{
+  background: #F8F8F8;
+}
+.column{
+  margin-top: 30rpx;
+  background: #fff;
+}
+.title{
+  font-size: 32rpx;
+  color: #424242;
+  line-height: 32rpx;
+  padding: 40rpx;
+  position: relative;
+}
+.addMember{
+  position: absolute;
+  right: 40rpx;
+  top: 50%;
+  transform: translateY(-50%) ;
+  height: 44rpx;
+  line-height: 44rpx;
+  font-size: 24rpx;
+  color: #fff;
+  background: #50DABE;
+  padding: 0 20rpx;
+  border-radius: 22rpx;
+}
+.item,.columnMe{
+  border-bottom: solid 1rpx #F8F8F8;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 26rpx;
+  color: #424242;
+}
+.itemTitle{
+  color: #8F9199;
+}
+.itemTitle,.itemText{
+  display: inline-block;
+  margin-right: 30rpx;
+}
+.tabCont{
+  height: 90rpx;
+  line-height: 90rpx;
+  border-bottom: solid #F8F8F8 1rpx;
+}
+.tabs{
+  text-align: center;
+  display: inline-block;
+  width: 25%;
+  color: #424242;
+  font-size: 28rpx;
+}
+.active{
+  position: relative;
+}
+.active::after{
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70rpx;
+  height: 6rpx;
+  background: #50DABE;
+  border-radius: 3rpx;
+}
+.columnMe{
+  display: flex;
+  justify-content: space-between;
+}
+.noData{
+  padding: 100rpx 0;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+}

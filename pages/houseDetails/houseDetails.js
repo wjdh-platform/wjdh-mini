@@ -1,4 +1,4 @@
-// pages/personal/personal.js
+// pages/houseDetails/houseDetails.js
 const app = getApp();
 import * as api from '../../api/api'
 import utils from '../../utils/util.js'
@@ -8,25 +8,37 @@ Page({
    * 页面的初始数据
    */
   data: {
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    defUserImg:'./../../static/image/userImg.png',
-    userNameType:false
+    currentTab:0
   },
 
-  getUserInfo: function (e) {
-    let t = this
-      app.globalData.userInfo = e.detail.userInfo
-      t.setData({
-        userInfo: e.detail.userInfo,
-        hasUserInfo: true
-      })
+  tabTap(e){
+    var t = this;
+    if( t.data.currentTab === e.target.dataset.current ) {
+        return false;
+    } else {
+        t.setData( {
+            currentTab: e.target.dataset.current
+        })
+    }
   },
 
-  //点击房屋列表
-  houseListO(e){
+  addFamily(){
     wx.navigateTo({
-      url: '/pages/houseList/ownerHouseList/ownerHouseList',
+      url: "/pages/bindCell/bindCell?type=family",
+    })
+  },
+
+  getHouseDetails(){
+    let t = this
+    api.housesDetails({
+      id: t.data.houseId,
+      role:t.data.role
+    },(res)=>{
+      if(res.data.code == 0){
+        t.setData({
+          detailsData:res.data.data
+        })
+      }
     })
   },
 
@@ -34,13 +46,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let avatar = utils.getItem("avatar"),
-        name = utils.getItem("name"),
-         t = this
-    t.setData({
-      avatar,
-      name
+    console.log(options)
+    this.setData({
+      houseId:options.houseId,
+      role: options.role,
     })
+    this.getHouseDetails()
   },
 
   /**
@@ -50,27 +61,11 @@ Page({
 
   },
 
-  getLogin(){
-    wx.navigateTo({
-      url: '/pages/login/login',
-    })
-  },
-
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let t = this,
-      token = utils.getItem("accessToken")
-    if (token == "") {
-      t.setData({
-        userNameType:false
-      })
-    }else{
-      t.setData({
-        userNameType: true
-      })
-    }
+
   },
 
   /**

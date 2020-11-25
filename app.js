@@ -1,4 +1,5 @@
 //app.js
+import utils from './utils/util.js'
 App({
   servers: "https://tc.mg.cool/",
   getTime(){
@@ -9,7 +10,14 @@ App({
     })
   },
   onLaunch(){
-    this.getTime()
+    let timestamp1 = utils.getItem('timestamp1')
+         
+      if(!timestamp1){
+        this.getTime()
+      }
+      
+       
+
   },
   globalData: {
     roles: ''
