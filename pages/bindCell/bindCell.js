@@ -44,7 +44,9 @@ Page({
     ownerType:false,
     codeAgain:true,
     codeAgainYZ:true,
-    pageType:true
+    pageType:true,
+    photoUrl:'',
+    inputDisable:true
   },
   bindFwyt(e){
     this.setData({
@@ -109,8 +111,18 @@ Page({
   },
 
   checkMoreBtn(){
-    this.setData({
-      moreType:!this.data.moreType
+    let t = this;
+    if(t.data.moreType){
+      t.setData({
+        moreText: '收起',
+      })
+    }else{
+      t.setData({
+        moreText: '点击查看更多',
+      })
+    }
+    t.setData({
+      moreType:!this.data.moreType,
     })
   },
 
@@ -145,23 +157,28 @@ Page({
 
   //业主获取验证码
   obtainCodeYZ() {
-    var that = this;
-    var phone = that.data.yezhuOldPhone;
-    var currentTime = that.data.currentTimeYZ
-    if(that.data.codeAgainYZ){
-      that.setData({
-        codeAgainYZ:false
-      })
+    let that = this,
+         data = that.data,
+         phone = data.yezhuOldPhone,
+         currentTime = data.currentTimeYZ,
+         villageName = data.villageList[data.villageIdx].community_name,
+         buildingName = data.buildingsList[data.buildingsIdx].building_name,
+         unitsName = data.unitsList[data.unitsIdx].unit_name,
+         floorName = data.floorList[data.floorIdx].floor_name,
+         roomName = data.roomList[data.roomIdx].house_name
+    
       api.getCode({
-        phone: that.data.yezhuOldPhone,
-        type: "verify",
+        phone: phone,
+        type: "yezhu",
+        community_house_name: villageName+buildingName+unitsName+floorName+roomName
       }, (res) => {
         if (res.data.code == 1) {
           utils.showToast(res.data.msg, "none")
           return
         } else {
           that.setData({
-            getCodeKeyLoginYZ: res.data.key
+            getCodeKeyLoginYZ: res.data.key,
+            codeAgainYZ:false
           })
           utils.showToast("短信验证码已发送", "none")
           var interval = setInterval(function () {
@@ -183,7 +200,7 @@ Page({
           })
         }
       })
-    }
+    
     // };
   },
 
@@ -192,10 +209,7 @@ Page({
     var that = this;
     var phone = that.data.phoneVal;
     var currentTime = that.data.currentTime
-    if(that.data.codeAgain){
-      that.setData({
-        codeAgain:false
-      })
+    
     if (phone == '') {
       utils.showToast("手机号码不能为空", "none")
     } else if (phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
@@ -210,7 +224,8 @@ Page({
           return
         } else {
           that.setData({
-            getCodeKeyLogin: res.data.key
+            getCodeKeyLogin: res.data.key,
+            codeAgain: false
           })
           utils.showToast("短信验证码已发送", "none")
           var interval = setInterval(function () {
@@ -233,7 +248,7 @@ Page({
         }
       })
     }
-    };
+    
   },
 
  
@@ -255,7 +270,8 @@ Page({
           t.setData({
             popupType: false
           })
-          wx.navigateTo({
+          wx.redirectTo({
+        
             url: '/pages/houseList/ownerHouseList/ownerHouseList',
           })
         }else if(res.data.code == 1){
@@ -280,6 +296,10 @@ Page({
         unitsType: false,
         floorType: false,
         roomType: false,
+        buildingsIdx:0,
+        unitsIdx:0,
+        floorIdx:0,
+        roomIdx:0,
       })
     }
     t.setData({
@@ -287,9 +307,9 @@ Page({
     })
     api.getBuildings({ id: list[idx].community_identifier},(res)=>{
       let data = res.data
-      if(data.code == 0){
+      if(data.code == 1){
         utils.showToast(res.data.message,"none")
-      }else if(data.code == 1&&data.data.length>0){
+      }else if(data.code == 0&&data.data.length>0){
         let list = [],
           oldList = data.data
         list = oldList.unshift({ building_name: '请选择' })
@@ -309,11 +329,14 @@ Page({
     let t = this,
       list = t.data.buildingsList,
       idx = e.detail.value
-    if (t.data.villageIdx != idx) {
+    if (t.data.buildingsIdx != idx) {
       t.setData({
         unitsType: false,
         floorType: false,
         roomType: false,
+        unitsIdx:0,
+        floorIdx:0,
+        roomIdx:0,
       })
     }
     t.setData({
@@ -321,9 +344,9 @@ Page({
     })
     api.getUnits({ id: list[idx].id }, (res) => {
       let data = res.data
-      if (data.code == 0) {
+      if (data.code == 1) {
         utils.showToast(res.data.message, "none")
-      } else if (data.code == 1&&data.data.length>0) {
+      } else if (data.code == 0&&data.data.length>0) {
         let list = [],
           oldList = data.data
         list = oldList.unshift({ unit_name: '请选择' })
@@ -341,10 +364,12 @@ Page({
     let t = this,
       list = t.data.unitsList,
       idx = e.detail.value
-    if (t.data.villageIdx != idx) {
+    if (t.data.unitsIdx != idx) {
       t.setData({
         floorType: false,
         roomType: false,
+        floorIdx:0,
+        roomIdx:0,
       })
     }
     t.setData({
@@ -352,9 +377,9 @@ Page({
     })
     api.getFloor({ id: list[idx].id }, (res) => {
       let data = res.data
-      if (data.code == 0) {
+      if (data.code == 1) {
         utils.showToast(res.data.message, "none")
-      } else if (data.code == 1&&data.data.length>0) {
+      } else if (data.code == 0&&data.data.length>0) {
         let list = [],
           oldList = data.data
         list = oldList.unshift({ floor_name: '请选择' })
@@ -371,20 +396,26 @@ Page({
     let t = this,
       list = t.data.floorList,
       idx = e.detail.value
-
+      if (t.data.floorIdx != idx) {
+        t.setData({
+          roomType: false,
+          roomIdx:0,
+        })
+      }
     t.setData({
       floorIdx: e.detail.value
     })
     api.getRoom({ id: list[idx].id }, (res) => {
       let data = res.data
-      if (data.code == 0) {
+      if (data.code == 1) {
         utils.showToast(res.data.message, "none")
-      } else if (data.code == 1) {
+      } else if (data.code == 0) {
         let list = [],
           oldList = data.data
         list = oldList.unshift({ house_name: '请选择' })
         t.setData({
-          roomList: oldList
+          roomList: oldList,
+          roomType: true,
         })
       }
     })
@@ -407,6 +438,11 @@ Page({
           encryptionPhone:data.data.phone,
           yezhuOldPhone: data.data.people_phone
         })
+      }else{
+        t.setData({
+          pageType:false,
+          ownerType:true
+        })
       }
     })
   },
@@ -415,7 +451,7 @@ Page({
   getVillage(){
     let t = this
     api.getVillage({},(res)=>{
-      if(res.data.code == 1){
+      if(res.data.code == 0){
         let list = [],
           oldList = res.data.data
         list = oldList.unshift({ community_name:'请选择'})
@@ -430,7 +466,7 @@ Page({
   bellInitialize(){
     let t = this
     api.bellInitialize({}, (res) => {
-      if (res.data.code == 1) {
+      if (res.data.code == 0) {
         if(!t.data.pageType){
           let arr = res.data.data.role,
                arrChange=arr.shift()
@@ -448,31 +484,7 @@ Page({
   launchAppError(e) {
     console.log(e.detail.errMsg)
   },
-  // 获取百度access_token
-  // getBaiduToken: function () {
-  //   const apiKey = 'aEo4u7peePL39qjpEfYbc7Dv';
-  //   const seckey = 'pozj20ovr7SSudqyAKQFPjQFGEL8sx6o';
-  //   const tokenUrl = `https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=${apiKey}&client_secret=${seckey}`;
-
-  //   let that = this;
-  //   wx.request({
-  //     url: tokenUrl,
-  //     method: 'POST',
-  //     dataType: 'json',
-  //     header: {
-  //       'content-type': 'application/json; charset=UTF-8'
-  //     },
-  //     success: function (res) {
-  //       console.log('getBaiduToken提示pass', res);
-  //       that.setData({
-  //         baiduToken: res.data.access_token
-  //       })
-  //     },
-  //     fail: function (res) {
-  //       console.log('getBaiduToken提示fail', res);
-  //     }
-  //   })
-  // },
+  
   // 上传图片
   uploadImg: function () {
     let t = this;
@@ -489,13 +501,19 @@ Page({
           filePath: tempFilePaths[0],
           encoding: 'base64',
           success: res => {
-            console.log('data:image/png;base64,' + res.data)
+            // console.log('data:image/png;base64,' + res.data)
             api.idcard({
               image: res.data
             },(res)=>{
-              console.log(res.data.data)
+              // console.log(res.data.data)
+              if(res.data.data){
+                t.setData({
+                  idcardData:res.data.data,
+                  inputDisable:false
+                })
+              }
               t.setData({
-                idcardData:res.data.data
+                
               })
             })
           },
@@ -506,35 +524,7 @@ Page({
       }
     })
   },
-  // 扫描图片中的数据
-  // scanImageInfo: function (imageData) {
-  //   let that = this;
-  //   const detecUrl = 'https://yixi.market.alicloudapi.com/ocr/idcard';
-  //   wx.showLoading({
-  //     title: '加载中',
-  //   });
-  //   wx.request({
-  //     url: detecUrl,
-  //     data: {
-  //       image: imageData,
-  //       side: 'front'
-  //     },
-  //     method: 'POST',
-  //     header: {
-  //       'Authorization': 'APPCODE 498b3a6f9e484f5fbbacf77e4a3f147c'
-  //     },
-  //     success: res => {
-  //       console.log(res)
 
-  //     },
-  //     fail: res => {
-  //       console.log('fail')
-  //     },
-  //     complete: res => {
-  //       wx.hideLoading();
-  //     }
-  //   })
-  // },
 
 
 
@@ -552,7 +542,7 @@ Page({
         wx.getImageInfo({
           src: photo.tempFilePaths[0],
           success: function (res) {
-            console.log(res)
+            // console.log(res)
             var ctx = wx.createCanvasContext('photo_canvas');
             var ratio = 0;
             var canvasWidth = res.width
@@ -580,7 +570,7 @@ Page({
               wx.canvasToTempFilePath({
                 canvasId: 'photo_canvas',
                 success: function (res) {
-                  console.log(res.tempFilePath)
+                  // console.log(res.tempFilePath)
                   _this.setData({
                     imgSrc: res.tempFilePath
                   })
@@ -598,8 +588,18 @@ Page({
                     success(res){
                       // console.log(JSON.parse(res.data))
                       let data = JSON.parse(res.data)
+                      // console.log(data)
+                      if(data.photoUrl == ''){
+                        wx.showLoading({
+                          title: '人脸照片上传中...',
+                        })
+                      }
                       _this.setData({
                         photoUrl:data.data
+                      }, ()=>{
+                        wx.hideLoading({
+                          success: (res) => {},
+                        })
                       })
                     }
                   })
@@ -646,10 +646,12 @@ Page({
   //提交
   submitCell(e){
     console.log(e)
+    console.log(this.data.photoUrl )
     let t = this,
          val = e.detail.value,
          data = t.data,
-         dataList =t.data.dataList,
+         dataList =data.dataList,
+         
          param = {
           phone:data.phoneVal,
           idcard: data.idcardData ? data.idcardData.idcard:val.IDNumber,
@@ -657,7 +659,7 @@ Page({
           // photo: data.photoBase64 == ''?'':'data:image/png;base64,'+data.photoBase64,
           photo: data.photoUrl ? data.photoUrl:'',
           sex: data.idcardData ? data.idcardData.gender:val.sex,
-          birth: data.idcardData ? data.idcardData.birthday:val.birth,
+          // birth: data.idcardData ? data.idcardData.birthday:val.birth,
           nation: data.idcardData ? data.idcardData.nation:val.nation,
           address: data.idcardData ? data.idcardData.address:val.address,
           zzmm: dataList.zzmm[data.zzmmIdx].key,
@@ -671,9 +673,10 @@ Page({
           status: dataList.status[data.jzxzIdx].key,
           use: dataList.use[data.fwytIdx].key,
           xingzhi: dataList.xingzhi[data.fwxzIdx].key,
-          choice: val.radio?val.radio:'',
+          choice: val.radio?val.radio:'1',
           type:dataList.type[data.zhlxIdx].key
         }
+        
       api.yibiaosanshi(param,(res)=>{
         if(res.data.code == 1){
           utils.showToast(res.data.msg,'none')
@@ -711,6 +714,7 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+    
     let t = this,
          roles = utils.getItem('userRoles')
     // t.getBaiduToken();

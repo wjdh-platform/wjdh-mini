@@ -29,30 +29,33 @@ Page({
   housesList(){
     let t = this
     api.housesList({},(res)=>{
+      console.log(res)
+      
       let list = res.data.data
-      if(list == []){
+      if(list.length === 0){
         t.setData({
           listType: false
         })
       }else{
+        for(let i = 0; i<list.length;i++){
+          switch(list[i].status){
+            case 0: 
+            list[i].statusVal = '未通过审核'
+            break;
+            case 1: 
+            list[i].statusVal = '已通过审核'
+            break;
+            case 2: 
+            list[i].statusVal = '待审核'
+            break;
+          }
+        }
         t.setData({
           listType: true,
         })
-      for(let i = 0; i<list.length;i++){
-        switch(list[i].status){
-          case 0: 
-          list[i].statusVal = '未通过审核'
-          break;
-          case 1: 
-          list[i].statusVal = '已通过审核'
-          break;
-          case 2: 
-          list[i].statusVal = '待审核'
-          break;
-        }
-      }
+      
       t.setData({
-        houseList:res.data.data,
+        houseList:list,
       })
     }
     })

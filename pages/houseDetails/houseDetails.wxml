@@ -1,8 +1,8 @@
 <!--pages/houseDetails/houseDetails.wxml-->
 <view class="houseDetails">
   <view class="column">
-  <view class="title">{{detailsData.introduction}}<view class="addMember" bindtap="addFamily">增加人员</view></view>
-  <!-- <view class="title">{{detailsData.introduction}}</view> -->
+  <!-- <view class="title">{{detailsData.introduction}}<view class="addMember" bindtap="addFamily">增加人员</view></view> -->
+  <view class="title">{{detailsData.introduction}}</view>
     <view class="item">
       <view class="itemTitle">房屋类别</view>
       <view class="itemText">{{detailsData.house_type}}</view>

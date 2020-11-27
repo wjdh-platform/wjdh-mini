@@ -19,8 +19,33 @@ Page({
     getCodeKey:'',
     loginPassVal:'',
     loginPhoneVal:'',
-    loginCodeVal:''
+    loginCodeVal:'',
+    loginType:false
   },
+
+  getUserInfo(e){
+    console.log(e)
+    let t = this
+    if(e.detail.userInfo){
+      t.setData({
+        userInfo: e.detail.userInfo,
+        loginType: true
+      })
+    }else{
+      utils.showToast('请授权获取用户信息','none')
+    }
+    
+  },
+  //杨哲
+  getPhoneNumber(e){
+    console.log(e.detail.encryptedData)
+    console.log(e.detail.iv)
+    let t = this
+    t.setData({
+
+    })
+  },
+  
   
 
   //切换登录方式

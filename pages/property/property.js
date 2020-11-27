@@ -8,6 +8,31 @@ Page({
    * 页面的初始数据
    */
   data: {
+    list:[{
+      text:'绑定小区',
+      icon:'/static/image/bindCell.png',
+    },{
+      text:'生活缴费',
+      icon:'/static/image/bindCell.png',
+    },{
+    text:'物业保修',
+    icon:'/static/image/bindCell.png',
+    },{
+      text:'云停车场',
+      icon:'/static/image/bindCell.png',
+    },{
+      text:'投诉建议',
+      icon:'/static/image/bindCell.png',
+    },{
+      text:'公告通知',
+      icon:'/static/image/bindCell.png',
+    },{
+      text:'一键报警',
+      icon:'/static/image/bindCell.png',
+    },{
+      text:'访客通行',
+      icon:'/static/image/bindCell.png',
+  }]
     
   },
 //绑定家属
@@ -27,13 +52,57 @@ Page({
 
 
 //绑定小区
-  bindCell(){
+  bindCell(e){
     let t = this;
-    let tocken = utils.getItem('accessToken')
+    let tocken = utils.getItem('accessToken'),
+         idx = e.currentTarget.dataset.idx
+    console.log(e.currentTarget.dataset.idx)
     if(tocken&&tocken!=''){
-      wx.navigateTo({
-        url: '/pages/bindCell/bindCell?type=owner',
-      })
+      switch(idx){
+        case 0:
+          wx.navigateTo({
+            url: '/pages/bindCell/bindCell?type=owner',
+          });
+        break;
+        case 1:
+          wx.navigateTo({
+            url: '/pages/bindCell/bindCell?type=owner',
+          });
+        break;
+        case 2:
+          wx.navigateTo({
+            url: '/pages/bindCell/bindCell?type=owner',
+          });
+        break;
+        case 3:
+          wx.navigateTo({
+            url: '/pages/bindCell/bindCell?type=owner',
+          });
+        break;
+        case 4:
+          wx.navigateTo({
+            url: '/pages/bindCell/bindCell?type=owner',
+          });
+        break;
+        case 5:
+          wx.navigateTo({
+            url: '/pages/bindCell/bindCell?type=owner',
+          });
+        break;
+        case 6:
+          wx.navigateTo({
+            url: '/pages/bindCell/bindCell?type=owner',
+          });
+        break;
+        case 7:
+          wx.navigateTo({
+            url: '/pages/bindCell/bindCell?type=owner',
+          });
+        break;
+
+      }
+      
+      
     }else{
       wx.navigateTo({
         url: '/pages/login/login',
@@ -41,6 +110,14 @@ Page({
     }
   },
   
+
+  getRoles(){
+    api.getRoles({},(res)=>{
+      if(res.data.code == 0){
+        utils.setItem('userRoles',res.data.data)
+      }
+    })
+  },
 
 
   /**
@@ -51,6 +128,7 @@ Page({
          currentTime = Date.parse(new Date()),//当前时间
          timestamp1 = wx.getStorageSync('timestamp1'),
          t = this
+         t.getRoles()
     wx.login({
       success(res) {
         t.setData({

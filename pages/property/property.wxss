@@ -6,7 +6,7 @@
 .tabCol{
   width: 155rpx;
   height: 155rpx;
-  float: left;
+  display: inline-block;
   margin: 16rpx 16rpx 0;
 }
 .tabCol image{

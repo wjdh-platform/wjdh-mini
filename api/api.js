@@ -87,3 +87,8 @@ export const idcard = (params, cb) => {
   request('api/v1/idcard/photo', params, cb, 'post')
 }
 
+//获取新角色
+export const getRoles = (params, cb) => {
+  request('api/v1/people/roles', params, cb, 'post')
+}
+
