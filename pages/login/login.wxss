@@ -92,6 +92,51 @@
   box-shadow: 0rpx 5rpx 10rpx #50DABE;
   font-weight: normal;
 }
+.wxLogin{
+  background: #FFC275;
+  box-shadow: 0rpx 5rpx 10rpx #FFC275;
+}
 .loginTypeC{
   margin-top: 300rpx;
+}
+.popup{
+  background: rgba(0,0,0,.3);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+}
+.popupCont{
+  width: 522rpx;
+  /* height: 461rpx; */
+  padding: 40rpx 30rpx 60rpx;
+  background: #fff;
+  border-radius: 15rpx;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+}
+.titleP{
+  text-align: center;
+  font-size: 38rpx;
+  color: #3C3C3C;
+  font-weight: 500;
+}
+.introP{
+  text-align: left;
+  font-size: 28rpx;
+  color: #787878;
+  margin-top: 30rpx;
+  line-height: 40rpx;
+}
+.popupW{
+  width: 80% !important;
+  height: 64rpx !important;
+  line-height: 64rpx !important;
+  font-size: 26rpx !important;
+  color: #FFFFFF !important;
 }

@@ -41,6 +41,7 @@ Page({
       avatar,
       name
     })
+    utils.token()
   },
 
   /**

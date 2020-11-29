@@ -1,4 +1,4 @@
-// pages/houseDetails/houseDetails.js
+// pages/guarantee/guarantee.js
 const app = getApp();
 import * as api from '../../api/api'
 import utils from '../../utils/util.js'
@@ -8,51 +8,41 @@ Page({
    * 页面的初始数据
    */
   data: {
-    currentTab:0
+  addressIdx:0
+
   },
 
-  tabTap(e){
-    var t = this;
-    if( t.data.currentTab === e.target.dataset.current ) {
-        return false;
-    } else {
-        t.setData( {
-            currentTab: e.target.dataset.current
-        })
+  bindAddress(e){
+    this.setData({
+      addressIdx: e.detail.value
+    })
+  },
+
+  addressSub(e){
+    console.log(e)
+  },
+
+//获取小区名字
+getVillage(){
+  let t = this
+  api.getVillage({},(res)=>{
+    if(res.data.code == 0){
+      let list = [],
+        oldList = res.data.data
+      list = oldList.unshift({ community_name:'请选择'})
+      t.setData({
+        addressList: oldList
+      })
     }
-  },
-
-  addFamily(){
-    wx.navigateTo({
-      url: "/pages/bindCell/bindCell?type=family",
-    })
-  },
-
-  getHouseDetails(){
-    let t = this
-    api.housesDetails({
-      id: t.data.houseId,
-      role:t.data.role
-    },(res)=>{
-      if(res.data.code == 0){
-        t.setData({
-          detailsData:res.data.data
-        })
-      }
-    })
-  },
+  })
+},
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     utils.token()
-    this.setData({
-      houseId:options.houseId,
-      role: options.role,
-    })
-    this.getHouseDetails()
+    this.getVillage()
   },
 
   /**

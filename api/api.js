@@ -21,6 +21,11 @@ export const loginCode = (params, cb) => {
   request('api/v1/weapp/athorizations/phone', params, cb, 'POST')
 }
 
+//登录改
+export const loginNew = (params, cb) => {
+  request('api/v1/weapp/users', params, cb, 'POST')
+}
+
 //刷新tocken值
 export const getTockenN= (params, cb) => {
   request('api/v1/authorizations/current', params, cb, 'put')

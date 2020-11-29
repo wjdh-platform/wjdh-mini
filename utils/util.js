@@ -50,47 +50,66 @@ function showToast(title, icon) {
   },300)
 }
 
-// function shareLogin(fn) {
-//   wx.login({
-//     success(res) {
-//       if (res.code) {
-//         wx.request({
-//           url: "https://api.maykahotel.com/wechat.mc.user/wxLogin",
-//           method: 'post',
-//           data: {
-//             code: res.code
-//           },
-//           header: {
-//             "Content-Type": "application/json",
-//             "Authorization": wx.getStorageSync("accessToken") ? wx.getStorageSync("accessToken") : ""
-//           },
-//           success(res) {
-//             if (res.data.code) {
-//               setItem("openid", res.data.data.openid);
-//               if (res.data.code == 1) {
-//                 setItem("accessToken", res.data.data.token); //老用户登录token
-//                 setItem("uid", res.data.uid);
-//                 setItem("avatar_url", res.data.data.avatar_url);
-//                 setItem("nickName", res.data.data.nickName);
-//                 setItem("share_code", res.data.data.share_code);
-//                 fn && fn(res.data.data);
-//               } else {
-//                 wx.navigateTo({
-//                   url: "/pages/login/login",
-//                 })
-//               }
-//             }
-//           }
-//         })
-//       } else { //微信登录失败
-//         wx.showToast({
-//           title: "微信登录失败，请刷新重试",
-//           duration: 2000
-//         })
-//       }
-//     }
-//   })
-// }
+function token(){
+  let  t = this,
+        tocken = t.getItem('accessToken'),
+        currentTime = Date.parse(new Date()),//当前时间
+        timestamp1 = wx.getStorageSync('timestamp1')
+         
+      if (tocken && tocken != '') {
+        if(currentTime>timestamp1+3600000){
+          console.log("token过期")
+          api.getTockenN({}, (res) => {
+            if(res.data.code == 0){
+            t.setItem('accessToken', res.data.access_token)
+            t.setItem('userRoles', res.data.roles)
+            t.setItem('timestamp1', currentTime)
+            if(t.getItem('avatar')){
+              return true
+            }else{
+              t.setItem('avatar', res.data.avatar)
+              t.setItem('name', res.data.name)
+            }
+          }else{
+            t.codeToken()
+          }
+          })
+        }else{
+          console.log("token未过期")
+        }
+      } else {
+        t.codeToken()
+      }
+};
+//code换token
+ function codeToken(){
+  let t = this,
+       currentTime = Date.parse(new Date())//当前时间
+  wx.login({
+    success(res){
+  api.getTocken({
+    code:res.code
+  }, (res) => {
+    if(res.data.code == 0){
+      t.setItem('accessToken', res.data.access_token)
+      t.setItem('userRoles', res.data.roles)
+      t.setItem('timestamp1', currentTime)
+      if(t.getItem('avatar')){
+        return true
+      }else{
+        t.setItem('avatar', res.data.avatar)
+        t.setItem('name', res.data.name)
+      }
+      
+    }else if (res.data.code == 1){
+      //游客身份
+    }
+  })
+}
+})
+}
+
+
 
 module.exports = {
   formatTime: formatTime,
@@ -99,5 +118,6 @@ module.exports = {
   removeItem: removeItem,
   checkLogin: checkLogin,
   showToast,
-  // shareLogin,
+  token,
+  codeToken
 }

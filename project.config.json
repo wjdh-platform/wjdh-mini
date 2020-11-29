@@ -30,11 +30,12 @@
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "enhance": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.13.2",
-  "appid": "wxd1d8a7847e4d52cd",
+  "appid": "wx3c3d7ceb2deb958d",
   "projectname": "wjdh-miniP",
   "debugOptions": {
     "hidedInDevtools": []
@@ -113,6 +114,29 @@
           "name": "小区详情",
           "pathName": "pages/houseDetails/houseDetails",
           "query": "id=1&role=1",
+          "scene": null
+        },
+        {
+          "name": "物业报修",
+          "pathName": "pages/repair/repair",
+          "scene": null,
+          "query": ""
+        },
+        {
+          "name": "公告通知",
+          "pathName": "pages/notice/notice",
+          "scene": null,
+          "query": ""
+        },
+        {
+          "name": "公告详情",
+          "pathName": "pages/notice/details/details",
+          "scene": null,
+          "query": ""
+        },
+        {
+          "name": "应急电话",
+          "pathName": "pages/phoneCall/phoneCall",
           "scene": null
         }
       ]

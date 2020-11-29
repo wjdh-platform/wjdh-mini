@@ -66,7 +66,7 @@
     </view>
     
   </view>
-  <view class="houseCont" wx:if="{{yezhuOldPhone&&roomType}}">
+  <view class="houseCont" wx:if="{{yezhuOldPhone&&yezhuOldPhone!=''&&roomType}}">
     <view class="msgColumn">
       <view class="msgTitle">业主手机号</view>
       <input type="number" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder"  value="{{encryptionPhone}}" disabled="true"></input>
@@ -82,14 +82,14 @@
     </view>
   </view>
   <!-- <view class="houseCont"> -->
-  <view class="houseCont" wx:if="{{verificationPhoneVal == '验证成功'&&pageType}}">
+  <view class="houseCont" wx:if="{{verificationPhoneVal == '验证成功'&&!pageType}}">
     <radio-group name="radio" bindchange="radioChange">
       <label><radio value="{{dataList.choice[0].key}}"/>{{dataList.choice[0].value}}</label>
       <label><radio value="{{dataList.choice[1].key}}"/>{{dataList.choice[1].value}}</label>
     </radio-group>
   </view>
   <view class="houseCont"> 
-  <view class="column" wx:if="{{shipType||!pageType}}">
+  <view class="column" wx:if="{{shipType&&!pageType}}">
     <view class="title">与业主关系</view>
       <picker bindchange="bindShip" value="{{shipIdx}}" range="{{dataList.role}}" range-key="value">
       {{dataList.role[shipIdx].value}}
@@ -132,7 +132,7 @@
     <view class="msgCont">
     <view class="msgColumn">
       <view class="msgTitle">身份证号</view>
-      <input type="number" name="IDNumber" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{idcardData.idcard}}" disabled="{{cellList}}" disabled="{{inputDisable}}"></input>
+      <input type="number" name="IDNumber" placeholder="{{placeholder}}" class="inputText" placeholder-class="inputPlaceHolder" value="{{idcardData.idcard}}" disabled="{{cellList}}" disabled="{{inputDisable}}"></input>
       <view class="photograph" bindtap="uploadImg" wx:if="{{!cellList}}">
         <image src="./../../static/image/photoID.png"></image>
         <text>拍照识别</text>
@@ -140,7 +140,7 @@
     </view>
     <view class="msgColumn">
       <view class="msgTitle">真实姓名</view>
-      <input type="text"  disabled="{{inputDisable}}" name="userName" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder" value="{{idcardData.name}}" disabled="{{cellList}}"></input>
+      <input type="text"  disabled="{{inputDisable}}" name="userName" placeholder="{{placeholder}}" class="inputText" placeholder-class="inputPlaceHolder" value="{{idcardData.name}}"></input>
     </view>
     <!-- <view class="msgColumn">
       <view class="msgTitle">民族</view>

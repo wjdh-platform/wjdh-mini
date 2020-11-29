@@ -17,15 +17,17 @@ Page({
     changeLoginType:true,//默认密码登录
     code:'',
     getCodeKey:'',
-    loginPassVal:'',
     loginPhoneVal:'',
     loginCodeVal:'',
-    loginType:false
+    loginType:false,
+    codeAgain:true,
+    popupType:false
   },
 
   getUserInfo(e){
     console.log(e)
     let t = this
+    
     if(e.detail.userInfo){
       t.setData({
         userInfo: e.detail.userInfo,
@@ -34,20 +36,57 @@ Page({
     }else{
       utils.showToast('请授权获取用户信息','none')
     }
+    if(t.data.popupType){
+      wx.login({
+        success: res => {
+          if (res.code) {
+            api.loginNew({
+              type:'weixin',
+              encryptedData: t.data.encryptedData,
+              iv: t.data.iv,
+              name:e.detail.userInfo.nickName,
+              avatar:e.detail.userInfo.avatarUrl,
+              code:res.code,
+            }, (res) => {
+              if (res.data.code == 1) {
+                  utils.showToast(res.data.msg, "none")
+              } else {
+                t.setData({
+                  popupType:false,
+                  loginType: false
+                })
+                utils.showToast(res.data.msg, "none")
+                utils.setItem('accessToken',res.data.access_token)
+                utils.setItem('avatar',res.data.avatar)
+                utils.setItem('name',res.data.name)
+                utils.setItem('userRoles',res.data.roles)
+                
+                wx.navigateBack({})
+              }
+            })
+          }
+        }
+      })
+    }
     
   },
   //杨哲
   getPhoneNumber(e){
-    console.log(e.detail.encryptedData)
-    console.log(e.detail.iv)
+    console.log(e)
     let t = this
-    t.setData({
-
-    })
+    if(e.detail.iv){
+      t.setData({
+        encryptedData: e.detail.encryptedData,
+        iv: e.detail.iv,
+        popupType:true
+      })
+    }else{
+      utils.showToast('请授权获取微信手机号','none')
+    }
+    
   },
   
   
-
   //切换登录方式
   changeLogin(){
     this.setData({
@@ -83,29 +122,30 @@ Page({
   //登录按钮
   loginBtn(){
     let t = this
-    if (t.data.changeLoginType){
+
       if(t.data.loginPhoneVal ==''){
         utils.showToast('请输入手机号', 'none')
-      } else if (t.data.loginPassVal == ''){
-        utils.showToast('请输入密码','none')
-      }else{
+      } else{
         wx.login({
           success: res => {
             if (res.code) {
-              api.loginPass({
+              api.loginNew({
+                type:'selfPhone',
+                verification_key: t.data.getCodeKeyLogin,
+                verification_code: t.data.loginCodeVal,
+                name:t.data.userInfo.nickName,
+                avatar:t.data.userInfo.avatarUrl,
                 code:res.code,
-                username: t.data.loginPhoneVal,
-                password: t.data.loginPassVal,
               }, (res) => {
-                wx.hideLoading()
                 if (res.data.code == 1) {
-                    utils.showToast(res.data.message, "none")
+                    utils.showToast(res.data.msg, "none")
                 } else {
-                  utils.showToast("已登录", "none")
-                  wx.setStorage({
-                    key: 'accessToken',
-                    data: res.data.access_token,
-                  })
+                  utils.showToast(res.data.msg, "none")
+                  utils.setItem('accessToken',res.data.access_token)
+                  utils.setItem('avatar',res.data.avatar)
+                  utils.setItem('name',res.data.name)
+                  utils.setItem('userRoles',res.data.roles)
+                  
                   wx.navigateBack({})
                 }
               })
@@ -114,31 +154,6 @@ Page({
         })
         
       }
-    }else{
-      if (t.data.loginPhoneVal == '') {
-        utils.showToast('请输入手机号', 'none')
-      } else if ( t.data.loginCodeVal == '') {
-        utils.showToast('请输入验证码', 'none')
-      } else {
-        api.loginCode({
-          verification_key: t.data.getCodeKeyLogin,
-          verification_code: t.data.loginCodeVal,
-          code:t.data.code
-        }, (res) => {
-          console.log(res.data)
-          if (res.data.code == 1) {
-            utils.showToast(res.data.message, "none")
-          } else {
-            utils.showToast("已登录", "none")
-            wx.setStorage({
-              key: 'accessToken',
-              data: res.data.access_token,
-            })
-            wx.navigateBack({})
-          }
-        })
-      }
-    }
   },
 
   //登录获取验证码
@@ -146,15 +161,12 @@ Page({
     var that = this;
     var phone = that.data.loginPhoneVal;
     var currentTime = that.data.currentTime
+    if(that.data.codeAgain){
     if (phone == '') {
       utils.showToast("手机号码不能为空", "none")
     } else if (phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
       utils.showToast("请输入正确的手机号", "none")
     } else {
-      that.setData({
-        disabled: true,
-        color: '#ccc',
-      })
       api.getCode({
         phone: that.data.loginPhoneVal,
         type:"login"
@@ -164,7 +176,8 @@ Page({
           return
         }else{
           that.setData({
-            getCodeKeyLogin: res.data.key
+            getCodeKeyLogin: res.data.key,
+            codeAgain:false
           })
           //设置一分钟的倒计时
           var interval = setInterval(function () {
@@ -178,8 +191,7 @@ Page({
               that.setData({
                 codeBtnText: '重新发送',
                 currentTime: 61,
-                disabled: false,
-                color: '#929fff'
+                codeAgain:true
               })
             }
           }, 1000);
@@ -187,6 +199,7 @@ Page({
       })
       
     };
+  }
   },
 
   
@@ -201,7 +214,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    utils.token()
   },
 
   /**

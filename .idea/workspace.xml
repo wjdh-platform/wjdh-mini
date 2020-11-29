@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="718036ba-ffad-4a1f-b307-8ac846151181" name="Default Changelist" comment="" />
+    <list default="true" id="718036ba-ffad-4a1f-b307-8ac846151181" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/bindCell/bindCell.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/bindCell/bindCell.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/bindCell/bindCell.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/bindCell/bindCell.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/guarantee/guarantee.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/guarantee/guarantee.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/guarantee/guarantee.wxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/guarantee/guarantee.wxss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/houseDetails/houseDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/houseDetails/houseDetails.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/houseList/ownerHouseList/ownerHouseList.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/houseList/ownerHouseList/ownerHouseList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login/login.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login/login.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login/login.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login/login.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/personal/personal.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/personal/personal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/property/property.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/property/property.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/util.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/util.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -43,9 +63,10 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="y" value="-28" />
     <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="height" value="928" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -104,6 +125,8 @@
       <workItem from="1605772984585" duration="304000" />
       <workItem from="1605780180133" duration="1180000" />
       <workItem from="1606295033371" duration="350000" />
+      <workItem from="1606471302074" duration="165000" />
+      <workItem from="1606611656097" duration="475000" />
     </task>
     <task id="LOCAL-00001" summary="小程序01">
       <created>1604372664181</created>
@@ -116,10 +139,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2418000" />
+    <option name="totallyTimeSpent" value="3058000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="25" width="1440" height="824" extended-state="6" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24947146" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -133,7 +156,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32891566" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3278237" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />

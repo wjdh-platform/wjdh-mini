@@ -46,7 +46,8 @@ Page({
     codeAgainYZ:true,
     pageType:true,
     photoUrl:'',
-    inputDisable:true
+    inputDisable:true,
+    placeholder:'请识别'
   },
   bindFwyt(e){
     this.setData({
@@ -62,11 +63,19 @@ Page({
 
   bindShip(e){
     let t = this
+    console.log(e.detail.value)
     if(e.detail.value!="0"){
       t.setData({
-        ownerType: false
+        ownerType: false,
+        inputDisable:false,
+        placeholder:'请输入'
       })
-      
+    }else{
+      t.setData({
+        ownerType: true,
+        inputDisable:true,
+        placeholder:'请识别'
+      })
     }
 
     t.setData({
@@ -441,7 +450,10 @@ Page({
       }else{
         t.setData({
           pageType:false,
-          ownerType:true
+          ownerType:true,
+          shipType:true,
+          encryptionPhone:'',
+          yezhuOldPhone:''
         })
       }
     })
@@ -637,7 +649,8 @@ Page({
     }else{
       t.setData({
         shipType: false,
-        ownerType:true
+        ownerType:true,
+        pageType:false
       })
     }
     
@@ -701,7 +714,8 @@ Page({
       if(res.data.code == 0){
         utils.showToast(res.data.message,"none")
         t.setData({
-          verificationPhoneVal:"验证成功"
+          verificationPhoneVal:"验证成功",
+          pageType:false
         })
       }else{
         utils.showToast(res.data.message, "none")
@@ -713,12 +727,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
-    
     let t = this,
          roles = utils.getItem('userRoles')
+         utils.token()
     // t.getBaiduToken();
-    this.bellInitialize()
+    t.bellInitialize();
     t.getVillage();
     if (roles.includes('NewMember')){
       t.setData({

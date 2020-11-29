@@ -1,4 +1,4 @@
-// pages/guarantee/guarantee.js
+// pages/phoneCall/phoneCall.js
 Page({
 
   /**

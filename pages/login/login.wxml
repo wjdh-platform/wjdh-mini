@@ -39,4 +39,11 @@
   <button class="codeLogin" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信手机号快捷登录</button>
   <button class="wxLogin" open-type="getUserInfo" bindgetuserinfo="getUserInfo">手机号验证码登录</button>
 </view>
+<view class="popup" wx:if="{{popupType}}">
+  <view class="popupCont">
+    <view class="titleP">提示</view>
+    <view class="introP">请授权获取用户信息，以便收集用户信息</view>
+    <button class="wxLogin popupW" open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权用户信息</button>
+  </view>
+</view>
 </view>

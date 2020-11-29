@@ -1,0 +1,50 @@
+/* pages/guarantee/guarantee.wxss */
+.column{
+  padding: 44rpx 0 40rpx;
+  margin-left: 36rpx;
+  border-bottom: solid 1rpx #F1F1F1;
+}
+.columnT{
+  border: none;
+  padding: 44rpx 40rpx;
+  box-sizing: border-box;
+  margin-left: 0;
+}
+.titleC{
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color: #969696;
+  margin-bottom: 20rpx;
+}
+.placeholder,.intro{
+  color: #DCDCDC;
+}
+.column input,.address,.textarea{
+  color: #333333;
+  font-size: 30rpx;
+  line-height: 30rpx;
+}
+.btn-area .saveBtn{
+  background:linear-gradient(90deg,#60C0FF,#0084FF);
+  border-radius:50rpx;
+  margin: 59rpx auto 64rpx;
+  line-height: 73rpx;
+  text-align: center;
+  padding: 0;
+  width: 653rpx;
+  height: 73rpx;
+  background: #50DABE;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  color: #fff;
+}
+textarea{
+  min-height: 300rpx;
+  width: 100%;
+  margin: 0 auto;
+  border: solid 1rpx #F1F1F1;
+  line-height: 45rpx;
+  border-radius: 10rpx;
+  padding: 10rpx;
+  box-sizing: border-box;
+}

@@ -1,44 +1,35 @@
-// pages/houseDetails/houseDetails.js
-const app = getApp();
-import * as api from '../../api/api'
-import utils from '../../utils/util.js'
+// pages/notice/notice.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    currentTab:0
+    list:[{
+      title:'温馨提示——请注意厨房用火安全',
+      wyName:'晨曦家园物业',
+      time:'一天前'
+    },{
+      title:'关于高空抛物的温馨提示',
+      wyName:'晨曦家园物业',
+      time:'2020年11月20日'
+    },{
+      title:'关于小区停水的通知',
+      wyName:'晨曦家园物业',
+      time:'2020年10月5日'
+    },{
+      title:'国庆节放假的温馨提示',
+      wyName:'晨曦家园物业',
+      time:'2020年9月29日'
+    }]
+
   },
 
-  tabTap(e){
-    var t = this;
-    if( t.data.currentTab === e.target.dataset.current ) {
-        return false;
-    } else {
-        t.setData( {
-            currentTab: e.target.dataset.current
-        })
-    }
-  },
-
-  addFamily(){
+  bindList(e){
+    console.log(e)
+    let idx = e.currentTarget.dataset.idx
     wx.navigateTo({
-      url: "/pages/bindCell/bindCell?type=family",
-    })
-  },
-
-  getHouseDetails(){
-    let t = this
-    api.housesDetails({
-      id: t.data.houseId,
-      role:t.data.role
-    },(res)=>{
-      if(res.data.code == 0){
-        t.setData({
-          detailsData:res.data.data
-        })
-      }
+      url: '/pages/notice/details/details?idx='+idx,
     })
   },
 
@@ -46,13 +37,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
-    utils.token()
-    this.setData({
-      houseId:options.houseId,
-      role: options.role,
-    })
-    this.getHouseDetails()
+
   },
 
   /**

@@ -1,0 +1,29 @@
+/* pages/notice/notice.wxss */
+page{
+  background: #e8e8e8;
+}
+.column{
+  margin-top: 20rpx;
+  padding: 30rpx;
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+.title{
+  font-size: 28rpx;
+  color: #333;
+  line-height: 28rpx;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  margin-bottom: 30rpx;
+}
+.name,.time{
+  display: inline-block;
+  font-size: 22rpx;
+  color: #B2B2B2;
+  margin-right: 20rpx;
+}
+.name{
+  color: #50DABE;
+}

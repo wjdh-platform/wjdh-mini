@@ -10,28 +10,28 @@ Page({
   data: {
     list:[{
       text:'绑定小区',
-      icon:'/static/image/bindCell.png',
+      icon:'/static/icon/bdxq.jpg',
     },{
       text:'生活缴费',
-      icon:'/static/image/bindCell.png',
+      icon:'/static/icon/shjf.jpg',
     },{
     text:'物业保修',
-    icon:'/static/image/bindCell.png',
+    icon:'/static/icon/wybx.jpg',
     },{
       text:'云停车场',
-      icon:'/static/image/bindCell.png',
+      icon:'/static/icon/ytcc.jpg',
     },{
       text:'投诉建议',
-      icon:'/static/image/bindCell.png',
+      icon:'/static/icon/tsjy.jpg',
     },{
       text:'公告通知',
-      icon:'/static/image/bindCell.png',
+      icon:'/static/icon/ggtz.jpg',
     },{
-      text:'一键报警',
-      icon:'/static/image/bindCell.png',
+      text:'应急电话',
+      icon:'/static/icon/yjbj.jpg',
     },{
       text:'访客通行',
-      icon:'/static/image/bindCell.png',
+      icon:'/static/icon/fktx.jpg',
   }]
     
   },
@@ -57,6 +57,20 @@ Page({
     let tocken = utils.getItem('accessToken'),
          idx = e.currentTarget.dataset.idx
     console.log(e.currentTarget.dataset.idx)
+    switch(idx){
+      
+      case 5:
+        wx.navigateTo({
+          url: '/pages/notice/notice',
+        });
+      break;
+      case 6:
+        wx.navigateTo({
+          url: '/pages/phoneCall/phoneCall',
+        });
+      break;
+
+    }
     if(tocken&&tocken!=''){
       switch(idx){
         case 0:
@@ -71,7 +85,7 @@ Page({
         break;
         case 2:
           wx.navigateTo({
-            url: '/pages/bindCell/bindCell?type=owner',
+            url: '/pages/repair/repair',
           });
         break;
         case 3:
@@ -124,67 +138,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let tocken = utils.getItem('accessToken'),
-         currentTime = Date.parse(new Date()),//当前时间
-         timestamp1 = wx.getStorageSync('timestamp1'),
-         t = this
-         t.getRoles()
-    wx.login({
-      success(res) {
-        t.setData({
-          code: res.code
-        })
-        if (tocken && tocken != '') {
-          if(currentTime>timestamp1+3600000){
-            console.log("token过期")
-            api.getTockenN({}, (res) => {
-              if(res.data.code == 0){
-              utils.setItem('accessToken', res.data.access_token)
-              utils.setItem('userRoles', res.data.roles)
-              if(utils.getItem('avatar')){
-                return true
-              }else{
-                utils.setItem('avatar', res.data.avatar)
-                utils.setItem('name', res.data.name)
-              }
-            }else{
-              t.codeToken()
-            }
-            })
-          }else{
-            console.log("token未过期")
-          }
-        } else {
-          t.codeToken()
-        }
-      }
-    })
-    
-    
-  },
-
-  //code换token
-  codeToken(){
     let t = this
-    api.getTocken({
-      code:t.data.code
-    }, (res) => {
-      if(res.data.code == 0){
-        utils.setItem('accessToken', res.data.access_token)
-        utils.setItem('userRoles', res.data.roles)
-        if(utils.getItem('avatar')){
-          return true
-        }else{
-          utils.setItem('avatar', res.data.avatar)
-          utils.setItem('name', res.data.name)
-        }
-        
-      }else if (res.data.code == 1){
-        //游客身份
-      }
-    })
+         utils.token()
+         t.getRoles()
+    
+    
+    
   },
 
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -1,0 +1,11 @@
+<!--pages/notice/notice.wxml-->
+<view class="notice">
+  <view class="column" wx:for="{{list}}" data-idx="{{index}}" bindtap="bindList">
+    <view class="title">{{item.title}}</view>
+    <view class="introduction">
+      <view class="name">{{item.wyName}}</view>
+      <view class="time">{{item.time}}</view>
+    </view>
+  </view>
+ 
+</view>

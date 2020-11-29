@@ -1,0 +1,17 @@
+<!--pages/notice/details/details.wxml-->
+<view class="details">
+  <view class="title">
+    <view class="icon"><image src="../../../static/image/cxLogo.jpeg"></image></view>
+    <view class="title">
+      <view class="text">晨曦家园物业</view>
+      <view class="time">{{details[idx].time}}</view>
+    </view>
+  </view>
+  <view class="titleName">{{details[idx].title}}</view>
+  <view class="introduction">
+    <rich-text nodes="{{details[idx].intro}}"></rich-text>
+  </view>
+  <view class="imgList">
+    <image wx:for="{{details[idx].img}}" src="{{item}}"></image>
+  </view>
+</view>
