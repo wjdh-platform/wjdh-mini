@@ -26,7 +26,8 @@ Page({
 
   getUserInfo(e){
     console.log(e)
-    let t = this
+    let t = this,
+         currentTime = Date.parse(new Date())//当前时间
     
     if(e.detail.userInfo){
       t.setData({
@@ -58,7 +59,7 @@ Page({
           utils.setItem('avatar',res.data.avatar)
           utils.setItem('name',res.data.name)
           utils.setItem('userRoles',res.data.roles)
-          
+          utils.setItem('timestamp1', currentTime)
           wx.navigateBack({})
         }
       })
@@ -116,7 +117,8 @@ Page({
 
   //登录按钮
   loginBtn(){
-    let t = this
+    let t = this,
+         currentTime = Date.parse(new Date())//当前时间
 
       if(t.data.loginPhoneVal ==''){
         utils.showToast('请输入手机号', 'none')
@@ -138,7 +140,7 @@ Page({
             utils.setItem('avatar',res.data.avatar)
             utils.setItem('name',res.data.name)
             utils.setItem('userRoles',res.data.roles)
-            
+            utils.setItem('timestamp1', currentTime)
             wx.navigateBack({})
           }
         })
@@ -159,7 +161,7 @@ Page({
     } else {
       api.getCode({
         phone: that.data.loginPhoneVal,
-        type:"login"
+        type:"register"
       }, (res) => {
         if(res.data.code == 1){
           utils.showToast(res.data.msg, "none")

@@ -34,13 +34,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let avatar = utils.getItem("avatar"),
-        name = utils.getItem("name"),
-         t = this
-    t.setData({
-      avatar,
-      name
-    })
+    
     utils.token()
   },
 
@@ -61,17 +55,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let t = this,
-      token = utils.getItem("accessToken")
-    if (token == "") {
-      t.setData({
-        userNameType:false
-      })
-    }else{
-      t.setData({
-        userNameType: true
-      })
-    }
+    let avatar = utils.getItem("avatar"),
+        name = utils.getItem("name"),
+         t = this
+    t.setData({
+      avatar,
+      name
+    })
   },
 
   /**

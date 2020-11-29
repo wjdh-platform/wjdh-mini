@@ -601,17 +601,9 @@ Page({
                       // console.log(JSON.parse(res.data))
                       let data = JSON.parse(res.data)
                       // console.log(data)
-                      if(data.photoUrl == ''){
-                        wx.showLoading({
-                          title: '人脸照片上传中...',
-                        })
-                      }
+                      
                       _this.setData({
                         photoUrl:data.data
-                      }, ()=>{
-                        wx.hideLoading({
-                          success: (res) => {},
-                        })
                       })
                     }
                   })
@@ -689,7 +681,16 @@ Page({
           choice: val.radio?val.radio:'1',
           type:dataList.type[data.zhlxIdx].key
         }
-        
+        if(data.photoUrl == ''){
+          wx.showLoading({
+            title: '人脸照片上传中...',
+          })
+          setTimeout(function () {
+            wx.hideLoading()
+          }, 2000)
+          
+          return
+        }
       api.yibiaosanshi(param,(res)=>{
         if(res.data.code == 1){
           utils.showToast(res.data.msg,'none')

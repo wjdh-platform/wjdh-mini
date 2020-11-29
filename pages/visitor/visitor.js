@@ -5,7 +5,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    timeList:[
+      '30分钟',
+      '1小时',
+      '6小时',
+      '12小时',
+      '24小时'
+    ],
+    timeIdx:0
   },
 
   /**
@@ -60,7 +67,16 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '分享给访客，已获得授权二维码',
+      path: '/pages/visitor/visitor',
+      imageUrl:'/static/image/shareImg.jpeg'
+    }
 
   }
 })

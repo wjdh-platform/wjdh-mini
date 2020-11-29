@@ -56,15 +56,15 @@ Page({
     let t = this;
     let tocken = utils.getItem('accessToken'),
          idx = e.currentTarget.dataset.idx
-    console.log(e.currentTarget.dataset.idx)
+
     switch(idx){
       
-      case 5:
+      case 5://公告通知
         wx.navigateTo({
           url: '/pages/notice/notice',
         });
       break;
-      case 6:
+      case 6://应急电话
         wx.navigateTo({
           url: '/pages/phoneCall/phoneCall',
         });
@@ -73,44 +73,35 @@ Page({
     }
     if(tocken&&tocken!=''){
       switch(idx){
-        case 0:
+        case 0://绑定小区
           wx.navigateTo({
             url: '/pages/bindCell/bindCell?type=owner',
           });
         break;
-        case 1:
+        case 1://生活缴费
           wx.navigateTo({
             url: '/pages/bindCell/bindCell?type=owner',
           });
         break;
-        case 2:
+        case 2://物业报修
           wx.navigateTo({
             url: '/pages/repair/repair',
           });
         break;
-        case 3:
+        case 3://云停车场
           wx.navigateTo({
             url: '/pages/bindCell/bindCell?type=owner',
           });
         break;
-        case 4:
+        case 4://投诉建议
           wx.navigateTo({
-            url: '/pages/bindCell/bindCell?type=owner',
+            url: '/pages/proposal/proposal',
           });
         break;
-        case 5:
+        
+        case 7://访客通行
           wx.navigateTo({
-            url: '/pages/bindCell/bindCell?type=owner',
-          });
-        break;
-        case 6:
-          wx.navigateTo({
-            url: '/pages/bindCell/bindCell?type=owner',
-          });
-        break;
-        case 7:
-          wx.navigateTo({
-            url: '/pages/bindCell/bindCell?type=owner',
+            url: '/pages/visitor/visitor',
           });
         break;
 

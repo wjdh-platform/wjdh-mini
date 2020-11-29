@@ -1,10 +1,11 @@
 <!--pages/visitor/visitor.wxml-->
 <view class="visitor">
   <view class="column">
-      <view class="titleC">问题分类*</view>
-      <picker bindchange="bindType" value="{{proposalIdx}}" range="{{proposalList}}">
-        <view class="address">{{proposalList[proposalIdx]}}</view>
+      <view class="titleC">访客通行有效时间*</view>
+      <picker bindchange="bindType" value="{{timeIdx}}" range="{{timeList}}">
+        <view class="address">{{timeList[timeIdx]}}</view>
       </picker>
       <image class="arrow" src="./../../static/image/arrow.png"></image>
     </view>
+    <button open-type="share">分享</button>
 </view>
