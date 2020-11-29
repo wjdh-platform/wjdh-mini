@@ -57,7 +57,7 @@ function token(){
         timestamp1 = wx.getStorageSync('timestamp1')
          
       if (tocken && tocken != '') {
-        if(currentTime>timestamp1+3600000){
+        if(currentTime>timestamp1+3000000){
           console.log("token过期")
           api.getTockenN({}, (res) => {
             if(res.data.code == 0){

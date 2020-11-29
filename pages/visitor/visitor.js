@@ -1,4 +1,7 @@
 // pages/visitor/visitor.js
+const app = getApp();
+import * as api from '../../api/api'
+import utils from '../../utils/util.js'
 Page({
 
   /**
@@ -12,14 +15,26 @@ Page({
       '12小时',
       '24小时'
     ],
-    timeIdx:0
+    timeIdx:0,
+    share:true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let token = utils.getItem('accessToken')
+    if(!token||token == ''){
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
+    if(options.share == 'share'){
+      this.setData({
+        share:false
+      })
+    }
+    
   },
 
   /**
@@ -73,8 +88,8 @@ Page({
       console.log(res.target)
     }
     return {
-      title: '分享给访客，已获得授权二维码',
-      path: '/pages/visitor/visitor',
+      title: '点击获得晨曦家园访客二维码',
+      path: '/pages/visitor/visitor?share=share',
       imageUrl:'/static/image/shareImg.jpeg'
     }
 

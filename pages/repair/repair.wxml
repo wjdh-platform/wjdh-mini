@@ -1,5 +1,6 @@
 <!--pages/guarantee/guarantee.wxml-->
 <view class="repair">
+  <view wx:if="{{popupType}}">
     <form bindsubmit="addressSub">
       <view class="column">
       <view class="titleC">报修地点*</view>
@@ -15,7 +16,7 @@
       <view class="titleC">报修说明*</view>
       <textarea bindblur="bindTextAreaBlur" auto-height placeholder-class="intro" name="repairIntro" placeholder="报修说明" />
     </view>
-    <view class="columnT">
+    <!-- <view class="columnT">
       <view class="titleC">上传照片</view>
       <view class="uploadPhoto">
         <view class="photoClo" wx:if="{{imgSrc}}">
@@ -25,9 +26,16 @@
         <view class="addImg" bindtap="addImg"></view>
       </view>
     <canvas canvas-id= "photo_canvas" style= "width:{{canvasWidth}}px;height:{{canvasHeight}}px;position: absolute;left:-300px;top:-300px;" ></canvas>
-    </view>
+    </view> -->
     <view class="btn-area ">
       <button formType="submit" class="saveBtn ">提交</button>
     </view>
   </form>
+
+</view>
+  <view class="popup" wx:else>
+      <view class="images"><image src="../../static/image/submitSucc.png"></image></view>
+      <view class="titleP">提交成功</view>
+      <view class="textP">我们会尽快为您落实反馈</view>
+    </view>
 </view>

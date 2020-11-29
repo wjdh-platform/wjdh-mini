@@ -47,7 +47,14 @@ Page({
     pageType:true,
     photoUrl:'',
     inputDisable:true,
-    placeholder:'请识别'
+    placeholder:'请识别',
+    villageIdxP:0
+  },
+
+  bindvillageListP(e){
+    this.setData({
+      villageIdxP:e.detail.value
+    })
   },
   bindFwyt(e){
     this.setData({
@@ -272,7 +279,8 @@ Page({
     }else{
       api.verificationPhone({
         verification_key: t.data.getCodeKeyLogin,
-        verification_code:t.data.codeVal
+        verification_code:t.data.codeVal,
+        id:t.data.villageList[t.data.villageIdxP].community_identifier
       },(res)=>{
         if(res.data.code == 0){
           utils.showToast(res.data.msg,"none")
@@ -696,6 +704,7 @@ Page({
           utils.showToast(res.data.msg,'none')
         } else if (res.data.code == 0){
           utils.showToast(res.data.msg, 'none')
+          utils.setItem('examineData',res.data.shenhe_data)
           wx.redirectTo({
             url: '/pages/houseList/ownerHouseList/ownerHouseList',
           })
@@ -729,13 +738,19 @@ Page({
    */
   onLoad: function (options) {
     let t = this,
-         roles = utils.getItem('userRoles')
+         roles = utils.getItem('userRoles'),
+         examineData = utils.getItem('examineData')
          utils.token()
     // t.getBaiduToken();
     setTimeout(()=>{
       t.bellInitialize();
       t.getVillage();
     },300)
+    if(examineData){
+      t.setData({
+        examineData
+      })
+    }
     
     if (roles.includes('NewMember')){
       t.setData({

@@ -15,7 +15,7 @@ Page({
       text:'生活缴费',
       icon:'/static/icon/shjf.jpg',
     },{
-    text:'物业保修',
+    text:'物业报修',
     icon:'/static/icon/wybx.jpg',
     },{
       text:'云停车场',

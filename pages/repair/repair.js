@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-  addressIdx:0
+  addressIdx:0,
+  popupType:true
 
   },
 
@@ -20,6 +21,19 @@ Page({
 
   addressSub(e){
     console.log(e)
+    let t = this,
+         val = e.detail.value
+    if(t.data.addressList.length<=1||t.data.addressIdx == 0){
+      utils.showToast('请选择报修地点','none')
+    }else if(val.repairName == ''){
+      utils.showToast('请填写报修项目','none')
+    }else if(val.repairIntro == ''){
+      utils.showToast('请填写报修说明','none')
+    }else{
+      t.setData({
+        popupType:false
+      })
+    }
   },
 
 //获取小区名字

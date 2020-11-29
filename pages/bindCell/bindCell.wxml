@@ -5,6 +5,15 @@
   <view class="phoneCode">
     <!-- <view class="closePopup" bindtap="closePopup"></view> -->
     <view class="popupTitle">校验手机号</view>
+    <view class="column">
+      <view class="title">小区</view>
+      <picker bindchange="bindvillageListP" value="{{villageIdxP}}" range="{{villageList}}" range-key="community_name">
+    <view class="picker">
+      {{villageList[villageIdxP].community_name}}
+    </view>
+  </picker>
+      <image class="arrow" src="./../../static/image/arrow.png"></image>
+    </view>
     <view class="photoText">
       <image src="./../../static/image/photoIcon.png" class="photoIcon"></image>
       <input type="number" placeholder="请输入手机号"  bindblur="phoneBlur" placeholder-class="phototextPP" class="phototextP"></input>
