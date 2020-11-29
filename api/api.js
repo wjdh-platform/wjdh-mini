@@ -26,6 +26,11 @@ export const loginNew = (params, cb) => {
   request('api/v1/weapp/users', params, cb, 'POST')
 }
 
+//open Id
+export const getOpenid = (params, cb) => {
+  request('api/v1/weapp/code', params, cb, 'POST')
+}
+
 //刷新tocken值
 export const getTockenN= (params, cb) => {
   request('api/v1/authorizations/current', params, cb, 'put')

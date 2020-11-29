@@ -175,7 +175,7 @@ Page({
          unitsName = data.unitsList[data.unitsIdx].unit_name,
          floorName = data.floorList[data.floorIdx].floor_name,
          roomName = data.roomList[data.roomIdx].house_name
-    
+    if(data.codeAgainYZ){
       api.getCode({
         phone: phone,
         type: "yezhu",
@@ -209,7 +209,7 @@ Page({
           })
         }
       })
-    
+    }
     // };
   },
 
@@ -218,7 +218,7 @@ Page({
     var that = this;
     var phone = that.data.phoneVal;
     var currentTime = that.data.currentTime
-    
+    if(that.data.codeAgain){
     if (phone == '') {
       utils.showToast("手机号码不能为空", "none")
     } else if (phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
@@ -257,7 +257,7 @@ Page({
         }
       })
     }
-    
+  }
   },
 
  
@@ -731,8 +731,11 @@ Page({
          roles = utils.getItem('userRoles')
          utils.token()
     // t.getBaiduToken();
-    t.bellInitialize();
-    t.getVillage();
+    setTimeout(()=>{
+      t.bellInitialize();
+      t.getVillage();
+    },300)
+    
     if (roles.includes('NewMember')){
       t.setData({
         popupType:true

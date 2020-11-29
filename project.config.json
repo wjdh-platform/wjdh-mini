@@ -35,7 +35,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.13.2",
-  "appid": "wx3c3d7ceb2deb958d",
+  "appid": "wxd1d8a7847e4d52cd",
   "projectname": "wjdh-miniP",
   "debugOptions": {
     "hidedInDevtools": []
@@ -137,7 +137,20 @@
         {
           "name": "应急电话",
           "pathName": "pages/phoneCall/phoneCall",
-          "scene": null
+          "scene": null,
+          "query": ""
+        },
+        {
+          "name": "投诉建议",
+          "pathName": "pages/proposal/proposal",
+          "scene": null,
+          "query": ""
+        },
+        {
+          "name": "访客通行",
+          "pathName": "pages/visitor/visitor",
+          "scene": null,
+          "query": ""
         }
       ]
     }

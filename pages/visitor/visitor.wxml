@@ -1,0 +1,10 @@
+<!--pages/visitor/visitor.wxml-->
+<view class="visitor">
+  <view class="column">
+      <view class="titleC">问题分类*</view>
+      <picker bindchange="bindType" value="{{proposalIdx}}" range="{{proposalList}}">
+        <view class="address">{{proposalList[proposalIdx]}}</view>
+      </picker>
+      <image class="arrow" src="./../../static/image/arrow.png"></image>
+    </view>
+</view>

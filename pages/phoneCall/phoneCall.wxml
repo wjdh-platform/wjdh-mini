@@ -1,2 +1,9 @@
 <!--pages/phoneCall/phoneCall.wxml-->
-<text>pages/phoneCall/phoneCall.wxml</text>
+<view class="phoneCall">
+  <view class="phoneCallCont">
+    <view class="column" wx:for="{{phoneList}}" data-num="{{item.phoneNum}}" bindtap="callNum">
+      <image src="../../static/image/phoneIcon.jpeg"></image><view class="phoneText">{{item.phoneTitle}}</view>
+    </view>
+  </view>
+  <view class="remarks">注：点击按钮即可拨打电话</view>
+</view>

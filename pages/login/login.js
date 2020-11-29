@@ -37,34 +37,29 @@ Page({
       utils.showToast('请授权获取用户信息','none')
     }
     if(t.data.popupType){
-      wx.login({
-        success: res => {
-          if (res.code) {
-            api.loginNew({
-              type:'weixin',
-              encryptedData: t.data.encryptedData,
-              iv: t.data.iv,
-              name:e.detail.userInfo.nickName,
-              avatar:e.detail.userInfo.avatarUrl,
-              code:res.code,
-            }, (res) => {
-              if (res.data.code == 1) {
-                  utils.showToast(res.data.msg, "none")
-              } else {
-                t.setData({
-                  popupType:false,
-                  loginType: false
-                })
-                utils.showToast(res.data.msg, "none")
-                utils.setItem('accessToken',res.data.access_token)
-                utils.setItem('avatar',res.data.avatar)
-                utils.setItem('name',res.data.name)
-                utils.setItem('userRoles',res.data.roles)
-                
-                wx.navigateBack({})
-              }
-            })
-          }
+      api.loginNew({
+        type:'weixin',
+        encryptedData: t.data.encryptedData,
+        iv: t.data.iv,
+        name:e.detail.userInfo.nickName,
+        avatar:e.detail.userInfo.avatarUrl,
+        openid:t.data.openid,
+        session_key:t.data.session_key
+      }, (res) => {
+        if (res.data.code == 1) {
+            utils.showToast(res.data.msg, "none")
+        } else {
+          t.setData({
+            popupType:false,
+            loginType: false
+          })
+          utils.showToast(res.data.msg, "none")
+          utils.setItem('accessToken',res.data.access_token)
+          utils.setItem('avatar',res.data.avatar)
+          utils.setItem('name',res.data.name)
+          utils.setItem('userRoles',res.data.roles)
+          
+          wx.navigateBack({})
         }
       })
     }
@@ -126,30 +121,25 @@ Page({
       if(t.data.loginPhoneVal ==''){
         utils.showToast('请输入手机号', 'none')
       } else{
-        wx.login({
-          success: res => {
-            if (res.code) {
-              api.loginNew({
-                type:'selfPhone',
-                verification_key: t.data.getCodeKeyLogin,
-                verification_code: t.data.loginCodeVal,
-                name:t.data.userInfo.nickName,
-                avatar:t.data.userInfo.avatarUrl,
-                code:res.code,
-              }, (res) => {
-                if (res.data.code == 1) {
-                    utils.showToast(res.data.msg, "none")
-                } else {
-                  utils.showToast(res.data.msg, "none")
-                  utils.setItem('accessToken',res.data.access_token)
-                  utils.setItem('avatar',res.data.avatar)
-                  utils.setItem('name',res.data.name)
-                  utils.setItem('userRoles',res.data.roles)
-                  
-                  wx.navigateBack({})
-                }
-              })
-            }
+        api.loginNew({
+          type:'selfPhone',
+          verification_key: t.data.getCodeKeyLogin,
+          verification_code: t.data.loginCodeVal,
+          name:t.data.userInfo.nickName,
+          avatar:t.data.userInfo.avatarUrl,
+          openid:t.data.openid,
+        session_key:t.data.session_key
+        }, (res) => {
+          if (res.data.code == 1) {
+              utils.showToast(res.data.msg, "none")
+          } else {
+            utils.showToast(res.data.msg, "none")
+            utils.setItem('accessToken',res.data.access_token)
+            utils.setItem('avatar',res.data.avatar)
+            utils.setItem('name',res.data.name)
+            utils.setItem('userRoles',res.data.roles)
+            
+            wx.navigateBack({})
           }
         })
         
@@ -214,7 +204,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let t = this
     utils.token()
+    wx.login({
+      success: res => {
+        if(res.code){
+          api.getOpenid({
+            code:res.code
+          },(res)=>{
+           if(res.data.code == 0){
+            t.setData({
+              openid: res.data.openid,
+              session_key:res.data.session_key
+            })
+           }
+          })
+        }
+        
+      }
+    })
   },
 
   /**

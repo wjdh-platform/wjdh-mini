@@ -1,0 +1,21 @@
+/* pages/visitor/visitor.wxss */
+.column{
+  padding: 44rpx 0 40rpx;
+  margin-left: 36rpx;
+  border-bottom: solid 1rpx #F1F1F1;
+  position: relative;
+}
+.titleC{
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color: #969696;
+  margin-bottom: 20rpx;
+}
+.arrow{
+  position: absolute;
+  right: 40rpx;
+  top: 90rpx;
+  /* transform: translateY(-50%); */
+  width: 14rpx;
+  height: 24rpx;
+}

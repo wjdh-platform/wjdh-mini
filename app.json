@@ -10,7 +10,9 @@
     "pages/repair/repair",
     "pages/notice/notice",
     "pages/notice/details/details",
-    "pages/phoneCall/phoneCall"
+    "pages/phoneCall/phoneCall",
+    "pages/proposal/proposal",
+    "pages/visitor/visitor"
   ],
   "window": {
     "backgroundTextStyle": "light",
