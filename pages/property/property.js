@@ -55,7 +55,8 @@ Page({
   bindCell(e){
     let t = this;
     let tocken = utils.getItem('accessToken'),
-         idx = e.currentTarget.dataset.idx
+         idx = e.currentTarget.dataset.idx,
+         userRoles = utils.getItem('userRoles')
 
     switch(idx){
       
@@ -72,13 +73,9 @@ Page({
 
     }
     if(tocken&&tocken!=''){
-      switch(idx){
-        case 0://绑定小区
-          wx.navigateTo({
-            url: '/pages/bindCell/bindCell?type=owner',
-          });
-        break;
-        case 1://生活缴费
+      if(userRoles.includes('houseMember')){
+        switch(idx){
+          case 1://生活缴费
           wx.navigateTo({
             url: '/pages/bindCell/bindCell?type=owner',
           });
@@ -104,6 +101,19 @@ Page({
             url: '/pages/visitor/visitor',
           });
         break;
+        }
+      }else if(userRoles.includes('NewMember')){
+        utils.showToast('需要先绑定房屋才能访问','none')
+      }else if(userRoles.includes('Shenheing')){
+        utils.showToast('需要等待物业审核通过才能访问','none')
+      }
+      switch(idx){
+        case 0://绑定小区
+          wx.navigateTo({
+            url: '/pages/bindCell/bindCell?type=owner',
+          });
+        break;
+        
 
       }
       

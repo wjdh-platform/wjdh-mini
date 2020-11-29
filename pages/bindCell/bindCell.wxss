@@ -19,6 +19,12 @@ page{
   height: 94rpx;
   padding: 0 40rpx;
 }
+.column01{
+  display: flex;
+  align-items: center;
+  border-bottom: solid 1rpx #ececec;
+  height: 94rpx;
+}
 .column:last-child,.msgColumn:last-child{
   border-bottom:none;
 }

@@ -33,28 +33,28 @@
     </view>
     <view class="memberList" wx:if="{{currentTab == 0}}">
       <view class="columnMe" wx:for="{{detailsData.yibangding}}" wx:if="{{detailsData.yibangding!=[]}}">
-        <view class="name">{{item.name}}（{{item.role}}）</view>
+        <view class="name">{{item.name}}</view>
         <!-- <view class="jiebang">解绑</view>  -->
       </view>
       <view class="noData"  wx:if="{{detailsData.yibangding.length === 0}}">暂无数据</view>
     </view>
     <view class="memberList" wx:if="{{currentTab == 1}}">
       <view class="columnMe" wx:for="{{detailsData.weibangding}}" wx:if="{{detailsData.weibangding!=[]}}">
-        <view class="name">{{item.name}}（{{item.role}}）</view>
+        <view class="name">{{item.name}}</view>
         <!-- <view class="jiebang">录入</view> -->
       </view>
       <view class="noData" wx:if="{{detailsData.weibangding.length === 0}}">暂无数据</view>
     </view>
     <view class="memberList" wx:if="{{currentTab == 2}}">
       <view class="columnMe" wx:for="{{detailsData.yijihuo}}" wx:if="{{detailsData.yijihuo!=[]}}">
-        <view class="name">{{item.name}}（{{item.role}}）</view>
+        <view class="name">{{item.name}}</view>
         <!-- <view class="jiebang">解绑</view> -->
       </view>
       <view class="noData" wx:if="{{detailsData.yijihuo.length === 0}}">暂无数据</view>
     </view>
     <view class="memberList" wx:if="{{currentTab == 3}}">
       <view class="columnMe" wx:for="{{detailsData.weijihuo}}" wx:if="{{detailsData.weijihuo!=[]}}">
-        <view class="name">{{item.name}}（{{item.role}}）</view>
+        <view class="name">{{item.name}}</view>
         <!-- <view class="jiebang">解绑</view> -->
       </view>
       <view class="noData" wx:if="{{detailsData.weijihuo.length === 0}}">暂无数据</view>

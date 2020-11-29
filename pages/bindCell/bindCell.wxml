@@ -5,7 +5,7 @@
   <view class="phoneCode">
     <!-- <view class="closePopup" bindtap="closePopup"></view> -->
     <view class="popupTitle">校验手机号</view>
-    <view class="column">
+    <view class="column01">
       <view class="title">小区</view>
       <picker bindchange="bindvillageListP" value="{{villageIdxP}}" range="{{villageList}}" range-key="community_name">
     <view class="picker">
