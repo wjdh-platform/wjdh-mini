@@ -103,6 +103,11 @@ Page({
         break;
         }
       }else if(userRoles.includes('NewMember')){
+        if(idx==0){
+            wx.navigateTo({
+              url: '/pages/bindCell/bindCell?type=owner',
+            });
+        }
         utils.showToast('需要先绑定房屋才能访问','none')
       }else if(userRoles.includes('Shenheing')){
         utils.showToast('需要等待物业审核通过才能访问','none')
