@@ -47,7 +47,7 @@ Page({
     pageType:true,
     photoUrl:'',
     inputDisable:true,
-    placeholder:'业主只能是使用拍照识别身份证',
+    // placeholder:'业主只能是使用拍照识别身份证',
     villageIdxP:0
   },
 
@@ -79,13 +79,13 @@ Page({
       t.setData({
         ownerType: false,
         inputDisable:false,
-        placeholder:'请输入'
+        // placeholder:'请输入'
       })
     }else{
       t.setData({
         ownerType: true,
         inputDisable:true,
-        placeholder:'业主只能是使用拍照识别身份证'
+        // placeholder:'业主只能是使用拍照识别身份证'
       })
     }
 
@@ -308,7 +308,6 @@ Page({
             popupType: false
           })
           wx.redirectTo({
-        
             url: '/pages/houseList/ownerHouseList/ownerHouseList',
           })
         }else if(res.data.code == 1){
