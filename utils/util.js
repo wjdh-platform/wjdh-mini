@@ -87,6 +87,7 @@ function token(){
        currentTime = Date.parse(new Date())//当前时间
   wx.login({
     success(res){
+    console.log(res)
   api.getTocken({
     code:res.code
   }, (res) => {

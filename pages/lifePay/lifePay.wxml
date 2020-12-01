@@ -1,0 +1,27 @@
+<!--pages/lifePay/lifePay.wxml-->
+<view class="lifePay">
+  <view class="changeCell">
+      <view class="titleC">缴费小区*</view>
+      <picker bindchange="bindChangeCell" value="{{cellListIdx}}" range-key="cellName" range="{{cellList}}">
+        <view class="address">{{cellList[cellListIdx].cellName}}</view>
+      </picker>
+      <image class="arrow" src="./../../static/image/arrow.png"></image>
+    </view>
+    <view class="payTab">
+      <view class="payTitle">缴费列表</view>
+      <view class="tabCont">
+      <view class="tabs  {{currentTab == 0?'active':''}}" data-current="0" bindtap="tabTap">待缴费</view>
+      <view class="tabs {{currentTab == 1?'active':''}}" data-current="1" bindtap="tabTap">已缴费</view>
+    </view>
+    <view class="payList">
+      <checkbox-group bindchange="payListChange">
+      <label wx:for="{{payList}}">
+        <checkbox value="{{index}}" checked="{{item.checked}}"/>
+        <view class="payName"><text>{{item.payName}}</text><text>{{item.time}}</text></view>
+        <view class="payNum">{{item.payNum}}</view>
+      </label>
+    </checkbox-group>
+    </view>
+    </view>
+    
+</view>

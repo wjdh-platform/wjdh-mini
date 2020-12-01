@@ -35,7 +35,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.13.2",
-  "appid": "wxd1d8a7847e4d52cd",
+  "appid": "wx3c3d7ceb2deb958d",
   "projectname": "wjdh-miniP",
   "debugOptions": {
     "hidedInDevtools": []
@@ -151,6 +151,12 @@
           "pathName": "pages/visitor/visitor",
           "scene": null,
           "query": ""
+        },
+        {
+          "name": "生活缴费",
+          "pathName": "pages/lifePay/lifePay",
+          "query": "",
+          "scene": null
         }
       ]
     }

@@ -58,8 +58,57 @@ Page({
          idx = e.currentTarget.dataset.idx,
          userRoles = utils.getItem('userRoles')
 
-    switch(idx){
+    if(tocken&&tocken!=''){
+      if(idx == 1 || idx == 2 || idx == 3|| idx == 4|| idx == 7){
+        if(userRoles.includes('HouseMember')){
+          switch(idx){
+            case 1://生活缴费
+            wx.navigateTo({
+              url: '/pages/lifePay/lifePay',
+            });
+          break;
+          case 2://物业报修
+            wx.navigateTo({
+              url: '/pages/repair/repair',
+            });
+          break;
+          case 3://云停车场
+            // wx.navigateTo({
+            //   url: '/pages/bindCell/bindCell?type=owner',
+            // });
+            utils.showToast("功能正在开发中","none")
+          break;
+          case 4://投诉建议
+            wx.navigateTo({
+              url: '/pages/proposal/proposal',
+            });
+          break;
+          case 7://访客通行
+            wx.navigateTo({
+              url: '/pages/visitor/visitor',
+            });
+          break;
+          }
+        }else if(userRoles.includes('NewMember')){
+          utils.showToast('需要先绑定房屋才能访问','none')
+        }else if(userRoles.includes('Shenheing')){
+          utils.showToast('需要等待物业审核通过才能访问','none')
+        }
+      }
       
+      switch(idx){
+        case 0://绑定小区
+          wx.navigateTo({
+            url: '/pages/bindCell/bindCell?type=owner',
+          });
+        break;
+      }
+    }else{
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
+    switch(idx){
       case 5://公告通知
         wx.navigateTo({
           url: '/pages/notice/notice',
@@ -70,63 +119,7 @@ Page({
           url: '/pages/phoneCall/phoneCall',
         });
       break;
-
-    }
-    if(tocken&&tocken!=''){
-      if(userRoles.includes('houseMember')){
-        switch(idx){
-          case 1://生活缴费
-          wx.navigateTo({
-            url: '/pages/bindCell/bindCell?type=owner',
-          });
-        break;
-        case 2://物业报修
-          wx.navigateTo({
-            url: '/pages/repair/repair',
-          });
-        break;
-        case 3://云停车场
-          wx.navigateTo({
-            url: '/pages/bindCell/bindCell?type=owner',
-          });
-        break;
-        case 4://投诉建议
-          wx.navigateTo({
-            url: '/pages/proposal/proposal',
-          });
-        break;
-        
-        case 7://访客通行
-          wx.navigateTo({
-            url: '/pages/visitor/visitor',
-          });
-        break;
-        }
-      }else if(userRoles.includes('NewMember')){
-        if(idx==0){
-            wx.navigateTo({
-              url: '/pages/bindCell/bindCell?type=owner',
-            });
-        }
-        utils.showToast('需要先绑定房屋才能访问','none')
-      }else if(userRoles.includes('Shenheing')){
-        utils.showToast('需要等待物业审核通过才能访问','none')
-      }
-      switch(idx){
-        case 0://绑定小区
-          wx.navigateTo({
-            url: '/pages/bindCell/bindCell?type=owner',
-          });
-        break;
-        
-
-      }
-      
-      
-    }else{
-      wx.navigateTo({
-        url: '/pages/login/login',
-      })
+      return
     }
   },
   
@@ -144,9 +137,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let t = this
-         utils.token()
-         t.getRoles()
+    
+         
     
     
     
@@ -164,7 +156,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    let t = this
+    utils.token()
+    setTimeout(()=>{
+     t.getRoles()
+    },300)
   },
 
   /**

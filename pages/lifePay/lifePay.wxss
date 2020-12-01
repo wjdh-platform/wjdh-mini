@@ -1,0 +1,90 @@
+/* pages/lifePay/lifePay.wxss */
+.changeCell{
+  padding: 44rpx 0 40rpx;
+  margin-left: 36rpx;
+  /* border-bottom: solid 1rpx #F1F1F1; */
+  position: relative;
+}
+.titleC{
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color: #969696;
+  margin-bottom: 20rpx;
+}
+.arrow{
+  position: absolute;
+  right: 40rpx;
+  top: 90rpx;
+  /* transform: translateY(-50%); */
+  width: 14rpx;
+  height: 24rpx;
+}
+.tabCont{
+  height: 90rpx;
+  line-height: 90rpx;
+  border-bottom: solid #F8F8F8 1rpx;
+}
+.tabs{
+  text-align: center;
+  display: inline-block;
+  width: 50%;
+  color: #424242;
+  font-size: 28rpx;
+}
+.active{
+  position: relative;
+}
+.active::after{
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70rpx;
+  height: 6rpx;
+  background: #50DABE;
+  border-radius: 3rpx;
+}
+.payTitle{
+  background: #F9F9F9;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 26rpx;
+  color: #5A5A5A;
+  padding-left: 35rpx;
+}
+.payTitle::before{
+  content: '';
+  display: inline-block;
+  width: 20rpx;
+  height: 20rpx;
+  background: #50DABE;
+  border-radius: 50%;
+  margin-right: 10rpx;
+}
+.payList label{
+  display: flex;
+  align-items: center;
+  height: 120rpx;
+  padding: 0 35rpx;
+  box-sizing: border-box;
+  border-bottom: solid 1rpx #f1f1f1;
+}
+.payName{
+  flex:1;
+  text-align:left;
+  margin-left: 15rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+.payName text{
+  display: block;
+}
+.payName text:last-child{
+  font-size: 24rpx;
+}
+.payNum{
+  font-size: 28rpx;
+  color: #333;
+}

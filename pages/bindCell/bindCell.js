@@ -47,7 +47,7 @@ Page({
     pageType:true,
     photoUrl:'',
     inputDisable:true,
-    placeholder:'请识别',
+    placeholder:'业主只能是使用拍照识别身份证',
     villageIdxP:0
   },
 
@@ -68,6 +68,10 @@ Page({
     })
   },
 
+  inputDis(e){
+    utils.showToast('业主只能是使用拍照识别身份证','none')
+  },
+
   bindShip(e){
     let t = this
     console.log(e.detail.value)
@@ -81,7 +85,7 @@ Page({
       t.setData({
         ownerType: true,
         inputDisable:true,
-        placeholder:'请识别'
+        placeholder:'业主只能是使用拍照识别身份证'
       })
     }
 
@@ -128,6 +132,9 @@ Page({
 
   checkMoreBtn(){
     let t = this;
+    t.setData({
+      moreType:!this.data.moreType,
+    })
     if(t.data.moreType){
       t.setData({
         moreText: '收起',
@@ -137,9 +144,7 @@ Page({
         moreText: '点击查看更多',
       })
     }
-    t.setData({
-      moreType:!this.data.moreType,
-    })
+    
   },
 
   //关闭弹层
@@ -151,17 +156,32 @@ Page({
 
   //手机号失焦
   phoneBlur(e){
-    this.setData({
-      phoneVal:e.detail.value
-    })
+    let t = this
+    if(e.detail.value.length == 11){
+      if (!/^1[3456789]\d{9}$/.test(e.detail.value)) {
+        utils.showToast("请输入正确的手机号","none")
+      }else{
+        t.setData({
+          phoneVal: e.detail.value
+        })
+      }
+    }else{
+      t.setData({
+        phoneVal: e.detail.value
+      })
+      
+    }
   },
 
 
   //验证码失焦
   codeBlur(e){
-    this.setData({
-      codeVal: e.detail.value
-    })
+    if(e.detail.value.length == 4){
+      this.setData({
+        codeVal: e.detail.value
+      })
+    }
+    
   },
 
   //业主验证码失焦
@@ -635,7 +655,8 @@ Page({
 
   delPhoto(){
     this.setData({
-      imgSrc:''
+      imgSrc:'',
+      'examineData.photo': '',
     })
   },
 
@@ -666,15 +687,15 @@ Page({
          dataList =data.dataList,
          
          param = {
-          phone:data.phoneVal,
+          phone:data.phoneVal?data.phoneVal:val.phone,
           idcard: data.idcardData ? data.idcardData.idcard:val.IDNumber,
           name: data.idcardData ? data.idcardData.name:val.userName,
           // photo: data.photoBase64 == ''?'':'data:image/png;base64,'+data.photoBase64,
           photo: data.photoUrl ? data.photoUrl:'',
-          sex: data.idcardData ? data.idcardData.gender:val.sex,
+          sex: data.idcardData ? data.idcardData.gender:'',
           // birth: data.idcardData ? data.idcardData.birthday:val.birth,
-          nation: data.idcardData ? data.idcardData.nation:val.nation,
-          address: data.idcardData ? data.idcardData.address:val.address,
+          nation: data.idcardData ? data.idcardData.nation:'',
+          address: data.idcardData ? data.idcardData.address:'',
           zzmm: dataList.zzmm[data.zzmmIdx].key,
           tyjr: dataList.tyjr[data.twjrIdx].key,
           dibao:dataList.dibao[data.sfdbIdx].key,
@@ -705,6 +726,7 @@ Page({
         } else if (res.data.code == 0){
           utils.showToast(res.data.msg, 'none')
           utils.setItem('examineData',res.data.shenhe_data)
+          utils.setItem('userRoles',res.data.data)
           wx.redirectTo({
             url: '/pages/houseList/ownerHouseList/ownerHouseList',
           })

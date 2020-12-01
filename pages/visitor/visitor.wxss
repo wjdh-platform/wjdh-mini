@@ -36,3 +36,7 @@
   margin-top: 60rpx;
   background: transparent;
 }
+.shareBtn image{
+  width: 286rpx;
+  height: 286rpx;
+}

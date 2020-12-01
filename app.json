@@ -12,7 +12,8 @@
     "pages/notice/details/details",
     "pages/phoneCall/phoneCall",
     "pages/proposal/proposal",
-    "pages/visitor/visitor"
+    "pages/visitor/visitor",
+    "pages/lifePay/lifePay"
   ],
   "window": {
     "backgroundTextStyle": "light",

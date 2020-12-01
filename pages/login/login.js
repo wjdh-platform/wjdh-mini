@@ -92,13 +92,24 @@ Page({
 
   //登录手机号失焦
   loginPhoneBlur(e){
-    if (!/^1[3456789]\d{9}$/.test(e.detail.value)) {
-      utils.showToast("请输入正确的手机号","none")
-    }else{
-      this.setData({
-        loginPhoneVal: e.detail.value
-      })
-    }
+    let t = this
+      if(e.detail.value.length == 11){
+        if (!/^1[3456789]\d{9}$/.test(e.detail.value)) {
+          utils.showToast("请输入正确的手机号","none")
+        }else{
+          t.setData({
+            loginPhoneVal: e.detail.value
+          })
+        }
+      }else{
+        t.setData({
+          loginPhoneVal: e.detail.value
+        })
+        
+      }
+    
+    
+    
   },
 
   //登录密码失焦
