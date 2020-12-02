@@ -46,9 +46,13 @@ Page({
   },
 
   getLogin(){
-    wx.navigateTo({
-      url: '/pages/login/login',
-    })
+    let avatar = utils.getItem("avatar")
+    if(!avatar){
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
+    
   },
 
   /**
