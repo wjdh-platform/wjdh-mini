@@ -6,7 +6,7 @@ page{
   padding-bottom: 60rpx;
 }
 .houseCont,.msgCont{
-  margin-top: 30rpx;
+  margin-top: 20rpx;
   background: #fff;
 }
 .msgCont{
@@ -24,9 +24,17 @@ page{
   align-items: center;
   border-bottom: solid 1rpx #ececec;
   height: 94rpx;
+  margin-top: 20rpx;
+}
+.column01 .title{
+  font-size: 28rpx;
+    color: #282828;
 }
 .column:last-child,.msgColumn:last-child{
   border-bottom:none;
+}
+.column01 picker{
+  font-size: 28rpx;
 }
 picker{
   flex: 1;
@@ -66,8 +74,12 @@ picker{
   color: #424242;
   width: 80%;
 }
-.inputPlaceHolder,.inputDis{
+.inputPlaceHolder{
   color: #C6C6C6;
+}
+
+.inputDis{
+  color: #424242;
 }
 .msgColumn{
   position: relative;

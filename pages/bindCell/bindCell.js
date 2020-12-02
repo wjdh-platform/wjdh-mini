@@ -48,7 +48,40 @@ Page({
     photoUrl:'',
     inputDisable:true,
     // placeholder:'业主只能是使用拍照识别身份证',
-    villageIdxP:0
+    villageIdxP:0,
+    bindListP:[
+      {id:1,name:'为本人绑定'},
+      {id:0,name:'为他人绑定'}
+    ],
+    bindListPIdx:0
+  },
+
+  bindlistPeople(e){
+    let t = this,
+         arr = t.data.dataList.role
+         console.log(arr)
+    if(e.detail.value == 1){
+      let arrChange=arr.shift()
+      t.setData({
+        shipType:true,
+        ownerType:false,
+        examineData:{},
+        'examineData.photo':'',
+        inputDisable:false,
+        'dataList.role':arr
+      })
+    }else{
+      arr.unshift({key: "业主", value: "业主"});
+      t.setData({
+        ownerType:true,
+        examineData:utils.getItem('examineData'),
+        inputDisable:true,
+        'dataList.role':arr
+      })
+    }
+    this.setData({
+      bindListPIdx:e.detail.value
+    })
   },
 
   bindvillageListP(e){
@@ -686,6 +719,7 @@ Page({
          dataList =data.dataList,
          
          param = {
+          who: data.bindListP[data.bindListPIdx].id,
           phone:data.phoneVal?data.phoneVal:val.phone,
           idcard: data.idcardData ? data.idcardData.idcard:val.IDNumber,
           name: data.idcardData ? data.idcardData.name:val.userName,
