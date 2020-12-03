@@ -53,30 +53,31 @@ Page({
       {id:1,name:'为本人绑定'},
       {id:0,name:'为他人绑定'}
     ],
-    bindListPIdx:0
+    bindListPIdx:0,
+    bindPeo:false
   },
 
   bindlistPeople(e){
-    let t = this,
-         arr = t.data.dataList.role
-         console.log(arr)
+    let t = this
+        //  arr = t.data.dataList.role
+        //  console.log(arr)
     if(e.detail.value == 1){
-      let arrChange=arr.shift()
+      // let arrChange=arr.shift()
       t.setData({
-        shipType:true,
-        ownerType:false,
-        examineData:{},
-        'examineData.photo':'',
-        inputDisable:false,
-        'dataList.role':arr
+        // shipType:true,
+        // ownerType:false,
+        // examineData:{},
+        // 'examineData.photo':'',
+        // inputDisable:false,
+        // 'dataList.role':arr
       })
     }else{
-      arr.unshift({key: "业主", value: "业主"});
+      // arr.unshift({key: "业主", value: "业主"});
       t.setData({
-        ownerType:true,
-        examineData:utils.getItem('examineData'),
-        inputDisable:true,
-        'dataList.role':arr
+        // ownerType:true,
+        // examineData:utils.getItem('examineData'),
+        // inputDisable:true,
+        // 'dataList.role':arr
       })
     }
     this.setData({
@@ -108,17 +109,20 @@ Page({
   bindShip(e){
     let t = this
     console.log(e.detail.value)
-    if(e.detail.value!="0"){
+    if(e.detail.value!="1"){
       t.setData({
         ownerType: false,
         inputDisable:false,
-        // placeholder:'请输入'
+        bindPeo:true,
+        examineData:{},
+        'examineData.photo':'',
       })
     }else{
       t.setData({
         ownerType: true,
         inputDisable:true,
-        // placeholder:'业主只能是使用拍照识别身份证'
+        bindPeo:false,
+        examineData:utils.getItem('examineData'),
       })
     }
 
@@ -244,10 +248,11 @@ Page({
         if (res.data.code == 1) {
           utils.showToast(res.data.msg, "none")
           return
-        } else {
+        } else if(res.data.code == 0) {
           that.setData({
             getCodeKeyLoginYZ: res.data.key,
-            codeAgainYZ:false
+            codeAgainYZ:false,
+            
           })
           utils.showToast("短信验证码已发送", "none")
           var interval = setInterval(function () {
@@ -338,7 +343,8 @@ Page({
         if(res.data.code == 0){
           utils.showToast(res.data.msg,"none")
           t.setData({
-            popupType: false
+            popupType: false,
+            
           })
           wx.redirectTo({
             url: '/pages/houseList/ownerHouseList/ownerHouseList',
@@ -510,7 +516,7 @@ Page({
       }else{
         t.setData({
           pageType:false,
-          ownerType:true,
+          // ownerType:true,
           shipType:true,
           encryptionPhone:'',
           yezhuOldPhone:''
@@ -539,23 +545,21 @@ Page({
     let t = this
     api.bellInitialize({}, (res) => {
       if (res.data.code == 0) {
-        if(!t.data.pageType){
-          let arr = res.data.data.role,
-               arrChange=arr.shift()
-          console.log(arr)
-          console.log(arrChange)
-        }
+        // if(!t.data.pageType){
+        //   let arr = res.data.data.role,
+        //        arrChange=arr.shift()
+        // }
+        let rolesOld = res.data.data.role,
+             role = []
+        role = rolesOld.unshift({ key:'请选择',value:'请选择'})
         t.setData({
-          dataList: res.data.data
+          dataList: res.data.data,
+          'dataList.role':rolesOld
         })
       }
     })
   },
 
-
-  launchAppError(e) {
-    console.log(e.detail.errMsg)
-  },
   
   // 上传图片
   uploadImg: function () {
@@ -697,13 +701,14 @@ Page({
     if(e.detail.value == "1"){
       t.setData({
         shipType:true,
-        ownerType:true
+        // ownerType:true
       })
     }else{
       t.setData({
         shipType: false,
-        ownerType:true,
-        pageType:false
+        // ownerType:true,
+        pageType:false,
+        bindPeo:false
       })
     }
     
@@ -717,23 +722,21 @@ Page({
          val = e.detail.value,
          data = t.data,
          dataList =data.dataList,
-         
          param = {
           who: data.bindListP[data.bindListPIdx].id,
           phone:data.phoneVal?data.phoneVal:val.phone,
-          idcard: data.idcardData ? data.idcardData.idcard:val.IDNumber,
-          name: data.idcardData ? data.idcardData.name:val.userName,
-          // photo: data.photoBase64 == ''?'':'data:image/png;base64,'+data.photoBase64,
-          photo: data.photoUrl ? data.photoUrl:'',
+          idcard: data.idcardData ? data.idcardData.idcard:val.IDNumber?val.IDNumber:examineData.idcard,
+          name: data.idcardData ? data.idcardData.name:val.userName?val.userName:examineData.name,
+          photo: data.photoUrl ? data.photoUrl:data.examineData.photo,
           sex: data.idcardData ? data.idcardData.gender:'',
-          // birth: data.idcardData ? data.idcardData.birthday:val.birth,
+          birth: data.idcardData ? data.idcardData.birthday:'',
           nation: data.idcardData ? data.idcardData.nation:'',
           address: data.idcardData ? data.idcardData.address:'',
           zzmm: dataList.zzmm[data.zzmmIdx].key,
           tyjr: dataList.tyjr[data.twjrIdx].key,
           dibao:dataList.dibao[data.sfdbIdx].key,
           shangfang: dataList.shangfang[data.sfjlIdx].key,
-          job:val.job,
+          job:val.job?val.job:examineData.job,
           company:val.company,
           house_id: data.roomIdx == 0?'':data.roomList[data.roomIdx].id,
           role: dataList.role[data.shipIdx].key,
@@ -743,7 +746,7 @@ Page({
           choice: val.radio?val.radio:'1',
           type:dataList.type[data.zhlxIdx].key
         }
-        if(data.photoUrl == ''){
+        if(param.photo == ''){
           wx.showLoading({
             title: '人脸照片上传中...',
           })
@@ -780,7 +783,7 @@ Page({
         utils.showToast(res.data.message,"none")
         t.setData({
           verificationPhoneVal:"验证成功",
-          pageType:false
+          pageType:false,
         })
       }else{
         utils.showToast(res.data.message, "none")

@@ -11,6 +11,11 @@
   color: #969696;
   margin-bottom: 20rpx;
 }
+.shareText{
+  font-size: 28rpx;
+  color: #808080;
+  text-align: center;
+}
 .arrow{
   position: absolute;
   right: 40rpx;

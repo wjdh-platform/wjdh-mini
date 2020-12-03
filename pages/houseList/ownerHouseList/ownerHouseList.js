@@ -17,11 +17,12 @@ Page({
     let id = e.currentTarget.dataset.houseid,
          shenhe_id = e.currentTarget.dataset.shenheid,
          role = e.currentTarget.dataset.role
-         if(id){
+         if(id&&role == '业主'){
           wx.navigateTo({
             url: '/pages/houseDetails/houseDetails?houseId='+id+'&role='+role,
           })
-         }else{
+         }else if(role != '业主'){
+          utils.showToast('只有业主才能查看房屋详情','none')
          }
   },
 

@@ -29,17 +29,6 @@
     </view>
   </view>
   <form bindsubmit="submitCell">
-    <view class="houseCont">
-      <view class="column">
-        <view class="title">绑定主体</view>
-        <picker bindchange="bindlistPeople" value="{{bindListPIdx}}" range="{{bindListP}}" range-key="name">
-          <view class="picker">
-            {{bindListP[bindListPIdx].name}}
-          </view>
-        </picker>
-        <image class="arrow" src="./../../static/image/arrow.png"></image>
-      </view>
-    </view>
     <view class="houseCont" wx:if="{{cellDetail}}">
       <view class="column">
         <view class="title">小区</view>
@@ -109,6 +98,7 @@
 
       </view>
     </view>
+  
     <!-- <view class="houseCont"> -->
     <view class="houseCont" wx:if="{{verificationPhoneVal == '验证成功'&&!pageType}}">
       <radio-group name="radio" bindchange="radioChange">
@@ -118,6 +108,7 @@
           <radio value="{{dataList.choice[1].key}}" />{{dataList.choice[1].value}}</label>
       </radio-group>
     </view>
+
     <view class="houseCont">
       <view class="column" wx:if="{{shipType&&!pageType}}">
         <view class="title">与业主关系</view>
@@ -126,7 +117,19 @@
         </picker>
         <image class="arrow" src="./../../static/image/arrow.png"></image>
       </view>
-      <view wx:if="{{ownerType}}">
+    </view>
+      <view class="houseCont" wx:if="{{bindPeo}}">
+      <view class="column">
+        <view class="title">绑定主体</view>
+        <picker bindchange="bindlistPeople" value="{{bindListPIdx}}" range="{{bindListP}}" range-key="name">
+          <view class="picker">
+            {{bindListP[bindListPIdx].name}}
+          </view>
+        </picker>
+        <image class="arrow" src="./../../static/image/arrow.png"></image>
+      </view>
+    </view>
+    <view class="houseCont" wx:if="{{ownerType}}">
         <view class="column">
           <view class="title">房屋用途</view>
           <picker bindchange="bindFwyt" value="{{fwytIdx}}" range="{{dataList.use}}" range-key="value">
@@ -156,7 +159,6 @@
           <image class="arrow" src="./../../static/image/arrow.png"></image>
         </view>
       </view>
-    </view>
 
     <!-- <view class="msgCont" wx:if="{{popupType||!pageType}}"> -->
     <view class="msgCont">
