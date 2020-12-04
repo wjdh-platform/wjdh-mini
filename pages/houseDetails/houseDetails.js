@@ -62,7 +62,7 @@ Page({
       if(res.data.code == 0){
         utils.showToast(res.data.msg,'none')
         wx.redirectTo({
-          url: '/pages/bindCell/bindCell',
+          url: '/pages/houseList/ownerHouseList',
         })
       }
     })
@@ -73,7 +73,7 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    utils.token()
+    // utils.token()
     this.setData({
       houseId:options.houseId,
       role: options.role,

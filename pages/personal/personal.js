@@ -35,7 +35,7 @@ Page({
    */
   onLoad: function (options) {
     
-    utils.token()
+    // utils.token()
   },
 
   /**

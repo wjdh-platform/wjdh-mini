@@ -147,9 +147,9 @@
   </view>
   
 </view>
-<view class="shenheStatus" wx:if="{{shenheData.shenhe_status == '审核未通过'}}">
+<view class="shenheStatus">
   <view class="delBtn" bindtap="delCell" data-id="{{shenheData.id}}">删除</view>
-  <view class="delText">注：可删除后重新填写</view>
+  <view class="delText">注：删除后可重新填写</view>
   
 </view>
 </view>
