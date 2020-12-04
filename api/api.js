@@ -102,3 +102,18 @@ export const getRoles = (params, cb) => {
   request('api/v1/people/roles', params, cb, 'post')
 }
 
+//审核详情
+export const getShenheDetail = (params, cb) => {
+  request('api/v1/shenhe/detail', params, cb, 'post')
+}
+//审核详情
+export const houseDel = (params, cb) => {
+  request('api/v1/shenhe/detail', params, cb, 'DELETE')
+}
+//审核详情
+export const payment = (params, cb) => {
+  request('api/v1/weapp/payment', params, cb, 'post')
+}
+
+
+

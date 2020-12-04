@@ -13,7 +13,7 @@
     </view>
     <view class="houseType fail" wx:if="{{item.status == 0}}">{{item.statusVal}}</view>
     <view class="houseType shenheing" wx:if="{{item.status == 2}}">{{item.statusVal}}</view>
-    <view class="houseType" wx:else>{{item.statusVal}}</view>
+    <view class="houseType" wx:if="{{item.status == 1}}">{{item.statusVal}}</view>
   </view>
 </view>
 <view class="listNone" wx:else>暂无列表数据</view>

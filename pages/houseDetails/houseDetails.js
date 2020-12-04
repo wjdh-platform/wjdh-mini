@@ -42,6 +42,32 @@ Page({
     })
   },
 
+  getShenheDetail(){
+    let t = this
+    api.getShenheDetail({
+      id: t.data.shenhe_id,
+    },(res)=>{
+      if(res.data.code == 0){
+        t.setData({
+          shenheData:res.data.data
+        })
+      }
+    })
+  },
+
+  delCell(e){
+    let id = e.currentTarget.dataset.id
+    console.log(e.currentTarget.dataset.id)
+    api.houseDel({id:id},(res)=>{
+      if(res.data.code == 0){
+        utils.showToast(res.data.msg,'none')
+        wx.redirectTo({
+          url: '/pages/bindCell/bindCell',
+        })
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -51,8 +77,16 @@ Page({
     this.setData({
       houseId:options.houseId,
       role: options.role,
+      shenhe_id:options.shenhe_id
+      // shenhe_id:16
     })
-    this.getHouseDetails()
+      if(options.houseId!=''){
+        this.getHouseDetails()
+      }else{
+        this.getShenheDetail()
+      }
+    
+    // this.getShenheDetail()
   },
 
   /**

@@ -10,8 +10,17 @@ page{
   font-size: 32rpx;
   color: #424242;
   line-height: 32rpx;
-  padding: 40rpx;
+  padding: 40rpx 0 20rpx 30rpx;
   position: relative;
+}
+.status{
+  color: #50DABE;
+}
+.yellow{
+  color: #EAC100;
+}
+.red{
+  color: red;
 }
 .addMember{
   position: absolute;
@@ -28,7 +37,7 @@ page{
 }
 .item,.columnMe{
   border-bottom: solid 1rpx #F8F8F8;
-  padding: 0 40rpx;
+  padding: 0 0 0 30rpx;
   box-sizing: border-box;
   height: 90rpx;
   line-height: 90rpx;
@@ -37,10 +46,11 @@ page{
 }
 .itemTitle{
   color: #8F9199;
+  width: 160rpx;
 }
 .itemTitle,.itemText{
   display: inline-block;
-  margin-right: 30rpx;
+  /* margin-right: 30rpx; */
 }
 .tabCont{
   height: 90rpx;
@@ -78,4 +88,30 @@ page{
   text-align: center;
   font-size: 28rpx;
   color: #333;
+}
+.shenheStatus{
+  margin-top: 40rpx;
+  /* display: flex;
+  justify-content: flex-end; */
+  margin: 40rpx 30rpx 50rpx 0;
+  overflow: hidden;
+}
+.delBtn{
+  width: 220rpx;
+  height: 68rpx;
+  background: #50DABE;
+  border-radius: 34rpx;
+  font-size: 30rpx;
+  font-weight: 400;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 68rpx;
+  float: right;
+}
+.delText{
+  font-size: 26rpx;
+  color: #D5D5D5;
+  float: right;
+  line-height: 68rpx;
+  margin-right: 20rpx;
 }

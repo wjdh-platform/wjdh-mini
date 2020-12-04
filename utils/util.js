@@ -1,19 +1,4 @@
 import * as api from '../api/api';
-const formatTime = date => {
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const hour = date.getHours()
-  const minute = date.getMinutes()
-  const second = date.getSeconds()
-
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
-}
-
-const formatNumber = n => {
-  n = n.toString()
-  return n[1] ? n : '0' + n
-}
 
 // 本地缓存存储
 function setItem(key, value) {
@@ -59,9 +44,13 @@ function token(){
       if (tocken && tocken != '') {
         if(currentTime>timestamp1+3000000){
           console.log("token过期")
-          api.getTockenN({}, (res) => {
+          refreshToken({}).then(function(res) {
+            console.log(res)
+          
+          // api.getTockenN({}, (res) => {
             if(res.data.code == 0){
-            t.setItem('accessToken', res.data.access_token)
+            // t.setItem('accessToken', res.data.access_token)
+            wx.setStorageSync('accessToken', res.data.access_token)
             t.setItem('userRoles', res.data.roles)
             t.setItem('timestamp1', currentTime)
             if(t.getItem('avatar')){
@@ -73,7 +62,8 @@ function token(){
           }else{
             t.codeToken()
           }
-          })
+        })
+          // })
         }else{
           console.log("token未过期")
         }
@@ -88,37 +78,53 @@ function token(){
   wx.login({
     success(res){
     console.log(res)
-  api.getTocken({
-    code:res.code
-  }, (res) => {
-    if(res.data.code == 0){
-      t.setItem('accessToken', res.data.access_token)
-      t.setItem('userRoles', res.data.roles)
-      t.setItem('timestamp1', currentTime)
-      if(t.getItem('avatar')){
-        return true
-      }else{
-        t.setItem('avatar', res.data.avatar)
-        t.setItem('name', res.data.name)
-      }
+    getToken({code:res.code}).then((res)=>{
+      if(res.data.code == 0){
+            // t.setItem('accessToken', res.data.access_token)
+            wx.setStorageSync('accessToken', res.data.access_token)
+            t.setItem('userRoles', res.data.roles)
+            t.setItem('timestamp1', currentTime)
+            if(t.getItem('avatar')){
+              return true
+            }else{
+              t.setItem('avatar', res.data.avatar)
+              t.setItem('name', res.data.name)
+            }
+            
+          }else if (res.data.code == 1){
+            //游客身份
+          }
+    })
+  // api.getTocken({
+  //   code:res.code
+  // }, (res) => {
+  //   if(res.data.code == 0){
+  //     t.setItem('accessToken', res.data.access_token)
+  //     t.setItem('userRoles', res.data.roles)
+  //     t.setItem('timestamp1', currentTime)
+  //     if(t.getItem('avatar')){
+  //       return true
+  //     }else{
+  //       t.setItem('avatar', res.data.avatar)
+  //       t.setItem('name', res.data.name)
+  //     }
       
-    }else if (res.data.code == 1){
-      //游客身份
-    }
-  })
+  //   }else if (res.data.code == 1){
+  //     //游客身份
+  //   }
+  // })
 }
 })
 }
 
 
-
 module.exports = {
-  formatTime: formatTime,
+  // formatTime: formatTime,
   setItem: setItem,
   getItem: getItem,
   removeItem: removeItem,
   checkLogin: checkLogin,
   showToast,
   token,
-  codeToken
+  codeToken,
 }

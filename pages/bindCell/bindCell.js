@@ -46,7 +46,7 @@ Page({
     codeAgainYZ:true,
     pageType:true,
     photoUrl:'',
-    inputDisable:true,
+    inputDisable:false,
     // placeholder:'业主只能是使用拍照识别身份证',
     villageIdxP:0,
     bindListP:[
@@ -116,6 +116,7 @@ Page({
         bindPeo:true,
         examineData:{},
         'examineData.photo':'',
+        inputDisable:false
       })
     }else{
       t.setData({
@@ -123,6 +124,7 @@ Page({
         inputDisable:true,
         bindPeo:false,
         examineData:utils.getItem('examineData'),
+        inputDisable:true
       })
     }
 
@@ -798,12 +800,12 @@ Page({
     let t = this,
          roles = utils.getItem('userRoles'),
          examineData = utils.getItem('examineData')
-         utils.token()
+        //  utils.token()
     // t.getBaiduToken();
-    setTimeout(()=>{
+    // setTimeout(()=>{
       t.bellInitialize();
       t.getVillage();
-    },300)
+    // },300)
     if(examineData){
       t.setData({
         examineData

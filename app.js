@@ -13,6 +13,7 @@ App({
 
   },
   globalData: {
-    roles: ''
+    roles: '',
+    access_token:''
   }
 })

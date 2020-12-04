@@ -157,10 +157,7 @@ Page({
    */
   onShow: function () {
     let t = this
-    utils.token()
-    setTimeout(()=>{
      t.getRoles()
-    },300)
   },
 
   /**

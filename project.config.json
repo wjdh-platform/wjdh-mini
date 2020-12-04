@@ -5,7 +5,8 @@
   },
   "setting": {
     "urlCheck": false,
-    "es6": true,
+    "es6": false,
+    "enhance": true,
     "postcss": true,
     "minified": true,
     "newFeature": true,
@@ -30,8 +31,7 @@
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true,
-    "enhance": true
+    "minifyWXSS": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.13.2",
@@ -107,50 +107,50 @@
         {
           "name": "pages/index/index",
           "pathName": "pages/index/index",
-          "scene": null,
-          "query": ""
+          "query": "",
+          "scene": null
         },
         {
           "name": "小区详情",
           "pathName": "pages/houseDetails/houseDetails",
-          "query": "id=1&role=1",
+          "query": "?id=17",
           "scene": null
         },
         {
           "name": "物业报修",
           "pathName": "pages/repair/repair",
-          "scene": null,
-          "query": ""
+          "query": "",
+          "scene": null
         },
         {
           "name": "公告通知",
           "pathName": "pages/notice/notice",
-          "scene": null,
-          "query": ""
+          "query": "",
+          "scene": null
         },
         {
           "name": "公告详情",
           "pathName": "pages/notice/details/details",
-          "scene": null,
-          "query": ""
+          "query": "",
+          "scene": null
         },
         {
           "name": "应急电话",
           "pathName": "pages/phoneCall/phoneCall",
-          "scene": null,
-          "query": ""
+          "query": "",
+          "scene": null
         },
         {
           "name": "投诉建议",
           "pathName": "pages/proposal/proposal",
-          "scene": null,
-          "query": ""
+          "query": "",
+          "scene": null
         },
         {
           "name": "访客通行",
           "pathName": "pages/visitor/visitor",
-          "scene": null,
-          "query": ""
+          "query": "",
+          "scene": null
         },
         {
           "name": "生活缴费",

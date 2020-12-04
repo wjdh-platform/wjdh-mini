@@ -1,4 +1,6 @@
 // pages/lifePay/lifePay.js
+import * as api from '../../api/api'
+import utils from '../../utils/util.js'
 Page({
 
   /**
@@ -34,11 +36,16 @@ Page({
     })
   },
 
+  payment(){
+    api.payment({},(res)=>{
+      console.log(res)
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.payment()
   },
 
   /**
