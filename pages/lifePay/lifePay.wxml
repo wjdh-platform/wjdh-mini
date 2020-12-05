@@ -23,5 +23,6 @@
     </checkbox-group>
     </view>
     </view>
+    <view class="payNumTotal" bindtap="payNum">去支付</view>
     
 </view>

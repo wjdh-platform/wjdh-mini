@@ -10,7 +10,7 @@ Page({
   data: {
     codeBtnText:'获取验证码',
     codeBtnTextYZ:'获取验证码',
-    moreText:'点击添加更多',
+    moreText:'点击录入更多信息',
     popupType:true,
     moreType:false,
     shipType:false,
@@ -180,7 +180,7 @@ Page({
       })
     }else{
       t.setData({
-        moreText: '点击查看更多',
+        moreText: '点击录入更多信息',
       })
     }
     
@@ -340,7 +340,7 @@ Page({
       api.verificationPhone({
         verification_key: t.data.getCodeKeyLogin,
         verification_code:t.data.codeVal,
-        id:t.data.villageList[t.data.villageIdxP].community_identifier
+        id:t.data.villageList[t.data.villageIdx].community_identifier
       },(res)=>{
         if(res.data.code == 0){
           utils.showToast(res.data.msg,"none")
@@ -692,7 +692,17 @@ Page({
   },
 
   delPhoto(){
-    this.setData({
+    let t = this
+    if(t.data.shipIdx == 1){
+      t.setData({
+        inputDisable:true
+      })
+    }else{
+      t.setData({
+        inputDisable:false
+      })
+    }
+    t.setData({
       imgSrc:'',
       'examineData.photo': '',
     })
@@ -727,8 +737,8 @@ Page({
          param = {
           who: data.bindListP[data.bindListPIdx].id,
           phone:data.phoneVal?data.phoneVal:val.phone,
-          idcard: data.idcardData ? data.idcardData.idcard:val.IDNumber?val.IDNumber:examineData.idcard,
-          name: data.idcardData ? data.idcardData.name:val.userName?val.userName:examineData.name,
+          idcard: data.idcardData ? data.idcardData.idcard:val.IDNumber?val.IDNumber:data.examineData.idcard,
+          name: data.idcardData ? data.idcardData.name:val.userName?val.userName:data.examineData.name,
           photo: data.photoUrl ? data.photoUrl:data.examineData.photo,
           sex: data.idcardData ? data.idcardData.gender:'',
           birth: data.idcardData ? data.idcardData.birthday:'',

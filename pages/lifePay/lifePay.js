@@ -39,6 +39,26 @@ Page({
   payment(){
     api.payment({},(res)=>{
       console.log(res)
+      this.setData({
+        payInfo:res.data
+      })
+    })
+  },
+
+  payNum(){
+    let t = this
+    wx.requestPayment({
+      timeStamp: t.data.payInfo.timeStamp,
+      nonceStr: t.data.payInfo.nonceStr,
+      package: t.data.payInfo.package,
+      signType: t.data.payInfo.signType,
+      paySign: t.data.payInfo.paySign,
+      success (res) { 
+        console.log('支付成功'+JSON.stringify(res))
+      },
+      fail (res) { 
+        console.log('支付失败'+JSON.stringify(res))
+      }
     })
   },
   /**

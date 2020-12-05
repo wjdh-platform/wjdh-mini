@@ -167,7 +167,7 @@
         <input type="number" name="IDNumber" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder"
           value="{{examineData&&examineData.idcard?examineData.idcard:idcardData.idcard}}" 
           wx:if="{{!inputDisable}}"></input>
-        <view class="inputDis" wx:else bindtap="inputDis">{{examineData?examineData.idcard:'请识别'}}</view>
+        <view class="inputDis" wx:else bindtap="inputDis">{{examineData.idcard?examineData.idcard:'请识别'}}</view>
         <view class="photograph" bindtap="uploadImg" wx:if="{{!cellList}}">
           <image src="./../../static/image/photoID.png"></image>
           <text>拍照识别</text>
@@ -177,7 +177,7 @@
         <view class="msgTitle">真实姓名</view>
         <input type="text" wx:if="{{!inputDisable}}" name="userName" placeholder="请输入" class="inputText"
           placeholder-class="inputPlaceHolder" value="{{examineData&&examineData.name?examineData.name:idcardData.name}}"></input>
-        <view class="inputDis" wx:else bindtap="inputDis">{{examineData?examineData.name:'请识别'}}</view>
+        <view class="inputDis" wx:else bindtap="inputDis">{{examineData.idcard?examineData.name:'请识别'}}</view>
       </view>
       <!-- <view class="msgColumn">
       <view class="msgTitle">民族</view>

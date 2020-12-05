@@ -62,7 +62,7 @@ Page({
       if(res.data.code == 0){
         utils.showToast(res.data.msg,'none')
         wx.redirectTo({
-          url: '/pages/houseList/ownerHouseList',
+          url: '/pages/houseList/ownerHouseList/ownerHouseList',
         })
       }
     })

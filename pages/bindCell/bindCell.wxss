@@ -213,7 +213,7 @@ picker{
   color: #fff;
 }
 .checkMoreBtn{
-  width: 184rpx;
+  width: 220rpx;
   height: 59rpx;
   border: 2rpx solid #50DABE;
   border-radius: 8rpx;
