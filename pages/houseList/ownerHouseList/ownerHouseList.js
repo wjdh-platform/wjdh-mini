@@ -19,7 +19,7 @@ Page({
          shenhe_id = e.currentTarget.dataset.shenheid?e.currentTarget.dataset.shenheid:'',
          role = e.currentTarget.dataset.role?e.currentTarget.dataset.role:''
          if(role == '业主'||shenhe_id){
-          wx.navigateTo({
+          wx.redirectTo({
             url: '/pages/houseDetails/houseDetails?houseId='+id+'&role='+role+'&shenhe_id='+shenhe_id,
           })
          }else if(role != '业主'){

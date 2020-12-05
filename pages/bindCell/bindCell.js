@@ -8,21 +8,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    codeBtnText:'获取验证码',
-    codeBtnTextYZ:'获取验证码',
-    moreText:'点击录入更多信息',
-    popupType:true,
-    moreType:false,
-    shipType:false,
-    phoneVal:'',
-    currentTime:61,
-    currentTimeYZ:61,
-    codeVal:'',
-    villageIdx:0,
-    buildingsIdx:0,
-    unitsIdx:0,
-    floorIdx:0,
-    roomIdx:0,
+    codeBtnText: '获取验证码',
+    codeBtnTextYZ: '获取验证码',
+    moreText: '点击录入更多信息',
+    popupType: true,
+    moreType: false,
+    shipType: false,
+    phoneVal: '',
+    currentTime: 61,
+    currentTimeYZ: 61,
+    codeVal: '',
+    villageIdx: 0,
+    buildingsIdx: 0,
+    unitsIdx: 0,
+    floorIdx: 0,
+    roomIdx: 0,
     fwytIdx: 0,
     fwxzIdx: 0,
     jzxzIdx: 0,
@@ -30,38 +30,40 @@ Page({
     sfdbIdx: 0,
     twjrIdx: 0,
     sfjlIdx: 0,
-    zzmmIdx:0,
-    shipIdx:0,
-    photoBase64:'',
-    verificationPhoneVal:'验证手机号',
-    buildingsType:true,
-    unitsType:true,
-    floorType:true,
-    roomType:true,
-    cellDetail:true,
-    cellList:false,
-    pagesType:false,
-    ownerType:false,
-    codeAgain:true,
-    codeAgainYZ:true,
-    pageType:true,
-    photoUrl:'',
-    inputDisable:false,
+    zzmmIdx: 0,
+    shipIdx: 0,
+    photoBase64: '',
+    verificationPhoneVal: '验证手机号',
+    buildingsType: true,
+    unitsType: true,
+    floorType: true,
+    roomType: true,
+    cellDetail: true,
+    cellList: false,
+    pagesType: false,
+    ownerType: false,
+    codeAgain: true,
+    codeAgainYZ: true,
+    pageType: true,
+    photoUrl: '',
+    inputDisable: false,
     // placeholder:'业主只能是使用拍照识别身份证',
-    villageIdxP:0,
-    bindListP:[
-      {id:1,name:'为本人绑定'},
-      {id:0,name:'为他人绑定'}
+    villageIdxP: 0,
+    bindListP: [
+      { id: 1, name: '为本人绑定' },
+      { id: 0, name: '为他人绑定' }
     ],
-    bindListPIdx:0,
-    bindPeo:false
+    bindListPIdx: 0,
+    bindPeo: false,
+    codeValYZ:'',
+    yezhuOldPhone:''
   },
 
-  bindlistPeople(e){
+  bindlistPeople(e) {
     let t = this
-        //  arr = t.data.dataList.role
-        //  console.log(arr)
-    if(e.detail.value == 1){
+    //  arr = t.data.dataList.role
+    //  console.log(arr)
+    if (e.detail.value == 1) {
       // let arrChange=arr.shift()
       t.setData({
         // shipType:true,
@@ -71,7 +73,7 @@ Page({
         // inputDisable:false,
         // 'dataList.role':arr
       })
-    }else{
+    } else {
       // arr.unshift({key: "业主", value: "业主"});
       t.setData({
         // ownerType:true,
@@ -81,18 +83,18 @@ Page({
       })
     }
     this.setData({
-      bindListPIdx:e.detail.value
+      bindListPIdx: e.detail.value
     })
   },
 
-  bindvillageListP(e){
+  bindvillageListP(e) {
     this.setData({
-      villageIdxP:e.detail.value
+      villageIdxP: e.detail.value
     })
   },
-  bindFwyt(e){
+  bindFwyt(e) {
     this.setData({
-      fwytIdx:e.detail.value
+      fwytIdx: e.detail.value
     })
   },
 
@@ -102,36 +104,36 @@ Page({
     })
   },
 
-  inputDis(e){
-    utils.showToast('业主只能是使用拍照识别身份证','none')
+  inputDis(e) {
+    utils.showToast('业主只能是使用拍照识别身份证', 'none')
   },
 
-  bindShip(e){
+  bindShip(e) {
     let t = this
     console.log(e.detail.value)
-    if(e.detail.value!="1"){
+    if (e.detail.value != "1") {
       t.setData({
         ownerType: false,
-        inputDisable:false,
-        bindPeo:true,
-        examineData:{},
-        'examineData.photo':'',
-        inputDisable:false
+        inputDisable: false,
+        bindPeo: true,
+        examineData: {},
+        'examineData.photo': '',
+        inputDisable: false
       })
-    }else{
+    } else {
       t.setData({
         ownerType: true,
-        inputDisable:true,
-        bindPeo:false,
-        examineData:utils.getItem('examineData'),
-        inputDisable:true
+        inputDisable: true,
+        bindPeo: false,
+        examineData: utils.getItem('examineData'),
+        inputDisable: true
       })
     }
 
     t.setData({
       shipIdx: e.detail.value
     })
-    
+
   },
 
   bindJzxz(e) {
@@ -169,58 +171,58 @@ Page({
     })
   },
 
-  checkMoreBtn(){
+  checkMoreBtn() {
     let t = this;
     t.setData({
-      moreType:!this.data.moreType,
+      moreType: !this.data.moreType,
     })
-    if(t.data.moreType){
+    if (t.data.moreType) {
       t.setData({
         moreText: '收起',
       })
-    }else{
+    } else {
       t.setData({
         moreText: '点击录入更多信息',
       })
     }
-    
+
   },
 
   //关闭弹层
-  closePopup(){
+  closePopup() {
     this.setData({
-      popupType:false
+      popupType: false
     })
   },
 
   //手机号失焦
-  phoneBlur(e){
+  phoneBlur(e) {
     let t = this
-    if(e.detail.value.length == 11){
+    if (e.detail.value.length == 11) {
       if (!/^1[3456789]\d{9}$/.test(e.detail.value)) {
-        utils.showToast("请输入正确的手机号","none")
-      }else{
+        utils.showToast("请输入正确的手机号", "none")
+      } else {
         t.setData({
           phoneVal: e.detail.value
         })
       }
-    }else{
+    } else {
       t.setData({
         phoneVal: e.detail.value
       })
-      
+
     }
   },
 
 
   //验证码失焦
-  codeBlur(e){
-    if(e.detail.value.length == 4){
+  codeBlur(e) {
+    if (e.detail.value.length == 4) {
       this.setData({
         codeVal: e.detail.value
       })
     }
-    
+
   },
 
   //业主验证码失焦
@@ -233,28 +235,28 @@ Page({
   //业主获取验证码
   obtainCodeYZ() {
     let that = this,
-         data = that.data,
-         phone = data.yezhuOldPhone,
-         currentTime = data.currentTimeYZ,
-         villageName = data.villageList[data.villageIdx].community_name,
-         buildingName = data.buildingsList[data.buildingsIdx].building_name,
-         unitsName = data.unitsList[data.unitsIdx].unit_name,
-         floorName = data.floorList[data.floorIdx].floor_name,
-         roomName = data.roomList[data.roomIdx].house_name
-    if(data.codeAgainYZ){
+      data = that.data,
+      phone = data.yezhuOldPhone,
+      currentTime = data.currentTimeYZ,
+      villageName = data.villageList[data.villageIdx].community_name,
+      buildingName = data.buildingsList[data.buildingsIdx].building_name,
+      unitsName = data.unitsList[data.unitsIdx].unit_name,
+      floorName = data.floorList[data.floorIdx].floor_name,
+      roomName = data.roomList[data.roomIdx].house_name
+    if (data.codeAgainYZ) {
       api.getCode({
         phone: phone,
         type: "yezhu",
-        community_house_name: villageName+buildingName+unitsName+floorName+roomName
+        community_house_name: villageName + buildingName + unitsName + floorName + roomName
       }, (res) => {
         if (res.data.code == 1) {
           utils.showToast(res.data.msg, "none")
           return
-        } else if(res.data.code == 0) {
+        } else if (res.data.code == 0) {
           that.setData({
             getCodeKeyLoginYZ: res.data.key,
-            codeAgainYZ:false,
-            
+            codeAgainYZ: false,
+
           })
           utils.showToast("短信验证码已发送", "none")
           var interval = setInterval(function () {
@@ -267,7 +269,7 @@ Page({
               that.setData({
                 codeBtnTextYZ: '重新发送',
                 currentTimeYZ: 61,
-                codeAgainYZ:true
+                codeAgainYZ: true
               })
             }
           }, 1000);
@@ -285,75 +287,75 @@ Page({
     var that = this;
     var phone = that.data.phoneVal;
     var currentTime = that.data.currentTime
-    if(that.data.codeAgain){
-    if (phone == '') {
-      utils.showToast("手机号码不能为空", "none")
-    } else if (phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
-      utils.showToast("请输入正确的手机号", "none")
-    } else {
-      api.getCode({
-        phone: that.data.phoneVal,
-        type: "verify",
-      }, (res) => {
-        if (res.data.code == 1) {
-          utils.showToast(res.data.msg, "none")
-          return
-        } else {
-          that.setData({
-            getCodeKeyLogin: res.data.key,
-            codeAgain: false
-          })
-          utils.showToast("短信验证码已发送", "none")
-          var interval = setInterval(function () {
-            currentTime--;
+    if (that.data.codeAgain) {
+      if (phone == '') {
+        utils.showToast("手机号码不能为空", "none")
+      } else if (phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
+        utils.showToast("请输入正确的手机号", "none")
+      } else {
+        api.getCode({
+          phone: that.data.phoneVal,
+          type: "verify",
+        }, (res) => {
+          if (res.data.code == 1) {
+            utils.showToast(res.data.msg, "none")
+            return
+          } else {
             that.setData({
-              codeBtnText: currentTime + 's',
+              getCodeKeyLogin: res.data.key,
+              codeAgain: false
             })
-            if (currentTime <= 0) {
-              clearInterval(interval)
+            utils.showToast("短信验证码已发送", "none")
+            var interval = setInterval(function () {
+              currentTime--;
               that.setData({
-                codeBtnText: '重新发送',
-                currentTime: 61,
-                codeAgain: true
+                codeBtnText: currentTime + 's',
               })
-            }
-          }, 1000);
-          that.setData({
-            clearInterval: interval
-          })
-        }
-      })
+              if (currentTime <= 0) {
+                clearInterval(interval)
+                that.setData({
+                  codeBtnText: '重新发送',
+                  currentTime: 61,
+                  codeAgain: true
+                })
+              }
+            }, 1000);
+            that.setData({
+              clearInterval: interval
+            })
+          }
+        })
+      }
     }
-  }
   },
 
- 
+
 
   //验证手机号
-  verificationBtn(){
+  verificationBtn() {
     let t = this
-    if (t.data.phoneVal == ''){
-      utils.showToast("请输入手机号","none")
-    } else if (t.data.codeVal == ''){
+    if (t.data.phoneVal == '') {
+      utils.showToast("请输入手机号", "none")
+    } else if (t.data.codeVal == '') {
       utils.showToast("请输入验证码", "none")
-    }else{
+    } else {
       api.verificationPhone({
         verification_key: t.data.getCodeKeyLogin,
-        verification_code:t.data.codeVal,
-        id:t.data.villageList[t.data.villageIdx].community_identifier
-      },(res)=>{
-        if(res.data.code == 0){
-          utils.showToast(res.data.msg,"none")
+        verification_code: t.data.codeVal,
+        id: t.data.villageList[t.data.villageIdx].community_identifier
+      }, (res) => {
+        if (res.data.code == 0) {
+          utils.showToast(res.data.msg, "none")
           t.setData({
             popupType: false,
-            
+
           })
           wx.redirectTo({
             url: '/pages/houseList/ownerHouseList/ownerHouseList',
           })
-        }else if(res.data.code == 1){
-          utils.showToast(res.data.msg,"none")
-        }else{
+        } else if (res.data.code == 1) {
+          utils.showToast(res.data.msg, "none")
+        } else {
           t.setData({
             popupType: false
           })
@@ -363,36 +365,36 @@ Page({
   },
 
   //选择小区
-  bindvillageList(e){
+  bindvillageList(e) {
     let t = this,
-         list = t.data.villageList,
-         idx = e.detail.value
-    if (t.data.villageIdx!=idx){
+      list = t.data.villageList,
+      idx = e.detail.value
+    if (t.data.villageIdx != idx) {
       t.setData({
-        buildingsType:false,
+        buildingsType: false,
         unitsType: false,
         floorType: false,
         roomType: false,
-        buildingsIdx:0,
-        unitsIdx:0,
-        floorIdx:0,
-        roomIdx:0,
+        buildingsIdx: 0,
+        unitsIdx: 0,
+        floorIdx: 0,
+        roomIdx: 0,
       })
     }
     t.setData({
       villageIdx: idx
     })
-    api.getBuildings({ id: list[idx].community_identifier},(res)=>{
+    api.getBuildings({ id: list[idx].community_identifier }, (res) => {
       let data = res.data
-      if(data.code == 1){
-        utils.showToast(res.data.message,"none")
-      }else if(data.code == 0&&data.data.length>0){
+      if (data.code == 1) {
+        utils.showToast(res.data.message, "none")
+      } else if (data.code == 0 && data.data.length > 0) {
         let list = [],
           oldList = data.data
         list = oldList.unshift({ building_name: '请选择' })
         t.setData({
           buildingsList: oldList,
-          buildingsType:true,
+          buildingsType: true,
           unitsType: true,
           floorType: true,
           roomType: true,
@@ -411,9 +413,9 @@ Page({
         unitsType: false,
         floorType: false,
         roomType: false,
-        unitsIdx:0,
-        floorIdx:0,
-        roomIdx:0,
+        unitsIdx: 0,
+        floorIdx: 0,
+        roomIdx: 0,
       })
     }
     t.setData({
@@ -423,7 +425,7 @@ Page({
       let data = res.data
       if (data.code == 1) {
         utils.showToast(res.data.message, "none")
-      } else if (data.code == 0&&data.data.length>0) {
+      } else if (data.code == 0 && data.data.length > 0) {
         let list = [],
           oldList = data.data
         list = oldList.unshift({ unit_name: '请选择' })
@@ -445,8 +447,8 @@ Page({
       t.setData({
         floorType: false,
         roomType: false,
-        floorIdx:0,
-        roomIdx:0,
+        floorIdx: 0,
+        roomIdx: 0,
       })
     }
     t.setData({
@@ -456,7 +458,7 @@ Page({
       let data = res.data
       if (data.code == 1) {
         utils.showToast(res.data.message, "none")
-      } else if (data.code == 0&&data.data.length>0) {
+      } else if (data.code == 0 && data.data.length > 0) {
         let list = [],
           oldList = data.data
         list = oldList.unshift({ floor_name: '请选择' })
@@ -473,12 +475,12 @@ Page({
     let t = this,
       list = t.data.floorList,
       idx = e.detail.value
-      if (t.data.floorIdx != idx) {
-        t.setData({
-          roomType: false,
-          roomIdx:0,
-        })
-      }
+    if (t.data.floorIdx != idx) {
+      t.setData({
+        roomType: false,
+        roomIdx: 0,
+      })
+    }
     t.setData({
       floorIdx: e.detail.value
     })
@@ -512,29 +514,29 @@ Page({
         utils.showToast(res.data.msg, "none")
       } else if (data.code == 0) {
         t.setData({
-          encryptionPhone:data.data.phone,
+          encryptionPhone: data.data.phone,
           yezhuOldPhone: data.data.people_phone
         })
-      }else{
+      } else {
         t.setData({
-          pageType:false,
+          pageType: false,
           // ownerType:true,
-          shipType:true,
-          encryptionPhone:'',
-          yezhuOldPhone:''
+          shipType: true,
+          encryptionPhone: '',
+          yezhuOldPhone: ''
         })
       }
     })
   },
 
   //获取小区名字
-  getVillage(){
+  getVillage() {
     let t = this
-    api.getVillage({},(res)=>{
-      if(res.data.code == 0){
+    api.getVillage({}, (res) => {
+      if (res.data.code == 0) {
         let list = [],
           oldList = res.data.data
-        list = oldList.unshift({ community_name:'请选择'})
+        list = oldList.unshift({ community_name: '请选择' })
         t.setData({
           villageList: oldList
         })
@@ -543,7 +545,7 @@ Page({
   },
 
   //初始化
-  bellInitialize(){
+  bellInitialize() {
     let t = this
     api.bellInitialize({}, (res) => {
       if (res.data.code == 0) {
@@ -552,17 +554,17 @@ Page({
         //        arrChange=arr.shift()
         // }
         let rolesOld = res.data.data.role,
-             role = []
-        role = rolesOld.unshift({ key:'请选择',value:'请选择'})
+          role = []
+        role = rolesOld.unshift({ key: '请选择', value: '请选择' })
         t.setData({
           dataList: res.data.data,
-          'dataList.role':rolesOld
+          'dataList.role': rolesOld
         })
       }
     })
   },
 
-  
+
   // 上传图片
   uploadImg: function () {
     let t = this;
@@ -582,16 +584,16 @@ Page({
             // console.log('data:image/png;base64,' + res.data)
             api.idcard({
               image: res.data
-            },(res)=>{
+            }, (res) => {
               // console.log(res.data.data)
-              if(res.data.data){
+              if (res.data.data) {
                 t.setData({
-                  idcardData:res.data.data,
-                  inputDisable:false
+                  idcardData: res.data.data,
+                  inputDisable: false
                 })
               }
               t.setData({
-                
+
               })
             })
           },
@@ -608,11 +610,11 @@ Page({
 
   addImg(e) {
     var _this = this,
-          data = _this.data
-          if(data.roomIdx == 0){
-            utils.showToast('请先选择要绑定的房子','none')
-            return
-          }
+      data = _this.data
+    if (data.roomIdx == 0) {
+      utils.showToast('请先选择要绑定的房子', 'none')
+      return
+    }
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'],
@@ -654,22 +656,22 @@ Page({
                   })
                   wx.uploadFile({
                     filePath: res.tempFilePath,
-                    formData:{
-                      'community_identifier':data.villageList[data.villageIdx].community_identifier,
-                      'building_number':data.buildingsList[data.buildingsIdx].building_number,
-                      'unit_number':data.unitsList[data.unitsIdx].unit_number,
-                      'floor_number':data.floorList[data.floorIdx].floor_number,
-                      'house_number':data.roomList[data.roomIdx].house_number
+                    formData: {
+                      'community_identifier': data.villageList[data.villageIdx].community_identifier,
+                      'building_number': data.buildingsList[data.buildingsIdx].building_number,
+                      'unit_number': data.unitsList[data.unitsIdx].unit_number,
+                      'floor_number': data.floorList[data.floorIdx].floor_number,
+                      'house_number': data.roomList[data.roomIdx].house_number
                     },
                     name: 'file',
                     url: 'https://tc.mg.cool/api/v1/people/photo',
-                    success(res){
+                    success(res) {
                       // console.log(JSON.parse(res.data))
                       let data = JSON.parse(res.data)
                       // console.log(data)
-                      
+
                       _this.setData({
-                        photoUrl:data.data
+                        photoUrl: data.data
                       })
                     }
                   })
@@ -677,7 +679,7 @@ Page({
                 fail: function (error) {
                   console.log(error)
                 }
-              },_this)
+              }, _this)
             }, 100)
           },
           fail: function (error) {
@@ -691,113 +693,167 @@ Page({
     })
   },
 
-  delPhoto(){
+  delPhoto() {
     let t = this
-    if(t.data.shipIdx == 1){
+    if (t.data.shipIdx == 1) {
       t.setData({
-        inputDisable:true
+        inputDisable: true
       })
-    }else{
+    } else {
       t.setData({
-        inputDisable:false
+        inputDisable: false
       })
     }
     t.setData({
-      imgSrc:'',
+      imgSrc: '',
       'examineData.photo': '',
     })
   },
 
-  radioChange(e){
+  radioChange(e) {
     let t = this
-    if(e.detail.value == "1"){
+    if (e.detail.value == "1") {
       t.setData({
-        shipType:true,
+        shipType: true,
         // ownerType:true
       })
-    }else{
+    } else {
       t.setData({
         shipType: false,
         // ownerType:true,
-        pageType:false,
-        bindPeo:false
+        pageType: false,
+        bindPeo: false,
+        inputDisable:true
       })
     }
-    
+
   },
 
   //提交
-  submitCell(e){
+  submitCell(e) {
     console.log(e)
-    console.log(this.data.photoUrl )
+    console.log(this.data.photoUrl)
     let t = this,
-         val = e.detail.value,
-         data = t.data,
-         dataList =data.dataList,
-         param = {
-          who: data.bindListP[data.bindListPIdx].id,
-          phone:data.phoneVal?data.phoneVal:val.phone,
-          idcard: data.idcardData ? data.idcardData.idcard:val.IDNumber?val.IDNumber:data.examineData.idcard,
-          name: data.idcardData ? data.idcardData.name:val.userName?val.userName:data.examineData.name,
-          photo: data.photoUrl ? data.photoUrl:data.examineData.photo,
-          sex: data.idcardData ? data.idcardData.gender:'',
-          birth: data.idcardData ? data.idcardData.birthday:'',
-          nation: data.idcardData ? data.idcardData.nation:'',
-          address: data.idcardData ? data.idcardData.address:'',
-          zzmm: dataList.zzmm[data.zzmmIdx].key,
-          tyjr: dataList.tyjr[data.twjrIdx].key,
-          dibao:dataList.dibao[data.sfdbIdx].key,
-          shangfang: dataList.shangfang[data.sfjlIdx].key,
-          job:val.job?val.job:examineData.job,
-          company:val.company,
-          house_id: data.roomIdx == 0?'':data.roomList[data.roomIdx].id,
-          role: dataList.role[data.shipIdx].key,
-          status: dataList.status[data.jzxzIdx].key,
-          use: dataList.use[data.fwytIdx].key,
-          xingzhi: dataList.xingzhi[data.fwxzIdx].key,
-          choice: val.radio?val.radio:'1',
-          type:dataList.type[data.zhlxIdx].key
-        }
-        if(param.photo == ''){
-          wx.showLoading({
-            title: '人脸照片上传中...',
-          })
-          setTimeout(function () {
-            wx.hideLoading()
-          }, 2000)
-          
-          return
-        }
-      api.yibiaosanshi(param,(res)=>{
-        if(res.data.code == 1){
-          utils.showToast(res.data.msg,'none')
-        } else if (res.data.code == 0){
+      val = e.detail.value,
+      data = t.data,
+      dataList = data.dataList,
+      param={},
+      reg = /^1(3[0-9]|4[5,7]|5[0,1,2,3,5,6,7,8,9]|6[2,5,6,7]|7[0,1,7,8]|8[0-9]|9[1,8,9])\d{8}$/
+      if (!(reg.test(val.phone))) {
+        utils.showToast("请输入正确的手机号","none")
+        return
+      }
+    if (data.verificationPhoneVal == '验证手机号'&&data.yezhuOldPhone!='') {
+      // if (val.codeValYZ == '') {
+        utils.showToast('请输入业主手机验证码', 'none')
+        return
+      // }else{
+
+      // }
+    }else{
+      if (val.radio == '') {
+        utils.showToast('请选择与业主绑定或替换原业主', 'none')
+        return
+      }else if(val.radio == '1'&&data.shipIdx == 0){
+          utils.showToast('请选择与业主关系', 'none')
+          return 
+      }else{
+
+      }
+    }
+    if (data.villageIdx == 0) {
+      utils.showToast('请选择小区', 'none')
+    } else if (data.buildingsIdx == 0) {
+      utils.showToast('请选择楼栋', 'none')
+    } else if (data.unitsIdx == 0) {
+      utils.showToast('请选择单元', 'none')
+    } else if (data.floorIdx == 0) {
+      utils.showToast('请选择楼层', 'none')
+    } else if (data.roomIdx == 0) {
+      utils.showToast('请选择房间号', 'none')
+    } else if (data.shipIdx == 0&&data.yezhuOldPhone =='') {
+      utils.showToast('请选择与业主关系', 'none')
+    } else if (val.IDNumber == '') {
+      utils.showToast('请输入身份证号', 'none')
+    } else if (val.address == '') {
+      utils.showToast('请输入户籍地址', 'none')
+    } else if (val.nation == '') {
+      utils.showToast('请输入民族', 'none')
+    } 
+    // else if (val.phone == ''&&(!/^1[3456789]\d{9}$/.test(val.phone))) {
+    //   utils.showToast('请输入正确的联系电话', 'none')
+    // } 
+    else if (val.sex == '') {
+      utils.showToast('请输入性别', 'none')
+    } else if (val.userName == '') {
+      utils.showToast('请输入真实姓名', 'none')
+    } else if (val.birth == '') {
+      utils.showToast('请输入生日', 'none')
+    } else if (val.job == '') {
+      utils.showToast('请输入职业', 'none')
+    } else if (val.company == '') {
+      utils.showToast('请输入工作单位', 'none')
+    } else if (data.photoUrl == ''&&data.examineData.photo =='') {
+      utils.showToast('请上传人脸照片', 'none')
+    } else { 
+        param = {
+        who: data.bindListP[data.bindListPIdx].id,
+        phone: data.phoneVal ? data.phoneVal : val.phone,
+        idcard: data.idcardData ? data.idcardData.idcard : val.IDNumber ? val.IDNumber : data.examineData.idcard,
+        name: data.idcardData ? data.idcardData.name : val.userName ? val.userName : data.examineData.name,
+        photo: data.photoUrl ? data.photoUrl : data.examineData.photo,
+        sex: data.idcardData ? data.idcardData.gender : '',
+        birth: data.idcardData ? data.idcardData.birthday : '',
+        nation: data.idcardData ? data.idcardData.nation : '',
+        address: data.idcardData ? data.idcardData.address : '',
+        zzmm: dataList.zzmm[data.zzmmIdx].key,
+        tyjr: dataList.tyjr[data.twjrIdx].key,
+        dibao: dataList.dibao[data.sfdbIdx].key,
+        shangfang: dataList.shangfang[data.sfjlIdx].key,
+        job: val.job ? val.job : data.examineData.job,
+        company: val.company ? val.company : data.examineData.job,
+        house_id: data.roomIdx == 0 ? '' : data.roomList[data.roomIdx].id,
+        role: dataList.role[data.shipIdx].key,
+        status: dataList.status[data.jzxzIdx].key,
+        use: dataList.use[data.fwytIdx].key,
+        xingzhi: dataList.xingzhi[data.fwxzIdx].key,
+        choice: val.radio ? val.radio : '1',
+        type: dataList.type[data.zhlxIdx].key
+      }
+  
+      api.yibiaosanshi(param, (res) => {
+        console.log(res + '')
+        if (res.data.code == 1) {
           utils.showToast(res.data.msg, 'none')
-          utils.setItem('examineData',res.data.shenhe_data)
-          utils.setItem('userRoles',res.data.data)
+        } else if (res.data.code == 0) {
+          utils.showToast(res.data.msg, 'none')
+          utils.setItem('examineData', res.data.shenhe_data)
+          utils.setItem('userRoles', res.data.data)
           wx.redirectTo({
             url: '/pages/houseList/ownerHouseList/ownerHouseList',
           })
         }
       })
-      // }
-
+    }
     
+    // }
+
+
   },
 
-  verificationPhone(){
+  verificationPhone() {
     let t = this
     api.yezhuCode({
-      verification_key:t.data.getCodeKeyLoginYZ,
+      verification_key: t.data.getCodeKeyLoginYZ,
       verification_code: t.data.codeValYZ,
-    },(res)=>{
-      if(res.data.code == 0){
-        utils.showToast(res.data.message,"none")
+    }, (res) => {
+      if (res.data.code == 0) {
+        utils.showToast(res.data.message, "none")
         t.setData({
-          verificationPhoneVal:"验证成功",
-          pageType:false,
+          verificationPhoneVal: "验证成功",
+          pageType: false,
         })
-      }else{
+      } else {
         utils.showToast(res.data.message, "none")
       }
     })
@@ -808,30 +864,30 @@ Page({
    */
   onLoad: function (options) {
     let t = this,
-         roles = utils.getItem('userRoles'),
-         examineData = utils.getItem('examineData')
-        //  utils.token()
+      roles = utils.getItem('userRoles'),
+      examineData = utils.getItem('examineData')
+    //  utils.token()
     // t.getBaiduToken();
     // setTimeout(()=>{
-      t.bellInitialize();
-      t.getVillage();
+    t.bellInitialize();
+    t.getVillage();
     // },300)
-    if(examineData){
+    if (examineData) {
       t.setData({
         examineData
       })
     }
-    
-    if (roles.includes('NewMember')){
+
+    if (roles.includes('NewMember')) {
       t.setData({
-        popupType:true
+        popupType: true
       })
-    }else{
+    } else {
       t.setData({
         popupType: false
       })
     }
-    switch (options.type){
+    switch (options.type) {
       case "owner":
         t.setData({
           // pagesType:false //业主进入
@@ -848,14 +904,14 @@ Page({
         })
         break;
     }
-    
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
 
   /**
