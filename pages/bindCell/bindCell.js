@@ -738,7 +738,7 @@ Page({
       data = t.data,
       dataList = data.dataList,
       param={},
-      reg = /^1(3[0-9]|4[5,7]|5[0,1,2,3,5,6,7,8,9]|6[2,5,6,7]|7[0,1,7,8]|8[0-9]|9[1,8,9])\d{8}$/
+      reg = /^1[3456789]\d{9}$/
       if (!(reg.test(val.phone))) {
         utils.showToast("请输入正确的手机号","none")
         return
