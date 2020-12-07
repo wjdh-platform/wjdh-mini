@@ -56,11 +56,16 @@ Page({
     let t = this;
     let tocken = utils.getItem('accessToken'),
          idx = e.currentTarget.dataset.idx,
-         userRoles = utils.getItem('userRoles')
-
+         userRoles = utils.getItem('userRoles'),
+         arr = []
+    for(let i = 0; i<userRoles.length;i++){
+      let arrN = userRoles[i].name;
+      arr.push(arrN)
+    }
+    console.log(arr)
     if(tocken&&tocken!=''){
       if(idx == 1 || idx == 2 || idx == 3|| idx == 4|| idx == 7){
-        if(userRoles.includes('HouseMember')){
+        if(arr.includes('HouseMember')){
           switch(idx){
             case 1://生活缴费
             wx.navigateTo({
@@ -89,9 +94,9 @@ Page({
             });
           break;
           }
-        }else if(userRoles.includes('NewMember')){
+        }else if(arr.includes('NewMember')){
           utils.showToast('需要先绑定房屋才能访问','none')
-        }else if(userRoles.includes('Shenheing')){
+        }else if(arr.includes('Shenheing')){
           utils.showToast('需要等待物业审核通过才能访问','none')
         }
       }

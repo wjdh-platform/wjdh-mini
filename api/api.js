@@ -99,7 +99,7 @@ export const idcard = (params, cb) => {
 
 //获取新角色
 export const getRoles = (params, cb) => {
-  request('api/v1/people/roles', params, cb, 'post')
+  request('api/v1/people/permissions', params, cb, 'post')
 }
 
 //审核详情

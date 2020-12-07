@@ -143,6 +143,7 @@ function requestWechatLogin(url, data, cb, method) {
               wx.setStorageSync("accessToken", res.data.access_token); //老用户登录token
               wx.setStorageSync("avatar", res.data.avatar);
               wx.setStorageSync("name", res.data.name);
+              wx.setStorageSync("userRoles", res.data.permissions);
               requestXhrAjax(url, data, cb, method); //新token请求数据
               weChatLoginFlag = true;
             }
@@ -183,6 +184,7 @@ function refreshToken(url, data, cb, method) {
               wx.setStorageSync("accessToken", res.data.access_token); //老用户登录token
               wx.setStorageSync("avatar", res.data.avatar);
               wx.setStorageSync("name", res.data.name);
+              wx.setStorageSync("userRoles", res.data.permissions);
               requestXhrAjax(url, data, cb, method); //新token请求数据
               weChatLoginFlag = true;
             }
