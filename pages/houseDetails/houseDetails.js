@@ -57,15 +57,28 @@ Page({
 
   delCell(e){
     let id = e.currentTarget.dataset.id
-    console.log(e.currentTarget.dataset.id)
-    api.houseDel({id:id},(res)=>{
-      if(res.data.code == 0){
-        utils.showToast(res.data.msg,'none')
-        wx.redirectTo({
-          url: '/pages/houseList/ownerHouseList/ownerHouseList',
-        })
+    wx.showModal({
+      title: '提示',
+      content: '您确定要删除该条绑定信息吗？',
+      success (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          api.houseDel({id:id},(res)=>{
+            if(res.data.code == 0){
+              utils.showToast(res.data.msg,'none')
+              wx.redirectTo({
+                url: '/pages/houseList/ownerHouseList/ownerHouseList',
+              })
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
       }
     })
+    
+
+    
   },
 
   /**

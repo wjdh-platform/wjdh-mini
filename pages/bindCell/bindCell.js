@@ -864,21 +864,23 @@ Page({
    */
   onLoad: function (options) {
     let t = this,
-      roles = utils.getItem('userRoles'),
-      examineData = utils.getItem('examineData')
-    //  utils.token()
-    // t.getBaiduToken();
-    // setTimeout(()=>{
+         userRoles = utils.getItem('userRoles'),
+         examineData = utils.getItem('examineData'),
+         arr = []
     t.bellInitialize();
     t.getVillage();
-    // },300)
     if (examineData) {
       t.setData({
         examineData
       })
     }
+    for(let i = 0; i<userRoles.length;i++){
+      let arrN = userRoles[i].name;
+      arr.push(arrN)
+    }
+    console.log(arr)
 
-    if (roles.includes('NewMember')) {
+    if (arr.includes('NewMember')) {
       t.setData({
         popupType: true
       })
