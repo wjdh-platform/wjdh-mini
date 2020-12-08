@@ -187,6 +187,8 @@ function refreshToken(url, data, cb, method) {
               wx.setStorageSync("userRoles", res.data.permissions);
               requestXhrAjax(url, data, cb, method); //新token请求数据
               weChatLoginFlag = true;
+            }else if(res.data.code == 1){
+              requestWechatLogin(url, data, cb, method);
             }
           }
         })

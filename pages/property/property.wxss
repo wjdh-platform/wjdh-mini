@@ -21,3 +21,97 @@
   
   line-height: 22rpx;
 }
+.activationP{
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .4);
+}
+.activitionCont{
+  width: 522rpx;
+  /* height: 461rpx; */
+  padding: 40rpx 30rpx 60rpx;
+  background: #fff;
+  border-radius: 15rpx;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+}
+.popupTitle{
+  text-align: center;
+  color: #333333;
+  font-size: 30rpx;
+}
+.photoText{
+  border-bottom:  solid 1rpx #E9E9E9;
+  padding: 60rpx 0 10rpx;
+  position: relative;
+}
+.photoIcon{
+  width: 22rpx;
+  height: 30rpx;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 22rpx;
+}
+.codeIcon{
+  width: 24rpx;
+  height: 26rpx;
+}
+.phototextP{
+  font-size: 28rpx;
+  color: #282828;
+  display: inline-block;
+  vertical-align: middle;
+}
+.phototextPP{
+  color: #B1B1B1;
+}
+.codeBtn{
+  position: absolute;
+  right: 0;
+  top: 60rpx;
+  z-index: 4;
+  font-size: 28rpx;
+  color: #50DABE;
+}
+.verificationBtn{
+  width: 338rpx;
+  height: 56rpx;
+  background: #50DABE;
+  border-radius: 28rpx;
+  margin: 45rpx auto 0;
+  text-align: center;
+  line-height: 56rpx;
+  font-size: 24rpx;
+  color: #fff;
+}
+.column01{
+  display: flex;
+  align-items: center;
+  border-bottom: solid 1rpx #ececec;
+  height: 94rpx;
+  margin-top: 20rpx;
+}
+.column01 .title{
+  font-size: 28rpx;
+  color: #424242;
+  width: 180rpx;
+}
+.column01 picker{
+  font-size: 28rpx;
+}
+.arrow{
+  width: 14rpx;
+  height: 24rpx;
+}
+picker{
+  flex: 1;
+  text-align: left;
+  font-size: 30rpx;
+  color: #424242;
+}

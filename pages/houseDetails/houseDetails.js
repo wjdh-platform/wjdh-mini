@@ -102,6 +102,55 @@ Page({
     // this.getShenheDetail()
   },
 
+  shouquan(id,idx){
+    let t = this
+    api.shouquan({ id },(res)=>{
+      if(res.data.code == 0){
+        utils.showToast(res.data.msg,'none')
+        let shouquan = 'detailsData.yibangding['+idx+'].shouquan'
+        t.setData({
+          [shouquan]:res.data.data
+          
+        })
+      }
+    })
+  },
+
+  binding(e){
+    let t = this,
+        id = e.currentTarget.dataset.id,
+        type = e.currentTarget.dataset.shouquan,
+        idx = e.currentTarget.dataset.idx
+        console.log(type)
+    if(type == '管理员'){
+
+    }else if(type == '授权管理'){
+      wx.showModal({
+        title: '点击确定，将授权该成员：',
+        content: '1.绑定其他人到本房屋；',
+        success (res) {
+          if (res.confirm) {
+            t.shouquan(id,idx)
+          } 
+        }
+      })
+    }else if(type == '禁用绑定'){
+      wx.showModal({
+        title: '点击确定，将失去授权该成员：',
+        content: '1.绑定其他人到本房屋；',
+        success (res) {
+          if (res.confirm) {
+            t.shouquan(id,idx)
+          } 
+        }
+      })
+    }else if(type == '禁用绑定'){
+
+    }
+    
+    
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -147,7 +196,16 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (res) {
+    console.log()
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '邀请您加入'+this.data.detailsData.introduction,
+      path: '/pages/property/property?type=houseDetails',
+      imageUrl:'/static/image/shareImg.jpeg'
+    }
   }
 })

@@ -32,8 +32,138 @@ Page({
     },{
       text:'访客通行',
       icon:'/static/icon/fktx.jpg',
-  }]
-    
+  }],
+  codeBtnText: '获取验证码',
+  phoneVal: '',
+    currentTime: 61,
+    codeAgain: true,
+    villageIdx:0,
+    villageList:[],
+    activationType:false
+  },
+
+  //获取小区名字
+  getVillage() {
+    let t = this
+    api.getVillage({}, (res) => {
+      if (res.data.code == 0) {
+        let list = [],
+          oldList = res.data.data
+        list = oldList.unshift({ community_name: '请选择' })
+        t.setData({
+          villageList: oldList
+        })
+      }
+    })
+  },
+  //验证手机号
+  verificationBtn() {
+    let t = this
+    if (t.data.phoneVal == '') {
+      utils.showToast("请输入手机号", "none")
+    } else if (t.data.codeVal == '') {
+      utils.showToast("请输入验证码", "none")
+    } else {
+      api.verificationPhone({
+        verification_key: t.data.getCodeKeyLogin,
+        verification_code: t.data.codeVal,
+        id: t.data.villageList[t.data.villageIdx].community_identifier
+      }, (res) => {
+        if (res.data.code == 0) {
+          utils.showToast(res.data.msg, "none")
+          t.setData({
+            activationType: false,
+
+          })
+          wx.redirectTo({
+            url: '/pages/houseList/ownerHouseList/ownerHouseList',
+          })
+        } else if (res.data.code == 1) {
+          utils.showToast(res.data.msg, "none")
+        } else {
+          t.setData({
+            activationType: false
+          })
+        }
+      })
+    }
+  },
+
+   //手机号失焦
+   phoneBlur(e) {
+    let t = this
+    if (e.detail.value.length == 11) {
+      if (!/^1[3456789]\d{9}$/.test(e.detail.value)) {
+        utils.showToast("请输入正确的手机号", "none")
+      } else {
+        t.setData({
+          phoneVal: e.detail.value
+        })
+      }
+    } else {
+      t.setData({
+        phoneVal: e.detail.value
+      })
+
+    }
+  },
+
+
+  //验证码失焦
+  codeBlur(e) {
+    if (e.detail.value.length == 4) {
+      this.setData({
+        codeVal: e.detail.value
+      })
+    }
+
+  },
+
+   //获取验证码
+   obtainCode() {
+    var that = this;
+    var phone = that.data.phoneVal;
+    var currentTime = that.data.currentTime
+    if (that.data.codeAgain) {
+      if (phone == '') {
+        utils.showToast("手机号码不能为空", "none")
+      } else if (phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
+        utils.showToast("请输入正确的手机号", "none")
+      } else {
+        api.getCode({
+          phone: that.data.phoneVal,
+          type: "verify",
+        }, (res) => {
+          if (res.data.code == 1) {
+            utils.showToast(res.data.msg, "none")
+            return
+          } else {
+            that.setData({
+              getCodeKeyLogin: res.data.key,
+              codeAgain: false
+            })
+            utils.showToast("短信验证码已发送", "none")
+            var interval = setInterval(function () {
+              currentTime--;
+              that.setData({
+                codeBtnText: currentTime + 's',
+              })
+              if (currentTime <= 0) {
+                clearInterval(interval)
+                that.setData({
+                  codeBtnText: '重新发送',
+                  currentTime: 61,
+                  codeAgain: true
+                })
+              }
+            }, 1000);
+            that.setData({
+              clearInterval: interval
+            })
+          }
+        })
+      }
+    }
   },
 //绑定家属
   bindFamily(){
@@ -137,13 +267,44 @@ Page({
     })
   },
 
+  bindvillageList(e) {
+    this.setData({
+      villageIdx: e.detail.value
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     
-         
+    let token = utils.getItem('accessToken'),
+         t = this
+         t.getVillage()
+         if(options.type == 'houseDetails'){
+          wx.showModal({
+            title: '提示',
+            content: '是否确认激活？',
+            // showCancel:true,
+            success (res) {
+              if (res.confirm) {
+                if(!token){
+                  wx.navigateTo({
+                    url: '/pages/login/login',
+                  })
+                }
+                t.setData({
+                  activationType:true
+                })
+              } else if (res.cancel) {
+                utils.showToast("如果想再次激活必须绑定小区",'none')
+              }
+            }
+          })
+         }
+    
+    
     
     
     

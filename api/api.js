@@ -110,9 +110,13 @@ export const getShenheDetail = (params, cb) => {
 export const houseDel = (params, cb) => {
   request('api/v1/shenhe/detail', params, cb, 'DELETE')
 }
-//审核详情
+//支付信息
 export const payment = (params, cb) => {
   request('api/v1/weapp/payment', params, cb, 'post')
+}
+//用户授权
+export const shouquan = (params, cb) => {
+  request('api/v1/house/shouquan', params, cb, 'put')
 }
 
 

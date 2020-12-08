@@ -116,3 +116,47 @@ page{
   line-height: 68rpx;
   margin-right: 20rpx;
 }
+.columnMe{
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 30rpx;
+  position: relative;
+}
+.shareBtn{
+  font-size: 26rpx;
+  color: #50DABE;
+  padding:20rpx 25rpx !important;
+  background: transparent;
+  font-weight: normal;
+  width: auto !important;
+  height: 66rpx !important;
+  line-height: 26rpx !important;
+  position: absolute;
+  right: 30rpx;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.green{
+  color:#50DABE ;
+}
+.default{
+  color: #424242;
+}
+.yellow{
+  color: #EAC100;
+}
+.shareBtnO{
+  background: transparent;
+  border: none;
+  padding: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+.btnType{
+  position: relative;
+}
