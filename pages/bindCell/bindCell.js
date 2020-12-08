@@ -669,9 +669,7 @@ Page({
                     name: 'file',
                     url: 'https://tc.mg.cool/api/v1/people/photo',
                     success(res) {
-                      // console.log(JSON.parse(res.data))
                       let data = JSON.parse(res.data)
-                      // console.log(data)
 
                       _this.setData({
                         photoUrl: data.data
