@@ -56,7 +56,8 @@ Page({
     bindListPIdx: 0,
     bindPeo: false,
     codeValYZ:'',
-    yezhuOldPhone:''
+    yezhuOldPhone:'',
+    timer:3
   },
 
   bindlistPeople(e) {
@@ -622,7 +623,9 @@ Page({
         wx.getImageInfo({
           src: photo.tempFilePaths[0],
           success: function (res) {
-            // console.log(res)
+            wx.showLoading({
+              title: '照片上传中',
+            })
             var ctx = wx.createCanvasContext('photo_canvas');
             var ratio = 0;
             var canvasWidth = res.width
@@ -672,6 +675,10 @@ Page({
 
                       _this.setData({
                         photoUrl: data.data
+                      },()=>{
+                        wx.hideLoading({
+                          success: (res) => {},
+                        })
                       })
                     }
                   })
@@ -731,110 +738,115 @@ Page({
 
   //提交
   submitCell(e) {
-    console.log(e)
-    console.log(this.data.photoUrl)
     let t = this,
       val = e.detail.value,
       data = t.data,
       dataList = data.dataList,
       param={},
       reg = /^1[3456789]\d{9}$/
-      if (!(reg.test(val.phone))) {
-        utils.showToast("请输入正确的手机号","none")
-        return
-      }
-    if (data.verificationPhoneVal == '验证手机号'&&data.yezhuOldPhone!='') {
-      // if (val.codeValYZ == '') {
-        utils.showToast('请输入业主手机验证码', 'none')
-        return
-      // }else{
-
-      // }
-    }else{
-      if (val.radio == '') {
-        utils.showToast('请选择与业主绑定或替换原业主', 'none')
-        return
-      }else if(val.radio == '1'&&data.shipIdx == 0){
-          utils.showToast('请选择与业主关系', 'none')
-          return 
-      }else{
-
-      }
-    }
-    if (data.villageIdx == 0) {
-      utils.showToast('请选择小区', 'none')
-    } else if (data.buildingsIdx == 0) {
-      utils.showToast('请选择楼栋', 'none')
-    } else if (data.unitsIdx == 0) {
-      utils.showToast('请选择单元', 'none')
-    } else if (data.floorIdx == 0) {
-      utils.showToast('请选择楼层', 'none')
-    } else if (data.roomIdx == 0) {
-      utils.showToast('请选择房间号', 'none')
-    } else if (data.shipIdx == 0&&data.yezhuOldPhone =='') {
-      utils.showToast('请选择与业主关系', 'none')
-    } else if (val.IDNumber == '') {
-      utils.showToast('请输入身份证号', 'none')
-    } else if (val.address == '') {
-      utils.showToast('请输入户籍地址', 'none')
-    } else if (val.nation == '') {
-      utils.showToast('请输入民族', 'none')
-    } 
-    // else if (val.phone == ''&&(!/^1[3456789]\d{9}$/.test(val.phone))) {
-    //   utils.showToast('请输入正确的联系电话', 'none')
-    // } 
-    else if (val.sex == '') {
-      utils.showToast('请输入性别', 'none')
-    } else if (val.userName == '') {
-      utils.showToast('请输入真实姓名', 'none')
-    } else if (val.birth == '') {
-      utils.showToast('请输入生日', 'none')
-    } else if (val.job == '') {
-      utils.showToast('请输入职业', 'none')
-    } else if (val.company == '') {
-      utils.showToast('请输入工作单位', 'none')
-    } else if (data.photoUrl == ''&&data.examineData.photo =='') {
-      utils.showToast('请上传人脸照片', 'none')
-    } else { 
-        param = {
-        who: data.bindListP[data.bindListPIdx].id,
-        phone: data.phoneVal ? data.phoneVal : val.phone,
-        idcard: data.idcardData ? data.idcardData.idcard : val.IDNumber ? val.IDNumber : data.examineData.idcard,
-        name: data.idcardData ? data.idcardData.name : val.userName ? val.userName : data.examineData.name,
-        photo: data.photoUrl ? data.photoUrl : data.examineData.photo,
-        sex: data.idcardData ? data.idcardData.gender : '',
-        birth: data.idcardData ? data.idcardData.birthday : '',
-        nation: data.idcardData ? data.idcardData.nation : '',
-        address: data.idcardData ? data.idcardData.address : '',
-        zzmm: dataList.zzmm[data.zzmmIdx].key,
-        tyjr: dataList.tyjr[data.twjrIdx].key,
-        dibao: dataList.dibao[data.sfdbIdx].key,
-        shangfang: dataList.shangfang[data.sfjlIdx].key,
-        job: val.job ? val.job : data.examineData.job,
-        company: val.company ? val.company : data.examineData.job,
-        house_id: data.roomIdx == 0 ? '' : data.roomList[data.roomIdx].id,
-        role: dataList.role[data.shipIdx].key,
-        status: dataList.status[data.jzxzIdx].key,
-        use: dataList.use[data.fwytIdx].key,
-        xingzhi: dataList.xingzhi[data.fwxzIdx].key,
-        choice: val.radio ? val.radio : '1',
-        type: dataList.type[data.zhlxIdx].key
-      }
-  
-      api.yibiaosanshi(param, (res) => {
-        console.log(res + '')
-        if (res.data.code == 1) {
-          utils.showToast(res.data.msg, 'none')
-        } else if (res.data.code == 0) {
-          utils.showToast(res.data.msg, 'none')
-          utils.setItem('examineData', res.data.shenhe_data)
-          utils.setItem('userRoles', res.data.data)
-          wx.redirectTo({
-            url: '/pages/houseList/ownerHouseList/ownerHouseList',
-          })
+      
+        if (!(reg.test(val.phone))) {
+          utils.showToast("请输入正确的手机号","none")
+          return
         }
-      })
-    }
+      if (data.verificationPhoneVal == '验证手机号'&&data.yezhuOldPhone!='') {
+        // if (val.codeValYZ == '') {
+          utils.showToast('请输入业主手机验证码', 'none')
+          return
+        // }else{
+  
+        // }
+      }else{
+        if (val.radio == '') {
+          utils.showToast('请选择与业主绑定或替换原业主', 'none')
+          return
+        }else if(val.radio == '1'&&data.shipIdx == 0){
+            utils.showToast('请选择与业主关系', 'none')
+            return 
+        }else{
+  
+        }
+      }
+      if (data.villageIdx == 0) {
+        utils.showToast('请选择小区', 'none')
+      } else if (data.buildingsIdx == 0) {
+        utils.showToast('请选择楼栋', 'none')
+      } else if (data.unitsIdx == 0) {
+        utils.showToast('请选择单元', 'none')
+      } else if (data.floorIdx == 0) {
+        utils.showToast('请选择楼层', 'none')
+      } else if (data.roomIdx == 0) {
+        utils.showToast('请选择房间号', 'none')
+      } else if (data.shipIdx == 0&&data.yezhuOldPhone =='') {
+        utils.showToast('请选择与业主关系', 'none')
+      } else if (val.IDNumber == '') {
+        utils.showToast('请输入身份证号', 'none')
+      } else if (val.address == '') {
+        utils.showToast('请输入户籍地址', 'none')
+      } else if (val.nation == '') {
+        utils.showToast('请输入民族', 'none')
+      } 
+      // else if (val.phone == ''&&(!/^1[3456789]\d{9}$/.test(val.phone))) {
+      //   utils.showToast('请输入正确的联系电话', 'none')
+      // } 
+      else if (val.sex == '') {
+        utils.showToast('请输入性别', 'none')
+      } else if (val.userName == '') {
+        utils.showToast('请输入真实姓名', 'none')
+      } else if (val.birth == '') {
+        utils.showToast('请输入生日', 'none')
+      } else if (val.job == '') {
+        utils.showToast('请输入职业', 'none')
+      } else if (val.company == '') {
+        utils.showToast('请输入工作单位', 'none')
+      } else if (data.photoUrl == ''&&data.examineData.photo =='') {
+        utils.showToast('请上传人脸照片', 'none')
+      } else { 
+        
+          param = {
+          who: data.bindListP[data.bindListPIdx].id,
+          phone: data.phoneVal ? data.phoneVal : val.phone,
+          idcard: data.idcardData ? data.idcardData.idcard : val.IDNumber ? val.IDNumber : data.examineData.idcard,
+          name: data.idcardData ? data.idcardData.name : val.userName ? val.userName : data.examineData.name,
+          photo: data.photoUrl ? data.photoUrl : data.examineData.photo,
+          sex: data.idcardData ? data.idcardData.gender : '',
+          birth: data.idcardData ? data.idcardData.birthday : '',
+          nation: data.idcardData ? data.idcardData.nation : '',
+          address: data.idcardData ? data.idcardData.address : '',
+          zzmm: dataList.zzmm[data.zzmmIdx].key,
+          tyjr: dataList.tyjr[data.twjrIdx].key,
+          dibao: dataList.dibao[data.sfdbIdx].key,
+          shangfang: dataList.shangfang[data.sfjlIdx].key,
+          job: val.job ? val.job : data.examineData.job,
+          company: val.company ? val.company : data.examineData.job,
+          house_id: data.roomIdx == 0 ? '' : data.roomList[data.roomIdx].id,
+          role: dataList.role[data.shipIdx].key,
+          status: dataList.status[data.jzxzIdx].key,
+          use: dataList.use[data.fwytIdx].key,
+          xingzhi: dataList.xingzhi[data.fwxzIdx].key,
+          choice: val.radio ? val.radio : '1',
+          type: dataList.type[data.zhlxIdx].key
+        }
+        
+        // if (data.photoUrl == ''&&data.examineData.photo =='') {
+        //   utils.showToast('人脸照片上传中，请稍等', 'none')
+        // }else{
+        api.yibiaosanshi(param, (res) => {
+          console.log(res + '')
+          if (res.data.code == 1) {
+            utils.showToast(res.data.msg, 'none')
+          } else if (res.data.code == 0) {
+            utils.showToast(res.data.msg, 'none')
+            utils.setItem('examineData', res.data.shenhe_data)
+            utils.setItem('userRoles', res.data.data)
+            wx.redirectTo({
+              url: '/pages/houseList/ownerHouseList/ownerHouseList',
+            })
+          }
+        })
+      }
+      // }
+      
     
     // }
 
@@ -854,7 +866,7 @@ Page({
           pageType: false,
         })
       } else {
-        utils.showToast(res.data.message, "none")
+        utils.showToast(res.data.msg, "none")
       }
     })
   },
