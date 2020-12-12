@@ -199,9 +199,10 @@ Page({
         if(arr.includes('HouseMember')){
           switch(idx){
             case 1://生活缴费
-            wx.navigateTo({
-              url: '/pages/lifePay/lifePay',
-            });
+            // wx.navigateTo({
+            //   url: '/pages/lifePay/lifePay',
+            // });
+            utils.showToast("功能正在开发中","none")
           break;
           case 2://物业报修
             wx.navigateTo({
