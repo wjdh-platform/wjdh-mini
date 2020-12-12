@@ -57,7 +57,8 @@ Page({
     bindPeo: false,
     codeValYZ:'',
     yezhuOldPhone:'',
-    timer:3
+    timer:3,
+    idcardData:''
   },
 
   bindlistPeople(e) {
@@ -338,7 +339,7 @@ Page({
     if (t.data.phoneVal == '') {
       utils.showToast("请输入手机号", "none")
     } else if (t.data.codeVal == '') {
-      utils.showToast("请输入验证码", "none")
+      utils.showToast("请输入验证码，并点击验证按钮", "none")
     } else {
       api.verificationPhone({
         verification_key: t.data.getCodeKeyLogin,
@@ -349,7 +350,6 @@ Page({
           utils.showToast(res.data.msg, "none")
           t.setData({
             popupType: false,
-
           })
           wx.redirectTo({
             url: '/pages/houseList/ownerHouseList/ownerHouseList',
@@ -388,7 +388,7 @@ Page({
     api.getBuildings({ id: list[idx].community_identifier }, (res) => {
       let data = res.data
       if (data.code == 1) {
-        utils.showToast(res.data.message, "none")
+        utils.showToast(res.data.msg, "none")
       } else if (data.code == 0 && data.data.length > 0) {
         let list = [],
           oldList = data.data
@@ -425,7 +425,7 @@ Page({
     api.getUnits({ id: list[idx].id }, (res) => {
       let data = res.data
       if (data.code == 1) {
-        utils.showToast(res.data.message, "none")
+        utils.showToast(res.data.msg, "none")
       } else if (data.code == 0 && data.data.length > 0) {
         let list = [],
           oldList = data.data
@@ -458,7 +458,7 @@ Page({
     api.getFloor({ id: list[idx].id }, (res) => {
       let data = res.data
       if (data.code == 1) {
-        utils.showToast(res.data.message, "none")
+        utils.showToast(res.data.msg, "none")
       } else if (data.code == 0 && data.data.length > 0) {
         let list = [],
           oldList = data.data
@@ -488,7 +488,7 @@ Page({
     api.getRoom({ id: list[idx].id }, (res) => {
       let data = res.data
       if (data.code == 1) {
-        utils.showToast(res.data.message, "none")
+        utils.showToast(res.data.msg, "none")
       } else if (data.code == 0) {
         let list = [],
           oldList = data.data
@@ -582,15 +582,13 @@ Page({
           filePath: tempFilePaths[0],
           encoding: 'base64',
           success: res => {
-            // console.log('data:image/png;base64,' + res.data)
             api.idcard({
               image: res.data
             }, (res) => {
-              // console.log(res.data.data)
               if (res.data.data) {
                 t.setData({
                   idcardData: res.data.data,
-                  inputDisable: false
+                  // inputDisable: false
                 })
               }
               t.setData({
@@ -742,11 +740,27 @@ Page({
       dataList = data.dataList,
       param={},
       reg = /^1[3456789]\d{9}$/
+      console.log(val)
+      if (data.villageIdx == 0) {
+        utils.showToast('请选择小区', 'none')
+        return
+      } else if (data.buildingsIdx == 0) {
+        utils.showToast('请选择楼栋', 'none')
+        return
+      } else if (data.unitsIdx == 0) {
+        utils.showToast('请选择单元', 'none')
+        return
+      } else if (data.floorIdx == 0) {
+        utils.showToast('请选择楼层', 'none')
+        return
+      } else if (data.roomIdx == 0) {
+        utils.showToast('请选择房间号', 'none')
+        return
+      } else if (data.shipIdx == 0&&data.yezhuOldPhone =='') {
+        utils.showToast('请选择与业主关系', 'none')
+        return
+      } 
       
-        if (!(reg.test(val.phone))) {
-          utils.showToast("请输入正确的手机号","none")
-          return
-        }
       if (data.verificationPhoneVal == '验证手机号'&&data.yezhuOldPhone!='') {
         // if (val.codeValYZ == '') {
           utils.showToast('请输入业主手机验证码', 'none')
@@ -765,41 +779,58 @@ Page({
   
         }
       }
-      if (data.villageIdx == 0) {
-        utils.showToast('请选择小区', 'none')
-      } else if (data.buildingsIdx == 0) {
-        utils.showToast('请选择楼栋', 'none')
-      } else if (data.unitsIdx == 0) {
-        utils.showToast('请选择单元', 'none')
-      } else if (data.floorIdx == 0) {
-        utils.showToast('请选择楼层', 'none')
-      } else if (data.roomIdx == 0) {
-        utils.showToast('请选择房间号', 'none')
-      } else if (data.shipIdx == 0&&data.yezhuOldPhone =='') {
-        utils.showToast('请选择与业主关系', 'none')
-      } else if (val.IDNumber == '') {
-        utils.showToast('请输入身份证号', 'none')
-      } else if (val.address == '') {
+      if (data.inputDisable) {
+        if(data.examineData&&data.examineData.idcard&&data.examineData.name&&data.examineData.photo){
+          
+        }else if(data.idcardData == ''){
+            utils.showToast('请识别身份分信息', 'none')
+            return 
+        }else if(data.photoUrl == ''){
+          utils.showToast('请上传照片', 'none')
+          return 
+        }
+        
+      }else{
+        if(val.IDNumber == ''){
+          utils.showToast('请输入身份证号', 'none')
+          return 
+        }else if(val.userName == ''){
+          utils.showToast('请输入真实姓名', 'none')
+          return 
+        }else if(data.photoUrl == ''){
+          utils.showToast('请上传照片', 'none')
+          return 
+        }
+      }
+     if (val.address == '') {
         utils.showToast('请输入户籍地址', 'none')
+        return 
       } else if (val.nation == '') {
         utils.showToast('请输入民族', 'none')
+        return 
       } 
-      // else if (val.phone == ''&&(!/^1[3456789]\d{9}$/.test(val.phone))) {
-      //   utils.showToast('请输入正确的联系电话', 'none')
-      // } 
+      else if (!(reg.test(val.phone))) {
+        utils.showToast('请输入正确的联系电话', 'none')
+        return 
+      } 
       else if (val.sex == '') {
         utils.showToast('请输入性别', 'none')
-      } else if (val.userName == '') {
-        utils.showToast('请输入真实姓名', 'none')
-      } else if (val.birth == '') {
+        return 
+      } 
+      else if (val.birth == '') {
         utils.showToast('请输入生日', 'none')
+        return 
       } else if (val.job == '') {
         utils.showToast('请输入职业', 'none')
+        return 
       } else if (val.company == '') {
         utils.showToast('请输入工作单位', 'none')
-      } else if (data.photoUrl == ''&&data.examineData.photo =='') {
-        utils.showToast('请上传人脸照片', 'none')
-      } else { 
+        return 
+      } 
+      // if(data.examineData&&data.photoUrl == ''){
+      //   utils.showToast('请上传人脸照片', 'none')
+      // }
+      else { 
         
           param = {
           who: data.bindListP[data.bindListPIdx].id,
@@ -858,7 +889,7 @@ Page({
       verification_code: t.data.codeValYZ,
     }, (res) => {
       if (res.data.code == 0) {
-        utils.showToast(res.data.message, "none")
+        utils.showToast(res.data.msg, "none")
         t.setData({
           verificationPhoneVal: "验证成功",
           pageType: false,
@@ -879,11 +910,7 @@ Page({
          arr = []
     t.bellInitialize();
     t.getVillage();
-    if (examineData) {
-      t.setData({
-        examineData
-      })
-    }
+    
     for(let i = 0; i<userRoles.length;i++){
       let arrN = userRoles[i].name;
       arr.push(arrN)
@@ -894,28 +921,43 @@ Page({
       t.setData({
         popupType: true
       })
+      // examineData=''
+      // wx.removeStorage({
+      //   key: 'examineData',
+      // })
     } else {
       t.setData({
         popupType: false
       })
     }
-    switch (options.type) {
-      case "owner":
+    if (examineData) {
+      if (arr.includes('NewMember')) {
         t.setData({
-          // pagesType:false //业主进入
+          popupType: false
         })
-        break;
-      case "family":
-        t.setData({
-          pageType: false //家属进入
-        })
-        break;
-      case "cellList":
-        t.setData({
-          cellList: true //小区列表进入
-        })
-        break;
+      }
+      t.setData({
+        examineData,
+        inputDisable:true
+      })
     }
+    // switch (options.type) {
+    //   case "owner":
+    //     t.setData({
+    //       // pagesType:false //业主进入
+    //     })
+    //     break;
+    //   case "family":
+    //     t.setData({
+    //       pageType: false //家属进入
+    //     })
+    //     break;
+    //   case "cellList":
+    //     t.setData({
+    //       cellList: true //小区列表进入
+    //     })
+    //     break;
+    // }
 
   },
 

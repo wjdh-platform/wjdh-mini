@@ -5,10 +5,12 @@
       <change beforePath="$PROJECT_DIR$/pages/bindCell/bindCell.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/bindCell/bindCell.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/bindCell/bindCell.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/bindCell/bindCell.wxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/bindCell/bindCell.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/bindCell/bindCell.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/personal/personal.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/personal/personal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/visitor/visitor.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/visitor/visitor.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/visitor/visitor.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/visitor/visitor.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/houseDetails/houseDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/houseDetails/houseDetails.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/houseDetails/houseDetails.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/houseDetails/houseDetails.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/houseDetails/houseDetails.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/houseDetails/houseDetails.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/property/property.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/property/property.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/property/property.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/property/property.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/property/property.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/property/property.wxss" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,20 +23,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/bindCell/bindCell.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
+            <state relative-caret-position="-1383">
               <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/login/login.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="414">
-              <caret line="23" column="19" lean-forward="true" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+              <caret line="23" column="19" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
               <folding>
                 <element signature="e#46#82#0" expanded="true" />
               </folding>
@@ -63,16 +65,18 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="y" value="28" />
-    <option name="width" value="1440" />
-    <option name="height" value="872" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-661" />
+    <option name="y" value="-1415" />
+    <option name="width" value="2560" />
+    <option name="height" value="1415" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -84,6 +88,12 @@
               <item name="wjdh-mini" type="b2602c69:ProjectViewProjectNode" />
               <item name="wjdh-mini" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wjdh-mini" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wjdh-mini" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="bindCell" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="wjdh-mini" type="b2602c69:ProjectViewProjectNode" />
@@ -108,7 +118,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -153,6 +162,7 @@
       <workItem from="1606611656097" duration="475000" />
       <workItem from="1606612515167" duration="4143000" />
       <workItem from="1606805726672" duration="873000" />
+      <workItem from="1607589204360" duration="325000" />
     </task>
     <task id="LOCAL-00001" summary="小程序01">
       <created>1604372664181</created>
@@ -165,13 +175,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8074000" />
+    <option name="totallyTimeSpent" value="8399000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="28" width="1440" height="872" extended-state="0" />
+    <frame x="-661" y="-1415" width="2560" height="1415" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24947146" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24931075" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -182,8 +192,8 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.21445782" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.340399" />
+      <window_info anchor="bottom" id="Version Control" order="8" visible="true" weight="0.3712984" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.34016705" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -208,20 +218,20 @@
     <option name="LAST_COMMIT_MESSAGE" value="小程序01" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pages/bindCell/bindCell.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/login/login.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
-          <caret line="23" column="19" lean-forward="true" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+          <caret line="23" column="19" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
           <folding>
             <element signature="e#46#82#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/bindCell/bindCell.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1383">
+          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
         </state>
       </provider>
     </entry>

@@ -21,7 +21,7 @@
       <view class="itemText">{{detailsData.status}}</view>
     </view>
     <view class="item">
-      <view class="itemTitle">住户类型</view>
+      <view class="itemTitle">管理人</view>
       <view class="itemText">{{detailsData.zhuhuleixing}}</view>
     </view>
   </view>
@@ -35,7 +35,7 @@
     <view class="memberList" wx:if="{{currentTab == 0}}">
       <view class="columnMe" wx:for="{{detailsData.yibangding}}" wx:if="{{detailsData.yibangding!=[]}}">
         <view class="name">{{item.name}}</view>
-        <view class="btnType {{item.shouquan == '邀请激活'?'yellow':item.shouquan == '授权管理'?'green':'default'}}" bindtap="binding" data-idx="{{index}}" data-id="{{item.id}}"   data-shouquan="{{item.shouquan}}">{{item.shouquan}}<button open-type="share" class="shareBtnO" wx:if="{{item.shouquan == '邀请激活'}}"></button></view> 
+        <view class="btnType {{item.shouquan == '邀请激活'?'yellow':item.shouquan == '授权管理'?'green':item.shouquan == '禁用管理'?'red':'default'}}" bindtap="binding" data-idx="{{index}}" data-id="{{item.id}}"   data-shouquan="{{item.shouquan}}">{{item.shouquan}}<button open-type="share" class="shareBtnO" wx:if="{{item.shouquan == '邀请激活'}}"></button></view> 
         
       </view>
       <view class="noData"  wx:if="{{detailsData.yibangding.length === 0}}">暂无数据</view>
@@ -59,7 +59,7 @@
       <view class="columnMe" wx:for="{{detailsData.weijihuo}}" wx:if="{{detailsData.weijihuo!=[]}}">
         <view class="name">{{item.name}}</view>
         <!-- <view class="jiebang">解绑</view> -->
-        <button open-type="share" class="shareBtn">邀请用户激活</button>
+        <button open-type="share" class="shareBtn">邀请激活</button>
       </view>
       <view class="noData" wx:if="{{detailsData.weijihuo.length === 0}}">暂无数据</view>
     </view>
@@ -71,7 +71,7 @@
   <view class="column">
     <view class="item">
     <view class="itemTitle">审核状态</view>
-    <view class="itemText {{shenheData.shenhe_status == '等待审核'?'yellow':'red'}}">{{shenheData.shenhe_status}}</view>
+    <view class="itemText {{shenheData.shenhe_status == '等待审核'?'yellow01':'red01'}}">{{shenheData.shenhe_status}}</view>
   </view>
   <view class="item" wx:if="{{shenheData.shenhe_refuse_reason}}">
     <view class="itemTitle">审核失败原因</view>
@@ -97,7 +97,7 @@
     <view class="itemText">{{shenheData.house_status}}</view>
   </view>
   <view class="item" wx:if="{{shenheData.zhuhuleixing!=''}}">
-    <view class="itemTitle">住户类型</view>
+    <view class="itemTitle">管理人</view>
     <view class="itemText">{{shenheData.zhuhuleixing}}</view>
   </view>
   <view class="item">

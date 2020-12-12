@@ -69,7 +69,7 @@ picker{
   display: inline-block;
   margin-right: 20rpx;
 }
-.inputText{
+.inputText,.inputDis{
   font-size: 30rpx;
   color: #424242;
   width: 80%;

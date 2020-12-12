@@ -62,13 +62,15 @@ Page({
       content: '您确定要删除该条绑定信息吗？',
       success (res) {
         if (res.confirm) {
-          console.log('用户点击确定')
           api.houseDel({id:id},(res)=>{
             if(res.data.code == 0){
               utils.showToast(res.data.msg,'none')
               wx.redirectTo({
                 url: '/pages/houseList/ownerHouseList/ownerHouseList',
               })
+              if(res.data.data&&res.data.data!=''){
+                utils.setItem('userRoles',res.data.data.permissions)
+              }
             }
           })
         } else if (res.cancel) {
@@ -127,17 +129,17 @@ Page({
     }else if(type == '授权管理'){
       wx.showModal({
         title: '点击确定，将授权该成员：',
-        content: '1.绑定其他人到本房屋；',
+        content: '绑定其他人到本房屋；',
         success (res) {
           if (res.confirm) {
             t.shouquan(id,idx)
           } 
         }
       })
-    }else if(type == '禁用绑定'){
+    }else if(type == '禁用管理'){
       wx.showModal({
         title: '点击确定，将失去授权该成员：',
-        content: '1.绑定其他人到本房屋；',
+        content: '绑定其他人到本房屋；',
         success (res) {
           if (res.confirm) {
             t.shouquan(id,idx)

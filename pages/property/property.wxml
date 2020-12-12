@@ -10,6 +10,7 @@
 <view class="activationP" wx:if="{{activationType}}">
   <view class="activitionCont">
     <view class="popupTitle">激活手机号</view>
+    <view class="closePopup" bindtap="closePopup"></view>
     <view class="column01">
         <view class="title">小区</view>
         <picker bindchange="bindvillageList" value="{{villageIdx}}" range="{{villageList}}" range-key="community_name">

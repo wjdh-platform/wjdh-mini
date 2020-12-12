@@ -69,6 +69,7 @@ Page({
         verification_code: t.data.codeVal,
         id: t.data.villageList[t.data.villageIdx].community_identifier
       }, (res) => {
+        console.log('激活',res)
         if (res.data.code == 0) {
           utils.showToast(res.data.msg, "none")
           t.setData({
@@ -273,6 +274,13 @@ Page({
     })
   },
 
+  closePopup(){
+    console.log(111)
+    this.setData({
+      activationType:!this.data.activationType
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面加载
@@ -280,9 +288,16 @@ Page({
   onLoad: function (options) {
     
     let token = utils.getItem('accessToken'),
-         t = this
+         userRoles = utils.getItem('userRoles'),
+         t = this,
+         arr = []
+        for(let i = 0; i<userRoles.length;i++){
+          let arrN = userRoles[i].name;
+          arr.push(arrN)
+        }
+          console.log(arr)
          t.getVillage()
-         if(options.type == 'houseDetails'){
+         if(options.type == 'houseDetails'&&(!arr.includes('HouseMember'))){
           wx.showModal({
             title: '提示',
             content: '是否确认激活？',
