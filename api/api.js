@@ -118,6 +118,37 @@ export const payment = (params, cb) => {
 export const shouquan = (params, cb) => {
   request('api/v1/house/shouquan', params, cb, 'put')
 }
+//订单列表
+export const orderList = (params, cb) => {
+  request('api/v1/orders/list', params, cb, 'POST')
+}
+//用户激活
+export const jihuo = (params, cb) => {
+  request('api/v1/people/jihuo', params, cb, 'POST')
+}
+//账单列表
+export const payList = (params, cb) => {
+  request('api/v1/payments/list', params, cb, 'POST')
+}
+//获得省份
+export const getProvinces = (params, cb) => {
+  request('api/v1/provinces', params, cb, 'POST')
+}
+//获得城市
+export const getCity = (params, cb) => {
+  request('api/v1/cities', params, cb, 'POST')
+}
+//添加家属
+export const housesJiashuList = (params, cb) => {
+  request('api/v1/user/housesJiashuList', params, cb, 'POST')
+}
+//提交报修
+export const submitRepair = (params, cb) => {
+  request('api/v1/repair/new', params, cb, 'POST')
+}
+
+
+
 
 
 

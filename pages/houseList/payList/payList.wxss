@@ -1,0 +1,25 @@
+/* pages/houseList/payList/payList.wxss */
+page{
+  background: #F7F9FA;
+}
+.payList{
+  padding-top: 50rpx;
+}
+.column{
+  margin: 0 auto 30rpx;
+  width: 690rpx;
+  /* height: 323px; */
+  background: #FFFFFF;
+  box-shadow: 0px 6rpx 28rpx 4rpx rgba(125, 125, 125, 0.05);
+  border-radius: 13rpx;
+  padding: 25rpx 30rpx 0;
+}
+.title{
+  font-size: 28rpx;
+  line-height: 28rpx;
+  font-weight: bold;
+  color: #333333;
+}
+.listDetail text{
+
+}

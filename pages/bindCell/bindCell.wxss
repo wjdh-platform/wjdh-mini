@@ -170,6 +170,13 @@ picker{
   vertical-align: middle;
   margin-right: 22rpx;
 }
+.nameIcon{
+  width: 24rpx;
+  height: 24rpx;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 22rpx;
+}
 .codeIcon{
   width: 24rpx;
   height: 26rpx;

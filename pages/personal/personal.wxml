@@ -16,11 +16,11 @@
           <view class="listText">房屋列表</view>
           <image src="./../../static/image/arrow.png" class="arrow"></image>
         </view>
-        <!-- <view class="listColumn">
+        <view class="listColumn" bindtap="payList">
           <image src="./../../static/image/perListF.png" class="houseList"></image>
-          <view class="listText">家属/租客</view>
+          <view class="listText">订单列表</view>
           <image src="./../../static/image/arrow.png" class="arrow"></image>
-        </view> -->
+        </view>
       </view>
     </view>
 </view>

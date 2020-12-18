@@ -23,6 +23,12 @@ Page({
       })
   },
 
+  payList(){
+    wx.navigateTo({
+      url: '/pages/houseList/payList/payList',
+    })
+  },
+
   //点击房屋列表
   houseListO(e){
     wx.navigateTo({

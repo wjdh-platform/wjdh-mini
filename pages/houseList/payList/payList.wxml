@@ -1,0 +1,13 @@
+<!--pages/houseList/payList/payList.wxml-->
+<view class="payList">
+  <view class="column" wx:for="{{payList}}">
+    <view class="title">账单一</view>
+    <view class="listDetail">
+      <text>交易单号：{{item.payment_number}}</text>
+      <text>商户单号：{{item.payment_shop_number}}</text>
+      <text>支付金额：{{item.total_amount}}</text>
+      <text>交易时间：{{item.paid_at}}</text>
+    </view>
+    <view class="lookMore">点击查看订单列表</view>
+  </view>
+</view>

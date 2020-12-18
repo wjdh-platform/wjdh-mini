@@ -22,7 +22,7 @@ export default (url, data, cb, method) => {
     method,
     header,
     success: (res) => {
-      console.log(res)
+      // console.log(res)
       wx.hideLoading()
       if (res.data.message == "token值因各种原因而失效，请重新调用接口获取token") {
         if(token&&token!=''){

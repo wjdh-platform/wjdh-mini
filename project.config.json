@@ -149,6 +149,23 @@
           "pathName": "pages/lifePay/lifePay",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "订单列表",
+          "pathName": "pages/houseList/payList/payList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "demo",
+          "pathName": "pages/demo/demo",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "账单列表",
+          "pathName": "pages/houseList/payList/payList",
+          "scene": null
         }
       ]
     }

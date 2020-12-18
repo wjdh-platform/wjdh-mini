@@ -59,7 +59,7 @@ Page({
     let id = e.currentTarget.dataset.id
     wx.showModal({
       title: '提示',
-      content: '您确定要删除该条绑定信息吗？',
+      content: '您确定要删除该条绑定信息吗？删除后需要您重新填写。',
       success (res) {
         if (res.confirm) {
           api.houseDel({id:id},(res)=>{

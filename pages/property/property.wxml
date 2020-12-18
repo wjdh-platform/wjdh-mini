@@ -1,17 +1,32 @@
-
 <view class="propertyMain">
-  <image class="banner" src='/static/image/banner.jpeg'></image>
-<view class="tabList">
-  <view class="tabCol" bindtap="bindCell" wx:for="{{list}}" data-idx="{{index}}">
-    <image src="{{item.icon}}"></image>
-    <view class="bindText">{{item.text}}</view>
+  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType">
+  </change-cell>
+  <view class="activationP" wx:if="{{popupTips}}">
+    <view class="activitionCont">
+      <view class="popupTitle">温馨提示</view>
+      <view class="closePopup" bindtap="closePopupTips"></view>
+      <view class="tipsText">
+        <text>进入绑定房屋的情况</text>
+        <text>1. 如果您是业主</text>
+        <text>2. 如果您是未被绑定过的家属或者租客</text>
+        <text>进入绑定房屋的情况</text>
+        <text>1. 您已经被业主授权了绑定其他家属</text>
+      </view>
+      <view class="tipsBtn" bindtap="tipsNone">已知悉，不再提示</view>
+    </view>
   </view>
-</view>
-<view class="activationP" wx:if="{{activationType}}">
-  <view class="activitionCont">
-    <view class="popupTitle">激活手机号</view>
-    <view class="closePopup" bindtap="closePopup"></view>
-    <view class="column01">
+  <image class="banner" src='/static/image/banner.jpeg'></image>
+  <view class="tabList">
+    <view class="tabCol" bindtap="bindCell" wx:for="{{list}}" data-idx="{{index}}">
+      <image src="{{item.icon}}"></image>
+      <view class="bindText">{{item.text}}</view>
+    </view>
+  </view>
+  <view class="activationP" wx:if="{{activationType}}">
+    <view class="activitionCont">
+      <view class="popupTitle">激活手机号</view>
+      <view class="closePopup" bindtap="closePopup"></view>
+      <!-- <view class="column01">
         <view class="title">小区</view>
         <picker bindchange="bindvillageList" value="{{villageIdx}}" range="{{villageList}}" range-key="community_name">
           <view class="picker">
@@ -19,6 +34,10 @@
           </view>
         </picker>
         <image class="arrow" src="./../../static/image/arrow.png"></image>
+      </view> -->
+      <view class="photoText">
+        <image src="./../../static/image/name.png" class="photoIcon"></image>
+        <input placeholder="请输入姓名" bindinput="nameBlur" placeholder-class="phototextPP" class="phototextP"></input>
       </view>
       <view class="photoText">
         <image src="./../../static/image/photoIcon.png" class="photoIcon"></image>
@@ -33,5 +52,5 @@
       </view>
       <view class="verificationBtn" bindtap="verificationBtn">确定</view>
     </view>
-</view>
+  </view>
 </view>

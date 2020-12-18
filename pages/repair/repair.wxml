@@ -1,15 +1,11 @@
 <!--pages/guarantee/guarantee.wxml-->
 <view class="repair">
+  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType"></change-cell>
   <view wx:if="{{popupType}}">
     <form bindsubmit="addressSub">
+      
       <view class="column">
-      <view class="titleC">报修地点*</view>
-      <picker bindchange="bindAddress" value="{{addressIdx}}" range-key="community_name" range="{{addressList}}">
-        <view class="address">{{addressList[addressIdx].community_name}}</view>
-      </picker>
-    </view>
-      <view class="column">
-      <view class="titleC">报修项目*</view>
+      <view class="titleC">报修位置*</view>
       <input placeholder="请输入" placeholder-class="placeholder" name="repairName" value="{{repairName}}"></input>
     </view>
     <view class="columnT">

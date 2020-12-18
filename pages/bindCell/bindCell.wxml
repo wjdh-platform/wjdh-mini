@@ -1,11 +1,15 @@
 <!--pages/bindCell/bindCell.wxml-->
 <view class="bindCell">
+  <change-cell changeCellType="{{changeCellType}}" 
+  bindchangeClose="changeClose" bindchangePopupType="changePopupType" buildingsType="{{buildingsType}}"
+  ></change-cell>
   <!-- 校验手机号 -->
   <view class="verificationPhoto" wx:if="{{popupType}}">
     <view class="phoneCode">
       <!-- <view class="closePopup" bindtap="closePopup"></view> -->
       <view class="popupTitle">校验手机号</view>
-      <view class="column01">
+      
+      <!-- <view class="column01">
         <view class="title">小区</view>
         <picker bindchange="bindvillageList" value="{{villageIdx}}" range="{{villageList}}" range-key="community_name">
           <view class="picker">
@@ -13,6 +17,11 @@
           </view>
         </picker>
         <image class="arrow" src="./../../static/image/arrow.png"></image>
+      </view> -->
+      <view class="photoText">
+        <image src="./../../static/image/name.png" class="nameIcon"></image>
+        <input placeholder="请输入姓名" bindinput="nameBlur" placeholder-class="phototextPP"
+          class="phototextP"></input>
       </view>
       <view class="photoText">
         <image src="./../../static/image/photoIcon.png" class="photoIcon"></image>
@@ -30,7 +39,7 @@
   </view>
   <form bindsubmit="submitCell">
     <view class="houseCont" wx:if="{{cellDetail}}">
-      <view class="column">
+     <!--  <view class="column">
         <view class="title">小区</view>
         <picker bindchange="bindvillageList" value="{{villageIdx}}" range="{{villageList}}" range-key="community_name">
           <view class="picker">
@@ -38,8 +47,9 @@
           </view>
         </picker>
         <image class="arrow" src="./../../static/image/arrow.png"></image>
-      </view>
-      <view class="column" wx:if="{{buildingsList&&buildingsType }}">
+      </view> -->
+      <!-- <view class="column" wx:if="{{buildingsList&&buildingsType}}"> -->
+        <view class="column" wx:if="{{buildingsList}}">
         <view class="title">楼栋</view>
         <picker bindchange="bindBuildingsList" value="{{buildingsIdx}}" range="{{buildingsList}}"
           range-key="building_name" data-id="{{buildingsList[buildingsIdx].id}}">
@@ -80,6 +90,18 @@
         <image class="arrow" src="./../../static/image/arrow.png"></image>
       </view>
 
+    </view>
+    <view  class="houseCont" wx:else>
+      <view class="column">
+        <view class="title">房间</view>
+        <picker bindchange="bindHomeList" value="{{homeListIdx}}" range="{{homeList}}"
+          range-key="introduction" disabled="{{homeListDis}}">
+          <view class="picker">
+            {{homeList[homeListIdx].introduction}}
+          </view>
+        </picker>
+        <image class="arrow" src="./../../static/image/arrow.png"></image>
+      </view>
     </view>
     <view class="houseCont" wx:if="{{yezhuOldPhone&&yezhuOldPhone!=''&&roomType}}">
       <view class="msgColumn">

@@ -1,6 +1,6 @@
 /* pages/guarantee/guarantee.wxss */
 .column{
-  padding: 44rpx 0 40rpx;
+  padding: 44rpx 0 20rpx;
   margin-left: 36rpx;
   border-bottom: solid 1rpx #F1F1F1;
 }
@@ -11,10 +11,10 @@
   margin-left: 0;
 }
 .titleC{
-  font-size: 24rpx;
-  line-height: 24rpx;
+  font-size: 30rpx;
+  line-height: 30rpx;
   color: #969696;
-  margin-bottom: 20rpx;
+  margin-bottom: 30rpx;
 }
 .placeholder,.intro{
   color: #DCDCDC;

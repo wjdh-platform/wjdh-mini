@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
+    "component":true,
+    "usingComponents": {
+      "change-cell":"/components/changeCell/changeCell"
+    },
   "navigationBarTitleText":"绑定小区"
 }

@@ -7,65 +7,176 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cellList:[
-      {id:0,
-        cellName:'请选择'
-        },
-      {id:1,
-      cellName:'晨曦家园'
-      }
-    ],
-    cellListIdx:0,
-    currentTab:0,
-    payList: [
-      { payName:'物业费',time:'2019年度',payNum:'¥2660' },
-      { payName:'水费',time:'暂无账单',payNum:'¥2660' ,checked: 'true' },
-      { payName:'电费',time:'暂无账单',payNum:'¥2660'},
-      { payName:'燃气费',time:'暂无账单',payNum:'¥2660' },
-      { payName:'停车费',time:'暂无账单',payNum:'¥2660' },
-    ]
+    cellListIdx: 0,
+    currentTab: 0,
+    isShow: false,
+    checkArr: [],
+    totalNum: 0,
+    changeCellType: false
   },
 
-  payListChange(e){
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+  changeClose(res) {
+    console.log(res)
+    let t = this,
+    villageList = utils.getItem('villageList'),
+    villageIdx = utils.getItem('villageIdx')
+    t.setData({
+      changeCellType: res.detail
+    })
+    t.orderList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier })
   },
-
-  bindChangeCell(e){
+  changePopupType(res) {
     this.setData({
-      cellListIdx:e.detail.value
+      changeCellType: res.detail
     })
   },
 
-  payment(){
-    api.payment({},(res)=>{
+  checkBox(e) {
+    let idx = e.currentTarget.dataset.idx,
+      checkedType = 'orderList[' + idx + '].checked',
+      id = e.currentTarget.dataset.id,
+      check = e.currentTarget.dataset.check,
+      t = this,
+      money = Number(e.currentTarget.dataset.money),
+      arr = t.data.checkArr.push(id)
+    // str = str.substr(0,str.length-1)
+
+    if (check) {
+      for (var i = 0; i < t.data.checkArr.length; i++) {
+        if (id == t.data.checkArr[i]) {
+          t.data.checkArr.splice(i, 1);
+          i--;//i需要自减，否则每次删除都会讲原数组索引发生变化
+        }
+      }
+      t.setData({
+        checkArr: t.data.checkArr,
+        totalNum: t.data.totalNum - money
+      })
+    } else {
+      t.setData({
+        checkArr: t.data.checkArr,
+        totalNum: t.data.totalNum + money
+      })
+    }
+    console.log(t.data.totalNum)
+    t.setData({
+      [checkedType]: !t.data.orderList[idx].checked
+    })
+  },
+
+
+  bindChangeCell(e) {
+    this.setData({
+      cellListIdx: e.detail.value
+    })
+  },
+
+  payment() {
+    api.payment({
+      ids: this.data.checkArr.join('A')
+    }, (res) => {
       console.log(res)
-      this.setData({
-        payInfo:res.data
+      let data = res.data.data
+      wx.requestPayment({
+        timeStamp: data.timeStamp,
+        nonceStr: data.nonceStr,
+        package: data.package,
+        signType: data.signType,
+        paySign: data.paySign,
+        success(res) {
+          console.log('支付成功' + JSON.stringify(res))
+          wx.navigateTo({
+            url: '/pages/houseList/payList/payList',
+          })
+        },
+        fail(res) {
+          console.log('支付失败' + JSON.stringify(res))
+        }
       })
     })
   },
 
-  payNum(){
-    let t = this
-    wx.requestPayment({
-      timeStamp: t.data.payInfo.timeStamp,
-      nonceStr: t.data.payInfo.nonceStr,
-      package: t.data.payInfo.package,
-      signType: t.data.payInfo.signType,
-      paySign: t.data.payInfo.paySign,
-      success (res) { 
-        console.log('支付成功'+JSON.stringify(res))
-      },
-      fail (res) { 
-        console.log('支付失败'+JSON.stringify(res))
+
+  orderList(param) {
+    api.orderList(param, (res) => {
+      if (res.data.code == 0) {
+        let dataArr = res.data.data
+        if(dataArr == []){
+          this.setData({
+            orderList: []
+          })
+        }else{
+          res.data.data.forEach(item => {
+            item.isShow = false;
+            item.checked = false;
+            item.extra = JSON.parse(item.extra)
+          })
+  
+          this.setData({
+            orderList: dataArr
+          })
+        }
+        
       }
+
     })
+  },
+
+  tabTap(e) {
+    var t = this;
+    if (e.target.dataset.current == 0) {
+      t.orderList({ paied: 0, community_identifier: t.data.villageList[t.data.villageIdx].community_identifier })
+    } else {
+      t.orderList({ paied: 1, community_identifier: t.data.villageList[t.data.villageIdx].community_identifier })
+    }
+    if (t.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
+      t.setData({
+        currentTab: e.target.dataset.current
+      })
+    }
+  },
+
+  orderDetail(e) {
+    let t = this,
+      idx = e.currentTarget.dataset.idx,
+      //  orderDetail = 'orderList[' + idx + '].orderDetail',
+      dataList = t.data.orderList
+    dataList[idx].isShow = !dataList[idx].isShow
+    if (dataList[idx].isShow) {
+      t.packUp(dataList, idx);
+    }
+    t.setData({
+      orderList: dataList
+    })
+  },
+  packUp(data, index) {
+    for (let i = 0, len = data.length; i < len; i++) {
+      if (index != i) {
+        data[i].isShow = false
+      }
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.payment()
+    let t = this,
+      villageIdx = utils.getItem('villageIdx'),
+      villageList = utils.getItem('villageList')
+    if (villageIdx && villageIdx != 0) {
+      t.setData({
+        villageIdx,
+        villageList
+      })
+      t.orderList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier })
+    } else {
+      t.setData({
+        changeCellType: true
+      })
+    }
+
   },
 
   /**

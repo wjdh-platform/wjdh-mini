@@ -125,3 +125,18 @@ picker{
   font-size: 30rpx;
   color: #424242;
 }
+.tipsText{
+  font-size: 27rpx;
+  color: #555;
+  margin: 30rpx 0;
+}
+.tipsText text{
+  display: block;
+  line-height: 40rpx;
+}
+.tipsBtn{
+  /* float: right; */
+  text-align: center;
+  font-size: 28rpx;
+  color: #50DABE;
+}

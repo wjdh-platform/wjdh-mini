@@ -63,28 +63,141 @@
   border-radius: 50%;
   margin-right: 10rpx;
 }
-.payList label{
+.payList .orderList{
   display: flex;
   align-items: center;
-  height: 120rpx;
-  padding: 0 35rpx;
+  min-height: 120rpx;
+  padding: 0 30rpx;
   box-sizing: border-box;
   border-bottom: solid 1rpx #f1f1f1;
+}
+.orderDetail{
+  display: flex;
+  justify-content: space-between; 
+  width: 93%;
+  align-items: center;
+  position: relative;
+}
+.lookMore{
+  position: absolute;
+  right: 226rpx;
+  bottom: 0;
+  z-index: 2;
+}
+.lookMore::after{
+  content: '';
+  display: inline-block;
+  width:0;
+  height:0;
+	border-right:10rpx solid transparent;
+	border-left:10rpx solid transparent;
+  border-top:10rpx solid #747474;
+  margin-left: 5rpx;
+}
+.orderDClo{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 74rpx;
+  border-bottom: solid 1rpx #EFEFEF ;
+  font-size: 26rpx;
+  color: #A4A4A4;
+}
+.detailAdd{
+  color: #333;
 }
 .payName{
   flex:1;
   text-align:left;
-  margin-left: 15rpx;
+  /* margin-left: 30rpx; */
   font-size: 28rpx;
   color: #333;
 }
 .payName text{
   display: block;
 }
-.payName text:last-child{
+.payName .introduction{
   font-size: 24rpx;
+  width:325rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .payNum{
   font-size: 28rpx;
   color: #333;
+}
+.orderDetailO{
+  background:#F7F7F7;
+  padding: 0 30rpx 0 95rpx;
+  box-sizing: border-box;
+}
+.paid .orderDetailO{
+  padding: 0 30rpx ;
+}
+.payNumTotal{
+  width: 750rpx;
+  height: 118rpx;
+  background: #FFFFFF;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  box-shadow: 0rpx 0rpx 8rpx rgba(116,137,145,.23);
+}
+.totalNum{
+  flex: 1;
+  text-align: right;
+  color: #BEBEBE;
+  font-size:26rpx ;
+  margin-right: 20rpx;
+}
+.totalNum text{
+  color: #50DABE;
+  font-weight: bold;
+}
+.payProduct{
+  font-size: 26rpx;
+  font-weight: 400;
+  color: #3C3C3C;
+  margin-left: 20rpx;
+}
+.bindOrderBtn{
+  width: 190rpx;
+  height: 68rpx;
+  background: #50DABE;
+  border-radius: 34rpx;
+  font-size: 30rpx;
+  font-weight: 400;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 68rpx;
+  margin-right: 20rpx;
+}
+.checkBox{
+  width: 70rpx;
+  /* height: 70rpx; */
+}
+.checkBox image{
+  width: 40rpx;
+  height: 40rpx;
+}
+.lookMore{
+  width: 79rpx;
+  height: 34rpx;
+  border: 2rpx solid #747474;
+  border-radius: 7rpx;
+  font-size: 22rpx;
+  font-weight: bold;
+  color: #747474;
+  text-align: center;
+  line-height: 34rpx;
+}
+.ListNone{
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+  padding: 50rpx 0;
 }
