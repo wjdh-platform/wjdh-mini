@@ -1,8 +1,9 @@
 /* pages/phoneCall/phoneCall.wxss */
 page{
   /* padding: 50rpx 0 0 35rpx; */
+  padding-top: 100rpx;
 }
-image{
+.column image{
   width: 23rpx;
   height: 30rpx;
   margin: 0 12rpx 0 34rpx;

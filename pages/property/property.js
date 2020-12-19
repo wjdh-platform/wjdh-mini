@@ -46,10 +46,26 @@ Page({
     villageList:[],
     activationType:false,
     verificationName:'',
+    popupTips:true,
     changeCellType:false,
-    popupTips:true
+    title:'',
+    backType:false
   },
 
+  
+
+  changeClose(res){
+    console.log(res)
+    this.setData({
+      changeCellType:res.detail.changeCellType,
+      title:res.detail.community_name
+    })
+  },
+  changePopupType(res){
+    this.setData({
+      changeCellType:res.detail
+    })
+  },
   closePopupTips(){
     this.setData({
       popupTips:false
@@ -62,19 +78,6 @@ Page({
     })
     utils.setItem("tipsNone",false)
   },
-
-  changeClose(res){
-    console.log(res)
-    this.setData({
-      changeCellType:res.detail
-    })
-  },
-  changePopupType(res){
-    this.setData({
-      changeCellType:res.detail
-    })
-  },
-  
 
   //获取小区名字
   getVillage() {
@@ -330,7 +333,6 @@ Page({
       activationType:!this.data.activationType
     })
   },
-
 
   /**
    * 生命周期函数--监听页面加载

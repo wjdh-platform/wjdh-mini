@@ -21,8 +21,26 @@ Page({
       title:'国庆节放假的温馨提示',
       wyName:'晨曦家园物业',
       time:'2020年9月29日'
-    }]
+    }],
 
+    changeCellType:false,
+    title:'',
+    backType:true
+  },
+
+  
+
+  changeClose(res){
+    console.log(res)
+    this.setData({
+      changeCellType:res.detail.changeCellType,
+      title:res.detail.community_name
+    })
+  },
+  changePopupType(res){
+    this.setData({
+      changeCellType:res.detail
+    })
   },
 
   bindList(e){

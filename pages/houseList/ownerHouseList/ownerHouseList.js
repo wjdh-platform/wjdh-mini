@@ -10,7 +10,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-    listType:false
+    listType:false,
+    changeCellType:false,
+    title:'',
+    false:false,
+    backType:true
+  },
+
+  changeClose(res){
+    console.log(res)
+    this.setData({
+      changeCellType:res.detail.changeCellType,
+      title:res.detail.community_name
+    })
+  },
+  changePopupType(res){
+    this.setData({
+      changeCellType:res.detail
+    })
   },
 
   bindListDetail(e){

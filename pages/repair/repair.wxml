@@ -1,6 +1,8 @@
 <!--pages/guarantee/guarantee.wxml-->
 <view class="repair">
-  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType"></change-cell>
+  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType" title="{{title}}">
+  </change-cell>
+  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
   <view wx:if="{{popupType}}">
     <form bindsubmit="addressSub">
       

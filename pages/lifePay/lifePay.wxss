@@ -1,4 +1,7 @@
 /* pages/lifePay/lifePay.wxss */
+page{
+  padding-top: 130rpx;
+}
 .changeCell{
   padding: 44rpx 0 40rpx;
   margin-left: 36rpx;
@@ -84,7 +87,7 @@
   bottom: 0;
   z-index: 2;
 }
-.lookMore::after{
+.up::after{
   content: '';
   display: inline-block;
   width:0;
@@ -92,6 +95,16 @@
 	border-right:10rpx solid transparent;
 	border-left:10rpx solid transparent;
   border-top:10rpx solid #747474;
+  margin-left: 5rpx;
+}
+.down::after{
+  content: '';
+  display: inline-block;
+  width:0;
+  height:0;
+	border-right:10rpx solid transparent;
+	border-left:10rpx solid transparent;
+  border-bottom:10rpx solid #747474;
   margin-left: 5rpx;
 }
 .orderDClo{
@@ -163,6 +176,17 @@
   font-weight: 400;
   color: #3C3C3C;
   margin-left: 20rpx;
+}
+.payProduct image{
+  width: 40rpx;
+  height: 40rpx;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+.payProduct text{
+  display: inline-block;
+  vertical-align: middle;
 }
 .bindOrderBtn{
   width: 190rpx;

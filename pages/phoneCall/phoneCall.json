@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "change-cell":"/components/changeCell/changeCell",
+    "title-Navigation": "/components/titleNavigation/titleNavigation"
+  },
   "navigationBarTitleText":"应急电话"
 }

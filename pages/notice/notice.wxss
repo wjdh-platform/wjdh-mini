@@ -1,6 +1,7 @@
 /* pages/notice/notice.wxss */
 page{
   background: #e8e8e8;
+  padding-top: 110rpx;
 }
 .column{
   margin-top: 20rpx;

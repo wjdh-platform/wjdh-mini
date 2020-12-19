@@ -17,7 +17,23 @@ Page({
       '其它'
     ],
     proposalIdx:0,
-    popupType:true
+    popupType:true,
+    changeCellType:false,
+    title:'',
+    backType:true
+  },
+
+  changeClose(res){
+    console.log(res)
+    this.setData({
+      changeCellType:res.detail.changeCellType,
+      title:res.detail.community_name
+    })
+  },
+  changePopupType(res){
+    this.setData({
+      changeCellType:res.detail
+    })
   },
 
   bindType(e){

@@ -1,15 +1,18 @@
 /* pages/proposal/proposal.wxss */
+page{
+  padding-top: 130rpx;
+}
 .column{
-  padding: 44rpx 0 40rpx;
+  padding: 0 0 40rpx;
   margin-left: 36rpx;
   border-bottom: solid 1rpx #F1F1F1;
   position: relative;
 }
 .titleC{
-  font-size: 24rpx;
-  line-height: 24rpx;
+  font-size: 30rpx;
+  line-height: 30rpx;
   color: #969696;
-  margin-bottom: 20rpx;
+  margin-bottom: 30rpx;
 }
 .address,textarea{
   color: #333333;

@@ -1,6 +1,8 @@
 <!--pages/lifePay/lifePay.wxml-->
 <view class="lifePay">
-  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType"></change-cell>
+  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType" title="{{title}}">
+  </change-cell>
+  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
   <!-- <view class="changeCell">
     <view class="titleC">缴费小区*</view>
     <picker bindchange="bindChangeCell" value="{{cellListIdx}}" range-key="cellName" range="{{cellList}}">
@@ -9,7 +11,7 @@
     <image class="arrow" src="./../../static/image/arrow.png"></image>
   </view> -->
   <view class="payTab">
-    <view class="payTitle">缴费列表</view>
+    <!-- <view class="payTitle">缴费列表</view> -->
     <view class="tabCont">
       <view class="tabs  {{currentTab == 0?'active':''}}" data-current="0" bindtap="tabTap">待缴费</view>
       <view class="tabs {{currentTab == 1?'active':''}}" data-current="1" bindtap="tabTap">已缴费</view>
@@ -18,14 +20,14 @@
       <view wx:for="{{orderList}}" wx:if="{{orderList.length>0}}">
         <view class="orderList">
           <view class="checkBox">
-            <image src="{{item.checked?'../../static/image/checked.png':'../../static/image/checkNone.png'}}"
+            <image src="{{item.checked?'../../static/image/checkBoxY.png':'../../static/image/checkBoxN.png'}}"
               bindtap="checkBox" data-check="{{item.checked}}" data-id="{{item.id}}" data-idx="{{index}}"
               data-money="{{item.amount}}"></image>
           </view>
           <view class="orderDetail" bindtap="orderDetail" data-idx="{{index}}">
             <view class="payName"><text wx:if="{{item.title}}">{{item.title}}</text><text
                 class="introduction">{{item.remark}}</text>
-              <view class="lookMore">详情</view>
+              <view class="lookMore  {{item.isShow?'down':'up'}}">详情</view>
             </view>
             <view class="payNum">{{item.amount}}</view>
           </view>
@@ -42,6 +44,10 @@
           <view class="orderDClo" wx:for="{{item.extra}}" wx:for-item="itemName" wx:for-index="key">
             <view class="detailTitle">{{key}}</view>
             <view class="detailAdd">{{itemName}}</view>
+          </view>
+          <view class="orderDClo">
+            <view class="detailTitle">备注</view>
+            <view class="detailAdd">{{item.remark}}</view>
           </view>
         </view>
       </view>
@@ -53,7 +59,7 @@
           <view class="orderDetail" bindtap="orderDetail" data-idx="{{index}}">
             <view class="payName"><text wx:if="{{item.title}}">{{item.title}}</text><text
                 class="introduction">{{item.remark}}</text>
-              <view class="lookMore">详情</view>
+              <view class="lookMore {{item.isShow?'down':'up'}}">详情</view>
             </view>
             <view class="payNum">{{item.amount}}</view>
           </view>
@@ -71,14 +77,21 @@
             <view class="detailTitle">{{key}}</view>
             <view class="detailAdd">{{itemName}}</view>
           </view>
+          <view class="orderDClo">
+            <view class="detailTitle">备注</view>
+            <view class="detailAdd">{{item.remark}}</view>
+          </view>
         </view>
       </view>
       <view wx:if="{{orderList.length == 0}}" class="ListNone">暂无数据</view>
     </view>
   </view>
   <view class="payNumTotal" wx:if="{{currentTab == 0}}">
-    <view class="payProduct">共{{checkArr.length}}个缴费</view>
+    <view class="payProduct" bindtap="selectAll">
+      <image src="{{selectAll?'../../static/image/checkBoxY.png':'../../static/image/checkBoxN.png'}}"></image>
+      <text>全选</text>
+    </view>
     <view class="totalNum">共计：<text>¥{{totalNum}}</text></view>
-    <view class="bindOrderBtn" bindtap="payment">确认订单</view>
+    <view class="bindOrderBtn" bindtap="payment">去支付</view>
   </view>
 </view>

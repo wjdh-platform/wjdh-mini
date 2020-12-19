@@ -1,5 +1,8 @@
 <!--pages/houseList/payList/payList.wxml-->
 <view class="payList">
+  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType" title="{{title}}">
+  </change-cell>
+  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
   <view class="column" wx:for="{{payList}}">
     <view class="title">账单一</view>
     <view class="listDetail">
@@ -8,6 +11,12 @@
       <text>支付金额：{{item.total_amount}}</text>
       <text>交易时间：{{item.paid_at}}</text>
     </view>
-    <view class="lookMore">点击查看订单列表</view>
+    <view class="lookMore" wx:if="{{!item.isShow}}" bindtap="orderListType" data-idx="{{index}}">点击查看订单列表</view>
+    <view class="orderList" wx:else>
+      <view class="orderClo" wx:for="{{item.orders}}" wx:for-item="itemN">
+        <view class="orderTitle">{{itemN.title}}</view>
+        <view class="orderBtn">订单详情</view>
+      </view>
+    </view>
   </view>
 </view>

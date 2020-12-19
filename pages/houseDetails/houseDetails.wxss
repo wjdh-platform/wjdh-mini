@@ -1,7 +1,7 @@
 /* pages/houseDetails/houseDetails.wxss */
 page{
   background: #F8F8F8;
-  padding-bottom: 50rpx;
+  padding:0 0 50rpx;
 }
 .column{
   margin-top: 30rpx;

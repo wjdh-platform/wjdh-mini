@@ -1,5 +1,8 @@
 <!--pages/notice/notice.wxml-->
 <view class="notice">
+  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType" title="{{title}}">
+  </change-cell>
+  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
   <view class="column" wx:for="{{list}}" data-idx="{{index}}" bindtap="bindList">
     <view class="title">{{item.title}}</view>
     <view class="introduction">

@@ -11,7 +11,9 @@ Page({
     addressIdx: 0,
     popupType: true,
 
-    changeCellType: false
+    changeCellType: false,
+    title:'',
+    backType:true
   },
 
   changeClose(res) {
@@ -19,7 +21,8 @@ Page({
       villageList = utils.getItem('villageList'),
       villageIdx = utils.getItem('villageIdx')
     t.setData({
-      changeCellType: res.detail
+      changeCellType:res.detail.changeCellType,
+      title:res.detail.community_name
     })
     // t.orderList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier })
   },

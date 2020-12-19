@@ -8,7 +8,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-    currentTab:0
+    currentTab:0,
+    changeCellType:false,
+    title:'',
+    false:false
+  },
+
+  changeClose(res){
+    console.log(res)
+    this.setData({
+      changeCellType:res.detail.changeCellType,
+      title:res.detail.community_name
+    })
+  },
+  changePopupType(res){
+    this.setData({
+      changeCellType:res.detail
+    })
   },
 
   tabTap(e){

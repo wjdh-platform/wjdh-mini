@@ -1,5 +1,8 @@
 <!--pages/proposal/proposal.wxml-->
 <view class="proposal">
+  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType" title="{{title}}">
+  </change-cell>
+  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
   <view wx:if="{{popupType}}">
   <form bindsubmit="propasalSub">
   <view class="column">

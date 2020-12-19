@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText":"房屋信息"
+  "usingComponents": {
+    
+  },
+  "navigationStyle":"default"
 }

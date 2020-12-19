@@ -12,6 +12,9 @@ Component({
     },
     buildingsType: {
       type: Boolean
+    },
+    title:{
+      type:String
     }
   },
 
@@ -61,8 +64,11 @@ Component({
       let t = this
       if (t.data.villageIdx != 0) {
         // utils.setItem('community_identifier')t.data.villageList[t.data.villageIdx].community_identifier
-        this.triggerEvent('changeClose', false)
-        // this.triggerEvent('changeBuildingsType',true)
+        let json = {
+          community_name: t.data.villageList[t.data.villageIdx].community_name,
+          changeCellType:false
+        }
+        this.triggerEvent('changeClose', json)
       } else {
         utils.showToast('请选择小区', 'none')
       }

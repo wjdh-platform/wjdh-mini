@@ -15,13 +15,15 @@
     "pages/visitor/visitor",
     "pages/lifePay/lifePay",
     "pages/houseList/payList/payList",
-    "pages/demo/demo"
+    "pages/demo/demo",
+    "pages/houseList/repairList/repairList"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "万家灯火",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
   },
   "tabBar": {
     "color": "#707070",

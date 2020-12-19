@@ -140,11 +140,27 @@ export const getCity = (params, cb) => {
 }
 //添加家属
 export const housesJiashuList = (params, cb) => {
-  request('api/v1/user/housesJiashuList', params, cb, 'POST')
+  request('api/v1/user/houseList', params, cb, 'POST')
 }
 //提交报修
 export const submitRepair = (params, cb) => {
   request('api/v1/repair/new', params, cb, 'POST')
+}
+//我的报修
+export const getRepairList = (params, cb) => {
+  request('api/v1/repair/list', params, cb, 'POST')
+}
+//行业
+export const industries = (params, cb) => {
+  request('api/v1/industries', params, cb, 'POST')
+}
+//细分行业
+export const smallindustries = (params, cb) => {
+  request('api/v1/smallindustries', params, cb, 'POST')
+}
+//职业
+export const jobs = (params, cb) => {
+  request('api/v1/jobs', params, cb, 'POST')
 }
 
 

@@ -8,18 +8,73 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    orderType:true,
+    changeCellType:false,
+    title:'',
+    false:false,
+    changeCellType:false,
+    title:'',
+    backType:true
   },
 
+  changeClose(res){
+    console.log(res)
+    this.setData({
+      changeCellType:res.detail.changeCellType,
+      title:res.detail.community_name
+    })
+  },
+  changePopupType(res){
+    this.setData({
+      changeCellType:res.detail
+    })
+  },
+
+  changeClose(res){
+    console.log(res)
+    this.setData({
+      changeCellType:res.detail.changeCellType,
+      title:res.detail.community_name
+    })
+  },
+  changePopupType(res){
+    this.setData({
+      changeCellType:res.detail
+    })
+  },
   getPayList(){
     api.payList({},(res)=>{
-      let data = res.data
+      let data = res.data,
+           dataArr = data.data
       if(data.code == 0){
+        dataArr.forEach(item => {
+          item.isShow = false;
+        })
         this.setData({
-          payList:data.data
+          payList:dataArr
         })
       }
     })
+  },
+
+  orderListType(e){
+  let t = this,
+      idx = e.currentTarget.dataset.idx,
+      dataList = t.data.payList
+      dataList[idx].isShow = !dataList[idx].isShow
+    if (dataList[idx].isShow) {
+      t.packUp(dataList, idx);
+    }
+    t.setData({
+      payList: dataList
+    })
+  },
+  packUp(data, index) {
+    for (let i = 0, len = data.length; i < len; i++) {
+      if (index != i) {
+        data[i].isShow = false
+      }
+    }
   },
 
   /**

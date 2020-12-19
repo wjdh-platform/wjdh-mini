@@ -46,7 +46,23 @@ Page({
         phoneTitle:'市长热线',
         phoneNum:'12345'
       }
-    ]
+    ],
+    changeCellType:false,
+    title:'',
+    backType:true
+  },
+
+  changeClose(res){
+    console.log(res)
+    this.setData({
+      changeCellType:res.detail.changeCellType,
+      title:res.detail.community_name
+    })
+  },
+  changePopupType(res){
+    this.setData({
+      changeCellType:res.detail
+    })
   },
 
   callNum(e){

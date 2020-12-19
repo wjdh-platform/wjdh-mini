@@ -1,5 +1,9 @@
 <!--pages/houseDetails/houseDetails.wxml-->
 <view class="houseDetails">
+  <title-Navigation detail="true" title="{{title}}"></title-Navigation>
+  <change-cell changeCellType="{{changeCellType}}" 
+  bindchangeClose="changeClose" bindchangePopupType="changePopupType" buildingsType="{{buildingsType}}"
+  title="{{title}}" wx:if="{{false}}"></change-cell>
   <view class="houseClo" wx:if="{{detailsData}}">
   <view class="column">
   <!-- <view class="title">{{detailsData.introduction}}<view class="addMember" bindtap="addFamily">增加人员</view></view> -->

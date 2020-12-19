@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText":"房屋列表"
+  "usingComponents": {
+    "change-cell":"/components/changeCell/changeCell",
+    "title-Navigation": "/components/titleNavigation/titleNavigation"
+  }
 }

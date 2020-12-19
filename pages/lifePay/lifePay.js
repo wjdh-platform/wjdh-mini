@@ -12,7 +12,9 @@ Page({
     isShow: false,
     checkArr: [],
     totalNum: 0,
-    changeCellType: false
+    changeCellType: false,
+    selectAll:false,
+    backType:true
   },
 
   changeClose(res) {
@@ -21,7 +23,8 @@ Page({
     villageList = utils.getItem('villageList'),
     villageIdx = utils.getItem('villageIdx')
     t.setData({
-      changeCellType: res.detail
+      changeCellType:res.detail.changeCellType,
+      title:res.detail.community_name
     })
     t.orderList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier })
   },
@@ -39,7 +42,6 @@ Page({
       t = this,
       money = Number(e.currentTarget.dataset.money),
       arr = t.data.checkArr.push(id)
-    // str = str.substr(0,str.length-1)
 
     if (check) {
       for (var i = 0; i < t.data.checkArr.length; i++) {
@@ -50,17 +52,57 @@ Page({
       }
       t.setData({
         checkArr: t.data.checkArr,
-        totalNum: t.data.totalNum - money
+        totalNum: t.data.totalNum - money,
+        selectAll:false
       })
     } else {
       t.setData({
         checkArr: t.data.checkArr,
-        totalNum: t.data.totalNum + money
+        totalNum: t.data.totalNum + money,
+        // selectAll:true
       })
     }
-    console.log(t.data.totalNum)
     t.setData({
       [checkedType]: !t.data.orderList[idx].checked
+    })
+    if(t.data.orderList.length == t.data.checkArr.length){
+      t.setData({
+        selectAll:true
+      })
+    }
+  },
+
+  selectAll(){
+    let t = this,
+        totalNum = 0,
+        orderList = t.data.orderList,
+        moneyArr = [],
+        checkArr=[]
+    t.setData({
+      selectAll:!t.data.selectAll
+    })
+    if(!t.data.selectAll){
+      orderList.forEach((item)=>{
+        item.checked = false
+      })
+      totalNum = 0,
+      checkArr = []
+    }else{
+      orderList.forEach((item)=>{
+        item.checked = true
+        moneyArr.push(item.amount)
+        checkArr.push(item.id)
+      })
+      totalNum = moneyArr.reduce((a=0,i)=>{
+        return Number(a)+Number(i)
+      })
+      console.log(totalNum)
+    }
+    
+    t.setData({
+      orderList,
+      totalNum,
+      checkArr
     })
   },
 
@@ -72,28 +114,33 @@ Page({
   },
 
   payment() {
-    api.payment({
-      ids: this.data.checkArr.join('A')
-    }, (res) => {
-      console.log(res)
-      let data = res.data.data
-      wx.requestPayment({
-        timeStamp: data.timeStamp,
-        nonceStr: data.nonceStr,
-        package: data.package,
-        signType: data.signType,
-        paySign: data.paySign,
-        success(res) {
-          console.log('支付成功' + JSON.stringify(res))
-          wx.navigateTo({
-            url: '/pages/houseList/payList/payList',
-          })
-        },
-        fail(res) {
-          console.log('支付失败' + JSON.stringify(res))
-        }
+    if(this.data.checkArr.length<1){
+      utils.showToast('请选择要缴费项目','none')
+    }else{
+      api.payment({
+        ids: this.data.checkArr.join('A')
+      }, (res) => {
+        console.log(res)
+        let data = res.data.data
+        wx.requestPayment({
+          timeStamp: data.timeStamp,
+          nonceStr: data.nonceStr,
+          package: data.package,
+          signType: data.signType,
+          paySign: data.paySign,
+          success(res) {
+            console.log('支付成功' + JSON.stringify(res))
+            wx.navigateTo({
+              url: '/pages/houseList/payList/payList',
+            })
+          },
+          fail(res) {
+            console.log('支付失败' + JSON.stringify(res))
+          }
+        })
       })
-    })
+    }
+    
   },
 
 
@@ -106,7 +153,7 @@ Page({
             orderList: []
           })
         }else{
-          res.data.data.forEach(item => {
+          dataArr.forEach(item => {
             item.isShow = false;
             item.checked = false;
             item.extra = JSON.parse(item.extra)

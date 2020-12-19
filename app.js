@@ -11,6 +11,7 @@ App({
     access_token:'',
     community_identifier:'',
     villageList:[],
-    villageIdx:0
+    villageIdx:0,
+    community_name:''
   }
 })

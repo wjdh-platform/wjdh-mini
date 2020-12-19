@@ -1,0 +1,4 @@
+<!--pages/houseList/repairList/repairList.wxml-->
+<view>
+  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType"></change-cell>
+</view>

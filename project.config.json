@@ -165,6 +165,12 @@
         {
           "name": "账单列表",
           "pathName": "pages/houseList/payList/payList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "我的报修",
+          "pathName": "pages/houseList/repairList/repairList",
           "scene": null
         }
       ]

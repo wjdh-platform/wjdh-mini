@@ -1,6 +1,7 @@
 <view class="propertyMain">
-  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType">
+  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType" title="{{title}}">
   </change-cell>
+  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
   <view class="activationP" wx:if="{{popupTips}}">
     <view class="activitionCont">
       <view class="popupTitle">温馨提示</view>

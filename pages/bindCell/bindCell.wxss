@@ -1,6 +1,7 @@
 /* pages/bindCell/bindCell.wxss */
 page{
   background: #F8F8F8;
+  padding-top: 110rpx;
 }
 .bindCell{
   padding-bottom: 60rpx;
@@ -78,6 +79,8 @@ picker{
   color: #C6C6C6;
 }
 
+
+
 .inputDis{
   color: #424242;
 }
@@ -127,7 +130,7 @@ picker{
 }
 
 
-.verificationPhoto{
+.verificationPhoto,.jobsPopup{
   position: fixed;
   left: 0;
   top: 0;
@@ -135,6 +138,25 @@ picker{
   bottom: 0;
   z-index: 9;
   background: rgba(106,102,104,.6)
+}
+.jobsPopup{
+  top: 130rpx;
+  background:#fff;
+}
+.jobsPopup .msgColumn{
+  border-bottom: solid 1rpx #ececec;
+}
+.jobsList{
+  padding: 30rpx;
+}
+.jobsList .jobsClo{
+  display: inline-block;
+  padding: 8rpx 15rpx;
+  border: solid 1rpx #aaa;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #444;
+  margin: 0 10rpx 20rpx;
 }
 .phoneCode{
   width: 522rpx;
@@ -262,3 +284,8 @@ radio .wx-radio-input{
  .btn-area{
    margin-top: 30rpx;
  }
+
+ .jobsList .active{
+  border: solid 1rpx#50DABE;
+  color: #50DABE;
+}
