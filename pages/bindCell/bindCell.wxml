@@ -94,12 +94,21 @@
     </view>
     <view  class="houseCont" wx:else>
       <view class="column">
-        <view class="title">房间</view>
+        <view class="title">房屋</view>
         <picker bindchange="bindHomeList" value="{{homeListIdx}}" range="{{homeList}}"
           range-key="introduction" disabled="{{homeListDis}}">
           <view class="picker">
             {{homeList[homeListIdx].introduction}}
           </view>
+        </picker>
+        <image class="arrow" src="./../../static/image/arrow.png"></image>
+      </view>
+    </view>
+    <view class="houseCont" wx:if="{{homeListIdx!=0}}">
+      <view class="column">
+        <view class="title">与业主关系</view>
+        <picker bindchange="bindShip" value="{{shipIdx}}" range="{{dataList.role}}" range-key="value">
+          {{dataList.role[shipIdx].value}}
         </picker>
         <image class="arrow" src="./../../static/image/arrow.png"></image>
       </view>
@@ -141,7 +150,7 @@
         <image class="arrow" src="./../../static/image/arrow.png"></image>
       </view>
     </view>
-      <view class="houseCont" wx:if="{{bindPeo}}">
+      <view class="houseCont" wx:if="{{bindPeo&&!homeList}}">
       <view class="column">
         <view class="title">绑定主体</view>
         <picker bindchange="bindlistPeople" value="{{bindListPIdx}}" range="{{bindListP}}" range-key="name">
@@ -224,21 +233,22 @@
       <view class="msgColumn">
         <view class="msgTitle">职业</view>
         <input name="job" placeholder="请选择" class="inputText" placeholder-class="inputPlaceHolder"
-          value="{{examineData?examineData.job:job}}" bindtap="jobsPopupTab" disabled="true"></input>
+          value="{{bigJobsText?job:examineData.job}}" bindtap="jobsPopupTab" disabled="true"></input>
         
       </view>
-      <view class="jobsPopup" wx:if="{{jobsPopup}}">
+      <view class="verificationPhotoJ" wx:if="{{jobsPopup}}">
+        <view class="jobsPopup">
         <view class="msgColumn">
         <view class="msgTitle">职业:</view>
         <input name="job" placeholder="请选择" class="inputText" placeholder-class="inputPlaceHolder"
-          value="{{examineData?examineData.job:bigJobsText+' '+smallJobsText+' '+jobsText}}" disabled="true"></input>
-        
+          value="{{bigJobsText?bigJobsText+' '+smallJobsText+' '+jobsText:examineData.job}}" disabled="true"></input>
         </view>
         <view class="jobsList">
           <view class="jobsClo {{item.isShow?'active':''}}" wx:if="{{bigJobsType}}" wx:for="{{bigJobsList}}" bindtap="bigJobsTab" data-idx="{{index}}" data-id="{{item.industry_id}}">{{item.industry_name}}</view>
-          <view class="jobsClo" wx:if="{{smallJobsType}}" wx:for="{{smallJobsList}}" bindtap="smallJobsTab" data-idx="{{index}}" data-id="{{item.small_industry_id}}">{{item.small_industry_name}}</view>
-          <view class="jobsClo" wx:if="{{jobsType}}" wx:for="{{jobsList}}" bindtap="jobsTab" data-idx="{{index}}">{{item.job_name}}</view>
+          <view class="jobsClo {{item.isShow?'active':''}}" wx:if="{{smallJobsType}}" wx:for="{{smallJobsList}}" bindtap="smallJobsTab" data-idx="{{index}}" data-id="{{item.small_industry_id}}">{{item.small_industry_name}}</view>
+          <view class="jobsClo {{item.isShow?'active':''}}" wx:if="{{jobsType}}" wx:for="{{jobsList}}" bindtap="jobsTab" data-idx="{{index}}">{{item.job_name}}</view>
         </view>
+      </view>
       </view>
       <!-- <view class="column">
         <view class="title">行业</view>
@@ -260,8 +270,8 @@
       <view class="msgColumnO">
         <view class="msgTitle">上传人脸照片</view>
         <view class="uploadPhoto">
-          <view class="photoClo" wx:if="{{imgSrc||examineData&&examineData.photo!=''}}">
-            <image class="photoImg" src="{{examineData&&examineData.photo!=''?examineData.photo:imgSrc}}" alt="" mode="heightFix"></image>
+          <view class="photoClo" wx:if="{{imgSrc||examineData.photo&&examineData.photo!=''}}">
+            <image class="photoImg" src="{{examineData.photo&&examineData.photo!=''?examineData.photo:imgSrc}}" alt="" mode="heightFix"></image>
             <image src="./../../static/image/imgClose.png" class="imgClose" bindtap="delPhoto"></image>
           </view>
           <view class="addImg" bindtap="addImg"></view>

@@ -171,6 +171,12 @@
         {
           "name": "我的报修",
           "pathName": "pages/houseList/repairList/repairList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "订单详情",
+          "pathName": "pages/houseList/payList/details/details",
           "scene": null
         }
       ]

@@ -7,18 +7,32 @@ Page({
    * 页面的初始数据
    */
   data: {
+    currentTab:0,
+    changeCellType: false,
+    backType:true
+  },
 
-    changeCellType: false
+  tabTap(e){
+    var t = this;
+    if( t.data.currentTab === e.target.dataset.current ) {
+        return false;
+    } else {
+        t.setData( {
+            currentTab: e.target.dataset.current
+        })
+    }
   },
 
   changeClose(res) {
+    console.log(res)
     let t = this,
-      villageList = utils.getItem('villageList'),
-      villageIdx = utils.getItem('villageIdx')
+    villageList = utils.getItem('villageList'),
+    villageIdx = utils.getItem('villageIdx')
     t.setData({
-      changeCellType: res.detail
+      changeCellType:res.detail.changeCellType,
+      title:res.detail.community_name
     })
-    t.getRepairList({ community_identifier: villageList[villageIdx].community_identifier })
+    t.orderList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier })
   },
   changePopupType(res) {
     this.setData({
@@ -28,7 +42,25 @@ Page({
 
   getRepairList(param){
     api.getRepairList(param,(res)=>{
-
+      let data = res.data,
+          repairList = data.data,
+          
+          notArr = [],
+          yesArr = []
+      if(data.code == 0){
+        notArr = repairList.filter((item)=>{
+          return item.status == '未解决'
+        })
+        yesArr = repairList.filter((item)=>{
+          return item.status == '已解决'
+        })
+        console.log(notArr)
+        console.log(yesArr)
+        this.setData({
+          repairListNot: notArr,
+          repairListYes:yesArr
+        })
+      }
     })
   },
 

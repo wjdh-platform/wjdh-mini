@@ -30,16 +30,22 @@ Page({
     })
   },
 
-  changeClose(res){
-    console.log(res)
-    this.setData({
-      changeCellType:res.detail.changeCellType,
-      title:res.detail.community_name
-    })
-  },
-  changePopupType(res){
-    this.setData({
-      changeCellType:res.detail
+  // changeClose(res){
+  //   console.log(res)
+  //   this.setData({
+  //     changeCellType:res.detail.changeCellType,
+  //     title:res.detail.community_name
+  //   })
+  // },
+  // changePopupType(res){
+  //   this.setData({
+  //     changeCellType:res.detail
+  //   })
+  // },
+  orderDetails(e){
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '/pages/houseList/payList/details/details?id='+id,
     })
   },
   getPayList(){

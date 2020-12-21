@@ -48,14 +48,12 @@
       <view class="columnMe" wx:for="{{detailsData.weibangding}}" wx:if="{{detailsData.weibangding!=[]}}">
         <view class="name">{{item.name}}</view>
         <view class="action">{{item.action}}</view>
-        <!-- <view class="jiebang">录入</view> -->
       </view>
       <view class="noData" wx:if="{{detailsData.weibangding.length === 0}}">暂无数据</view>
     </view>
     <view class="memberList" wx:if="{{currentTab == 2}}">
       <view class="columnMe" wx:for="{{detailsData.yijihuo}}" wx:if="{{detailsData.yijihuo!=[]}}">
         <view class="name">{{item.name}}</view>
-        <!-- <view class="jiebang">解绑</view> -->
       </view>
       <view class="noData" wx:if="{{detailsData.yijihuo.length === 0}}">暂无数据</view>
     </view>

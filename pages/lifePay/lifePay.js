@@ -12,8 +12,8 @@ Page({
     isShow: false,
     checkArr: [],
     totalNum: 0,
-    changeCellType: false,
     selectAll:false,
+    changeCellType: false,
     backType:true
   },
 
@@ -209,21 +209,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let t = this,
-      villageIdx = utils.getItem('villageIdx'),
-      villageList = utils.getItem('villageList')
-    if (villageIdx && villageIdx != 0) {
-      t.setData({
-        villageIdx,
-        villageList
-      })
-      t.orderList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier })
-    } else {
-      t.setData({
-        changeCellType: true
-      })
-    }
-
+    
   },
 
   /**
@@ -237,6 +223,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let t = this,
+    villageIdx = utils.getItem('villageIdx'),
+    villageList = utils.getItem('villageList')
+  if (villageIdx && villageIdx != 0) {
+    t.setData({
+      villageIdx,
+      villageList
+    })
+    t.orderList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier })
+  } else {
+    t.setData({
+      changeCellType: true
+    })
+  }
 
   },
 

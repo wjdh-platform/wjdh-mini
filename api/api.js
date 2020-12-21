@@ -130,6 +130,10 @@ export const jihuo = (params, cb) => {
 export const payList = (params, cb) => {
   request('api/v1/payments/list', params, cb, 'POST')
 }
+//账单详情
+export const orderDetail = (params, cb) => {
+  request('api/v1/order', params, cb, 'POST')
+}
 //获得省份
 export const getProvinces = (params, cb) => {
   request('api/v1/provinces', params, cb, 'POST')

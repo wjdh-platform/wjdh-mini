@@ -74,18 +74,26 @@ Page({
   },
 
   jobsPopupTab(){
-    console.log(11)
+    // console.log(11)
     this.setData({
       jobsPopup:true,
       bigJobsType:true,
       smallJobsType:false,
       jobsType:false,
+      'examineData.job':''
     })
   },
 
   bindHomeList(e) {
+    let val = e.detail.value,
+         t = this
     this.setData({
-      homeListIdx: e.detail.value
+      homeListIdx: val,
+      community_identifier:t.data.homeList[val].community_identifier,
+      building_number:t.data.homeList[val].building_number,
+      unit_number:t.data.homeList[val].unit_number,
+      floor_number:t.data.homeList[val].floor_number,
+      house_number:t.data.homeList[val].house_number
     })
   },
 
@@ -277,10 +285,12 @@ Page({
   //业主获取验证码
   obtainCodeYZ() {
     let that = this,
+    villageList = utils.getItem('villageList'),
+    villageIdx = utils.getItem('villageIdx'),
       data = that.data,
       phone = data.yezhuOldPhone,
       currentTime = data.currentTimeYZ,
-      villageName = data.villageList[data.villageIdx].community_name,
+      villageName = villageList[villageIdx].community_name,
       buildingName = data.buildingsList[data.buildingsIdx].building_name,
       unitsName = data.unitsList[data.unitsIdx].unit_name,
       floorName = data.floorList[data.floorIdx].floor_name,
@@ -659,7 +669,7 @@ Page({
   addImg(e) {
     var _this = this,
       data = _this.data
-    if (data.roomIdx == 0) {
+    if (data.roomIdx == 0&&data.homeListIdx ==0) {
       utils.showToast('请先选择要绑定的房子', 'none')
       return
     }
@@ -709,11 +719,11 @@ Page({
                   wx.uploadFile({
                     filePath: res.tempFilePath,
                     formData: {
-                      'community_identifier': villageList[villageIdx].community_identifier,
-                      'building_number': data.buildingsList[data.buildingsIdx].building_number,
-                      'unit_number': data.unitsList[data.unitsIdx].unit_number,
-                      'floor_number': data.floorList[data.floorIdx].floor_number,
-                      'house_number': data.roomList[data.roomIdx].house_number
+                      'community_identifier': data.community_identifier?data.community_identifier:villageList[villageIdx].community_identifier,
+                      'building_number': data.building_number?data.building_number:data.buildingsList[data.buildingsIdx].building_number,
+                      'unit_number': data.unit_number?data.unit_number:data.unitsList[data.unitsIdx].unit_number,
+                      'floor_number': data.floor_number?data.floor_number:data.floorList[data.floorIdx].floor_number,
+                      'house_number': data.house_number?data.house_number:data.roomList[data.roomIdx].house_number
                     },
                     name: 'file',
                     url: 'https://tc.mg.cool/api/v1/people/photo',
@@ -840,6 +850,13 @@ Page({
           job: val.job ? val.job : data.examineData.job,
           company: val.company ? val.company : data.examineData.job,
           house_id: data.roomIdx == 0 ? '' : data.roomList[data.roomIdx].id,
+          zzmm: dataList.zzmm[data.zzmmIdx].key,
+          tyjr: dataList.tyjr[data.twjrIdx].key,
+          dibao: dataList.dibao[data.sfdbIdx].key,
+          shangfang: dataList.shangfang[data.sfjlIdx].key,
+          house_id:data.homeList[data.homeListIdx].id,
+          choice:1,
+          role: dataList.role[data.shipIdx].key,
         }
         
       }
@@ -1116,11 +1133,18 @@ Page({
          if (dataList[idx].isShow) {
            t.packUp(dataList, idx);
          }
+         if(idx != t.data.idx){
+           t.setData({
+             smallJobsText:'',
+             jobsText:''
+           })
+         }
     t.setData({
       bigJobsText: t.data.bigJobsList[idx].industry_name,
       bigJobsType:false,
       smallJobsType:true,
-      bigJobsList:dataList
+      bigJobsList:dataList,
+      idx,
     })
     t.smallindustries({industry_id:id})
   },

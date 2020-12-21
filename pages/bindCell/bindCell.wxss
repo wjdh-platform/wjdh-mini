@@ -130,7 +130,7 @@ picker{
 }
 
 
-.verificationPhoto,.jobsPopup{
+.verificationPhoto,.jobsPopup,.verificationPhotoJ{
   position: fixed;
   left: 0;
   top: 0;
@@ -139,8 +139,11 @@ picker{
   z-index: 9;
   background: rgba(106,102,104,.6)
 }
-.jobsPopup{
+.verificationPhotoJ{
   top: 130rpx;
+}
+.jobsPopup{
+  top: 400rpx;
   background:#fff;
 }
 .jobsPopup .msgColumn{

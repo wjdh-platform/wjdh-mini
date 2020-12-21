@@ -29,6 +29,12 @@ Page({
     })
   },
 
+  repairList(){
+    wx.navigateTo({
+      url: '/pages/houseList/repairList/repairList',
+    })
+  },
+
   //点击房屋列表
   houseListO(e){
     wx.navigateTo({

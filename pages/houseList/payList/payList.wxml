@@ -13,7 +13,7 @@
     </view>
     <view class="lookMore" wx:if="{{!item.isShow}}" bindtap="orderListType" data-idx="{{index}}">点击查看订单列表</view>
     <view class="orderList" wx:else>
-      <view class="orderClo" wx:for="{{item.orders}}" wx:for-item="itemN">
+      <view class="orderClo" wx:for="{{item.orders}}" wx:for-item="itemN" bindtap="orderDetails" data-id="{{itemN.id}}">
         <view class="orderTitle">{{itemN.title}}</view>
         <view class="orderBtn">订单详情</view>
       </view>
