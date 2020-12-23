@@ -1,7 +1,7 @@
 /* pages/phoneCall/phoneCall.wxss */
 page{
   /* padding: 50rpx 0 0 35rpx; */
-  padding-top: 100rpx;
+  /* padding-top: 100rpx; */
 }
 .column image{
   width: 23rpx;
@@ -27,7 +27,7 @@ page{
   margin-left: 35rpx;
 }
 .column:nth-child(1),.column:nth-child(2){
-  margin-top: 50rpx;
+  margin-top: 20rpx;
 }
 .phoneText{
   display: inline-block;

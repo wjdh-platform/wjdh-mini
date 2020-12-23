@@ -1,5 +1,5 @@
 <!--pages/bindCell/bindCell.wxml-->
-<view class="bindCell">
+<view class="bindCell" style="padding-top:{{navH}}px">
   <change-cell changeCellType="{{changeCellType}}" 
   bindchangeClose="changeClose" bindchangePopupType="changePopupType" buildingsType="{{buildingsType}}"
   title="{{title}}" ></change-cell>
@@ -236,6 +236,12 @@
           value="{{bigJobsText?job:examineData.job}}" bindtap="jobsPopupTab" disabled="true"></input>
         
       </view>
+      <view class="msgColumn" wx:if="{{jobOther}}">
+        <view class="msgTitle"></view>
+        <input name="jobName" placeholder="请输入职业名称" class="inputText" placeholder-class="inputPlaceHolder"
+          value="{{examineData.job}}"></input>
+        
+      </view>
       <view class="verificationPhotoJ" wx:if="{{jobsPopup}}">
         <view class="jobsPopup">
         <view class="msgColumn">
@@ -246,7 +252,7 @@
         <view class="jobsList">
           <view class="jobsClo {{item.isShow?'active':''}}" wx:if="{{bigJobsType}}" wx:for="{{bigJobsList}}" bindtap="bigJobsTab" data-idx="{{index}}" data-id="{{item.industry_id}}">{{item.industry_name}}</view>
           <view class="jobsClo {{item.isShow?'active':''}}" wx:if="{{smallJobsType}}" wx:for="{{smallJobsList}}" bindtap="smallJobsTab" data-idx="{{index}}" data-id="{{item.small_industry_id}}">{{item.small_industry_name}}</view>
-          <view class="jobsClo {{item.isShow?'active':''}}" wx:if="{{jobsType}}" wx:for="{{jobsList}}" bindtap="jobsTab" data-idx="{{index}}">{{item.job_name}}</view>
+          <view class="jobsClo {{item.isShow?'active':''}}" wx:if="{{jobsType}}" wx:for="{{jobsList}}" bindtap="jobsTab" data-idx="{{index}}" data-name="{{item.job_name}}">{{item.job_name}}</view>
         </view>
       </view>
       </view>

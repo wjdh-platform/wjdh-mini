@@ -1,7 +1,7 @@
 /* pages/notice/notice.wxss */
 page{
   background: #e8e8e8;
-  padding-top: 110rpx;
+  /* padding-top: 110rpx; */
 }
 .column{
   margin-top: 20rpx;
@@ -9,6 +9,12 @@ page{
   background: #fff;
   width: 100%;
   box-sizing: border-box;
+}
+.noData{
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+  padding: 100rpx 0;
 }
 .title{
   font-size: 28rpx;

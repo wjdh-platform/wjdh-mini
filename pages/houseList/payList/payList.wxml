@@ -1,10 +1,11 @@
 <!--pages/houseList/payList/payList.wxml-->
-<view class="payList">
+<view class="payList" style="padding-top:{{navH}}px">
   <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType" title="{{title}}">
   </change-cell>
   <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
-  <view class="column" wx:for="{{payList}}">
-    <view class="title">账单一</view>
+  <view class="payListCont">
+    <view class="column" wx:for="{{payList}}">
+    <view class="title">{{item.payment_name}}</view>
     <view class="listDetail">
       <text>交易单号：{{item.payment_number}}</text>
       <text>商户单号：{{item.payment_shop_number}}</text>
@@ -19,4 +20,6 @@
       </view>
     </view>
   </view>
+  </view>
+  
 </view>

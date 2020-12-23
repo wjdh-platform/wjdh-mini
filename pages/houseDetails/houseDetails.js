@@ -27,6 +27,9 @@ Page({
     })
   },
 
+  bindCharge(){
+
+  },
   tabTap(e){
     var t = this;
     if( t.data.currentTab === e.target.dataset.current ) {
@@ -132,6 +135,49 @@ Page({
         })
       }
     })
+  },
+
+  charge(id,idx){
+    let t = this
+    api.charge({ id },(res)=>{
+      if(res.data.code == 0){
+        utils.showToast(res.data.msg,'none')
+        let charge = 'detailsData.yibangding['+idx+'].charge'
+        t.setData({
+          [charge]:res.data.data
+          
+        })
+      }
+    })
+  },
+
+  bindCharge(e){
+    let t = this,
+        id = e.currentTarget.dataset.id,
+        type = e.currentTarget.dataset.charge,
+        idx = e.currentTarget.dataset.idx
+        if(type == '授权支付'){
+          wx.showModal({
+            title: '点击确定，将授权该成员：',
+            content: '查看和缴纳该房屋的各项费用；',
+            success (res) {
+              if (res.confirm) {
+                t.charge(id,idx)
+              } 
+            }
+          })
+        }else if(type == '禁用支付'){
+          wx.showModal({
+            title: '点击确定，将失去授权该成员：',
+            content: '查看和缴纳该房屋的各项费用；',
+            success (res) {
+              if (res.confirm) {
+                t.charge(id,idx)
+              } 
+            }
+          })
+        }
+    
   },
 
   binding(e){

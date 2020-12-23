@@ -1,6 +1,6 @@
 /* pages/lifePay/lifePay.wxss */
 page{
-  padding-top: 130rpx;
+  /* padding-top: 130rpx; */
 }
 .changeCell{
   padding: 44rpx 0 40rpx;
@@ -107,7 +107,7 @@ page{
   border-bottom:10rpx solid #747474;
   margin-left: 5rpx;
 }
-.orderDClo{
+.orderDClo,.orderDCloO{
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -115,6 +115,16 @@ page{
   border-bottom: solid 1rpx #EFEFEF ;
   font-size: 26rpx;
   color: #A4A4A4;
+}
+.orderDCloO{
+  min-height: 74rpx;
+  height: auto;
+  line-height: 40rpx;
+  padding: 20rpx 0;
+  align-items: flex-start;
+}
+.orderDCloO .detailAdd{
+  width: 85%;
 }
 .detailAdd{
   color: #333;

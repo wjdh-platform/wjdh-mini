@@ -1,5 +1,5 @@
 <!--pages/proposal/proposal.wxml-->
-<view class="proposal">
+<view class="proposal" style="padding-top:{{navH}}px">
   <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType" title="{{title}}">
   </change-cell>
   <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>

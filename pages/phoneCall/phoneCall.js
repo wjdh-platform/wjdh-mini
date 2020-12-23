@@ -1,4 +1,7 @@
 // pages/phoneCall/phoneCall.js
+const app = getApp();
+import * as api from '../../api/api'
+import utils from '../../utils/util.js'
 Page({
 
   /**
@@ -75,7 +78,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      navH: app.globalData.navHeight
+    })
   },
 
   /**

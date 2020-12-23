@@ -1,10 +1,10 @@
 /* pages/houseList/payList/payList.wxss */
 page{
   background: #F7F9FA;
-  padding-top: 100rpx;
+  /* padding-top: 100rpx; */
 }
-.payList{
-  padding-top: 50rpx;
+.payListCont{
+  padding-top: 20rpx;
 }
 .column{
   margin: 0 auto 30rpx;
@@ -22,6 +22,9 @@ page{
   font-weight: bold;
   color: #333333;
   margin-bottom: 20rpx;
+  overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
 }
 .listDetail{
   border-bottom: solid 1rpx rgba(107,107,107,.4);

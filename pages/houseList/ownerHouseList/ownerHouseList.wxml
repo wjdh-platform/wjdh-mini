@@ -1,5 +1,5 @@
 
-<view class="listCont">
+<view class="listCont" style="padding-top:{{navH}}px">
   <change-cell changeCellType="{{changeCellType}}" 
   bindchangeClose="changeClose" bindchangePopupType="changePopupType" buildingsType="{{buildingsType}}"
   title="{{title}}" wx:if="{{false}}"></change-cell>

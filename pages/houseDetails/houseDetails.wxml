@@ -39,7 +39,12 @@
     <view class="memberList" wx:if="{{currentTab == 0}}">
       <view class="columnMe" wx:for="{{detailsData.yibangding}}" wx:if="{{detailsData.yibangding!=[]}}">
         <view class="name">{{item.name}}</view>
-        <view class="btnType {{item.shouquan == '邀请激活'?'yellow':item.shouquan == '授权管理'?'green':item.shouquan == '禁用管理'?'red':'default'}}" bindtap="binding" data-idx="{{index}}" data-id="{{item.id}}"   data-shouquan="{{item.shouquan}}">{{item.shouquan}}<button open-type="share" class="shareBtnO" wx:if="{{item.shouquan == '邀请激活'}}"></button></view> 
+        <view class="btnTypeI {{item.shouquan == '邀请激活'?'yellow':item.shouquan == '授权管理'?'green':item.shouquan == '禁用管理'?'red':'default'}}" bindtap="binding" data-idx="{{index}}" data-id="{{item.id}}"   data-shouquan="{{item.shouquan}}">{{item.shouquan}}
+          <button open-type="share" class="shareBtnO" wx:if="{{item.shouquan == '邀请激活'}}"></button>
+        </view> 
+        <view class="btnType {{item.charge == '授权支付'?'green':'red'}}" wx:if="{{item.charge}}" bindtap="bindCharge" data-idx="{{index}}" data-id="{{item.id}}"   data-charge="{{item.charge}}">{{item.charge}}
+          <!-- <button open-type="share" class="shareBtnO" wx:if="{{item.shouquan == '邀请激活'}}"></button> -->
+        </view>
         
       </view>
       <view class="noData"  wx:if="{{detailsData.yibangding.length === 0}}">暂无数据</view>

@@ -1,14 +1,16 @@
 <!--pages/notice/notice.wxml-->
-<view class="notice">
+<view class="notice" style="padding-top:{{navH}}px">
   <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType" title="{{title}}">
   </change-cell>
   <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
-  <view class="column" wx:for="{{list}}" data-idx="{{index}}" bindtap="bindList">
+  <block wx:if="{{noticeList.length>0}}">
+  <view class="column" wx:for="{{noticeList}}" data-id="{{item.announcement_id}}" bindtap="bindList">
     <view class="title">{{item.title}}</view>
     <view class="introduction">
-      <view class="name">{{item.wyName}}</view>
-      <view class="time">{{item.time}}</view>
+      <view class="name">{{item.manager}}</view>
+      <view class="time">{{item.date}}</view>
     </view>
   </view>
- 
+</block>
+<view wx:else class="noData">暂无数据</view>
 </view>

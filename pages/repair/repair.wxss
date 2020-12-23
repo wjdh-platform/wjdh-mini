@@ -1,6 +1,6 @@
 /* pages/guarantee/guarantee.wxss */
 page{
-  padding-top: 130rpx;
+  /* padding-top: 130rpx; */
 }
 .column{
   padding: 44rpx 0 20rpx;

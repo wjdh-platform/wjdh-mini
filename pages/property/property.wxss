@@ -1,6 +1,6 @@
 /* pages/property/property.wxss */
 page{
-  padding-top: 130rpx;
+  /* padding-top: 130rpx; */
 }
 .banner{
   width: 690rpx;

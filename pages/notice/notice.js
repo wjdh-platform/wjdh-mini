@@ -1,4 +1,7 @@
 // pages/notice/notice.js
+const app = getApp();
+import * as api from '../../api/api'
+import utils from '../../utils/util.js'
 Page({
 
   /**
@@ -31,11 +34,17 @@ Page({
   
 
   changeClose(res){
-    console.log(res)
-    this.setData({
+    let t = this,
+      villageList = utils.getItem('villageList'),
+      villageIdx = utils.getItem('villageIdx')
+    t.setData({
       changeCellType:res.detail.changeCellType,
       title:res.detail.community_name
     })
+    if(villageIdx&&villageIdx!=0){
+      t.getNoticeList({ community_identifier: villageList[villageIdx].community_identifier })
+    }
+
   },
   changePopupType(res){
     this.setData({
@@ -44,10 +53,21 @@ Page({
   },
 
   bindList(e){
-    console.log(e)
-    let idx = e.currentTarget.dataset.idx
+    let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/notice/details/details?idx='+idx,
+      url: '/pages/notice/details/details?id='+id,
+    })
+  },
+
+  getNoticeList(param){
+    api.noticeList(param,(res)=>{
+      let data = res.data
+      console.log(data.data)
+      if(data.code == 0){
+        this.setData({
+          noticeList:data.data.data
+        })
+      }
     })
   },
 
@@ -55,7 +75,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let t = this,
+    villageIdx = utils.getItem('villageIdx'),
+    villageList = utils.getItem('villageList')
+    t.setData({
+      navH: app.globalData.navHeight
+    })
+  if (villageIdx && villageIdx != 0) {
+    t.setData({
+      villageIdx,
+      villageList
+    })
+    t.getNoticeList({ community_identifier: villageList[villageIdx].community_identifier })
+  } else {
+    t.setData({
+      changeCellType: true
+    })
+  }
   },
 
   /**

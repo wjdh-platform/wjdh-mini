@@ -29,7 +29,7 @@
       <view class="titleS">缴费金额</view>
       <view class="titleIntro">{{orderDetail.amount}}</view>
     </view>
-    <view class="detailsCont">
+    <view class="detailsContO">
       <view class="titleS">订单备注</view>
       <view class="titleIntro">{{orderDetail.remark}}</view>
     </view>

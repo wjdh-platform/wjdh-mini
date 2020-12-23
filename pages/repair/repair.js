@@ -75,6 +75,9 @@ Page({
    */
   onLoad: function (options) {
     // this.getVillage()
+    this.setData({
+      navH: app.globalData.navHeight
+    })
   },
 
   /**

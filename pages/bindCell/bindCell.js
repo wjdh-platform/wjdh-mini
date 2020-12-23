@@ -70,7 +70,8 @@ Page({
     bigJobsType:true,
     smallJobsType:false,
     jobsType:false,
-    jobsPopup:false
+    jobsPopup:false,
+    jobOther:false
   },
 
   jobsPopupTab(){
@@ -153,6 +154,18 @@ Page({
   bindShip(e) {
     let t = this
     console.log(e.detail.value)
+    if(t.data.pageEntry == 'family'){
+      t.setData({
+        ownerType: false,
+        inputDisable: false,
+        bindPeo: true,
+        examineData: {},
+        'examineData.photo': '',
+        inputDisable: false,
+        shipIdx: e.detail.value
+      })
+      return
+    }
     if (e.detail.value != "1") {//除业主外
       t.setData({
         ownerType: false,
@@ -609,12 +622,13 @@ Page({
     let t = this
     api.bellInitialize({}, (res) => {
       if (res.data.code == 0) {
-        // if(!t.data.pageType){
-        //   let arr = res.data.data.role,
-        //        arrChange=arr.shift()
-        // }
+        
         let rolesOld = res.data.data.role,
-          role = []
+          role = [],
+          arrChange
+          if(t.data.pageEntry == 'family'){
+                 arrChange=rolesOld.shift()
+          }
         role = rolesOld.unshift({ key: '请选择', value: '请选择' })
         t.setData({
           dataList: res.data.data,
@@ -779,12 +793,12 @@ Page({
     if (e.detail.value == "1") {
       t.setData({
         shipType: true,
-        // ownerType:true
+        ownerType:false
       })
     } else {
       t.setData({
         shipType: false,
-        // ownerType:true,
+        ownerType:true,
         pageType: false,
         bindPeo: false,
         inputDisable: true
@@ -829,12 +843,16 @@ Page({
           return
         }
       }
+      if(data.jobOther == true&&val.jobName == ''){
+        utils.showToast('请输入职业', 'none')
+        return
+      }
       if (!(reg.test(val.phone))) {
         utils.showToast('请输入正确的联系电话', 'none')
         return
       }
       else if (val.job == '') {
-        utils.showToast('请输入职业', 'none')
+        utils.showToast('请选择职业', 'none')
         return
       } else if (val.company == '') {
         utils.showToast('请输入工作单位', 'none')
@@ -847,7 +865,7 @@ Page({
           idcard: data.idcardData ? data.idcardData.idcard : val.IDNumber ? val.IDNumber : data.examineData.idcard,
           name: data.idcardData ? data.idcardData.name : val.userName ? val.userName : data.examineData.name,
           photo: data.photoUrl ? data.photoUrl : data.examineData.photo,
-          job: val.job ? val.job : data.examineData.job,
+          job: val.jobName&&val.jobName !=''?val.jobName:val.job ? val.job : data.examineData.job,
           company: val.company ? val.company : data.examineData.job,
           house_id: data.roomIdx == 0 ? '' : data.roomList[data.roomIdx].id,
           zzmm: dataList.zzmm[data.zzmmIdx].key,
@@ -922,6 +940,10 @@ Page({
           return
         }
       }
+      if(data.jobOther == true&&val.jobName == ''){
+        utils.showToast('请输入职业', 'none')
+        return
+      }
       if (val.address == '') {
         utils.showToast('请输入户籍地址', 'none')
         return
@@ -941,7 +963,7 @@ Page({
         utils.showToast('请输入生日', 'none')
         return
       } else if (val.job == '') {
-        utils.showToast('请输入职业', 'none')
+        utils.showToast('请选择职业', 'none')
         return
       } else if (val.company == '') {
         utils.showToast('请输入工作单位', 'none')
@@ -963,7 +985,7 @@ Page({
           tyjr: dataList.tyjr[data.twjrIdx].key,
           dibao: dataList.dibao[data.sfdbIdx].key,
           shangfang: dataList.shangfang[data.sfjlIdx].key,
-          job: val.job ? val.job : data.examineData.job,
+          job: val.jobName&&val.jobName !=''?val.jobName:val.job ? val.job : data.examineData.job,
           company: val.company ? val.company : data.examineData.job,
           house_id: data.roomIdx == 0 ? '' : data.roomList[data.roomIdx].id,
           role: dataList.role[data.shipIdx].key,
@@ -1174,7 +1196,20 @@ Page({
     console.log(e)
     let t = this,
          idx = e.currentTarget.dataset.idx,
-         id = e.currentTarget.dataset.id
+         id = e.currentTarget.dataset.id,
+         jobName = e.currentTarget.dataset.name
+         console.log(jobName)
+         if(jobName == '其他职位'){
+          //  utils.setItem('jobOther',true)
+           t.setData({
+            jobOther:true
+           })
+         }else{
+          // utils.setItem('jobOther',false)
+          t.setData({
+            jobOther:false
+           })
+         }
     t.setData({
       jobsText: t.data.jobsList[idx].job_name,
       jobsPopup:false,
@@ -1192,9 +1227,14 @@ Page({
       arr = [],
       villageList = utils.getItem('villageList'),
       villageIdx = utils.getItem('villageIdx')
+      // jobOther = utils.getItem('jobOther')
+      t.setData({
+        navH: app.globalData.navHeight,
+        // jobOther
+      })
     t.bellInitialize();
     t.getIndustries()
-    if (examineData) {
+    if (examineData&&examineData.length>0) {
       if (arr.includes('NewMember')) {
         t.setData({
           popupType: false
@@ -1206,6 +1246,9 @@ Page({
       })
     }
     if (options.type == 'family') {
+      t.setData({
+        examineData:''
+      })
     if(villageIdx&&villageIdx!=0){
         t.setData({
           cellDetail: false,

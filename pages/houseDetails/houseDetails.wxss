@@ -174,7 +174,7 @@ page{
   bottom: 0;
   right: 0;
 }
-.btnType{
+.btnType,.btnTypeI{
   position: relative;
   width: 125rpx;
     height: 45rpx;
@@ -183,4 +183,7 @@ page{
     margin-top: 20rpx;
     border-radius: 10rpx;
 
+}
+.btnTypeI{
+  margin-left: 280rpx;
 }

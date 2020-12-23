@@ -131,6 +131,9 @@ Page({
    */
   onLoad: function (options) {
     // this.init()
+    this.setData({
+      navH: app.globalData.navHeight
+    })
   },
 
   /**

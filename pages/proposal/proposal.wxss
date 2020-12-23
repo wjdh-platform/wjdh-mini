@@ -1,6 +1,6 @@
 /* pages/proposal/proposal.wxss */
 page{
-  padding-top: 130rpx;
+  /* padding-top: 130rpx; */
 }
 .column{
   padding: 0 0 40rpx;

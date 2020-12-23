@@ -166,6 +166,18 @@ export const smallindustries = (params, cb) => {
 export const jobs = (params, cb) => {
   request('api/v1/jobs', params, cb, 'POST')
 }
+//公告列表
+export const noticeList = (params, cb) => {
+  request('api/v1/announcements/list', params, cb, 'POST')
+}
+//公告详情
+export const noticeDetails = (params, cb) => {
+  request('api/v1/announcement', params, cb, 'POST')
+}
+//禁用授权支付
+export const charge = (params, cb) => {
+  request('api/v1/house/charge', params, cb, 'PUT')
+}
 
 
 

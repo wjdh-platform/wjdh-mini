@@ -67,7 +67,7 @@
 
 .navBar .return {
   /* margin-left: 30rpx; */
-  /* width: 30%; */
+  width: 30%;
   position: relative;
   text-align: center;
   display: inline-block;

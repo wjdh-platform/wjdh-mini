@@ -1,7 +1,6 @@
 /* pages/bindCell/bindCell.wxss */
 page{
   background: #F8F8F8;
-  padding-top: 110rpx;
 }
 .bindCell{
   padding-bottom: 60rpx;
