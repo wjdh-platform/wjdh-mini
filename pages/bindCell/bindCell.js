@@ -900,12 +900,8 @@ Page({
       }
 
       if (data.verificationPhoneVal == '验证手机号' && data.yezhuOldPhone != '') {
-        // if (val.codeValYZ == '') {
         utils.showToast('请输入业主手机验证码', 'none')
         return
-        // }else{
-
-        // }
       } else {
         if (val.radio == '') {
           utils.showToast('请选择与业主绑定或替换原业主', 'none')

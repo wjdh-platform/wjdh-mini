@@ -77,7 +77,7 @@
             <view class="detailTitle">{{key}}</view>
             <view class="detailAdd">{{itemName}}</view>
           </view>
-          <view class="orderDClo">
+          <view class="orderDCloO">
             <view class="detailTitle">备注</view>
             <view class="detailAdd">{{item.remark}}</view>
           </view>

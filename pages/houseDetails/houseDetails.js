@@ -269,7 +269,7 @@ Page({
     return {
       title: '邀请您加入'+this.data.detailsData.introduction,
       path: '/pages/property/property?type=houseDetails',
-      imageUrl:'/static/image/shareImg.jpeg'
+      imageUrl:'/static/image/shareImgO.jpeg'
     }
   }
 })

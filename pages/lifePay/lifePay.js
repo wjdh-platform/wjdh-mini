@@ -170,11 +170,13 @@ Page({
   },
 
   tabTap(e) {
-    var t = this;
+    var t = this,
+    villageIdx = utils.getItem('villageIdx'),
+    villageList = utils.getItem('villageList')
     if (e.target.dataset.current == 0) {
-      t.orderList({ paied: 0, community_identifier: t.data.villageList[t.data.villageIdx].community_identifier })
+      t.orderList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier })
     } else {
-      t.orderList({ paied: 1, community_identifier: t.data.villageList[t.data.villageIdx].community_identifier })
+      t.orderList({ paied: 1, community_identifier: villageList[villageIdx].community_identifier })
     }
     if (t.data.currentTab === e.target.dataset.current) {
       return false;
@@ -228,6 +230,10 @@ Page({
     let t = this,
     villageIdx = utils.getItem('villageIdx'),
     villageList = utils.getItem('villageList')
+    t.setData({
+      totalNum:0,
+      selectAll:false
+    })
   if (villageIdx && villageIdx != 0) {
     t.setData({
       villageIdx,

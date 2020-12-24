@@ -90,7 +90,7 @@ Page({
     return {
       title: '点击获得晨曦家园访客二维码',
       path: '/pages/visitor/visitor?share=share',
-      imageUrl:'/static/image/shareImg.jpeg'
+      imageUrl:'/static/image/shareImgO.jpeg'
     }
 
   }
