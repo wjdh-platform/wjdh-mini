@@ -2,6 +2,7 @@
 <view>
   <view class="changeCellPopup" wx:if="{{changeCellType}}">
     <view class="changeCont">
+      <view class="closePopup" bindtap="closePopup"></view>
       <view class="popupTitle">切换小区</view>
       <picker bindchange="bindProvincesList" value="{{provincesIdx}}" range="{{provincesData}}" range-key="province_name">
         <view class="changePicker">

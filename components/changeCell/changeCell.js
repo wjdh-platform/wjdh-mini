@@ -37,7 +37,6 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
     bindvillageList(e) {
       let t = this,
         villageIdx = utils.getItem('villageIdx')
@@ -55,7 +54,7 @@ Component({
       utils.setItem('villageIdx', e.detail.value)
     },
     closePopup() {
-      this.triggerEvent('changeClose', false)
+      this.triggerEvent('closeBtn', false)
     },
     changePopupType() {
       this.triggerEvent('changePopupType', true)

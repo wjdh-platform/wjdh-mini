@@ -31,6 +31,11 @@ Page({
       changeCellType: res.detail
     })
   },
+  closeBtn(res) {
+    this.setData({
+      changeCellType: res.detail
+    })
+  },
 
   bindAddress(e) {
     this.setData({
@@ -44,7 +49,9 @@ Page({
       val = e.detail.value,
       villageList = utils.getItem('villageList'),
       villageIdx = utils.getItem('villageIdx')
-    if (val.repairName == '') {
+      if(!villageIdx&&villageIdx==0){
+        utils.showToast('请点击切换小区按钮选择报修的小区', 'none')
+      }else if (val.repairName == '') {
       utils.showToast('请填写报修项目', 'none')
     } else if (val.repairIntro == '') {
       utils.showToast('请填写报修说明', 'none')

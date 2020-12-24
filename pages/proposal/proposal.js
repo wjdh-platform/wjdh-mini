@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    proposalList:[
+    proposalList: [
       '请选择',
       '环境卫生',
       '物业服务',
@@ -16,45 +16,80 @@ Page({
       '合理化建议',
       '其它'
     ],
-    proposalIdx:0,
-    popupType:true,
-    changeCellType:false,
-    title:'',
-    backType:true
+    proposalIdx: 0,
+    popupType: true,
+    changeCellType: false,
+    title: '',
+    backType: true
   },
 
-  changeClose(res){
+  changeClose(res) {
     console.log(res)
     this.setData({
-      changeCellType:res.detail.changeCellType,
-      title:res.detail.community_name
+      changeCellType: res.detail.changeCellType,
+      title: res.detail.community_name
     })
   },
-  changePopupType(res){
+  changePopupType(res) {
     this.setData({
-      changeCellType:res.detail
+      changeCellType: res.detail
     })
   },
+  closeBtn(res) {
+    this.setData({
+      changeCellType: res.detail
+    })
+  },
+  bindType(e) {
+    this.setData({
+      proposalIdx: e.detail.value
+    })
 
-  bindType(e){
-    this.setData({
-      proposalIdx:e.detail.value
-    })
-    
-  }, 
-  propasalSub(e){
-    let t = this
-    if(t.data.proposalIdx ==0){
-      utils.showToast('请选择问题分类','none')
-    }else if(e.detail.value.repairIntro == ''){
-      utils.showToast('请填写详细说明','none')
-    }else{
-      t.setData({
-        popupType:false
+  },
+  propasalSub(e) {
+    let t = this,
+      val = e.detail.value,
+      villageList = utils.getItem('villageList'),
+      villageIdx = utils.getItem('villageIdx')
+    if (!villageIdx && villageIdx == 0) {
+      utils.showToast('请点击切换小区按钮选择报修的小区', 'none')
+    } else if (t.data.proposalIdx == 0) {
+      utils.showToast('请选择问题分类', 'none')
+    } else if (val.repairIntro == '') {
+      utils.showToast('请填写详细说明', 'none')
+    } else {
+      let param = {
+        suggestion_category_id: t.data.proposalInit[t.data.proposalIdx].id,
+        content: val.repairIntro,
+        community_identifier: villageList[villageIdx].community_identifier,
+      }
+      api.proposalSub(param, (res) => {
+        let data = res.data
+        if (data.code == 0) {
+          t.setData({
+            popupType: false
+          })
+        }
       })
+
+      
     }
   },
 
+  proposalInitial() {
+    api.proposalInitial({}, (res) => {
+      let data = res.data,
+        oldList = data.data,
+        list = []
+      if (data.code == 0) {
+        list = oldList.unshift({ suggestion_category_name: '请选择' })
+        this.setData({
+          proposalInit: oldList
+        })
+
+      }
+    })
+  },
 
 
   /**
@@ -64,6 +99,7 @@ Page({
     this.setData({
       navH: app.globalData.navHeight
     })
+    this.proposalInitial()
   },
 
   /**

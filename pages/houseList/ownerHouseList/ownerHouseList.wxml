@@ -2,7 +2,7 @@
 <view class="listCont" style="padding-top:{{navH}}px">
   <change-cell changeCellType="{{changeCellType}}" 
   bindchangeClose="changeClose" bindchangePopupType="changePopupType" buildingsType="{{buildingsType}}"
-  title="{{title}}" wx:if="{{false}}"></change-cell>
+  title="{{title}}" wx:if="{{false}}" bindcloseBtn="closeBtn"></change-cell>
   <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
   <view class="list" wx:if="{{listType}}">
   <view class="listColumn" bindtap="bindListDetail" wx:for="{{houseList}}" data-houseId="{{item.house_id}}" data-shenheId="{{item.shenhe_id}}" data-role="{{item.role}}">

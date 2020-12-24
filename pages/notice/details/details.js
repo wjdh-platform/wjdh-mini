@@ -47,6 +47,13 @@ Page({
     })
   },
 
+  previewImage(){
+    wx.previewImage({
+      current:this.data.noticeDetails.images[0], 
+      urls: this.data.noticeDetails.images
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

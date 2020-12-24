@@ -1,5 +1,5 @@
 <view class="propertyMain" style="padding-top:{{navH}}px">
-  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType" title="{{title}}">
+  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType" title="{{title}}" bindcloseBtn="closeBtn">
   </change-cell>
   <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
   <view class="activationP" wx:if="{{popupTips}}">

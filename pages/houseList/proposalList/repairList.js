@@ -40,26 +40,28 @@ Page({
       changeCellType: res.detail
     })
   },
+  closeBtn(res) {
+    this.setData({
+      changeCellType: res.detail
+    })
+  },
 
-  getRepairList(param){
-    api.getRepairList(param,(res)=>{
+  proposalList(param){
+    api.proposalList(param,(res)=>{
       let data = res.data,
           repairList = data.data,
-          
           notArr = [],
           yesArr = []
       if(data.code == 0){
         notArr = repairList.filter((item)=>{
-          return item.status == '未解决'
+          return item.status == '未查阅'
         })
         yesArr = repairList.filter((item)=>{
-          return item.status == '已解决'
+          return item.status == '已采纳'
         })
-        console.log(notArr)
-        console.log(yesArr)
         this.setData({
-          repairListNot: notArr,
-          repairListYes:yesArr
+          repairListNot: yesArr,
+          repairListYes:notArr
         })
       }
     })
@@ -80,7 +82,7 @@ Page({
           villageIdx,
           villageList
         })
-        t.getRepairList({community_identifier: villageList[villageIdx].community_identifier })
+        t.proposalList({community_identifier: villageList[villageIdx].community_identifier })
       } else {
         t.setData({
           changeCellType: true

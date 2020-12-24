@@ -1,7 +1,7 @@
 <!--pages/houseList/repairList/repairList.wxml-->
 <view class="repairList" style="padding-top:{{navH}}px">
   <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType"
-    title="{{title}}">
+    title="{{title}}" bindcloseBtn="closeBtn">
   </change-cell>
   <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
   <view class="tabCont">
@@ -14,6 +14,11 @@
       <view class="title">{{item.possion}}</view>
       <view class="description">{{item.description}}</view>
       <view class="time">{{item.created_at}}</view>
+      <view class="reply">
+        <view class="replyTitle">物业回复：</view>
+        <view class="replyCont">{{item.reply}}</view>
+        
+      </view>
     </view>
   </view>
     <view wx:if="{{repairListYes.length==0}}" class="noData">暂无数据</view>

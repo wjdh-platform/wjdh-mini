@@ -40,6 +40,11 @@ Page({
       changeCellType: res.detail
     })
   },
+  closeBtn(res) {
+    this.setData({
+      changeCellType: res.detail
+    })
+  },
 
   getRepairList(param){
     api.getRepairList(param,(res)=>{

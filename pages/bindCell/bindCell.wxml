@@ -2,7 +2,7 @@
 <view class="bindCell" style="padding-top:{{navH}}px">
   <change-cell changeCellType="{{changeCellType}}" 
   bindchangeClose="changeClose" bindchangePopupType="changePopupType" buildingsType="{{buildingsType}}"
-  title="{{title}}" ></change-cell>
+  title="{{title}}" bindcloseBtn="closeBtn"></change-cell>
   <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
   <!-- 校验手机号 -->
   <view class="verificationPhoto" wx:if="{{popupType}}">

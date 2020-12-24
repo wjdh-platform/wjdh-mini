@@ -178,6 +178,18 @@ export const noticeDetails = (params, cb) => {
 export const charge = (params, cb) => {
   request('api/v1/house/charge', params, cb, 'PUT')
 }
+//投诉建议初始化
+export const proposalInitial = (params, cb) => {
+  request('api/v1/suggestion/initial', params, cb, 'POST')
+}
+//提交投诉与建议
+export const proposalSub = (params, cb) => {
+  request('api/v1/suggestion/new', params, cb, 'POST')
+}
+//投诉建议列表
+export const proposalList = (params, cb) => {
+  request('api/v1/suggestions/list', params, cb, 'POST')
+}
 
 
 

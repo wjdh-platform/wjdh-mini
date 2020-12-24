@@ -51,6 +51,11 @@ Page({
       changeCellType:res.detail
     })
   },
+  closeBtn(res) {
+    this.setData({
+      changeCellType: res.detail
+    })
+  },
 
   bindList(e){
     let id = e.currentTarget.dataset.id

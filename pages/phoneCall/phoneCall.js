@@ -67,6 +67,11 @@ Page({
       changeCellType:res.detail
     })
   },
+  closeBtn(res) {
+    this.setData({
+      changeCellType: res.detail
+    })
+  },
 
   callNum(e){
     wx.makePhoneCall({

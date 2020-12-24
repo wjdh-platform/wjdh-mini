@@ -177,6 +177,12 @@
         {
           "name": "订单详情",
           "pathName": "pages/houseList/payList/details/details",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "投诉建议列表",
+          "pathName": "pages/houseList/proposalList/repairList",
           "scene": null
         }
       ]

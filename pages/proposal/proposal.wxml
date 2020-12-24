@@ -1,14 +1,14 @@
 <!--pages/proposal/proposal.wxml-->
 <view class="proposal" style="padding-top:{{navH}}px">
-  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType" title="{{title}}">
+  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType" title="{{title}}" bindcloseBtn="closeBtn">
   </change-cell>
   <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
   <view wx:if="{{popupType}}">
   <form bindsubmit="propasalSub">
   <view class="column">
       <view class="titleC">问题分类*</view>
-      <picker bindchange="bindType" value="{{proposalIdx}}" range="{{proposalList}}">
-        <view class="address">{{proposalList[proposalIdx]}}</view>
+      <picker bindchange="bindType" value="{{proposalIdx}}" range="{{proposalInit}}" range-key="suggestion_category_name">
+        <view class="address">{{proposalInit[proposalIdx].suggestion_category_name}}</view>
       </picker>
       <image class="arrow" src="./../../static/image/arrow.png"></image>
     </view>

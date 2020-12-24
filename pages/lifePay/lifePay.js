@@ -33,6 +33,11 @@ Page({
       changeCellType: res.detail
     })
   },
+  closeBtn(res) {
+    this.setData({
+      changeCellType: res.detail
+    })
+  },
 
   checkBox(e) {
     let idx = e.currentTarget.dataset.idx,

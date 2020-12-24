@@ -99,10 +99,11 @@ Page({
   },
 
   changeClose(res) {
+    console.log(res)
     let t = this,
       villageList = utils.getItem('villageList'),
       villageIdx = utils.getItem('villageIdx')
-    this.setData({
+    t.setData({
       changeCellType:res.detail.changeCellType,
       title:res.detail.community_name,
     })
@@ -120,8 +121,11 @@ Page({
       changeCellType: res.detail
     })
   },
-
-
+  closeBtn(res) {
+    this.setData({
+      changeCellType: res.detail
+    })
+  },
 
   bindlistPeople(e) {
     let t = this

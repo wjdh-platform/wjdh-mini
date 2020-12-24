@@ -29,6 +29,11 @@ Page({
       changeCellType:res.detail
     })
   },
+  closeBtn(res) {
+    this.setData({
+      changeCellType: res.detail
+    })
+  },
 
   // changeClose(res){
   //   console.log(res)

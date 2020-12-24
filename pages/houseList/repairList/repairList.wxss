@@ -65,3 +65,21 @@ page{
   font-size: 24rpx;
   color: #ABABAB;
 }
+.reply {
+  border-top: 2rpx solid #F2F2F2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 15rpx;
+  padding-top: 16rpx;
+}
+
+.replyTitle {
+  font-size: 26rpx;
+  color: #50DABE;
+}
+.replyCont {
+  width: 500rpx;
+  font-size: 26rpx;
+  color: #A1A1A1;
+}

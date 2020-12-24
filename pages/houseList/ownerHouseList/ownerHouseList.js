@@ -29,6 +29,11 @@ Page({
       changeCellType:res.detail
     })
   },
+  closeBtn(res) {
+    this.setData({
+      changeCellType: res.detail
+    })
+  },
 
   bindListDetail(e){
     console.log(e.currentTarget.dataset)

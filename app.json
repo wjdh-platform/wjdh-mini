@@ -17,6 +17,7 @@
     "pages/houseList/payList/payList",
     "pages/demo/demo",
     "pages/houseList/repairList/repairList",
+    "pages/houseList/proposalList/repairList",
     "pages/houseList/payList/details/details"
   ],
   "window": {

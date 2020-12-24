@@ -68,6 +68,11 @@ Page({
       changeCellType: res.detail
     })
   },
+  closeBtn(res) {
+    this.setData({
+      changeCellType: res.detail
+    })
+  },
   closePopupTips() {
     this.setData({
       popupTips: false
@@ -120,7 +125,7 @@ Page({
           t.setData({
             activationType: false,
           })
-          wx.redirectTo({
+          wx.navigateTo({
             url: '/pages/houseList/ownerHouseList/ownerHouseList',
           })
         } else if (res.data.code == 1) {
