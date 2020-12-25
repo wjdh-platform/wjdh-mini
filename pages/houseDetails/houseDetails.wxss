@@ -40,10 +40,19 @@ page{
   border-bottom: solid 1rpx #E8E8E8;
   padding: 0 0 0 30rpx;
   box-sizing: border-box;
-  height: 90rpx;
-  line-height: 90rpx;
+  min-height: 90rpx;
+  /* line-height: 90rpx; */
   font-size: 26rpx;
   color: #424242;
+}
+.item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.itemText{
+  width: 77%;
+  text-align: left;
 }
 .column .item:last-child{
   border: none;

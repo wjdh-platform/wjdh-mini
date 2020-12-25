@@ -12,19 +12,20 @@ Page({
     isShow: false,
     checkArr: [],
     totalNum: 0,
-    selectAll:false,
+    selectAll: false,
     changeCellType: false,
-    backType:true
+    backType: true,
+    idxArray: []
   },
 
   changeClose(res) {
     console.log(res)
     let t = this,
-    villageList = utils.getItem('villageList'),
-    villageIdx = utils.getItem('villageIdx')
+      villageList = utils.getItem('villageList'),
+      villageIdx = utils.getItem('villageIdx')
     t.setData({
-      changeCellType:res.detail.changeCellType,
-      title:res.detail.community_name
+      changeCellType: res.detail.changeCellType,
+      title: res.detail.community_name
     })
     t.orderList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier })
   },
@@ -46,7 +47,23 @@ Page({
       check = e.currentTarget.dataset.check,
       t = this,
       money = Number(e.currentTarget.dataset.money),
-      arr = t.data.checkArr.push(id)
+      arr = t.data.checkArr.push(id),
+      idxArr = []
+    console.log(idx)
+    // if (t.data.idxArray.includes(idx)) {
+    //   for (var i = 0; i < t.data.idxArray.length; i++) {
+    //     t.data.idxArray.splice(i, 1);
+    //     // i--;//i需要自减，否则每次删除都会讲原数组索引发生变化
+    //   }
+    //   t.setData({
+    //     idxArray:t.data.idxArray
+    //   })
+    // } else {
+    //   idxArr = t.data.idxArray.push(idx)
+    //   t.setData({
+    //     idxArray:t.data.idxArray
+    //   })
+    // }
 
     if (check) {
       for (var i = 0; i < t.data.checkArr.length; i++) {
@@ -58,7 +75,7 @@ Page({
       t.setData({
         checkArr: t.data.checkArr,
         totalNum: t.data.totalNum - money,
-        selectAll:false
+        selectAll: false
       })
     } else {
       t.setData({
@@ -68,42 +85,43 @@ Page({
       })
     }
     t.setData({
-      [checkedType]: !t.data.orderList[idx].checked
+      [checkedType]: !t.data.orderList[idx].checked,
+      idxArray: t.data.idxArray
     })
-    if(t.data.orderList.length == t.data.checkArr.length){
+    if (t.data.orderList.length == t.data.checkArr.length) {
       t.setData({
-        selectAll:true
+        selectAll: true
       })
     }
   },
 
-  selectAll(){
+  selectAll() {
     let t = this,
-        totalNum = 0,
-        orderList = t.data.orderList,
-        moneyArr = [],
-        checkArr=[]
+      totalNum = 0,
+      orderList = t.data.orderList,
+      moneyArr = [],
+      checkArr = []
     t.setData({
-      selectAll:!t.data.selectAll
+      selectAll: !t.data.selectAll
     })
-    if(!t.data.selectAll){
-      orderList.forEach((item)=>{
+    if (!t.data.selectAll) {
+      orderList.forEach((item) => {
         item.checked = false
       })
       totalNum = 0,
-      checkArr = []
-    }else{
-      orderList.forEach((item)=>{
+        checkArr = []
+    } else {
+      orderList.forEach((item) => {
         item.checked = true
         moneyArr.push(item.amount)
         checkArr.push(item.id)
       })
-      totalNum = moneyArr.reduce((a=0,i)=>{
-        return Number(a)+Number(i)
+      totalNum = moneyArr.reduce((a = 0, i) => {
+        return Number(a) + Number(i)
       })
       console.log(totalNum)
     }
-    
+
     t.setData({
       orderList,
       totalNum,
@@ -119,9 +137,9 @@ Page({
   },
 
   payment() {
-    if(this.data.checkArr.length<1){
-      utils.showToast('请选择要缴费项目','none')
-    }else{
+    if (this.data.checkArr.length < 1) {
+      utils.showToast('请选择要缴费项目', 'none')
+    } else {
       api.payment({
         ids: this.data.checkArr.join('A')
       }, (res) => {
@@ -145,7 +163,7 @@ Page({
         })
       })
     }
-    
+
   },
 
 
@@ -153,22 +171,28 @@ Page({
     api.orderList(param, (res) => {
       if (res.data.code == 0) {
         let dataArr = res.data.data
-        if(dataArr == []){
+        if (dataArr == []) {
           this.setData({
             orderList: []
           })
-        }else{
+        } else {
+
           dataArr.forEach(item => {
             item.isShow = false;
             item.checked = false;
             item.extra = JSON.parse(item.extra)
           })
-  
+          // if (this.data.idxArray.length > 0) {
+          //   for (let i = 0; i < this.data.idxArray.length; i++) {
+          //     dataArr[i].checked = true
+          //   }
+          // }
+
           this.setData({
             orderList: dataArr
           })
         }
-        
+
       }
 
     })
@@ -176,9 +200,17 @@ Page({
 
   tabTap(e) {
     var t = this,
-    villageIdx = utils.getItem('villageIdx'),
-    villageList = utils.getItem('villageList')
+      idx = e.currentTarget.dataset.idx,
+      villageIdx = utils.getItem('villageIdx'),
+      villageList = utils.getItem('villageList')
+    console.log(idx)
     if (e.target.dataset.current == 0) {
+      t.setData({
+        totalNum:0,
+        selectAll:false,
+        checkArr:[]
+      })
+      // if(t)
       t.orderList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier })
     } else {
       t.orderList({ paied: 1, community_identifier: villageList[villageIdx].community_identifier })
@@ -233,23 +265,24 @@ Page({
    */
   onShow: function () {
     let t = this,
-    villageIdx = utils.getItem('villageIdx'),
-    villageList = utils.getItem('villageList')
+      villageIdx = utils.getItem('villageIdx'),
+      villageList = utils.getItem('villageList')
     t.setData({
-      totalNum:0,
-      selectAll:false
+      totalNum: 0,
+      selectAll: false,
+      checkArr: []
     })
-  if (villageIdx && villageIdx != 0) {
-    t.setData({
-      villageIdx,
-      villageList
-    })
-    t.orderList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier })
-  } else {
-    t.setData({
-      changeCellType: true
-    })
-  }
+    if (villageIdx && villageIdx != 0) {
+      t.setData({
+        villageIdx,
+        villageList
+      })
+      t.orderList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier })
+    } else {
+      t.setData({
+        changeCellType: true
+      })
+    }
 
   },
 
