@@ -138,6 +138,7 @@ page{
 }
 .name{
   width: 200rpx;
+  margin-top: 25rpx;
 }
 .shareBtn{
   font-size: 26rpx;

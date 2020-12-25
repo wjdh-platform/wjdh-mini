@@ -1216,7 +1216,7 @@ Page({
          id = e.currentTarget.dataset.id,
          jobName = e.currentTarget.dataset.name
          console.log(jobName)
-         if(jobName == '其他职位'){
+         if(jobName.indexOf("其他")!==-1){
           //  utils.setItem('jobOther',true)
            t.setData({
             jobOther:true
@@ -1229,8 +1229,19 @@ Page({
          }
     t.setData({
       jobsText: t.data.jobsList[idx].job_name,
-      jobsPopup:false,
+      
       job:t.data.bigJobsText+' '+t.data.smallJobsText+' '+t.data.jobsList[idx].job_name
+    })
+  },
+  jobsBtnEnter(){
+    this.setData({
+      jobsPopup:false,
+    })
+  },
+  jobsBtnClo(){
+    this.setData({
+      jobsPopup:false,
+      job:''
     })
   },
 

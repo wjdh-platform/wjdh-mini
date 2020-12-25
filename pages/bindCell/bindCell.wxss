@@ -149,7 +149,7 @@ picker{
   border-bottom: solid 1rpx #ececec;
 }
 .jobsList{
-  padding: 30rpx;
+  padding: 30rpx 40rpx;
 }
 .jobsList .jobsClo{
   display: inline-block;
@@ -295,4 +295,15 @@ radio .wx-radio-input{
   font-size: 30rpx;
   color: #666;
   margin-bottom: 20rpx;
+}
+.jobsBtnCont{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 90rpx;
+  font-size: 30rpx;
+  color: #4395ff;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+  border-bottom: solid 1rpx #ececec;
 }

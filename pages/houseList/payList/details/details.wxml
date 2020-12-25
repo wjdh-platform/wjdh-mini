@@ -2,6 +2,10 @@
 <view class="details">
   <view class="column">
     <view class="title">服务客户</view>
+    <view class="detailsCont" wx:if="{{orderDetail.house&&orderDetail.house!=''}}">
+      <view class="titleS">收费房屋</view>
+      <view class="titleIntro">{{orderDetail.house}}</view>
+    </view>
     <view class="detailsCont">
       <view class="titleS">收费项目</view>
       <view class="titleIntro">{{orderDetail.title}}</view>
