@@ -102,7 +102,23 @@ Page({
     console.log(res)
     let t = this,
       villageList = utils.getItem('villageList'),
-      villageIdx = utils.getItem('villageIdx')
+      villageIdx = utils.getItem('villageIdx'),
+      userRoles = utils.getItem('userRoles'),
+      arr = []
+      for (let i = 0; i < userRoles.length; i++) {
+        let arrN = userRoles[i].name;
+        arr.push(arrN)
+      }
+      if (arr.includes('NewMember')) {
+        t.setData({
+          popupType: true
+        })
+      } else {
+        t.setData({
+          popupType: false
+        })
+        t.getBuildingsList(villageList, villageIdx)
+      }
     t.setData({
       changeCellType:res.detail.changeCellType,
       title:res.detail.community_name,
@@ -264,18 +280,19 @@ Page({
 
   //手机号失焦
   phoneBlur(e) {
-    let t = this
-    if (e.detail.value.length == 11) {
-      if (!/^1[3456789]\d{9}$/.test(e.detail.value)) {
+    let t = this,
+         val = e.detail.value.replace(/\s*/g, "")
+    if (val.length == 11) {
+      if (!/^1[3456789]\d{9}$/.test(val)) {
         utils.showToast("请输入正确的手机号", "none")
       } else {
         t.setData({
-          phoneVal: e.detail.value
+          phoneVal: val
         })
       }
     } else {
       t.setData({
-        phoneVal: e.detail.value
+        phoneVal: val
       })
 
     }

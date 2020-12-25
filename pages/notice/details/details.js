@@ -47,9 +47,11 @@ Page({
     })
   },
 
-  previewImage(){
+  previewImage(e){
+    console.log(e.currentTarget.dataset.idx)
+    let idx = e.currentTarget.dataset.idx
     wx.previewImage({
-      current:this.data.noticeDetails.images[0], 
+      current:this.data.noticeDetails.images[idx], 
       urls: this.data.noticeDetails.images
     })
   },

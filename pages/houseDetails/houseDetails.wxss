@@ -127,6 +127,9 @@ page{
   padding-right: 30rpx;
   position: relative;
 }
+.name{
+  width: 200rpx;
+}
 .shareBtn{
   font-size: 26rpx;
   color: #EAC100;
@@ -185,5 +188,5 @@ page{
 
 }
 .btnTypeI{
-  margin-left: 280rpx;
+  margin-left: 200rpx;
 }

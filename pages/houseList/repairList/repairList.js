@@ -33,7 +33,7 @@ Page({
       changeCellType:res.detail.changeCellType,
       title:res.detail.community_name
     })
-    t.orderList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier })
+    t.getRepairList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier })
   },
   changePopupType(res) {
     this.setData({
@@ -50,22 +50,29 @@ Page({
     api.getRepairList(param,(res)=>{
       let data = res.data,
           repairList = data.data,
-          
           notArr = [],
           yesArr = []
       if(data.code == 0){
-        notArr = repairList.filter((item)=>{
-          return item.status == '未解决'
-        })
-        yesArr = repairList.filter((item)=>{
-          return item.status == '已解决'
-        })
-        console.log(notArr)
-        console.log(yesArr)
-        this.setData({
-          repairListNot: notArr,
-          repairListYes:yesArr
-        })
+        if(repairList != ''){
+          notArr = repairList.filter((item)=>{
+            return item.status == '未解决'
+          })
+          yesArr = repairList.filter((item)=>{
+            return item.status == '已解决'
+          })
+          console.log(notArr)
+          console.log(yesArr)
+          this.setData({
+            repairListNot: notArr,
+            repairListYes:yesArr
+          })
+        }else{
+          this.setData({
+            repairListNot: [],
+            repairListYes:[]
+          })
+        }
+        
       }
     })
   },

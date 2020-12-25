@@ -12,6 +12,6 @@
     <rich-text nodes="{{noticeDetails.content}}"></rich-text>
   </view>
   <view class="imgList">
-    <image wx:for="{{noticeDetails.images}}" mode="aspectFit" src="{{item}}" bindtap="previewImage"></image>
+    <image wx:for="{{noticeDetails.images}}" mode="aspectFit" src="{{item}}" bindtap="previewImage" data-idx="{{index}}"></image>
   </view>
 </view>

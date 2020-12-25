@@ -291,3 +291,8 @@ radio .wx-radio-input{
   border: solid 1rpx#50DABE;
   color: #50DABE;
 }
+.jobsTitle{
+  font-size: 30rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+}

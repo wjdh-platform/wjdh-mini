@@ -250,6 +250,7 @@
           value="{{bigJobsText?bigJobsText+' '+smallJobsText+' '+jobsText:examineData.job}}" disabled="true"></input>
         </view>
         <view class="jobsList">
+          <view class="jobsTitle">{{bigJobsType?'大行业：':smallJobsType?'细分行业：':'职业：'}}</view>
           <view class="jobsClo {{item.isShow?'active':''}}" wx:if="{{bigJobsType}}" wx:for="{{bigJobsList}}" bindtap="bigJobsTab" data-idx="{{index}}" data-id="{{item.industry_id}}">{{item.industry_name}}</view>
           <view class="jobsClo {{item.isShow?'active':''}}" wx:if="{{smallJobsType}}" wx:for="{{smallJobsList}}" bindtap="smallJobsTab" data-idx="{{index}}" data-id="{{item.small_industry_id}}">{{item.small_industry_name}}</view>
           <view class="jobsClo {{item.isShow?'active':''}}" wx:if="{{jobsType}}" wx:for="{{jobsList}}" bindtap="jobsTab" data-idx="{{index}}" data-name="{{item.job_name}}">{{item.job_name}}</view>

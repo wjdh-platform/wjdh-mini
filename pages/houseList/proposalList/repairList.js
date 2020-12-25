@@ -33,7 +33,7 @@ Page({
       changeCellType:res.detail.changeCellType,
       title:res.detail.community_name
     })
-    t.orderList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier })
+    t.proposalList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier })
   },
   changePopupType(res) {
     this.setData({
@@ -52,7 +52,9 @@ Page({
           repairList = data.data,
           notArr = [],
           yesArr = []
+
       if(data.code == 0){
+        if(repairList != ''){
         notArr = repairList.filter((item)=>{
           return item.status == '未查阅'
         })
@@ -63,6 +65,12 @@ Page({
           repairListNot: yesArr,
           repairListYes:notArr
         })
+      }else{
+        this.setData({
+          repairListNot: [],
+          repairListYes:[]
+        })
+      }
       }
     })
   },
