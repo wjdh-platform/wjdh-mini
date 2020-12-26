@@ -1,6 +1,6 @@
 /* pages/notice/notice.wxss */
 page{
-  background: #FFF7F9FA;
+  background: #FFF8F8FB;
   /* padding-top: 110rpx; */
 }
 .column{
@@ -9,6 +9,20 @@ page{
   background: #fff;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
+}
+.top{
+  position: absolute;
+  right: 0;
+  top: 16rpx;
+  width: 74rpx;
+  height: 37rpx;
+  background: #50DABE;
+  border-radius: 8rpx 0px 0px 8rpx;
+  text-align: center;
+  line-height: 37rpx;
+  color: #fff;
+  font-size: 24rpx;
 }
 .noData{
   font-size: 28rpx;
@@ -24,6 +38,9 @@ page{
   overflow:hidden;
   text-overflow:ellipsis;
   margin-bottom: 30rpx;
+  overflow: hidden;
+text-overflow:ellipsis; white-space: nowrap;
+width: 94%;
 }
 .name,.time,.date{
   display: inline-block;

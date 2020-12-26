@@ -5,11 +5,12 @@
   <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
   <block wx:if="{{noticeList.length>0}}">
   <view class="column" wx:for="{{noticeList}}" data-id="{{item.announcement_id}}" bindtap="bindList">
+    <view class="top" wx:if="{{item.top!=null}}">{{item.top}}</view>
     <view class="title">{{item.title}}</view>
     <view class="introduction">
-      <view class="time">{{item.manager}}</view>
+      <view class="name">{{item.manager}}</view>
       <view class="date">{{item.date}}</view>
-      <view class="name" wx:if="{{item.top!=null}}">{{item.top}}</view>
+      <view class="name" wx:if="{{item.top!=null}}"></view>
     </view>
   </view>
 </block>
