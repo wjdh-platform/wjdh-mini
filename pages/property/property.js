@@ -54,10 +54,13 @@ Page({
     navH: 0,
   },
 
-
-
   changeClose(res) {
-    console.log(res)
+      let villageList = utils.getItem('villageList'),
+      villageIdx = utils.getItem('villageIdx'),
+      t = this
+    if(villageIdx&&villageIdx!=0){
+      t.houseExist({community_identifier:villageList[villageIdx].community_identifier})
+    }
     this.setData({
       changeCellType: res.detail.changeCellType,
       title: res.detail.community_name
@@ -249,47 +252,51 @@ Page({
       let arrN = userRoles[i].name;
       arr.push(arrN)
     }
-    console.log(arr)
     if (tocken && tocken != '') {
       if (idx == 1 || idx == 2 || idx == 3 || idx == 4 || idx == 5) {
-        if (arr.includes('HouseMember')) {
-          switch (idx) {
-            case 1://添加家属
-              wx.navigateTo({
-                url: '/pages/bindCell/bindCell?type=family',
-              });
-              // utils.showToast("功能正在开发中","none")
-              break;
-            case 2://生活缴费
-              wx.navigateTo({
-                url: '/pages/lifePay/lifePay',
-              });
-
-              break;
-            case 3://物业报修
-              wx.navigateTo({
-                url: '/pages/repair/repair',
-              });
-
-              break;
-            case 4://云停车场
-              utils.showToast("功能正在开发中", "none")
-
-              break;
-            case 5://投诉建议
-              wx.navigateTo({
-                url: '/pages/proposal/proposal',
-              });
-              // wx.navigateTo({
-              //   url: '/pages/visitor/visitor',
-              // });
-              break;
+        if(t.data.houseExist){
+          if (arr.includes('HouseMember')) {
+            switch (idx) {
+              case 1://添加家属
+                wx.navigateTo({
+                  url: '/pages/bindCell/bindCell?type=family',
+                });
+                // utils.showToast("功能正在开发中","none")
+                break;
+              case 2://生活缴费
+                wx.navigateTo({
+                  url: '/pages/lifePay/lifePay',
+                });
+  
+                break;
+              case 3://物业报修
+                wx.navigateTo({
+                  url: '/pages/repair/repair',
+                });
+  
+                break;
+              case 4://云停车场
+                utils.showToast("功能正在开发中", "none")
+  
+                break;
+              case 5://投诉建议
+                wx.navigateTo({
+                  url: '/pages/proposal/proposal',
+                });
+                // wx.navigateTo({
+                //   url: '/pages/visitor/visitor',
+                // });
+                break;
+            }
+          } else if (arr.includes('NewMember')) {
+            utils.showToast('需要先绑定房屋才能访问', 'none')
+          } else if (arr.includes('Shenheing')) {
+            utils.showToast('需要等待物业审核通过才能访问', 'none')
           }
-        } else if (arr.includes('NewMember')) {
-          utils.showToast('需要先绑定房屋才能访问', 'none')
-        } else if (arr.includes('Shenheing')) {
-          utils.showToast('需要等待物业审核通过才能访问', 'none')
+        }else{
+          utils.showToast('需要在该小区没有绑定房屋才能访问', 'none')
         }
+        
       }
 
       switch (idx) {
@@ -341,6 +348,24 @@ Page({
     })
   },
 
+  //检测用户在该小区是否有房屋
+
+  houseExist(param){
+    api.houseExist(param,(res)=>{
+      let code = res.data.code
+      if(code == 0){
+        this.setData({
+          houseExist:true
+        })
+      }else if(code == 1){
+        utils.showToast(res.data.msg)
+      }else{
+        this.setData({
+          houseExist:false
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -349,11 +374,18 @@ Page({
     let token = utils.getItem('accessToken'),
       userRoles = utils.getItem('userRoles'),
       tipsNone = utils.getItem('tipsNone'),
+      villageList = utils.getItem('villageList'),
+      villageIdx = utils.getItem('villageIdx'),
       t = this,
       arr = []
     t.setData({
       navH: app.globalData.navHeight
     })
+    if(villageIdx&&villageIdx!=0){
+      t.houseExist({community_identifier:villageList[villageIdx].community_identifier})
+    }
+
+
 
 
 

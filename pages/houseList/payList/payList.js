@@ -1,32 +1,46 @@
 // pages/houseList/payList/payList.js
 const app = getApp();
 import * as api from '../../../api/api'
-// import utils from '../../utils/util.js'
+import utils from '../../../utils/util.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    orderType:true,
-    changeCellType:false,
-    title:'',
-    false:false,
-    changeCellType:false,
-    title:'',
-    backType:true
+    orderType: true,
+    changeCellType: false,
+    title: '',
+    false: false,
+    changeCellType: false,
+    title: '',
+    backType: true,
+    houseListIdx: 0
   },
 
-  changeClose(res){
+  bindHouseList(e) {
+    let t = this,
+      val = e.detail.value
+    if (val != t.data.houseListIdx) {
+      t.getPayList({ house_id: t.data.houseList[val].id })
+    }
+    t.setData({
+      houseListIdx: val
+    })
+
+
+  },
+
+  changeClose(res) {
     console.log(res)
     this.setData({
-      changeCellType:res.detail.changeCellType,
-      title:res.detail.community_name
+      changeCellType: res.detail.changeCellType,
+      title: res.detail.community_name
     })
   },
-  changePopupType(res){
+  changePopupType(res) {
     this.setData({
-      changeCellType:res.detail
+      changeCellType: res.detail
     })
   },
   closeBtn(res) {
@@ -47,32 +61,32 @@ Page({
   //     changeCellType:res.detail
   //   })
   // },
-  orderDetails(e){
+  orderDetails(e) {
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/houseList/payList/details/details?id='+id,
+      url: '/pages/houseList/payList/details/details?id=' + id,
     })
   },
-  getPayList(){
-    api.payList({},(res)=>{
+  getPayList(param) {
+    api.payList(param, (res) => {
       let data = res.data,
-           dataArr = data.data
-      if(data.code == 0){
+        dataArr = data.data
+      if (data.code == 0) {
         dataArr.forEach(item => {
           item.isShow = false;
         })
         this.setData({
-          payList:dataArr
+          payList: dataArr
         })
       }
     })
   },
 
-  orderListType(e){
-  let t = this,
+  orderListType(e) {
+    let t = this,
       idx = e.currentTarget.dataset.idx,
       dataList = t.data.payList
-      dataList[idx].isShow = !dataList[idx].isShow
+    dataList[idx].isShow = !dataList[idx].isShow
     if (dataList[idx].isShow) {
       t.packUp(dataList, idx);
     }
@@ -88,15 +102,36 @@ Page({
     }
   },
 
+  housesJiashuList(param) {
+    api.housesJiashuList(param, (res) => {
+      let data = res.data,
+        oldList = data.data,
+        list = []
+      list = oldList.unshift({ introduction: '请选择' })
+      if (data.code == 0) {
+        this.setData({
+          houseList: oldList
+        })
+
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
+    let villageList = utils.getItem('villageList'),
+      villageIdx = utils.getItem('villageIdx'),
+      t = this
+    t.setData({
       navH: app.globalData.navHeight
     })
-    this.getPayList()
-    
+    t.getPayList()
+    if (villageIdx && villageIdx != 0) {
+      t.housesJiashuList({ community_identifier: villageList[villageIdx].community_identifier, type: "charge" })
+    }
+
   },
 
   /**

@@ -4,6 +4,16 @@
   </change-cell>
   <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
   <view class="payListCont">
+    <view class="columnC">
+        <view class="titleC">房屋</view>
+        <picker bindchange="bindHouseList" value="{{houseListIdx}}" range="{{houseList}}" range-key="introduction"
+          data-id="{{houseList[houseListIdx].id}}">
+          <view class="picker">
+            {{houseList[houseListIdx].introduction}}
+          </view>
+        </picker>
+        <image class="arrow" src="./../../../static/image/arrow.png"></image>
+      </view>
     <view class="column" wx:for="{{payList}}">
     <view class="title">{{item.payment_name}}</view>
     <view class="listDetail">

@@ -1,6 +1,6 @@
 /* pages/notice/notice.wxss */
 page{
-  background: #e8e8e8;
+  background: #FFF7F9FA;
   /* padding-top: 110rpx; */
 }
 .column{
@@ -25,7 +25,7 @@ page{
   text-overflow:ellipsis;
   margin-bottom: 30rpx;
 }
-.name,.time{
+.name,.time,.date{
   display: inline-block;
   font-size: 22rpx;
   color: #B2B2B2;
@@ -33,4 +33,11 @@ page{
 }
 .name{
   color: #50DABE;
+}
+.introduction{
+  display: flex;
+}
+.date{
+  flex: 1;
+  text-align: left;
 }

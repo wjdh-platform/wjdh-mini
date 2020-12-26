@@ -71,3 +71,28 @@ text-overflow: ellipsis;
 .orderList{
   padding-bottom: 20rpx;
 }
+.columnC{
+  display: flex;
+  align-items: center;
+  border-bottom: solid 1rpx #ececec;
+  height: 94rpx;
+  padding: 0 40rpx;
+  background: #FFFFFF;
+  margin-bottom: 20rpx;
+}
+.title{
+  font-size: 30rpx;
+  color: #424242;
+  width: 180rpx;
+}
+picker{
+  flex: 1;
+  text-align: left;
+  font-size: 30rpx;
+  color: #424242;
+  margin-left: 30rpx;
+}
+.arrow{
+  width: 14rpx;
+  height: 24rpx;
+}

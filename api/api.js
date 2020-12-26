@@ -190,6 +190,10 @@ export const proposalSub = (params, cb) => {
 export const proposalList = (params, cb) => {
   request('api/v1/suggestions/list', params, cb, 'POST')
 }
+//判断用户在该小区是否有房屋
+export const houseExist = (params, cb) => {
+  request('api/v1/weapp/house', params, cb, 'POST')
+}
 
 
 

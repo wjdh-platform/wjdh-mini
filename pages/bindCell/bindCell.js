@@ -76,6 +76,7 @@ Page({
 
   jobsPopupTab(){
     // console.log(11)
+    this.getIndustries()
     this.setData({
       jobsPopup:true,
       bigJobsType:true,
@@ -182,11 +183,13 @@ Page({
         examineData: {},
         'examineData.photo': '',
         inputDisable: false,
-        shipIdx: e.detail.value
+        shipIdx: e.detail.value,
+        job:'',
+        jobOther:false
       })
       return
     }
-    if (e.detail.value != "1") {//除业主外
+    if (e.detail.value != "1") {//非业主外
       t.setData({
         ownerType: false,
         inputDisable: false,
@@ -194,7 +197,6 @@ Page({
         examineData: {},
         'examineData.photo': '',
         inputDisable: false,
-        
       })
     } else {//业主
       t.setData({
@@ -203,12 +205,19 @@ Page({
         bindPeo: false,
         examineData: utils.getItem('examineData'),
         inputDisable: true,
-        who:1
+        who:1,
+        
       })
     }
 
+
     t.setData({
-      shipIdx: e.detail.value
+      shipIdx: e.detail.value,
+      job:'',
+        jobOther:false,
+        bigJobsText:'',
+        smallJobsText:'',
+        jobsText:''
     })
 
   },
@@ -886,7 +895,7 @@ Page({
           idcard: data.idcardData ? data.idcardData.idcard : val.IDNumber ? val.IDNumber : data.examineData.idcard,
           name: data.idcardData ? data.idcardData.name : val.userName ? val.userName : data.examineData.name,
           photo: data.photoUrl ? data.photoUrl : data.examineData.photo,
-          job: val.jobName&&val.jobName !=''?val.jobName:val.job ? val.job : data.examineData.job,
+          job: val.jobName&&val.jobName !=''?val.jobName:data.job ? data.job : data.examineData.job,
           company: val.company ? val.company : data.examineData.job,
           house_id: data.roomIdx == 0 ? '' : data.roomList[data.roomIdx].id,
           zzmm: dataList.zzmm[data.zzmmIdx].key,
@@ -1002,7 +1011,7 @@ Page({
           tyjr: dataList.tyjr[data.twjrIdx].key,
           dibao: dataList.dibao[data.sfdbIdx].key,
           shangfang: dataList.shangfang[data.sfjlIdx].key,
-          job: val.jobName&&val.jobName !=''?val.jobName:val.job ? val.job : data.examineData.job,
+          job: val.jobName&&val.jobName !=''?val.jobName:data.job ? data.job : data.examineData.job,
           company: val.company ? val.company : data.examineData.job,
           house_id: data.roomIdx == 0 ? '' : data.roomList[data.roomIdx].id,
           role: dataList.role[data.shipIdx].key,
@@ -1239,9 +1248,14 @@ Page({
     })
   },
   jobsBtnClo(){
-    this.setData({
+    let t =this
+   
+    t.setData({
       jobsPopup:false,
-      job:''
+      job:'',
+      bigJobsText:'',
+      smallJobsText:'',
+      jobsText:''
     })
   },
 
@@ -1261,7 +1275,7 @@ Page({
         // jobOther
       })
     t.bellInitialize();
-    t.getIndustries()
+    
     if (examineData&&examineData.length>0) {
       if (arr.includes('NewMember')) {
         t.setData({

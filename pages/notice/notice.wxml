@@ -7,8 +7,9 @@
   <view class="column" wx:for="{{noticeList}}" data-id="{{item.announcement_id}}" bindtap="bindList">
     <view class="title">{{item.title}}</view>
     <view class="introduction">
-      <view class="name">{{item.manager}}</view>
-      <view class="time">{{item.date}}</view>
+      <view class="time">{{item.manager}}</view>
+      <view class="date">{{item.date}}</view>
+      <view class="name" wx:if="{{item.top!=null}}">{{item.top}}</view>
     </view>
   </view>
 </block>
