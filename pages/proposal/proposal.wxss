@@ -10,7 +10,7 @@ page{
 }
 .titleC{
   font-size: 30rpx;
-  line-height: 30rpx;
+  /* line-height: 30rpx; */
   color: #969696;
   margin-bottom: 30rpx;
 }

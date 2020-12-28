@@ -10,7 +10,8 @@ Page({
   data: {
     currentTab:0,
     changeCellType: false,
-    backType:true
+    backType:true,
+    homeListDis:false
   },
 
   tabTap(e){

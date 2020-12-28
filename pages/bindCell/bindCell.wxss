@@ -142,7 +142,7 @@ picker{
   top: 130rpx;
 }
 .jobsPopup{
-  top: 400rpx;
+  top: 200rpx;
   background:#fff;
 }
 .jobsPopup .msgColumn{

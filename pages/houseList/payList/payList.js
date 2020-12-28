@@ -32,8 +32,13 @@ Page({
   },
 
   changeClose(res) {
-    console.log(res)
-    this.setData({
+    let villageList = utils.getItem('villageList'),
+      villageIdx = utils.getItem('villageIdx'),
+      t = this
+    if (villageIdx && villageIdx != 0) {
+      t.housesJiashuList({ community_identifier: villageList[villageIdx].community_identifier, type: "charge" })
+    }
+    t.setData({
       changeCellType: res.detail.changeCellType,
       title: res.detail.community_name
     })
@@ -107,12 +112,19 @@ Page({
       let data = res.data,
         oldList = data.data,
         list = []
-      list = oldList.unshift({ introduction: '请选择' })
+      
       if (data.code == 0) {
+        list = oldList.unshift({ introduction: '请选择' })
         this.setData({
           houseList: oldList
         })
 
+      }else{
+        list = oldList.unshift({ introduction: '该小区暂无可选房屋' })
+        this.setData({
+          houseList: oldList,
+          homeListDis:true
+        })
       }
     })
   },
@@ -130,6 +142,10 @@ Page({
     t.getPayList()
     if (villageIdx && villageIdx != 0) {
       t.housesJiashuList({ community_identifier: villageList[villageIdx].community_identifier, type: "charge" })
+    } else {
+      t.setData({
+        changeCellType: true
+      })
     }
 
   },

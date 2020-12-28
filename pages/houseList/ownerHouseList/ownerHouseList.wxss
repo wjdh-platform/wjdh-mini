@@ -2,6 +2,7 @@
 page{
   /* background: #e8e8e8; */
   /* padding-top: 110rpx; */
+  padding-bottom: 50rpx;
 }
 .listColumn{
   width: 690rpx;

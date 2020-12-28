@@ -56,8 +56,22 @@ Page({
   },
 
   changeClose(res){
-    console.log(res)
-    this.setData({
+    let t = this,
+    villageList = utils.getItem('villageList'),
+    villageIdx = utils.getItem('villageIdx')
+    if(villageIdx&&villageIdx!=0){
+      let phone = villageList[villageIdx].community_phone
+      if(phone !== null){
+        t.setData({
+          wyPhone:villageList[villageIdx].community_phone
+        })
+      }else{
+        t.setData({
+          wyPhone:''
+        })
+      }
+    }
+    t.setData({
       changeCellType:res.detail.changeCellType,
       title:res.detail.community_name
     })
@@ -83,7 +97,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
+    let t = this,
+    villageList = utils.getItem('villageList'),
+    villageIdx = utils.getItem('villageIdx')
+    if(villageIdx&&villageIdx!=0){
+      let phone = villageList[villageIdx].community_phone
+      if(phone !== null){
+        t.setData({
+          wyPhone:villageList[villageIdx].community_phone
+        })
+      }else{
+        t.setData({
+          wyPhone:''
+        })
+      }
+    }
+    t.setData({
       navH: app.globalData.navHeight
     })
   },

@@ -16,7 +16,7 @@
       <view class="tipsBtn" bindtap="tipsNone">已知悉，不再提示</view>
     </view>
   </view>
-  <image class="banner" src='/static/image/banner.jpeg'></image>
+  <image class="banner" src='/static/image/banner.jpg'></image>
   <view class="tabList">
     <view class="tabCol" bindtap="bindCell" wx:for="{{list}}" data-idx="{{index}}">
       <image src="{{item.icon}}"></image>

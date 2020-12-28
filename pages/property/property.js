@@ -66,16 +66,19 @@ Page({
       title: res.detail.community_name
     })
   },
+  
   changePopupType(res) {
     this.setData({
       changeCellType: res.detail
     })
   },
+
   closeBtn(res) {
     this.setData({
       changeCellType: res.detail
     })
   },
+
   closePopupTips() {
     this.setData({
       popupTips: false
@@ -86,7 +89,7 @@ Page({
     this.setData({
       popupTips: false
     })
-    utils.setItem("tipsNone", false)
+    utils.setItem("tipsNone", 'none')
   },
 
   //获取小区名字
@@ -385,20 +388,14 @@ Page({
       t.houseExist({community_identifier:villageList[villageIdx].community_identifier})
     }
 
-
-
-
-
-
-
     for (let i = 0; i < userRoles.length; i++) {
       let arrN = userRoles[i].name;
       arr.push(arrN)
     }
     // console.log(arr)
-    if (tipsNone == false) {
+    if (tipsNone&&tipsNone == 'none') {
       t.setData({
-        popupTips: tipsNone
+        popupTips: false
       })
     }
 

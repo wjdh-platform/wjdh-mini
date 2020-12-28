@@ -8,6 +8,11 @@ page{
   height: 30rpx;
   margin: 0 12rpx 0 34rpx;
 }
+.title{
+  padding: 20rpx 0 0 30rpx;
+  font-size: 28rpx;
+  color: #666;
+}
 .column{
   width: 330rpx;
   height: 76rpx;
@@ -40,6 +45,6 @@ page{
   color: #B2B2B2;
   margin-left: 35rpx;
 }
-.phoneCallCont{
+.phoneCont{
   overflow: hidden;
 }

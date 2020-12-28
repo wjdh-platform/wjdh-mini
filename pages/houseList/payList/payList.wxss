@@ -18,7 +18,6 @@ page{
 }
 .title{
   font-size: 28rpx;
-  line-height: 28rpx;
   font-weight: bold;
   color: #333333;
   margin-bottom: 20rpx;
@@ -83,7 +82,7 @@ text-overflow: ellipsis;
 .title{
   font-size: 30rpx;
   color: #424242;
-  width: 180rpx;
+  width: 90%;
 }
 picker{
   flex: 1;

@@ -5,9 +5,9 @@
   <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
   <view class="payListCont">
     <view class="columnC">
-        <view class="titleC">房屋</view>
+        <view class="titleC">选择房屋</view>
         <picker bindchange="bindHouseList" value="{{houseListIdx}}" range="{{houseList}}" range-key="introduction"
-          data-id="{{houseList[houseListIdx].id}}">
+          data-id="{{houseList[houseListIdx].id}}" disabled="{{homeListDis}}">
           <view class="picker">
             {{houseList[houseListIdx].introduction}}
           </view>

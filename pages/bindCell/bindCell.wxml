@@ -234,28 +234,37 @@
         <view class="msgTitle">职业</view>
         <!-- <input name="job" placeholder="请选择" class="inputText" placeholder-class="inputPlaceHolder"
           value="{{bigJobsText?job:examineData.job}}" bindtap="jobsPopupTab" disabled="true"></input> -->
-          <view class="inputText" bindtap="jobsPopupTab">{{job&&job!=''?job:examineData.job?examineData.job:'请选择'}}</view>
+          <view class="inputText {{job&&job!=''?'':'inputPlaceHolder'}}" bindtap="jobsPopupTab">{{job&&job!=''?job:'请选择'}}</view>
         
       </view>
       <view class="msgColumn" wx:if="{{jobOther}}">
         <view class="msgTitle"></view>
         <input name="jobName" placeholder="请输入职业名称" class="inputText" placeholder-class="inputPlaceHolder"
-          value="{{examineData.job}}"></input>
+          ></input>
         
       </view>
       <view class="verificationPhotoJ" wx:if="{{jobsPopup}}">
         <view class="jobsPopup">
           <view class="jobsBtnCont">
-            <view bindtap="jobsBtnClo">取消</view>
+            <view bindtap="jobsBtnClo">重置</view>
             <view bindtap="jobsBtnEnter">确定</view>
           </view>
         <view class="msgColumn">
+        <view class="msgTitle">大行业:</view>
+        <input name="job" placeholder="请选择" class="inputText" placeholder-class="inputPlaceHolder"
+          value="{{bigJobsText}}" disabled="true"></input>
+        </view>
+        <view class="msgColumn">
+        <view class="msgTitle">细分行业:</view>
+        <input name="job" placeholder="请选择" class="inputText" placeholder-class="inputPlaceHolder"
+          value="{{smallJobsText}}" disabled="true"></input>
+        </view>
+        <view class="msgColumn">
         <view class="msgTitle">职业:</view>
         <input name="job" placeholder="请选择" class="inputText" placeholder-class="inputPlaceHolder"
-          value="{{bigJobsText?bigJobsText+' '+smallJobsText+' '+jobsText:examineData.job}}" disabled="true"></input>
+          value="{{jobsText}}" disabled="true"></input>
         </view>
         <view class="jobsList">
-          
           <view class="jobsTitle">{{bigJobsType?'大行业：':smallJobsType?'细分行业：':'职业：'}}</view>
           <view class="jobsClo" wx:if="{{bigJobsType}}" wx:for="{{bigJobsList}}" bindtap="bigJobsTab" data-idx="{{index}}" data-id="{{item.industry_id}}">{{item.industry_name}}</view>
           <!-- <view class="jobsClo {{item.isShow?'active':''}}" wx:if="{{bigJobsType}}" wx:for="{{bigJobsList}}" bindtap="bigJobsTab" data-idx="{{index}}" data-id="{{item.industry_id}}">{{item.industry_name}}</view> -->

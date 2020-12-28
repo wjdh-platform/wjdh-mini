@@ -82,7 +82,6 @@ Page({
       bigJobsType:true,
       smallJobsType:false,
       jobsType:false,
-      'examineData.job':''
     })
   },
 
@@ -892,10 +891,10 @@ Page({
         param = {
           who: '0',
           phone: data.phoneVal ? data.phoneVal : val.phone,
-          idcard: data.idcardData ? data.idcardData.idcard : val.IDNumber ? val.IDNumber : data.examineData.idcard,
-          name: data.idcardData ? data.idcardData.name : val.userName ? val.userName : data.examineData.name,
+          idcard: val.IDNumber ? val.IDNumber : data.idcardData ? data.idcardData.idcard : data.examineData.idcard,
+          name: val.userName ? val.userName : data.idcardData ? data.idcardData.name : data.examineData.name,
           photo: data.photoUrl ? data.photoUrl : data.examineData.photo,
-          job: val.jobName&&val.jobName !=''?val.jobName:data.job ? data.job : data.examineData.job,
+          job: val.jobName&&val.jobName !=''?data.job+ '-'+val.jobName:data.job,
           company: val.company ? val.company : data.examineData.job,
           house_id: data.roomIdx == 0 ? '' : data.roomList[data.roomIdx].id,
           zzmm: dataList.zzmm[data.zzmmIdx].key,
@@ -988,7 +987,7 @@ Page({
       else if (val.birth == '') {
         utils.showToast('请输入生日', 'none')
         return
-      } else if (val.job == '') {
+      } else if (data.job == '') {
         utils.showToast('请选择职业', 'none')
         return
       } else if (val.company == '') {
@@ -1000,8 +999,8 @@ Page({
         param = {
           who: data.bindListP[data.bindListPIdx].id,
           phone: data.phoneVal ? data.phoneVal : val.phone,
-          idcard: data.idcardData ? data.idcardData.idcard : val.IDNumber ? val.IDNumber : data.examineData.idcard,
-          name: data.idcardData ? data.idcardData.name : val.userName ? val.userName : data.examineData.name,
+          idcard: val.IDNumber ? val.IDNumber : data.idcardData ? data.idcardData.idcard : data.examineData.idcard,
+          name: val.userName ? val.userName : data.idcardData ? data.idcardData.name : data.examineData.name,
           photo: data.photoUrl ? data.photoUrl : data.examineData.photo,
           sex: data.idcardData ? data.idcardData.gender : '',
           birth: data.idcardData ? data.idcardData.birthday : '',
@@ -1011,7 +1010,7 @@ Page({
           tyjr: dataList.tyjr[data.twjrIdx].key,
           dibao: dataList.dibao[data.sfdbIdx].key,
           shangfang: dataList.shangfang[data.sfjlIdx].key,
-          job: val.jobName&&val.jobName !=''?val.jobName:data.job ? data.job : data.examineData.job,
+          job: val.jobName&&val.jobName !=''?data.job+ '-'+val.jobName:data.job,
           company: val.company ? val.company : data.examineData.job,
           house_id: data.roomIdx == 0 ? '' : data.roomList[data.roomIdx].id,
           role: dataList.role[data.shipIdx].key,
@@ -1239,7 +1238,7 @@ Page({
     t.setData({
       jobsText: t.data.jobsList[idx].job_name,
       
-      job:t.data.bigJobsText+' '+t.data.smallJobsText+' '+t.data.jobsList[idx].job_name
+      job:t.data.bigJobsText+'-'+t.data.smallJobsText+'-'+t.data.jobsList[idx].job_name
     })
   },
   jobsBtnEnter(){
@@ -1276,7 +1275,7 @@ Page({
       })
     t.bellInitialize();
     
-    if (examineData&&examineData.length>0) {
+    if (examineData) {
       if (arr.includes('NewMember')) {
         t.setData({
           popupType: false

@@ -1,7 +1,7 @@
 <!--pages/notice/details/details.wxml-->
 <view class="details">
   <view class="title">
-    <view class="icon"><image src="../../../static/image/cxLogo.jpeg"></image></view>
+    <view class="icon"><image src="{{noticeDetails.logo}}"></image></view>
     <view class="title">
       <view class="text">晨曦家园物业</view>
       <view class="time">{{noticeDetails.date}}</view>
