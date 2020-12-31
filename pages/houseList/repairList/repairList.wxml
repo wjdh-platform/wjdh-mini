@@ -13,7 +13,7 @@
     <view class="column" wx:for="{{repairListYes}}" >
       <view class="title">{{item.possion}}</view>
       <view class="description">{{item.description}}</view>
-      <view class="time">{{item.created_at}}</view>
+      <view class="time">{{item.date}}</view>
       <view class="reply">
         <view class="replyTitle">物业回复：</view>
         <view class="replyCont">{{item.reply}}</view>
@@ -28,7 +28,7 @@
     <view class="column" wx:for="{{repairListNot}}" wx:if="{{repairListNot.length>0}}">
       <view class="title">{{item.possion}}</view>
       <view class="description">{{item.description}}</view>
-      <view class="time">{{item.created_at}}</view>
+      <view class="time">{{item.date}}</view>
     </view>
     <view wx:if="{{repairListNot.length==0}}" class="noData">暂无数据</view>
   </view>

@@ -15,7 +15,7 @@
   <view class="phoneCallCont">
     <view class="title">应急电话：</view>
     <view class="phoneCont">
-      <view class="column" wx:for="{{phoneList}}" data-num="{{item.phoneNum}}" bindtap="callNum">
+      <view class="column" wx:for="{{phoneList}}" data-num="{{item.phoneNum}}" bindtap="callNum" wx:key="index">
       <image src="../../static/image/phoneIcon.jpeg"></image><view class="phoneText">{{item.phoneTitle}}</view>
     </view>
     </view>

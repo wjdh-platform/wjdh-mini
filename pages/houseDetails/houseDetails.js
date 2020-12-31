@@ -50,7 +50,7 @@ Page({
   getHouseDetails(){
     let t = this
     api.housesDetails({
-      id: t.data.houseId,
+      house_id: t.data.houseId,
       role:t.data.role
     },(res)=>{
       if(res.data.code == 0){
@@ -59,6 +59,35 @@ Page({
         })
       }
     })
+  },
+
+  jiebang(e){
+    let shouquan = e.currentTarget.dataset.shouquan,
+    idx = e.currentTarget.dataset.idx,
+    t = this
+    if( shouquan&&shouquan != '管理员'){
+      wx.showModal({
+        title: '提示',
+        content: '您确定要解绑家庭成员'+t.data.detailsData.yibangding[idx].name+'吗？',
+        success (res) {
+          if (res.confirm) {
+            api.listJB({ people_house_id: t.data.detailsData.yibangding[idx].people_house_id }, (res) => {
+              if(res.data.code == 0){
+                utils.showToast(res.data.msg,'none')
+                this.getHouseDetails()
+              }else{
+                utils.showToast(res.data.msg,'none')
+              }
+            })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+      
+      
+    }
+    
   },
 
   getShenheDetail(){
@@ -107,25 +136,21 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    // utils.token()
     this.setData({
       houseId:options.houseId,
       role: options.role,
       shenhe_id:options.shenhe_id
-      // shenhe_id:16
     })
       if(options.houseId!=''){
         this.getHouseDetails()
       }else{
         this.getShenheDetail()
       }
-    
-    // this.getShenheDetail()
   },
 
   shouquan(id,idx){
     let t = this
-    api.shouquan({ id },(res)=>{
+    api.shouquan({ people_house_id:id },(res)=>{
       if(res.data.code == 0){
         utils.showToast(res.data.msg,'none')
         let shouquan = 'detailsData.yibangding['+idx+'].shouquan'
@@ -139,7 +164,7 @@ Page({
 
   charge(id,idx){
     let t = this
-    api.charge({ id },(res)=>{
+    api.charge({ people_house_id:id },(res)=>{
       if(res.data.code == 0){
         utils.showToast(res.data.msg,'none')
         let charge = 'detailsData.yibangding['+idx+'].charge'

@@ -59,6 +59,10 @@ Page({
       villageIdx = utils.getItem('villageIdx'),
       t = this
     if(villageIdx&&villageIdx!=0){
+      t.setData({
+        villageList,
+        villageIdx
+      })
       t.houseExist({community_identifier:villageList[villageIdx].community_identifier})
     }
     this.setData({
@@ -297,9 +301,8 @@ Page({
             utils.showToast('需要等待物业审核通过才能访问', 'none')
           }
         }else{
-          utils.showToast('需要在该小区没有绑定房屋才能访问', 'none')
+          utils.showToast('您在'+t.data.villageList[t.data.villageIdx].community_name+'没有房屋或者房屋正在审核中', 'none')
         }
-        
       }
 
       switch (idx) {
@@ -382,7 +385,9 @@ Page({
       t = this,
       arr = []
     t.setData({
-      navH: app.globalData.navHeight
+      navH: app.globalData.navHeight,
+      villageList,
+      villageIdx
     })
     if(villageIdx&&villageIdx!=0){
       t.houseExist({community_identifier:villageList[villageIdx].community_identifier})

@@ -844,8 +844,10 @@ Page({
       dataList = data.dataList,
       param = {},
       reg = /^1[3456789]\d{9}$/,
-      villageIdx = utils.getItem('villageIdx')
-    console.log(val)
+      villageIdx = utils.getItem('villageIdx'),
+      id = data.homeList[data.homeListIdx].people_house_id;
+    console.log(id)
+    // return false
     if (t.data.pageEntry == 'family') {
       if(t.data.homeListIdx == 0){
         utils.showToast('请选择房屋','none')
@@ -888,6 +890,8 @@ Page({
         return
       }
       else {
+        console.log('twice:'+id)
+        // return false
         param = {
           who: '0',
           phone: data.phoneVal ? data.phoneVal : val.phone,
@@ -896,15 +900,15 @@ Page({
           photo: data.photoUrl ? data.photoUrl : data.examineData.photo,
           job: val.jobName&&val.jobName !=''?data.job+ '-'+val.jobName:data.job,
           company: val.company ? val.company : data.examineData.job,
-          house_id: data.roomIdx == 0 ? '' : data.roomList[data.roomIdx].id,
+          house_id: id,
           zzmm: dataList.zzmm[data.zzmmIdx].key,
           tyjr: dataList.tyjr[data.twjrIdx].key,
           dibao: dataList.dibao[data.sfdbIdx].key,
           shangfang: dataList.shangfang[data.sfjlIdx].key,
-          house_id:data.homeList[data.homeListIdx].id,
           choice:1,
           role: dataList.role[data.shipIdx].key,
         }
+        console.log('house_id-first:',param.house_id)
         
       }
     } else {
@@ -1023,8 +1027,9 @@ Page({
         
       }
     }
+    console.log('third:'+id)
+    console.log(param.house_id)
     api.yibiaosanshi(param, (res) => {
-      console.log(res + '')
       if (res.data.code == 1) {
         utils.showToast(res.data.msg, 'none')
       } else if (res.data.code == 0) {

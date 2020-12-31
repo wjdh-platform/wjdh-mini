@@ -1,6 +1,6 @@
 <view class="container">
 
-<view class="input">
+  <!-- <view class="input">
 
   <input placeholder="选择" value="{{province}}-{{city}}-{{county}}" focus="{{focus}}" bindfocus="open" />
 
@@ -24,5 +24,14 @@
   <picker-view-column>
     <view wx:for="{{countys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
   </picker-view-column>
-</picker-view>
+</picker-view> -->
+
+  <view class="item {{item.isActive ? 'active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{items}}" wx:key="index">
+      <view class="info">
+          {{item.content}}
+          <view class="author">—— 向左滑</view>
+        </view>
+      <view class="del" data-index="{{index}}" bindtap="del">删除</view>
+  </view>
+
 </view>

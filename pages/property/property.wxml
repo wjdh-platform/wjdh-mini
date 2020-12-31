@@ -18,7 +18,7 @@
   </view>
   <image class="banner" src='/static/image/banner.jpg'></image>
   <view class="tabList">
-    <view class="tabCol" bindtap="bindCell" wx:for="{{list}}" data-idx="{{index}}">
+    <view class="tabCol" bindtap="bindCell" wx:for="{{list}}" data-idx="{{index}}" wx:key="index">
       <image src="{{item.icon}}"></image>
       <view class="bindText">{{item.text}}</view>
     </view>

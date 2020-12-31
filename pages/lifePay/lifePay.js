@@ -15,7 +15,11 @@ Page({
     selectAll: false,
     changeCellType: false,
     backType: true,
-    idxArray: []
+    idxArray: [],
+    pageIndex: 1,
+    pageSize: 10,
+    totalNum: 0,
+    orderList: []
   },
 
   changeClose(res) {
@@ -170,7 +174,8 @@ Page({
   orderList(param) {
     api.orderList(param, (res) => {
       if (res.data.code == 0) {
-        let dataArr = res.data.data
+        let dataArr = res.data.data,
+          t = this
         if (dataArr == []) {
           this.setData({
             orderList: []
@@ -182,14 +187,17 @@ Page({
             item.checked = false;
             item.extra = JSON.parse(item.extra)
           })
-          // if (this.data.idxArray.length > 0) {
-          //   for (let i = 0; i < this.data.idxArray.length; i++) {
-          //     dataArr[i].checked = true
-          //   }
-          // }
+          let arr = [];
+          if (t.data.pageIndex == 1) {
+            arr = dataArr;
+          } else {
+            arr = t.data.orderList.concat(dataArr);
+          }
 
           this.setData({
-            orderList: dataArr
+            orderList: arr,
+            totalNum: res.data.pages.total,
+            pageSize: res.data.pages.per_page,
           })
         }
 
@@ -206,11 +214,10 @@ Page({
     console.log(idx)
     if (e.target.dataset.current == 0) {
       t.setData({
-        totalNum:0,
-        selectAll:false,
-        checkArr:[]
+        totalNum: 0,
+        selectAll: false,
+        checkArr: []
       })
-      // if(t)
       t.orderList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier })
     } else {
       t.orderList({ paied: 1, community_identifier: villageList[villageIdx].community_identifier })
@@ -277,7 +284,7 @@ Page({
         villageIdx,
         villageList
       })
-      t.orderList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier })
+      t.orderList({ paied: 0, community_identifier: villageList[villageIdx].community_identifier, page: t.data.pageIndex })
     } else {
       t.setData({
         changeCellType: true
@@ -311,6 +318,26 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    let t = this;
+    if (t.data.currentTab == 0) {
+      if (t.data.pageIndex < Math.ceil(t.data.totalNum / t.data.pageSize)) {
+        t.data.pageIndex++;
+        t.setData({
+          pageIndex: t.data.pageIndex
+        }, function () {
+          t.orderList({ paied: 0, community_identifier: t.data.villageList[t.data.villageIdx].community_identifier, page: t.data.pageIndex })
+        })
+      }
+    } else {
+      if (t.data.pageIndex < Math.ceil(t.data.totalNum / t.data.pageSize)) {
+        t.data.pageIndex++;
+        t.setData({
+          pageIndex: t.data.pageIndex
+        }, function () {
+          t.orderList({ paied: 0, community_identifier: t.data.villageList[t.data.villageIdx].community_identifier, page: t.data.pageIndex })
+        })
+      }
+    }
 
   },
 

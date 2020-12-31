@@ -67,7 +67,6 @@ Page({
   getNoticeList(param){
     api.noticeList(param,(res)=>{
       let data = res.data
-      console.log(data.data)
       if(data.code == 0){
         this.setData({
           noticeList:data.data.data

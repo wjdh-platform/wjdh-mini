@@ -14,7 +14,7 @@
         </picker>
         <image class="arrow" src="./../../../static/image/arrow.png"></image>
       </view>
-    <view class="column" wx:for="{{payList}}">
+    <view class="column" wx:for="{{payList}}" wx:if="{{payList.length>0}}">
     <view class="title">{{item.payment_name}}</view>
     <view class="listDetail">
       <text>交易单号：{{item.payment_number}}</text>
@@ -30,6 +30,7 @@
       </view>
     </view>
   </view>
+  <view class="noData" wx:if="{{payList.length==0}}">暂无数据</view>
   </view>
   
 </view>

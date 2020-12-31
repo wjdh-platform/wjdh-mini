@@ -104,6 +104,7 @@
   margin: 20rpx;
   border-radius: 50%;
 }
+
 picker-view-column{
   text-align: center;
 }

@@ -118,6 +118,10 @@ export const payment = (params, cb) => {
 export const shouquan = (params, cb) => {
   request('api/v1/house/shouquan', params, cb, 'put')
 }
+//解绑
+export const listJB = (params, cb) => {
+  request('api/v1/house/shouquan', params, cb, 'DELETE')
+}
 //订单列表
 export const orderList = (params, cb) => {
   request('api/v1/orders/list', params, cb, 'POST')
@@ -144,7 +148,7 @@ export const getCity = (params, cb) => {
 }
 //添加家属
 export const housesJiashuList = (params, cb) => {
-  request('api/v1/user/houseList', params, cb, 'POST')
+  request('api/v1/user/manager/houseList', params, cb, 'POST')
 }
 //提交报修
 export const submitRepair = (params, cb) => {
@@ -193,6 +197,10 @@ export const proposalList = (params, cb) => {
 //判断用户在该小区是否有房屋
 export const houseExist = (params, cb) => {
   request('api/v1/weapp/house', params, cb, 'POST')
+}
+//删除房屋
+export const houseDelete = (params, cb) => {
+  request('api/v1/user/houseList', params, cb, 'DELETE')
 }
 
 

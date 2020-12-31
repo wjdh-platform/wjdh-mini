@@ -4,7 +4,7 @@
   </change-cell>
   <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
   <block wx:if="{{noticeList.length>0}}">
-  <view class="column" wx:for="{{noticeList}}" data-id="{{item.announcement_id}}" bindtap="bindList">
+  <view class="column" wx:for="{{noticeList}}" data-id="{{item.announcement_id}}" bindtap="bindList" wx:key="announcement_id">
     <view class="top" wx:if="{{item.top!=null}}">{{item.top}}</view>
     <view class="title">{{item.title}}</view>
     <view class="introduction">

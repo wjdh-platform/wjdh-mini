@@ -83,6 +83,10 @@ Page({
         this.setData({
           payList: dataArr
         })
+      }else{
+        this.setData({
+          payList: []
+        })
       }
     })
   },

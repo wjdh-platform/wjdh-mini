@@ -125,10 +125,7 @@ picker{
   /* margin-left: 20rpx; */
   background: #F8F8F8 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC8AAAAvCAYAAABzJ5OsAAABO0lEQVRoQ+2aQWqEQBBFq4jBIVm4ljnQDELrDdxk4QVyjFzARTbeQBskOVBw7SIhQwwVmpAggUDhdDsI33X76/fvR2lrMwW4mqa5TZKkdNLjODZlWb4GKEMcQrRt2ydmPjhtEXkuiuIYoo5383VdX6dpeiL6DUaGYYirqvrwPQHv5vu+j6dpep8bjaJol2WZm5DXC+bncSJ5JVzABtgoUZkPAzbABtgsSADYLAgN3QbYAJsFCVwMG2vtjYjcEdH+TN8/t18R0f0frQci+vSk/8LMj8aYN7bWtiKSexJeRYaZO2NMwV3Xuf1mvEpVf0VOeZ7vtp38ppn3t5LfStiAKxPFu83FHlLKFVIPA/PKqMA8mFeigo9O/wWFbqNECN0G3UaJCroNus0CVIJis+k/4C6ZzZ49cObXOvXxBXiLfT+mZ9qPAAAAAElFTkSuQmCC") no-repeat center center;
   background-size: 46rpx 46rpx;
-
 }
-
-
 .verificationPhoto,.jobsPopup,.verificationPhotoJ{
   position: fixed;
   left: 0;

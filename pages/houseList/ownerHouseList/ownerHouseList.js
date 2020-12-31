@@ -10,23 +10,29 @@ Page({
    * 页面的初始数据
    */
   data: {
-    listType:false,
-    changeCellType:false,
-    title:'',
-    false:false,
-    backType:true
+    listType: false,
+    changeCellType: false,
+    title: '',
+    false: false,
+    backType: true,
+    listType: true,
+    listTypeJB: '解绑',
+    listTypeDel: '删除',
+    startX: 0, //开始坐标
+    startY: 0,
+    currentTab:0
   },
 
-  changeClose(res){
+  changeClose(res) {
     console.log(res)
     this.setData({
-      changeCellType:res.detail.changeCellType,
-      title:res.detail.community_name
+      changeCellType: res.detail.changeCellType,
+      title: res.detail.community_name
     })
   },
-  changePopupType(res){
+  changePopupType(res) {
     this.setData({
-      changeCellType:res.detail
+      changeCellType: res.detail
     })
   },
   closeBtn(res) {
@@ -35,57 +41,185 @@ Page({
     })
   },
 
-  bindListDetail(e){
-    console.log(e.currentTarget.dataset)
-    let id = e.currentTarget.dataset.houseid?e.currentTarget.dataset.houseid:'',
-         shenhe_id = e.currentTarget.dataset.shenheid?e.currentTarget.dataset.shenheid:'',
-         role = e.currentTarget.dataset.role?e.currentTarget.dataset.role:''
-         if(role == '业主'||shenhe_id){
-          wx.redirectTo({
-            url: '/pages/houseDetails/houseDetails?houseId='+id+'&role='+role+'&shenhe_id='+shenhe_id,
-          })
-         }else if(role != '业主'){
-          utils.showToast('只有业主才能查看房屋详情','none')
-         }
+  tabTap(e){
+    var t = this;
+    if(e.target.dataset.current == 0){
+      t.housesList({type:'bangding'})
+    }else{
+      t.housesList({type:'jiebang'})
+    }
+    if( t.data.currentTab === e.target.dataset.current ) {
+        return false;
+    } else {
+        t.setData( {
+            currentTab: e.target.dataset.current
+        })
+    }
+  },
+
+  bindListDetail(e) {
+    let id = e.currentTarget.dataset.houseid ? e.currentTarget.dataset.houseid : '',
+      shenhe_id = e.currentTarget.dataset.shenheid ? e.currentTarget.dataset.shenheid : '',
+      role = e.currentTarget.dataset.role ? e.currentTarget.dataset.role : '',
+      del = e.currentTarget.dataset.del ? e.currentTarget.dataset.del:''
+      if(del!=''){
+        utils.showToast('已经解绑房屋不能查看详情', 'none')
+        return
+      }
+    if (role == '业主' || shenhe_id) {
+      wx.redirectTo({
+        url: '/pages/houseDetails/houseDetails?houseId=' + id + '&role=' + role + '&shenhe_id=' + shenhe_id,
+      })
+    } else if (role != '业主') {
+      utils.showToast('只有业主才能查看房屋详情', 'none')
+    }
   },
 
   //获取列表
-  housesList(){
+  housesList(param) {
     let t = this
     // return new Promise((resolve, reject) => {
-    api.housesList({},(res)=>{
-      if(res.data.code == 0){
+    api.housesList(param, (res) => {
+      if (res.data.code == 0) {
         let list = res.data.data
-        if(list.length === 0){
+        if (list.length === 0) {
           t.setData({
             listType: false
           })
-        }else{
-          for(let i = 0; i<list.length;i++){
-            switch(list[i].status){
-              case 0: 
-              list[i].statusVal = '未通过审核'
-              break;
-              case 1: 
-              list[i].statusVal = '已通过审核'
-              break;
-              case 2: 
-              list[i].statusVal = '待审核'
-              break;
-            }
-          }
+        } else {
+          // for (let i = 0; i < list.length; i++) {
+          //   switch (list[i].status) {
+          //     case 0:
+          //       list[i].statusVal = '未通过审核'
+          //       break;
+          //     case 1:
+          //       list[i].statusVal = '已通过审核'
+          //       break;
+          //     case 2:
+          //       list[i].statusVal = '待审核'
+          //       break;
+          //   }
+          // }
+          let newArr = list.map(item => {
+            return { ...item, isActive: false }
+          })
           t.setData({
             listType: true,
           })
-        
-        t.setData({
-          houseList:list,
+
+          t.setData({
+            houseList: newArr,
+          })
+        }
+      }
+
+    })
+    // })
+  },
+
+  //手指触摸动作开始 记录起点X坐标
+  touchstart(e) {
+    let val = e.currentTarget.dataset
+    if(val.houseid&&val.houseid!=''){
+      this.setData({
+        startX: e.changedTouches[0].clientX,
+        startY: e.changedTouches[0].clientY
+      })
+    }
+    
+  },
+  //滑动事件处理
+  touchmove(e) {
+    let val = e.currentTarget.dataset
+    if(val.houseid&&val.houseid!=''){
+    let index = e.currentTarget.dataset.index;
+    let startX = this.data.startX;
+    let startY = this.data.startY;
+    let touchMoveX = e.changedTouches[0].clientX;
+    let touchMoveY = e.changedTouches[0].clientY;
+    let angle = this.angle({
+      X: startX,
+      Y: startY
+    }, {
+      X: touchMoveX,
+      Y: touchMoveY
+    });
+    if(val.del&&val.del!=''){
+      this.setData({
+        listType:false
+      })
+    }else{
+      this.setData({
+        listType:true
+      })
+    }
+    this.data.houseList.forEach((item, idx) => {
+      item.isActive = false;
+      if (Math.abs(angle) > 30) return;
+      if (idx == index) {
+        item.isActive = touchMoveX > startX ? false : true
+      }
+    });
+    //更新数据
+    this.setData({
+      houseList: this.data.houseList
+    })
+  }
+  },
+  /**
+* 计算滑动角度
+* @param {Object} start 起点坐标
+* @param {Object} end 终点坐标
+*/
+  angle(start, end) {
+    var _X = end.X - start.X,
+      _Y = end.Y - start.Y
+    //返回角度 /Math.atan()返回数字的反正切值
+    return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
+  },
+  //删除事件
+  del(e) {
+    console.log(e)
+    let idx = e.currentTarget.dataset.index,
+      t = this
+      if (t.data.listType) {
+        wx.showModal({
+          title: '提示',
+          content: '您确定申请解绑房屋吗？',
+          success(res) {
+            if (res.confirm) {
+                api.listJB({ people_house_id: t.data.houseList[idx].people_house_id }, (res) => {
+                  if(res.data.code == 0){
+                    t.housesList()
+                  }else{
+                    t.housesList()
+                    utils.showToast(res.data.msg,'none')
+                  }
+                })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      }else{
+        wx.showModal({
+          title: '提示',
+          content: '您确定删除房屋吗？',
+          success(res) {
+            if (res.confirm) {
+                api.houseDelete({people_house_id:t.data.houseList[idx].people_house_id},(res)=>{
+
+                })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
         })
       }
-      }
-      
-    })
-  // })
+    
+
+    
+
   },
 
   // housesList: function() {
@@ -116,7 +250,7 @@ Page({
   //         t.setData({
   //           listType: true,
   //         })
-        
+
   //       t.setData({
   //         houseList:list,
   //       })
@@ -152,8 +286,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
-    this.housesList()
+
+    this.housesList({type:'bangding'})
   },
 
   /**

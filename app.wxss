@@ -8,3 +8,9 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+.noData {
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+  padding: 100rpx 0;
+}

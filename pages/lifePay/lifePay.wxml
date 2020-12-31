@@ -3,21 +3,13 @@
   <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType" title="{{title}}" bindcloseBtn="closeBtn">
   </change-cell>
   <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
-  <!-- <view class="changeCell">
-    <view class="titleC">缴费小区*</view>
-    <picker bindchange="bindChangeCell" value="{{cellListIdx}}" range-key="cellName" range="{{cellList}}">
-      <view class="address">{{cellList[cellListIdx].cellName}}</view>
-    </picker>
-    <image class="arrow" src="./../../static/image/arrow.png"></image>
-  </view> -->
   <view class="payTab">
-    <!-- <view class="payTitle">缴费列表</view> -->
     <view class="tabCont">
       <view class="tabs  {{currentTab == 0?'active':''}}" data-current="0" bindtap="tabTap">待缴费</view>
       <view class="tabs {{currentTab == 1?'active':''}}" data-current="1" bindtap="tabTap">已缴费</view>
     </view>
     <view class="payList" wx:if="{{currentTab == 0}}">
-      <view wx:for="{{orderList}}" wx:if="{{orderList.length>0}}">
+      <view wx:for="{{orderList}}" wx:if="{{orderList.length>0}}" wx:key="id">
         <view class="orderList">
           <view class="checkBox">
             <image src="{{item.checked?'../../static/image/checkBoxY.png':'../../static/image/checkBoxN.png'}}"

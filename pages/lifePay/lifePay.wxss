@@ -85,7 +85,7 @@ page{
   position: absolute;
   right: 226rpx;
   bottom: 0;
-  z-index: 2;
+  z-index: 1;
 }
 .up::after{
   content: '';
