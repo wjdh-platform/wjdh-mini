@@ -10,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    listType: false,
+    // listType: false,
     changeCellType: false,
     title: '',
     false: false,
@@ -84,22 +84,10 @@ Page({
         let list = res.data.data
         if (list.length === 0) {
           t.setData({
-            listType: false
+            listType: false,
+            houseList:list
           })
         } else {
-          // for (let i = 0; i < list.length; i++) {
-          //   switch (list[i].status) {
-          //     case 0:
-          //       list[i].statusVal = '未通过审核'
-          //       break;
-          //     case 1:
-          //       list[i].statusVal = '已通过审核'
-          //       break;
-          //     case 2:
-          //       list[i].statusVal = '待审核'
-          //       break;
-          //   }
-          // }
           let newArr = list.map(item => {
             return { ...item, isActive: false }
           })
@@ -190,9 +178,9 @@ Page({
             if (res.confirm) {
                 api.listJB({ people_house_id: t.data.houseList[idx].people_house_id }, (res) => {
                   if(res.data.code == 0){
-                    t.housesList()
+                    t.housesList({type:'bangding'})
                   }else{
-                    t.housesList()
+                    t.housesList({type:'bangding'})
                     utils.showToast(res.data.msg,'none')
                   }
                 })
@@ -208,7 +196,11 @@ Page({
           success(res) {
             if (res.confirm) {
                 api.houseDelete({people_house_id:t.data.houseList[idx].people_house_id},(res)=>{
-
+                  if(res.data.code == 0){
+                    t.housesList({type:'jiebang'})
+                  }else{
+                    utils.showToast(res.data.msg)
+                  }
                 })
             } else if (res.cancel) {
               console.log('用户点击取消')

@@ -36,6 +36,11 @@ Component({
     //返回上一页
     returnPage() {
       wx.navigateBack();
+      let pages = getCurrentPages(); //页面栈
+      let prevPage = pages[pages.length - 2];  //上一个页面
+      prevPage .setData({//获取上级页面传的参数
+          title:this.data.title
+      })
     },
     /**
      * 获取胶囊按钮位置

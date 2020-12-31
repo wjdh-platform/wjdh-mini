@@ -22,7 +22,7 @@ Page({
     let t = this,
       val = e.detail.value
     if (val != t.data.houseListIdx) {
-      t.getPayList({ house_id: t.data.houseList[val].id })
+      t.getPayList({ house_id: t.data.houseList[val].people_house_id })
     }
     t.setData({
       houseListIdx: val

@@ -74,7 +74,7 @@ Page({
             api.listJB({ people_house_id: t.data.detailsData.yibangding[idx].people_house_id }, (res) => {
               if(res.data.code == 0){
                 utils.showToast(res.data.msg,'none')
-                this.getHouseDetails()
+                t.getHouseDetails()
               }else{
                 utils.showToast(res.data.msg,'none')
               }
