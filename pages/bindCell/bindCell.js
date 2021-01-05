@@ -534,8 +534,8 @@ Page({
         t.setData({
           unitsList: oldList,
           unitsType: true,
-          floorType: true,
-          roomType: true,
+          floorType: false,
+          roomType: false,
         })
       }
     })
@@ -567,7 +567,7 @@ Page({
         t.setData({
           floorList: oldList,
           floorType: true,
-          roomType: true,
+          roomType: false,
         })
       }
     })
@@ -844,9 +844,7 @@ Page({
       dataList = data.dataList,
       param = {},
       reg = /^1[3456789]\d{9}$/,
-      villageIdx = utils.getItem('villageIdx'),
-      id = data.homeList[data.homeListIdx].people_house_id;
-    console.log(id)
+      villageIdx = utils.getItem('villageIdx')
     // return false
     if (t.data.pageEntry == 'family') {
       if(t.data.homeListIdx == 0){
@@ -890,8 +888,6 @@ Page({
         return
       }
       else {
-        console.log('twice:'+id)
-        // return false
         param = {
           who: '0',
           phone: data.phoneVal ? data.phoneVal : val.phone,
@@ -900,7 +896,7 @@ Page({
           photo: data.photoUrl ? data.photoUrl : data.examineData.photo,
           job: val.jobName&&val.jobName !=''?data.job+ '-'+val.jobName:data.job,
           company: val.company ? val.company : data.examineData.job,
-          house_id: id,
+          house_id: data.homeList[data.homeListIdx].people_house_id,
           zzmm: dataList.zzmm[data.zzmmIdx].key,
           tyjr: dataList.tyjr[data.twjrIdx].key,
           dibao: dataList.dibao[data.sfdbIdx].key,
@@ -908,7 +904,6 @@ Page({
           choice:1,
           role: dataList.role[data.shipIdx].key,
         }
-        console.log('house_id-first:',param.house_id)
         
       }
     } else {
@@ -1027,8 +1022,7 @@ Page({
         
       }
     }
-    console.log('third:'+id)
-    console.log(param.house_id)
+
     api.yibiaosanshi(param, (res) => {
       if (res.data.code == 1) {
         utils.showToast(res.data.msg, 'none')
@@ -1223,26 +1217,21 @@ Page({
 
 
   jobsTab(e){
-    console.log(e)
     let t = this,
          idx = e.currentTarget.dataset.idx,
          id = e.currentTarget.dataset.id,
          jobName = e.currentTarget.dataset.name
-         console.log(jobName)
          if(jobName.indexOf("其他")!==-1){
-          //  utils.setItem('jobOther',true)
            t.setData({
             jobOther:true
            })
          }else{
-          // utils.setItem('jobOther',false)
           t.setData({
             jobOther:false
            })
          }
     t.setData({
       jobsText: t.data.jobsList[idx].job_name,
-      
       job:t.data.bigJobsText+'-'+t.data.smallJobsText+'-'+t.data.jobsList[idx].job_name
     })
   },
@@ -1253,7 +1242,6 @@ Page({
   },
   jobsBtnClo(){
     let t =this
-   
     t.setData({
       jobsPopup:false,
       job:'',
@@ -1273,10 +1261,8 @@ Page({
       arr = [],
       villageList = utils.getItem('villageList'),
       villageIdx = utils.getItem('villageIdx')
-      // jobOther = utils.getItem('jobOther')
       t.setData({
         navH: app.globalData.navHeight,
-        // jobOther
       })
     t.bellInitialize();
     
@@ -1334,14 +1320,7 @@ Page({
         })
         t.getBuildingsList(villageList, villageIdx)
       }
-
     }
-
-
-
-
-
-
   },
 
   /**
