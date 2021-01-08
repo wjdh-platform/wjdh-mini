@@ -64,8 +64,11 @@ Page({
   jiebang(e){
     let shouquan = e.currentTarget.dataset.shouquan,
     idx = e.currentTarget.dataset.idx,
-    t = this
+    t = this,
+    jiebang = e.currentTarget.dataset.jiebang
+    
     if( shouquan&&shouquan != '管理员'){
+      if(jiebang == '解绑'){
       wx.showModal({
         title: '提示',
         content: '您确定要解绑家庭成员'+t.data.detailsData.yibangding[idx].name+'吗？',
@@ -85,7 +88,9 @@ Page({
         }
       })
       
-      
+    }else{
+      utils.showToast('解绑审核中，请稍后...','none')
+    }
     }
     
   },

@@ -25,10 +25,17 @@ Page({
 
   changeClose(res) {
     console.log(res)
+    let villageList = utils.getItem('villageList'),
+    villageIdx = utils.getItem('villageIdx'),
+    t = this
     this.setData({
       changeCellType: res.detail.changeCellType,
       title: res.detail.community_name
     })
+    if(villageIdx&&villageIdx!=0){
+      t.housesList({type:'bangding',community_identifier:villageList[villageIdx].community_identifier})
+    }
+    
   },
   changePopupType(res) {
     this.setData({
@@ -69,7 +76,7 @@ Page({
         return
       }
     if (role == '业主' || shenhe_id) {
-      wx.redirectTo({
+      wx.navigateTo({
         url: '/pages/houseDetails/houseDetails?houseId=' + id + '&role=' + role + '&shenhe_id=' + shenhe_id,
       })
     } else if (role != '业主') {
@@ -109,8 +116,10 @@ Page({
 
   //手指触摸动作开始 记录起点X坐标
   touchstart(e) {
+
     let val = e.currentTarget.dataset
-    if(val.houseid&&val.houseid!=''){
+    console.log(val)
+    if(val.houseid&&val.houseid!=''&&val.status != '解绑审核中'){
       this.setData({
         startX: e.changedTouches[0].clientX,
         startY: e.changedTouches[0].clientY

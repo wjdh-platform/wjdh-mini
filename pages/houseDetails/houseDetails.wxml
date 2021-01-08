@@ -45,7 +45,7 @@
         </view> 
         <view class="btnType {{item.charge == '授权支付'?'green':'red'}}" wx:if="{{item.charge}}" bindtap="bindCharge" data-idx="{{index}}" data-id="{{item.people_house_id}}"   data-charge="{{item.charge}}">{{item.charge}}
         </view>
-        <view class="btnType {{item.jiebang == '解绑'?'green':'yellow'}}" bindtap="jiebang" data-shouquan="{{item.shouquan}}" data-idx="{{index}}" wx:if="{{item.shouquan!='管理员'}}">{{item.jiebang}}</view>
+        <view class="btnType {{item.jiebang == '解绑'?'green':'yellow'}}" bindtap="jiebang" data-shouquan="{{item.shouquan}}" data-idx="{{index}}" wx:if="{{item.shouquan!='管理员'&&item.shouquan!='邀请激活'}}" data-jiebang="{{item.jiebang}}">{{item.jiebang}}</view>
         </view>
         
       </view>

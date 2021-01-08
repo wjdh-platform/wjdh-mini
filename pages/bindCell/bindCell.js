@@ -802,15 +802,15 @@ Page({
 
   delPhoto() {
     let t = this
-    if (t.data.shipIdx == 1) {
-      t.setData({
-        inputDisable: true
-      })
-    } else {
-      t.setData({
-        inputDisable: false
-      })
-    }
+    // if (t.data.shipIdx == 1) {
+    //   t.setData({
+    //     inputDisable: true
+    //   })
+    // } else {
+    //   t.setData({
+    //     inputDisable: false
+    //   })
+    // }
     t.setData({
       imgSrc: '',
       'examineData.photo': '',
@@ -852,9 +852,9 @@ Page({
         return
       }
       if (data.inputDisable) {
-        if (data.examineData && data.examineData.idcard && data.examineData.name && data.examineData.photo) {
+        if (data.examineData && data.examineData.idcard && data.examineData.name || data.examineData.photo) {
         } else if (data.idcardData == '') {
-          utils.showToast('请识别身份分信息', 'none')
+          utils.showToast('请识别身份信息', 'none')
           return
         } else if (data.photoUrl == '') {
           utils.showToast('请上传照片', 'none')
@@ -942,10 +942,10 @@ Page({
         }
       }
       if (data.inputDisable) {
-        if (data.examineData && data.examineData.idcard && data.examineData.name && data.examineData.photo) {
+        if (data.examineData && data.examineData.idcard && data.examineData.name || data.examineData.photo) {
 
         } else if (data.idcardData == '') {
-          utils.showToast('请识别身份分信息', 'none')
+          utils.showToast('请识别身份信息', 'none')
           return
         } else if (data.photoUrl == '') {
           utils.showToast('请上传照片', 'none')
@@ -1279,7 +1279,8 @@ Page({
     }
     if (options.type == 'family') {
       t.setData({
-        examineData:''
+        examineData:'',
+        inputDisable:false
       })
     if(villageIdx&&villageIdx!=0){
         t.setData({

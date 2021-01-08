@@ -126,3 +126,6 @@ page{
   background: #50DABE;
   border-radius: 3rpx;
 }
+.list{
+  overflow: hidden;
+}

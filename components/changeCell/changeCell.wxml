@@ -24,7 +24,7 @@
       <view class="enterBtn" bindtap="enterBtn">确定</view>
     </view>
   </view>
-  <view class="changeCellImg" wx:else bindtap="changePopupType">
+  <view class="changeCellImg" wx:else bindtap="changePopupType" style="bottom:{{buttonTop}}px;right:{{buttonLeft}}px;">
     <image src="../../static/image/cellIcon.png"></image>
     <view class="changeText">切换小区</view>
   </view>
