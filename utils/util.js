@@ -125,6 +125,6 @@ module.exports = {
   removeItem: removeItem,
   checkLogin: checkLogin,
   showToast,
-  token,
-  codeToken,
+  // token,
+  // codeToken,
 }

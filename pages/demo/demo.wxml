@@ -26,12 +26,13 @@
   </picker-view-column>
 </picker-view> -->
 
-  <view class="item {{item.isActive ? 'active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{items}}" wx:key="index">
+  <!-- <view class="item {{item.isActive ? 'active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{items}}" wx:key="index">
       <view class="info">
           {{item.content}}
           <view class="author">—— 向左滑</view>
         </view>
       <view class="del" data-index="{{index}}" bindtap="del">删除</view>
-  </view>
+  </view> -->
+  <map longitude="{{longitude}}" latitude="{{latitude}}" style="width:98%;height:600rpx"></map>
 
 </view>

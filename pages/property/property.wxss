@@ -41,6 +41,7 @@ page{
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, .4);
+  z-index: 99;
 }
 .activitionCont{
   width: 522rpx;

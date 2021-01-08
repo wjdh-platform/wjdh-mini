@@ -110,6 +110,16 @@ Page({
       }
     })
   },
+  getPins() {
+    let t = this
+    api.getPins({}, (res) => {
+      if (res.data.code == 0) {
+        t.setData({
+          pinsText: res.data.data
+        })
+      }
+    })
+  },
   //验证手机号
   verificationBtn() {
     let t = this
@@ -255,6 +265,19 @@ Page({
       idx = e.currentTarget.dataset.idx,
       userRoles = utils.getItem('userRoles'),
       arr = []
+      switch (idx) {
+        case 6://公告通知
+          wx.navigateTo({
+            url: '/pages/notice/notice',
+          }); 
+          break;
+        case 7://应急电话
+          wx.navigateTo({
+            url: '/pages/phoneCall/phoneCall',
+          });
+          break;
+          return
+      }
     for (let i = 0; i < userRoles.length; i++) {
       let arrN = userRoles[i].name;
       arr.push(arrN)
@@ -290,9 +313,6 @@ Page({
                 wx.navigateTo({
                   url: '/pages/proposal/proposal',
                 });
-                // wx.navigateTo({
-                //   url: '/pages/visitor/visitor',
-                // });
                 break;
             }
           } else if (arr.includes('NewMember')) {
@@ -301,7 +321,9 @@ Page({
             utils.showToast('需要等待物业审核通过才能访问', 'none')
           }
         }else{
-          utils.showToast('您在'+t.data.villageList[t.data.villageIdx].community_name+'没有房屋或者房屋正在审核中', 'none')
+            utils.showToast('您在'+t.data.villageList[t.data.villageIdx].community_name+'没有房屋或者房屋正在审核中', 'none')
+       
+          
         }
       }
 
@@ -317,19 +339,7 @@ Page({
         url: '/pages/login/login',
       })
     }
-    switch (idx) {
-      case 6://公告通知
-        wx.navigateTo({
-          url: '/pages/notice/notice',
-        });
-        break;
-      case 7://应急电话
-        wx.navigateTo({
-          url: '/pages/phoneCall/phoneCall',
-        });
-        break;
-        return
-    }
+    
   },
 
 
@@ -376,32 +386,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-    let token = utils.getItem('accessToken'),
-      userRoles = utils.getItem('userRoles'),
-      tipsNone = utils.getItem('tipsNone'),
-      villageList = utils.getItem('villageList'),
-      villageIdx = utils.getItem('villageIdx'),
-      t = this,
-      arr = []
-    t.setData({
-      navH: app.globalData.navHeight,
-      villageList,
-      villageIdx
-    })
-    if(villageIdx&&villageIdx!=0){
-      t.houseExist({community_identifier:villageList[villageIdx].community_identifier})
-    }
-
+    let arr = [],
+    t = this,
+    token = utils.getItem('accessToken'),
+    userRoles = utils.getItem('userRoles')
     for (let i = 0; i < userRoles.length; i++) {
       let arrN = userRoles[i].name;
       arr.push(arrN)
-    }
-    // console.log(arr)
-    if (tipsNone&&tipsNone == 'none') {
-      t.setData({
-        popupTips: false
-      })
     }
 
     //  t.getVillage()
@@ -413,13 +404,17 @@ Page({
         success(res) {
           if (res.confirm) {
             if (!token) {
+              console.log('没有token')
               wx.navigateTo({
-                url: '/pages/login/login',
+                url: '/pages/login/login?type=activation',
+              })
+            }else{
+              console.log('有token')
+              t.setData({
+                activationType: true
               })
             }
-            t.setData({
-              activationType: true
-            })
+            
           } else if (res.cancel) {
             utils.showToast("如果想再次激活必须绑定小区", 'none')
           }
@@ -445,9 +440,43 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let t = this
-    t.getRoles()
-    //  t.getVillage()
+    
+    let token = utils.getItem('accessToken'),
+      userRoles = utils.getItem('userRoles'),
+      tipsNone = utils.getItem('tipsNone'),
+      villageList = utils.getItem('villageList'),
+      villageIdx = utils.getItem('villageIdx'),
+      t = this,
+      arr = []
+      t.getRoles()
+      t.getPins()
+    t.setData({
+      navH: app.globalData.navHeight,
+      villageList,
+      villageIdx
+    })
+    
+    if(villageIdx&&villageIdx!=0){
+      t.houseExist({community_identifier:villageList[villageIdx].community_identifier})
+      t.setData({
+        changeCellType:false
+      })
+    }else{
+      t.setData({
+        changeCellType:true
+      })
+    }
+
+    for (let i = 0; i < userRoles.length; i++) {
+      let arrN = userRoles[i].name;
+      arr.push(arrN)
+    }
+    // console.log(arr)
+    if (tipsNone&&tipsNone == 'none') {
+      t.setData({
+        popupTips: false
+      })
+    }
   },
 
   /**

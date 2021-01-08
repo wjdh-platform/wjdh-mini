@@ -223,14 +223,17 @@ page {
 
 .btnType {
   position: relative;
-  width: 125rpx;
-  height: 45rpx;
+  /* width: 125rpx; */
+  /* height: 45rpx; */
   text-align: center;
   line-height: 45rpx;
   border-radius: 10rpx;
   margin-right: 20rpx;
+  padding: 0 10rpx;
 }
-
+.btnType:last-child{
+  margin-right: 0;
+}
 .operation {
   display: flex;
   align-items: center;

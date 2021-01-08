@@ -8,23 +8,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list:[{
-      title:'温馨提示——请注意厨房用火安全',
-      wyName:'晨曦家园物业',
-      time:'一天前'
-    },{
-      title:'关于高空抛物的温馨提示',
-      wyName:'晨曦家园物业',
-      time:'2020年11月20日'
-    },{
-      title:'关于小区停水的通知',
-      wyName:'晨曦家园物业',
-      time:'2020年10月5日'
-    },{
-      title:'国庆节放假的温馨提示',
-      wyName:'晨曦家园物业',
-      time:'2020年9月29日'
-    }],
 
     changeCellType:false,
     title:'',

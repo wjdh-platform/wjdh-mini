@@ -7,11 +7,7 @@
       <view class="popupTitle">温馨提示</view>
       <view class="closePopup" bindtap="closePopupTips"></view>
       <view class="tipsText">
-        <text>进入绑定房屋的情况</text>
-        <text>1. 如果您是业主</text>
-        <text>2. 如果您是未被绑定过的家属或者租客</text>
-        <text>进入绑定房屋的情况</text>
-        <text>1. 您已经被业主授权了绑定其他家属</text>
+        <text wx:for="{{pinsText}}">{{item}}</text>
       </view>
       <view class="tipsBtn" bindtap="tipsNone">已知悉，不再提示</view>
     </view>

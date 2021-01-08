@@ -111,6 +111,11 @@ Page({
           wyPhone:''
         })
       }
+    }else{
+      utils.showToast("如需查看物业电话，需要点击切换小区按钮选择小区",'none')
+      t.setData({
+        wyPhone:''
+      })
     }
     t.setData({
       navH: app.globalData.navHeight

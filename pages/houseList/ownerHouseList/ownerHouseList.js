@@ -43,10 +43,12 @@ Page({
 
   tabTap(e){
     var t = this;
+    let villageList = utils.getItem('villageList'),
+    villageIdx = utils.getItem('villageIdx')
     if(e.target.dataset.current == 0){
-      t.housesList({type:'bangding'})
+      t.housesList({type:'bangding',community_identifier:villageList[villageIdx].community_identifier})
     }else{
-      t.housesList({type:'jiebang'})
+      t.housesList({type:'jiebang',community_identifier:villageList[villageIdx].community_identifier})
     }
     if( t.data.currentTab === e.target.dataset.current ) {
         return false;
@@ -167,7 +169,8 @@ Page({
   },
   //删除事件
   del(e) {
-    console.log(e)
+    let villageList = utils.getItem('villageList'),
+    villageIdx = utils.getItem('villageIdx')
     let idx = e.currentTarget.dataset.index,
       t = this
       if (t.data.listType) {
@@ -178,9 +181,9 @@ Page({
             if (res.confirm) {
                 api.listJB({ people_house_id: t.data.houseList[idx].people_house_id }, (res) => {
                   if(res.data.code == 0){
-                    t.housesList({type:'bangding'})
+                    t.housesList({type:'bangding',community_identifier:villageList[villageIdx].community_identifier})
                   }else{
-                    t.housesList({type:'bangding'})
+                    t.housesList({type:'bangding',community_identifier:villageList[villageIdx].community_identifier})
                     utils.showToast(res.data.msg,'none')
                   }
                 })
@@ -197,7 +200,7 @@ Page({
             if (res.confirm) {
                 api.houseDelete({people_house_id:t.data.houseList[idx].people_house_id},(res)=>{
                   if(res.data.code == 0){
-                    t.housesList({type:'jiebang'})
+                    t.housesList({type:'jiebang',community_identifier:villageList[villageIdx].community_identifier})
                   }else{
                     utils.showToast(res.data.msg)
                   }
@@ -214,48 +217,7 @@ Page({
 
   },
 
-  // housesList: function() {
-  //   let parmas = {},
-  //        t = this
-  //        housesList(parmas).then((res)=> {
-  //     console.log(res)
-  //     if(res.data.code == 0){
-  //       let list = res.data.data
-  //       if(list.length === 0){
-  //         t.setData({
-  //           listType: false
-  //         })
-  //       }else{
-  //         for(let i = 0; i<list.length;i++){
-  //           switch(list[i].status){
-  //             case 0: 
-  //             list[i].statusVal = '未通过审核'
-  //             break;
-  //             case 1: 
-  //             list[i].statusVal = '已通过审核'
-  //             break;
-  //             case 2: 
-  //             list[i].statusVal = '待审核'
-  //             break;
-  //           }
-  //         }
-  //         t.setData({
-  //           listType: true,
-  //         })
-
-  //       t.setData({
-  //         houseList:list,
-  //       })
-  //     }
-  //     }
-  //   })
-  // },
-
-
-  // async init () {
-  //   await utils.token()
-  //   await this.housesList()
-  // },
+  
 
   /**
    * 生命周期函数--监听页面加载
@@ -278,8 +240,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
-    this.housesList({type:'bangding'})
+    let villageList = utils.getItem('villageList'),
+    villageIdx = utils.getItem('villageIdx')
+    this.housesList({type:'bangding',community_identifier:villageList[villageIdx].community_identifier})
   },
 
   /**

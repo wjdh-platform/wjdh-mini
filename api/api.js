@@ -202,6 +202,10 @@ export const houseExist = (params, cb) => {
 export const houseDelete = (params, cb) => {
   request('api/v1/user/houseList', params, cb, 'DELETE')
 }
+//获得温馨提示
+export const getPins = (params, cb) => {
+  request('api/v1/pins', params, cb, 'POST')
+}
 
 
 

@@ -61,6 +61,14 @@ Page({
           utils.setItem('userRoles',res.data.roles)
           utils.setItem('timestamp1', currentTime)
           wx.navigateBack({})
+          if(t.data.pageType == 'activation'){
+            let pages = getCurrentPages(); //页面栈
+            let prevPage = pages[pages.length - 2];  //上一个页面
+            prevPage .setData({//获取上级页面传的参数
+              activationType:true
+            })
+          }
+          
         }
       })
     }
@@ -153,6 +161,13 @@ Page({
             utils.setItem('userRoles',res.data.roles)
             utils.setItem('timestamp1', currentTime)
             wx.navigateBack({})
+            if(t.data.pageType == 'activation'){
+              let pages = getCurrentPages(); //页面栈
+              let prevPage = pages[pages.length - 2];  //上一个页面
+              prevPage .setData({//获取上级页面传的参数
+                activationType:true
+              })
+            }
           }
         })
         
@@ -217,8 +232,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let t = this
-    utils.token()
+console.log(options)
+    let t = this,
+    pageType = options.type
+    // utils.token()
+    t.setData({
+      pageType
+    })
     wx.login({
       success: res => {
         if(res.code){

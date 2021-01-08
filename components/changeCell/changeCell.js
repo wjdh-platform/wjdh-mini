@@ -54,7 +54,13 @@ Component({
       utils.setItem('villageIdx', e.detail.value)
     },
     closePopup() {
-      this.triggerEvent('closeBtn', false)
+      let villageIdx = utils.getItem('villageIdx')
+      if(villageIdx){
+        this.triggerEvent('closeBtn', false)
+      }else{
+        utils.showToast('必须选择小区后才能进行后续操作！','none')
+      }
+      
     },
     changePopupType() {
       this.triggerEvent('changePopupType', true)
