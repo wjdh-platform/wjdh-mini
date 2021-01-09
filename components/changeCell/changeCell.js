@@ -2,6 +2,7 @@
 import * as api from '../../api/api'
 import utils from '../../utils/util.js'
 const app = getApp();
+var startPoint
 Component({
   /**
    * 组件的属性列表
@@ -27,8 +28,8 @@ Component({
     cityIdx: 0,
     cellType: false,
     cityType: false,
-    buttonTop: '120',
-    buttonLeft: 0,
+    windowHeight:'',
+    windowWidth:''
   },
 
 
@@ -39,6 +40,17 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    getsize(){
+      let that=this;
+      wx.getSystemInfo({
+        success(res) {
+          that.setData({
+            windowHeight:res.windowHeight,
+            windowWidth:res.windowWidth
+          })
+        },
+      })
+    },
     bindvillageList(e) {
       let t = this,
         villageIdx = utils.getItem('villageIdx')
@@ -130,6 +142,8 @@ Component({
         }
       })
     },
+    //以下是按钮拖动事件
+  
   },
   attached() {
     //请求数据(业务逻辑)
@@ -140,6 +154,7 @@ Component({
          cityIdx = utils.getItem('cityIdx'),
          villageList = utils.getItem('villageList'),
          villageIdx = utils.getItem('villageIdx')
+         t.getsize();
          if(villageIdx){
            t.setData({
             provincesData,

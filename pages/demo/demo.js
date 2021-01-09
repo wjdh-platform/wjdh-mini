@@ -27,8 +27,11 @@ Page({
 
       'content': '没有去过的地方，都叫远方3。'
 
-    }]
+    }],
 
+    countPic:9,//上传图片最大数量
+    showImgUrl: "", //路径拼接，一般上传返回的都是文件名，
+    uploadImgUrl:''//图片的上传的路径
 
 
 
@@ -48,17 +51,17 @@ Page({
 
     })
 
-    wx.getLocation({
-      type: 'wgs84',
-      success: (res) => {
-        var latitude = res.latitude // 纬度
-        var longitude = res.longitude // 经度
-        this.setData({
-          latitude,
-          longitude
-        })
-      }
-    })
+    // wx.getLocation({
+    //   type: 'wgs84',
+    //   success: (res) => {
+    //     var latitude = res.latitude // 纬度
+    //     var longitude = res.longitude // 经度
+    //     this.setData({
+    //       latitude,
+    //       longitude
+    //     })
+    //   }
+    // })
   },
   //手指触摸动作开始 记录起点X坐标
 

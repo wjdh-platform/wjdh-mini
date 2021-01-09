@@ -731,11 +731,11 @@ Page({
             var canvasWidth = res.width
             var canvasHeight = res.height;
             _this.setData({
-              aaa: photo.tempFilePaths[0],
+              // aaa: photo.tempFilePaths[0],
               canvasWidth2: res.width,
               canvasHeight2: res.height
             })
-            // 保证宽高均在200以内
+            // 保证宽高均在300以内
             while (canvasWidth > 300 || canvasHeight > 300) {
               //比例取整
               canvasWidth = Math.trunc(res.width / ratio)
@@ -753,7 +753,7 @@ Page({
               wx.canvasToTempFilePath({
                 canvasId: 'photo_canvas',
                 success: function (res) {
-                  // console.log(res.tempFilePath)
+                  console.log(res.tempFilePath)
                   _this.setData({
                     imgSrc: res.tempFilePath
                   })

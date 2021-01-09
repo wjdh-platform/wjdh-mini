@@ -119,7 +119,7 @@ Page({
 
     let val = e.currentTarget.dataset
     console.log(val)
-    if(val.houseid&&val.houseid!=''&&val.status != '解绑审核中'){
+    if(val.houseid&&val.houseid!=''&&val.status === '审核已通过'){
       this.setData({
         startX: e.changedTouches[0].clientX,
         startY: e.changedTouches[0].clientY

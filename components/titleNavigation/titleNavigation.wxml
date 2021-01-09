@@ -14,7 +14,7 @@
         <image src="../../static/icon/homeIcon.png"></image>
       </view> -->
     </view>
-    <view class="title">万家灯火{{title!=''?'-'+title:''}}</view>
+    <view class="title">{{title!=''?title:'万家灯火'}}</view>
     <!--  商品详情页结束-->
   </view>
 </view>

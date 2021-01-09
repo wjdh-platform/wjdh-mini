@@ -1,7 +1,7 @@
 /* pages/personal/personal.wxss */
 
 .headerBg{
-  background: url('https://wq.mgg.cool/app/css/121.jpg') no-repeat;
+  background: url('https://tc.mg.cool/mini/bg/personalBg.jpg') no-repeat;
   background-size: contain;
   width: 750rpx;
   height: 246rpx;

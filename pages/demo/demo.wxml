@@ -34,6 +34,8 @@
       <view class="del" data-index="{{index}}" bindtap="del">删除</view>
   </view> -->
   <!-- <map longitude="{{longitude}}" latitude="{{latitude}}" style="width:98%;height:600rpx"></map> -->
+  <!-- <uploadImages bindmyevent="myEventListener" count='{{countPic}}' showUrl="{{showImgUrl}}" uploadUrl="{{uploadImgUrl}}"></uploadImages> -->
+
   
 
 </view>

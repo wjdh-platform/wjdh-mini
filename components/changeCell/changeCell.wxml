@@ -4,7 +4,8 @@
     <view class="changeCont">
       <view class="closePopup" bindtap="closePopup"></view>
       <view class="popupTitle">切换小区</view>
-      <picker bindchange="bindProvincesList" value="{{provincesIdx}}" range="{{provincesData}}" range-key="province_name">
+      <picker bindchange="bindProvincesList" value="{{provincesIdx}}" range="{{provincesData}}"
+        range-key="province_name">
         <view class="changePicker">
           {{provincesData[provincesIdx].province_name}}
         </view>
@@ -24,8 +25,12 @@
       <view class="enterBtn" bindtap="enterBtn">确定</view>
     </view>
   </view>
-  <view class="changeCellImg" wx:else bindtap="changePopupType" style="bottom:{{buttonTop}}px;right:{{buttonLeft}}px;">
-    <image src="../../static/image/cellIcon.png"></image>
-    <view class="changeText">切换小区</view>
-  </view>
+  <movable-area class="movable-area" wx:else>
+    <movable-view x="{{windowWidth}}" y="{{windowHeight}}" class="movable-view" direction='all' catchtap="bindtapdianhua">
+    <view class="changeCellImg" bindtap="changePopupType">
+        <image src="../../static/image/cellIcon.png"></image>
+        <view class="changeText">切换小区</view>
+    </view>
+  </movable-view>
+  </movable-area>
 </view>
