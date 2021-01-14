@@ -238,19 +238,13 @@ Page({
       dataList = t.data.orderList
     dataList[idx].isShow = !dataList[idx].isShow
     if (dataList[idx].isShow) {
-      t.packUp(dataList, idx);
+      utils.packUp(dataList, idx);
     }
     t.setData({
       orderList: dataList
     })
   },
-  packUp(data, index) {
-    for (let i = 0, len = data.length; i < len; i++) {
-      if (index != i) {
-        data[i].isShow = false
-      }
-    }
-  },
+  
   /**
    * 生命周期函数--监听页面加载
    */

@@ -1,0 +1,33 @@
+/**index.wxss**/
+page{
+  background: #fff;
+}
+ec-canvas {
+  width: 100%;
+  height: 100%;
+}
+.container {
+  margin-top: 50rpx;
+  width: 750rpx;
+  height: 900rpx;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+} 
+picker{
+  display: inline-block;
+  margin-right: 30rpx;
+}
+.myTW{
+  width: 425rpx;
+  height: 75rpx;
+  background: #50DABE;
+  border-radius: 10rpx;
+  text-align: center;
+  line-height: 75rpx;
+  color: #fff;
+  font-size: 30rpx;
+}

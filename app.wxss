@@ -14,3 +14,9 @@
   text-align: center;
   padding: 100rpx 0;
 }
+.green{
+  color: #50DABE !important;
+}
+.placeholder{
+  color: #C6C6C6;
+}

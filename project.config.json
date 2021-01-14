@@ -165,8 +165,8 @@
           "scene": null
         },
         {
-          "name": "demo",
-          "pathName": "pages/demo/demo",
+          "name": "我的体温",
+          "pathName": "pages/epidemic/wdtw/wdtw",
           "query": "",
           "scene": null
         },
@@ -191,6 +191,37 @@
         {
           "name": "投诉建议列表",
           "pathName": "pages/houseList/proposalList/repairList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "发布",
+          "pathName": "pages/forum/release/release",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "论坛列表",
+          "pathName": "pages/forum/list/list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "疫情上报",
+          "pathName": "pages/epidemic/report/report",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "体温上报",
+          "pathName": "pages/epidemic/twsb/twsb",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "疫情举报列表",
+          "pathName": "pages/epidemic/reportList/reportList",
+          "query": "",
           "scene": null
         }
       ]

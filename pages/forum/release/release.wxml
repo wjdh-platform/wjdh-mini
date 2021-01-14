@@ -1,0 +1,31 @@
+<!--pages/forum/release/release.wxml-->
+<view class="" style="padding-top:{{navH}}px">
+  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType"
+    title="{{title}}" bindcloseBtn="closeBtn">
+  </change-cell>
+  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
+  <form catchsubmit="formSubmit" catchreset="formReset">
+  <view class="release">
+    <view class="releaseCont">
+      <view class="grouping" bindtap="bindGroup">
+        <image class="groupingIcon" src="../../../static/image/groupingIcon.png"></image>
+        <text>{{categoriesType ?'选择分组':categoriesData[categoriesIdx].category_name}}</text>
+        <image class="arrow" src="../../../static/image/arrow.png"></image>
+      </view>
+      <view class="title"><input name="title" class="input" placeholder="输入标题（4～100个汉字）" placeholder-class="placeholder" /></view>
+      <textarea name="content" placeholder-class="placeholder" placeholder="请输入论坛内容（4～2000个汉字）" class="textarea" maxlength="2000" />
+      <view class="updateImg">
+        <upload-images bindmyevent="myEventListener" count="{{count}}" uploadUrl="{{uploadUrl}}" showUrl="{{showUrl}}"></upload-images>
+      </view>
+    </view>
+  </view>
+  <button class="releaseBtn" formType="submit">发布</button>
+  </form>
+  <view class="groupingCont"  wx:if="{{groupingType}}" style="top:{{navH+44}}px">
+    <view class="groupingClo">
+      <view wx:for="{{categoriesData}}" class="groupingItem" bindtap="bindCategories" data-idx="{{index}}">
+        <view class="item {{item.isShow?'green':''}}">{{item.category_name}}</view>
+      </view>
+    </view>
+  </view>
+</view>

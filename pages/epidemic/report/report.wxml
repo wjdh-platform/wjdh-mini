@@ -1,0 +1,35 @@
+<!--pages/epidemic/report/report.wxml-->
+<view class="report" style="padding-top:{{navH}}px">
+  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType"
+    title="{{title}}" bindcloseBtn="closeBtn">
+  </change-cell>
+  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
+  <form catchsubmit="formSubmit">
+    <view class="reportCont">
+
+      <view class="column">
+        <text>地点</text>
+        <input class="addressInput" name="address" placeholder-class="placeholder" placeholder="请输入举报地点" />
+      </view>
+      <view class="column">
+        <text>事件</text>
+        <picker bindchange="bindEvent" value="{{eventIdx}}" range="{{eventArr}}">
+          <view class="picker">
+            {{eventArr[eventIdx]}}
+          </view>
+        </picker>
+        <image class="arrow" src="../../../static/image/arrow.png"></image>
+      </view>
+      <view class="columnO">
+        <text>简单描述你举报内容（不超过300字）</text>
+        <textarea name="intro" class="intro" bindinput="introduction" value="{{text_valued}}"
+          maxlength="300"><text class="currentWordNumber">{{currentWordNumber|0}}/{{max}}</text></textarea>
+      </view>
+      <radio-group name="radio">
+        <label><radio color="#50DABE" value="{{checked}}" /></label><text>匿名举报</text>
+      </radio-group>
+    </view>
+
+    <button class="submitBtn" formType="submit">提交</button>
+  </form>
+</view>

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "ec-canvas": "../../../ec-canvas/ec-canvas",
+    "change-cell":"/components/changeCell/changeCell",
+    "title-Navigation": "/components/titleNavigation/titleNavigation"
+  },
+  "navigationStyle":"default",
+  "navigationBarTitleText":"我的体温"
+}

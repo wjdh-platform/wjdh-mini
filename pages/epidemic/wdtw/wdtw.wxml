@@ -1,0 +1,11 @@
+<!-- <view class="container" style="padding-top:{{navH}}px"> -->
+  <view class="container"> 
+  <!-- <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType"
+    title="{{title}}" bindcloseBtn="closeBtn">
+  </change-cell> -->
+  <!-- <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation> -->
+  <ec-canvas id="mychart" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+  <view class="myTW" bindtap="twsb">
+    上报体温
+  </view>
+</view>

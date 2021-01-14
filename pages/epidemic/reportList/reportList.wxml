@@ -1,0 +1,24 @@
+<!--pages/epidemic/reportList/reportList.wxml-->
+<view class="report" style="padding-top:{{navH}}px">
+  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType"
+    title="{{title}}" bindcloseBtn="closeBtn">
+  </change-cell>
+  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
+  <view class="listCont">
+    <view wx:if="{{list.length>0}}">
+    <view class="column" wx:for="{{list}}" >
+      <view class="description">地点：{{item.place}}</view>
+      <view class="description">事件：{{item.type}}</view>
+      <view class="description">描述：{{item.reason}}</view>
+      <view class="description">举报方式：{{item.who}}</view>
+      <view class="reportType">{{item.status}}</view>
+      <view class="time">{{item.date}}</view>
+      <view class="reply" wx:if="{{item.reply != ''}}">
+        <view class="replyTitle">物业回复：</view>
+        <view class="replyCont">{{item.reply}}</view>
+      </view>
+    </view>
+  </view>
+    <view wx:if="{{list.length==0}}" class="noData">暂无数据</view>
+  </view>
+</view>

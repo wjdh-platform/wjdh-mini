@@ -1,0 +1,138 @@
+<!--pages/forum/list/list.wxml-->
+<view class="" style="padding-top:{{navH}}px">
+  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType"
+    title="{{title}}" bindcloseBtn="closeBtn">
+  </change-cell>
+  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
+  <view class="forumList">
+    <view class="listTab" style="top:{{navH-10}}px">
+      <view class="listTabCont">
+        <view class="follow {{currentTab == 0?'active':''}}" data-current="0" bindtap="tabTap">关注</view>
+        <view class="classification {{currentTab == 1?'active':''}}" data-current="1" bindtap="tabTap">
+          {{categoriesType?'论坛分类':categoriesData[categoriesIdx].category_name}}<view class="up"></view>
+        </view>
+        <view class="group {{currentTab == 2?'active':''}}" data-current="2" bindtap="tabTap">我的群</view>
+        <!-- 分组 -->
+        <view class="groupCont" style="top:{{navH+38}}px" wx:if="{{groupType}}">
+          <view class="groupItem">
+            <view class="item {{item.isShow?'green':''}}" wx:for="{{categoriesData}}" bindtap="bindCategories"
+              data-idx="{{index}}">{{item.category_name}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="forumListCont" style="padding-top:{{navH-10}}px" wx:if="{{currentTab == 1}}">
+      <view class="listColumn" wx:for="{{forumList}}" wx:if="{{forumList.length>0}}">
+        <view class="userCol">
+          <image src="{{item.topic_author_avatar}}" class="userImg"></image>
+          <view class="userCont">
+            <view class="userName">{{item.topic_author_name}}</view>
+            <view class="userTime">{{item.topic_date}}</view>
+          </view>
+          <view class="followList" wx:if="{{item.followType}}" bindtap="bindFollow" data-idx="{{index}}">
+            <view class="follewIcon"></view>关注
+          </view>
+          <view class="followList grey" wx:else bindtap="bindFollow" data-idx="{{index}}">
+            <view class="follewedIcon"></view>已关注
+          </view>
+        </view>
+        <view class="contentCol">
+          <view class="title">{{item.topic_title}}</view>
+          <view class="forumIntro">
+            <rich-text nodes="{{item.contentType?item.topic_content_sub:item.topic_content}}"></rich-text><text
+              catchtap="listMoreCont" data-idx="{{index}}">{{item.contentType?'展开全部':'收起'}}</text>
+          </view>
+        </view>
+        <view class="imageCol">
+          <image src="{{itemI}}" wx:for="{{item.topic_images}}" wx:for-item="itemI" bindtap="listImages"
+            wx:for-index="idx" data-idx="{{idx}}" data-list="{{item.topic_images}}"></image>
+        </view>
+        <view class="interactiveCol">
+          <view class="reply" catchtap="bindZan" data-idx="{{index}}" animation="{{ani}}">
+            <image src="{{item.zanType?zanActive:zanDe}}"></image>
+            <text>{{item.topic_zan_count == 0?'点赞':item.topic_zan_count}}</text>
+          </view>
+          <view class="reply" catchtap="bindReply" data-idx="{{index}}">
+            <image src="../../../static/icon/forum/reply.png"></image>
+            <text>{{item.topic_reply_count == 0?'评论':item.topic_reply_count }}</text>
+          </view>
+          <!-- 评论输入框 -->
+          <view class="replyPopup" wx:if="{{item.replyType}}" catchtouchmove='true' style="bottom:{{popHeight}}px">
+            <view class="replyPCont">
+              <view class="replyTextarea">
+                <textarea class="textareaRe" auto-focus="{{item.replyType}}" bindfocus="textareaFocus"
+                  bindblur="textareaBlur"></textarea>
+                <view class="replyPopBtn">
+                  <view class="sendBtn cancelBtn" catchtap="cancelBtn">取消</view>
+                  <view class="sendBtn">发送</view>
+                </view>
+
+              </view>
+            </view>
+          </view>
+          <!-- 评论END -->
+          <view class="reply">
+            <image src="../../../static/icon/forum/share.png"></image>
+            <text>{{item.topic_share_count == 0?'转发':item.topic_share_count}}</text>
+          </view>
+
+          <view class="reply" catchtap="moreEvent">
+            <image src="../../../static/icon/forum/more.png"></image>
+            <text>更多</text>
+            <view class="moreEventView" wx:if="{{reportPType}}">
+              <view class="popupCont">
+                <view class="reportPIcon" bindtap="reportPR">
+                  <image src="../../../static/icon/forum/reportIcon.png"></image>
+                  <text>举报</text>
+                </view>
+                <view class="replyReason" wx:if="{{reportPRType}}">
+                  <view class="replyRTitle">请选择据举报的原因</view>
+                  <view class="replyRCol {{itemP.isShow?'green':''}}" wx:for="{{replyRCol}}" catchtap="replyRColBind"
+                    wx:for-item="itemP" wx:for-index="idx" data-idx="{{idx}}">{{itemP.name}}</view>
+                </view>
+                <view class="replyPBtn" catchtap="replyPClose">取消</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="replyCont">
+          <view class="replyCol" wx:for="{{item.replies}}" wx:for-item="itemO" wx:for-index="idx">
+            <image class="replyUser" src="{{itemO.reply_user_avatar}}"></image>
+            <view class="replyRight">
+              <view class="replyName">{{itemO.reply_user_name}}</view>
+              <view class="replyText">
+                <rich-text nodes="{{itemO.reply_content}}"></rich-text>
+              </view>
+              <view class="replyOther">
+                <view class="replyTime">{{itemO.reply_date}}</view>
+                <view class="replyZan" catchtap="zanTypeR" data-index="{{index}}" data-idx="{{idx}}">
+                  <image src="{{itemO.zanTypeR?zanActive:zanDe}}"></image>
+                  <text>{{itemO.reply_zan_count == 0?'点赞':itemO.reply_zan_count}}</text>
+                </view>
+                <view class="replyReport">
+                  <image src="../../../static/icon/forum/report.png"></image><text>举报</text>
+                  <view class="moreEventView" wx:if="{{reportPopType}}">
+                    <view class="popupCont">
+                      <view class="reportPIcon" bindtap="reportPopR">
+                        <image src="../../../static/icon/forum/reportIcon.png"></image>
+                        <text>举报</text>
+                      </view>
+                      <view class="replyReason" wx:if="{{reportPopRType}}">
+                        <view class="replyRTitle">请选择据举报的原因</view>
+                        <view class="replyRCol {{itemP.isShow?'green':''}}" wx:for="{{replyRopCol}}"
+                          catchtap="replyRopColBind" wx:for-item="itemP" wx:for-index="idx" data-idx="{{idx}}">
+                          {{itemP.name}}</view>
+                      </view>
+                      <view class="replyPBtn" catchtap="replyPClose">取消</view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="noData" wx:if="{{forumList.length==0}}">暂无数据</view>
+    </view>
+  </view>
+</view>

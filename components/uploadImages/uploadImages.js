@@ -1,4 +1,6 @@
 // component/uploadImages/index.js
+import * as api from '../../api/api'
+import utils from '../../utils/util.js'
 Component({
   /**
    * 组件的属性列表
@@ -33,6 +35,21 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    delPhoto(e){
+      console.log(e.currentTarget.dataset)
+      console.log(this.data.detailPics)
+      let list = this.data.detailPics,
+           idx = e.currentTarget.dataset.idx
+           list.splice(idx,1)
+           this.setData({
+            detailPics:list
+           })
+      var myEventDetail = {
+        picsList: list
+      } // detail对象，提供给事件监听函数
+      var myEventOption = {} // 触发事件的选项
+      this.triggerEvent('myevent', myEventDetail, myEventOption)//结果返回调用的页面
+    },
 
     uploadDetailImage: function(e) { //这里是选取图片的方法
       var that = this;
@@ -63,6 +80,9 @@ Component({
     },
     //多张图片上传
     uploadimg: function(data) {
+      let token = utils.getItem('accessToken'),
+         villageList = utils.getItem('villageList'),
+         villageIdx = utils.getItem('villageIdx')
       wx.showLoading({
         title: '上传中...',
         mask: true,
@@ -74,14 +94,19 @@ Component({
       wx.uploadFile({
         url: data.url,
         filePath: data.path[i],
-        name: 'fileData',
-        formData: null,
+        name: 'image',
+        header: {
+          Authorization: 'Bearer ' + token
+        },
+        formData: {
+          'community_identifier': villageList[villageIdx].community_identifier,
+        },
         success: (resp) => {
           wx.hideLoading();
           success++;
           var str = resp.data //返回的结果，可能不同项目结果不一样
           var pic = JSON.parse(str);
-          var pic_name = that.data.showUrl + pic.Data;
+          var pic_name = that.data.showUrl + pic.data;
           var detailPics = that.data.detailPics;
           detailPics.push(pic_name)
           that.setData({
@@ -95,8 +120,8 @@ Component({
         complete: () => {
           i++;
           if (i == data.path.length) { //当图片传完时，停止调用     
-            console.log('执行完毕');
-            console.log('成功：' + success + " 失败：" + fail);
+            // console.log('执行完毕');
+            // console.log('成功：' + success + " 失败：" + fail);
             var myEventDetail = {
               picsList: that.data.detailPics
             } // detail对象，提供给事件监听函数
@@ -112,5 +137,13 @@ Component({
       });
     },
 
+  },
+  attached() {
+    
+    // this.setData({
+    //   accessToken,
+    //   villageList,
+    //   villageIdx
+    // })
   }
 })

@@ -32,6 +32,15 @@ Page({
     }, {
       text: '应急电话',
       icon: '/static/icon/yjbj.jpg',
+    },{
+      text: '我的体温',
+      icon: '/static/icon/wdtw.jpg',
+    },{
+      text: '体温上报',
+      icon: '/static/icon/twsb.jpg',
+    },{
+      text: '疫情举报',
+      icon: '/static/icon/yqsb.jpg',
     },
       //   ,{
       //     text:'访客通行',
@@ -331,6 +340,21 @@ Page({
         case 0://绑定小区
           wx.navigateTo({
             url: '/pages/bindCell/bindCell?type=owner',
+          });
+          break;
+          case 8://我的体温
+          wx.navigateTo({
+            url: '/pages/epidemic/wdtw/wdtw',
+          });
+          break;
+          case 9://体温上报
+          wx.navigateTo({
+            url: '/pages/epidemic/twsb/twsb',
+          });
+          break;
+          case 10://疫情举报
+          wx.navigateTo({
+            url: '/pages/epidemic/report/report',
           });
           break;
       }

@@ -206,6 +206,40 @@ export const houseDelete = (params, cb) => {
 export const getPins = (params, cb) => {
   request('api/v1/pins', params, cb, 'POST')
 }
+//获得论坛分类
+export const categories = (params, cb) => {
+  request('api/v1/forum/categories', params, cb, 'POST')
+}
+//提交帖子
+export const submitTopic = (params, cb) => {
+  request('api/v1/forum/topic', params, cb, 'POST')
+}
+//论坛列表
+export const forumList = (params, cb) => {
+  request('api/v1/forum/topics/list', params, cb, 'POST')
+}
+//上报体温
+export const temperature = (params, cb) => {
+  request('api/v1/epidemic/temperature', params, cb, 'POST')
+}
+//疫情举报事件
+export const yqEvent = (params, cb) => {
+  request('api/v1/epidemic/report/categories/list', params, cb, 'POST')
+}
+//体温两周数据
+export const temperaturesList = (params, cb) => {
+  request('api/v1/epidemic/temperatures/list', params, cb, 'POST')
+}
+//疫情举报提交
+export const epidemicReport = (params, cb) => {
+  request('api/v1/epidemic/report', params, cb, 'POST')
+}
+//疫情举报列表
+export const epidemicReportList = (params, cb) => {
+  request('api/v1/epidemic/reports/list', params, cb, 'POST')
+}
+
+
 
 
 

@@ -12,6 +12,7 @@ App({
   })
 
   },
+  
   globalData: {
     roles: '',
     access_token:'',
@@ -19,6 +20,7 @@ App({
     villageList:[],
     villageIdx:0,
     community_name:'',
-    navHeight: 0
+    navHeight: 0,
+    temperatures:[]
   }
 })

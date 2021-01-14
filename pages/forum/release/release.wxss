@@ -1,0 +1,147 @@
+/* pages/forum/release/release.wxss */
+page{
+  background: #F8F8F8;
+  padding-top: 10rpx;
+}
+.release{
+  background: #fff;
+  padding-bottom: 30rpx;
+}
+.placeholder{
+  color: #D8D8D8;
+}
+.title,.input{
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size:30rpx;
+  color: #535353;
+}
+.title{
+  border-bottom: solid 1rpx #F0F0F0;
+  padding-left: 40rpx;
+}
+.textarea{
+  padding: 20rpx 40rpx;
+  font-size:28rpx;
+  color: #565656;
+  width: 100% !important;
+  box-sizing: border-box;
+  line-height: 47rpx;
+}
+.imgCont{
+  width: 180rpx;
+  height: 180rpx;
+  background: #F2F2F2;
+  
+}
+/* .grouping{
+  width: 187rpx;
+  height: 59rpx;
+  background: #F2F2F2;
+  border-radius: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20rpx 0 0 30rpx;
+}
+.grouping image{
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 10rpx;
+}
+.grouping text{
+  color: #333333;
+  font-size: 24rpx;
+} */
+.groupingIcon{
+  width: 28rpx;
+  height: 28rpx;
+}
+.grouping{
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  border-bottom: solid 1rpx #F0F0F0;
+  padding: 0 40rpx;
+  position: relative;
+}
+.grouping text{
+  flex: 1;
+  font-size: 28rpx;
+  color: #424242;
+  margin-left: 15rpx;
+}
+.arrow{
+  width: 11rpx;
+  height: 21rpx;
+}
+/* .groupingCont{
+  position: fixed;
+  left: 0;
+  right: 0;
+  /* top: 10rpx; 
+  bottom: 0;
+  z-index: 3;
+  background: #fff;
+}
+.groupingCont image{
+  width: 36rpx;
+  height: 32rpx;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 27rpx 0 75rpx;
+}
+.groupingCont .item{
+  display: inline-block;
+  vertical-align: middle;
+}
+.groupingItem{
+  margin-top: 30rpx;
+} */
+.enterBtn,.releaseBtn{
+  width: 270rpx !important;
+  height: 60rpx;
+  background: #50DABE;
+  border-radius: 30rpx;
+  text-align: center;
+  line-height: 60rpx;
+  float: right;
+  font-size: 30rpx !important;
+  color: #fff;
+  margin: 100rpx  60rpx 0 0;
+}
+.releaseBtn{
+  margin: 108rpx auto 0;
+  float: none;
+  padding: 0 !important;
+  font-weight: normal !important;
+}
+.groupingCont{
+  position: absolute;
+  top: 89rpx;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  background: rgba(0,0,0,.26);
+}
+.groupingClo{
+  padding: 20rpx 0 20rpx 30rpx;
+  background: #fff;
+  overflow: hidden;
+  min-height: 400rpx;
+}
+.item{
+  min-width: 165rpx;
+  height: 72rpx;
+  background: #F2F2F2;
+  border-radius: 4rpx;
+  padding: 0 20rpx;
+  float: left;
+  box-sizing: border-box;
+  line-height: 72rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333333;
+  margin-right: 10rpx;
+}

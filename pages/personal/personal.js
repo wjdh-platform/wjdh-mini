@@ -11,7 +11,28 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     defUserImg:'./../../static/image/userImg.png',
-    userNameType:false
+    userNameType:false,
+    listData:[{
+      icon:'./../../static/image/houseList.png',
+      text:'房屋列表',
+      url:'/pages/houseList/ownerHouseList/ownerHouseList'
+    },{
+      icon:'./../../static/image/bill.png',
+      text:'账单列表',
+      url:'/pages/houseList/payList/payList'
+    },{
+      icon:'./../../static/image/baoxiu.png',
+      text:'报修列表',
+      url:'/pages/houseList/repairList/repairList',
+    },{
+      icon:'./../../static/image/tousu.png',
+      text:'投诉建议列表',
+      url:'/pages/houseList/proposalList/repairList'
+    },{
+      icon:'./../../static/image/yqjb.png',
+      text:'疫情举报列表',
+      url:'/pages/epidemic/reportList/reportList'
+    }]
   },
 
   getUserInfo: function (e) {
@@ -23,30 +44,37 @@ Page({
       })
   },
 
-  payList(){
+  bindHouseList(e){
+    let idx = e.currentTarget.dataset.idx
     wx.navigateTo({
-      url: '/pages/houseList/payList/payList',
+      url: this.data.listData[idx].url,
     })
   },
 
-  repairList(){
-    wx.navigateTo({
-      url: '/pages/houseList/repairList/repairList',
-    })
-  },
+  // payList(){
+  //   wx.navigateTo({
+  //     url: '/pages/houseList/payList/payList',
+  //   })
+  // },
 
-  proposalList(){
-    wx.navigateTo({
-      url: '/pages/houseList/proposalList/repairList',
-    })
-  },
+  // repairList(){
+  //   wx.navigateTo({
+  //     url: '/pages/houseList/repairList/repairList',
+  //   })
+  // },
 
-  //点击房屋列表
-  houseListO(e){
-    wx.navigateTo({
-      url: '/pages/houseList/ownerHouseList/ownerHouseList',
-    })
-  },
+  // proposalList(){
+  //   wx.navigateTo({
+  //     url: '/pages/houseList/proposalList/repairList',
+  //   })
+  // },
+
+  // //点击房屋列表
+  // houseListO(e){
+  //   wx.navigateTo({
+  //     url: '/pages/houseList/ownerHouseList/ownerHouseList',
+  //   })
+  // },
 
   /**
    * 生命周期函数--监听页面加载

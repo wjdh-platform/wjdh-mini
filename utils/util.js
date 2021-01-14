@@ -117,6 +117,14 @@ function token(){
 })
 }
 
+function packUp(data, index) {
+  for (let i = 0, len = data.length; i < len; i++) {
+    if (index != i) {
+      data[i].isShow = false
+    }
+  }
+}
+
 
 module.exports = {
   // formatTime: formatTime,
@@ -127,4 +135,5 @@ module.exports = {
   showToast,
   // token,
   // codeToken,
+  packUp,
 }
