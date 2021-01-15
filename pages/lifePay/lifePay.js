@@ -11,7 +11,7 @@ Page({
     currentTab: 0,
     isShow: false,
     checkArr: [],
-    totalNum: 0,
+    totalPageNum: 0,
     selectAll: false,
     changeCellType: false,
     backType: true,
@@ -51,23 +51,9 @@ Page({
       check = e.currentTarget.dataset.check,
       t = this,
       money = Number(e.currentTarget.dataset.money),
+      totalNum = Number(t.data.totalNum),
       arr = t.data.checkArr.push(id),
       idxArr = []
-    console.log(idx)
-    // if (t.data.idxArray.includes(idx)) {
-    //   for (var i = 0; i < t.data.idxArray.length; i++) {
-    //     t.data.idxArray.splice(i, 1);
-    //     // i--;//i需要自减，否则每次删除都会讲原数组索引发生变化
-    //   }
-    //   t.setData({
-    //     idxArray:t.data.idxArray
-    //   })
-    // } else {
-    //   idxArr = t.data.idxArray.push(idx)
-    //   t.setData({
-    //     idxArray:t.data.idxArray
-    //   })
-    // }
 
     if (check) {
       for (var i = 0; i < t.data.checkArr.length; i++) {
@@ -78,13 +64,13 @@ Page({
       }
       t.setData({
         checkArr: t.data.checkArr,
-        totalNum: t.data.totalNum - money,
+        totalNum:  (totalNum * 100 - money * 100) / 100,
         selectAll: false
       })
     } else {
       t.setData({
         checkArr: t.data.checkArr,
-        totalNum: t.data.totalNum + money,
+        totalNum: (totalNum * 100 + money * 100) / 100,
         // selectAll:true
       })
     }
@@ -196,7 +182,7 @@ Page({
 
           this.setData({
             orderList: arr,
-            totalNum: res.data.pages.total,
+            totalPageNum: res.data.pages.total,
             pageSize: res.data.pages.per_page,
           })
         }
@@ -314,7 +300,7 @@ Page({
   onReachBottom: function () {
     let t = this;
     if (t.data.currentTab == 0) {
-      if (t.data.pageIndex < Math.ceil(t.data.totalNum / t.data.pageSize)) {
+      if (t.data.pageIndex < Math.ceil(t.data.totalPageNum / t.data.pageSize)) {
         t.data.pageIndex++;
         t.setData({
           pageIndex: t.data.pageIndex
@@ -323,7 +309,7 @@ Page({
         })
       }
     } else {
-      if (t.data.pageIndex < Math.ceil(t.data.totalNum / t.data.pageSize)) {
+      if (t.data.pageIndex < Math.ceil(t.data.totalPageNum / t.data.pageSize)) {
         t.data.pageIndex++;
         t.setData({
           pageIndex: t.data.pageIndex

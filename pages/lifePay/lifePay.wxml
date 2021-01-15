@@ -1,4 +1,4 @@
-<!--pages/lifePay/lifePay.wxml-->
+
 <view class="lifePay" style="padding-top:{{navH}}px">
   <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType" title="{{title}}" bindcloseBtn="closeBtn">
   </change-cell>

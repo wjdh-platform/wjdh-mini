@@ -22,13 +22,11 @@ Page({
     let t = this,
       val = e.detail.value
     if (val != t.data.houseListIdx) {
-      t.getPayList({ house_id: t.data.houseList[val].people_house_id })
+      t.getPayList({ community_identifier: t.data.villageList[t.data.villageIdx].community_identifier,house_id: t.data.houseList[val].people_house_id })
     }
     t.setData({
       houseListIdx: val
     })
-
-
   },
 
   changeClose(res) {
@@ -141,9 +139,11 @@ Page({
       villageIdx = utils.getItem('villageIdx'),
       t = this
     t.setData({
-      navH: app.globalData.navHeight
+      navH: app.globalData.navHeight,
+      villageList,
+      villageIdx
     })
-    t.getPayList()
+    t.getPayList({community_identifier: villageList[villageIdx].community_identifier})
     if (villageIdx && villageIdx != 0) {
       t.housesJiashuList({ community_identifier: villageList[villageIdx].community_identifier, type: "charge" })
     } else {
