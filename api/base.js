@@ -22,7 +22,7 @@ export default (url, data, cb, method) => {
       wx.hideLoading()
       // if (res.data.message == "token值因各种原因而失效，请重新调用接口获取token") {
       //token值是否过期	0过期，1未过期
-      if (res.data.token_expired == 0) {
+      if (res.data.code == 9) {
         if (token && token != '') {
           refreshToken(url, data, cb, method);
         } else {

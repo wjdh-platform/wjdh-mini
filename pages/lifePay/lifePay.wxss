@@ -1,6 +1,7 @@
 /* pages/lifePay/lifePay.wxss */
 page{
   /* padding-top: 130rpx; */
+  padding-bottom: 150rpx;
 }
 .changeCell{
   padding: 44rpx 0 40rpx;
