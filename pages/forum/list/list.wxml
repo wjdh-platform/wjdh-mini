@@ -9,7 +9,7 @@
       <view class="listTabCont">
         <view class="follow {{currentTab == 0?'active':''}}" data-current="0" bindtap="tabTap">关注</view>
         <view class="classification {{currentTab == 1?'active':''}}" data-current="1" bindtap="tabTap">
-          {{categoriesType?'论坛分类':categoriesData[categoriesIdx].category_name}}<view class="up"></view>
+          {{categoriesType?'论坛分类':categoriesData[categoriesIdx].category_name}}<view class="{{groupType?'down':'up'}}"></view>
         </view>
         <view class="group {{currentTab == 2?'active':''}}" data-current="2" bindtap="tabTap">我的群</view>
         <!-- 分组 -->
@@ -36,7 +36,7 @@
             <view class="follewedIcon"></view>已关注
           </view>
         </view>
-        <view class="contentCol">
+        <view class="contentCol" bindtap="forumDetails" data-idx="{{index}}">
           <view class="title">{{item.topic_title}}</view>
           <view class="forumIntro">
             <rich-text nodes="{{item.contentType?item.topic_content_sub:item.topic_content}}"></rich-text><text
@@ -47,6 +47,7 @@
           <image src="{{itemI}}" wx:for="{{item.topic_images}}" wx:for-item="itemI" bindtap="listImages"
             wx:for-index="idx" data-idx="{{idx}}" data-list="{{item.topic_images}}"></image>
         </view>
+        <!-- 交互区 -->
         <view class="interactiveCol">
           <view class="reply" catchtap="bindZan" data-idx="{{index}}" animation="{{ani}}">
             <image src="{{item.zanType?zanActive:zanDe}}"></image>
@@ -56,7 +57,7 @@
             <image src="../../../static/icon/forum/reply.png"></image>
             <text>{{item.topic_reply_count == 0?'评论':item.topic_reply_count }}</text>
           </view>
-          <!-- 评论输入框 -->
+          <!-- 评论输入框 catchtouchmove='true' 禁止后面内容去滚动-->
           <view class="replyPopup" wx:if="{{item.replyType}}" catchtouchmove='true' style="bottom:{{popHeight}}px">
             <view class="replyPCont">
               <view class="replyTextarea">
@@ -76,25 +77,28 @@
             <text>{{item.topic_share_count == 0?'转发':item.topic_share_count}}</text>
           </view>
 
-          <view class="reply" catchtap="moreEvent">
+          <view class="reply" catchtap="moreEvent" data-idx="{{index}}">
             <image src="../../../static/icon/forum/more.png"></image>
             <text>更多</text>
-            <view class="moreEventView" wx:if="{{reportPType}}">
+            <!-- 举报弹层 -->
+            <view class="moreEventView" wx:if="{{item.reportType}}">
               <view class="popupCont">
-                <view class="reportPIcon" bindtap="reportPR">
+                <view class="reportPIcon" catchtap="reportPR" data-idx="{{index}}">
                   <image src="../../../static/icon/forum/reportIcon.png"></image>
                   <text>举报</text>
                 </view>
-                <view class="replyReason" wx:if="{{reportPRType}}">
+                <view class="replyReason" wx:if="{{item.reportPopType}}">
                   <view class="replyRTitle">请选择据举报的原因</view>
                   <view class="replyRCol {{itemP.isShow?'green':''}}" wx:for="{{replyRCol}}" catchtap="replyRColBind"
-                    wx:for-item="itemP" wx:for-index="idx" data-idx="{{idx}}">{{itemP.name}}</view>
+                    wx:for-item="itemP" wx:for-index="idx" data-index="{{index}}" data-idx="{{idx}}">{{itemP.name}}</view>
                 </view>
-                <view class="replyPBtn" catchtap="replyPClose">取消</view>
+                <view class="replyPBtn" catchtap="replyPClose" data-idx="{{index}}">取消</view>
               </view>
             </view>
+            <!-- 举报弹层END -->
           </view>
         </view>
+        <!-- 交互区END -->
         <view class="replyCont">
           <view class="replyCol" wx:for="{{item.replies}}" wx:for-item="itemO" wx:for-index="idx">
             <image class="replyUser" src="{{itemO.reply_user_avatar}}"></image>
@@ -109,22 +113,10 @@
                   <image src="{{itemO.zanTypeR?zanActive:zanDe}}"></image>
                   <text>{{itemO.reply_zan_count == 0?'点赞':itemO.reply_zan_count}}</text>
                 </view>
-                <view class="replyReport">
+                <view class="replyReport" catchtap="replyReport" data-index="{{index}}" data-idx="{{idx}}">
                   <image src="../../../static/icon/forum/report.png"></image><text>举报</text>
-                  <view class="moreEventView" wx:if="{{reportPopType}}">
-                    <view class="popupCont">
-                      <view class="reportPIcon" bindtap="reportPopR">
-                        <image src="../../../static/icon/forum/reportIcon.png"></image>
-                        <text>举报</text>
-                      </view>
-                      <view class="replyReason" wx:if="{{reportPopRType}}">
-                        <view class="replyRTitle">请选择据举报的原因</view>
-                        <view class="replyRCol {{itemP.isShow?'green':''}}" wx:for="{{replyRopCol}}"
-                          catchtap="replyRopColBind" wx:for-item="itemP" wx:for-index="idx" data-idx="{{idx}}">
-                          {{itemP.name}}</view>
-                      </view>
-                      <view class="replyPBtn" catchtap="replyPClose">取消</view>
-                    </view>
+                  <view class="reportReplyP" wx:if="{{itemO.reportTypeR}}">
+                    <view class="reportReplyCol" wx:for="{{replyRCol}}" catchtap="reportReplyCol" data-idx="{{index}}">{{item.name}}</view>
                   </view>
                 </view>
               </view>

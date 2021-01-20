@@ -29,8 +29,8 @@ background: #F7F7F7;
   display: inline-block;
   width:0;
   height:0;
-	border-right:10rpx solid transparent;
-	border-left:10rpx solid transparent;
+	border-right:8rpx solid transparent;
+	border-left:8rpx solid transparent;
   border-top:10rpx solid #747474;
   margin-left: 10rpx;
 }
@@ -38,8 +38,8 @@ background: #F7F7F7;
   display: inline-block;
   width:0;
   height:0;
-	border-right:10rpx solid transparent;
-	border-left:10rpx solid transparent;
+	border-right:8rpx solid transparent;
+	border-left:8rpx solid transparent;
   border-bottom:10rpx solid #747474;
   margin-left: 10rpx;
 }
@@ -374,4 +374,60 @@ background: #F7F7F7;
   color: #B3B3B3;
   margin-bottom: 20rpx;
  }
- 
+ .interactiveClass{
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   z-index: 9;
+   background: #fff;
+   height: 70rpx;
+   display: flex;
+   align-items: center;
+   width: 100%;
+   padding-left: 30rpx;
+   box-sizing: border-box;
+ }
+ .replyReport{
+   position: relative;
+ }
+ .reportReplyP{
+   position: absolute;
+   right: 0;
+   top: 55rpx;
+   z-index: 9;
+  width: 690rpx;
+  /* height: 310rpx; */
+  padding: 40rpx 0 20rpx 0;
+  background: #FFFFFF;
+  border: 1rpx solid #EEEEEE;
+  box-shadow: 0px 7rpx 33rpx 2rpx rgba(0, 0, 0, 0.15);
+  border-radius: 17rpx;
+ }
+ .reportReplyP::after{
+  content: '';
+  position: absolute;
+  top: -25rpx;
+  right: 20rpx;
+  width:0;
+  height:0;
+	border-right:15px solid transparent;
+	border-left:15px solid transparent;
+	border-bottom:15px solid #fff;
+  position: absolute;
+  margin-left: -10px;
+  z-index: 1;
+  filter: blur(2px);
+  /* box-shadow: 0px 2rpx 3rpx 2rpx rgba(0, 0, 0, 0.5); */
+}
+.reportReplyCol{
+  width: 300rpx;
+  height: 52rpx;
+  border: 1px solid #EDEDED;
+  border-radius: 26rpx;
+  display: inline-block;
+  text-align: center;
+  line-height: 52rpx;
+  font-size: 24rpx;
+  color: #424242;
+  margin: 0 0 20rpx 25rpx;
+}

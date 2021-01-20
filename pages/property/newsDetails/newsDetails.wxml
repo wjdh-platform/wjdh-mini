@@ -1,0 +1,14 @@
+<view class="newsDetails">
+  <view class="title">{{data.title}}</view>
+  <view class="userCont">
+    <image src="{{data.icon}}" class="userIcon"></image>
+    <view class="userIntro">
+      <view class="userName">{{data.name}}</view>
+      <view class="date">{{data.date}} · {{data.textName}}</view>
+    </view>
+  </view>
+  <view class="introduction">
+    <rich-text nodes="{{data.text}}"></rich-text>
+    <image src="{{item}}" wx:for="{{data.images}}" mode="aspectFill" class="imageIntro" bindtap="seePic" data-idx="{{index}}"></image>
+  </view>
+</view>

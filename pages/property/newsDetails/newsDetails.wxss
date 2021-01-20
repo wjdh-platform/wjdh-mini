@@ -1,0 +1,60 @@
+/* pages/property/newsDetails/newsDetails.wxss */
+page{
+  border-top: solid 1rpx #eee;
+  padding-bottom: 50rpx;
+}
+.newsDetails{
+  padding: 0 35rpx;
+}
+.title{
+  font-size: 35rpx;
+  font-weight: bold;
+  color: #333;
+  margin: 30rpx 0;
+}
+.userCont{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.userIntro{
+  text-align: left;
+  width: 83%;
+}
+.userIcon{
+  width: 85rpx;
+  height: 85rpx;
+  border-radius: 50%;
+  border: solid 1rpx #eee;
+}
+.userName{
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+.date{
+  font-size: 24rpx;
+  color: #999;
+}
+.introduction{
+  font-size: 30rpx;
+  color: #333;
+  line-height: 45rpx;
+  margin-top: 30rpx;
+}
+.introduction .images{
+  width: 100%;
+  margin: 20rpx 0;
+}
+.introduction .col{
+  margin-bottom: 15rpx;
+}
+.imageIntro{
+  width: 210rpx;
+  height: 210rpx;
+  display: inline-block;
+  margin: 30rpx 24rpx 0 0;
+}
+.imageIntro:last-child{
+  margin: 0;
+}

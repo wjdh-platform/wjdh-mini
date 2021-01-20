@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "change-cell":"/components/changeCell/changeCell",
+    "title-Navigation": "/components/titleNavigation/titleNavigation"
+  }
 }

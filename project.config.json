@@ -223,6 +223,17 @@
           "pathName": "pages/epidemic/reportList/reportList",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "论坛详情",
+          "pathName": "pages/forum/details/details",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "新闻详情",
+          "pathName": "pages/property/newsDetails/newsDetails",
+          "scene": null
         }
       ]
     }

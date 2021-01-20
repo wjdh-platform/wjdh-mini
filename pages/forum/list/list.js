@@ -42,16 +42,19 @@ Page({
         isShow: false
       }
     ],
-    reportPRType: false,
-    reportPType: false,
+    // reportPRType: false,
+    // reportPType: false,
     // zanType:false,
     zanDe:'../../../static/icon/forum/zan.png',
     zanActive:'../../../static/icon/forum/zanActive.png',
+    interactiveType:false
   },
 
   moreEvent(e) {
-    this.setData({
-      reportPType: true
+    let t = this,
+    idx = e.currentTarget.dataset.idx
+    t.setData({
+      ['forumList['+idx+'].reportType']: true
     })
   },
 
@@ -72,29 +75,34 @@ Page({
   zanTypeR(e){
     let idx = e.currentTarget.dataset.idx,
          index = e.currentTarget.dataset.index
-    console.log(idx)
-    console.log(index)
     this.setData({
       ['forumList['+index+'].replies['+idx+'].zanTypeR']:!this.data.forumList[index].replies[idx].zanTypeR
     })
   },
 
-  reportPR() {
-    this.setData({
-      reportPRType: true
+  reportPR(e) {
+    let  t = this,
+    idx = e.currentTarget.dataset.idx
+    t.setData({
+      ['forumList['+idx+'].reportPopType']: true,
     })
   },
 
-  replyRColBind(e) {
-    this.setData({
-      reportPRType:false
+  replyReport(e){
+    let  t = this,
+    idx = e.currentTarget.dataset.idx,
+    index = e.currentTarget.dataset.index
+    t.setData({
+      ['forumList['+index+'].replies['+idx+'].reportTypeR']:true
     })
   },
 
-  replyPClose() {
-    this.setData({
-      reportPType: false,
-      reportPRType:false
+  replyPClose(e) {
+    let t = this,
+    idx = e.currentTarget.dataset.idx
+    t.setData({
+      ['forumList['+idx+'].reportPopType']: false,
+      ['forumList['+idx+'].reportType']: false,
     })
   },
   bindZan(e){
@@ -161,6 +169,16 @@ Page({
     }
   },
 
+  forumDetails(e){
+    let t = this,
+    idx = e.currentTarget.dataset.idx
+    // t.setData({
+      wx.navigateTo({
+        url: '/pages/forum/details/details',
+      })
+    // })
+  },
+
   cancelBtn(){
     let list = this.data.forumList
     list.forEach((item)=>{
@@ -173,7 +191,8 @@ Page({
 
   replyRColBind(e) {
     let t = this,
-      idx = e.currentTarget.dataset.idx,
+    index = e.currentTarget.dataset.index,//父层索引
+    idx = e.currentTarget.dataset.idx,//子层索引
       dataList = t.data.replyRCol
       dataList.forEach((item)=>{
         item.isShow = false
@@ -184,9 +203,27 @@ Page({
     }
     t.setData({
       replyRCol: dataList,
-      reportPType:false,
+      ['forumList['+index+'].reportPopType']: false,
+      ['forumList['+index+'].reportType']: false
     })  
   },
+
+  reportReplyCol(e){
+    let t = this,
+    idx = e.currentTarget.dataset.idx,
+    dataList = t.data.replyRCol
+      dataList.forEach((item)=>{
+        item.isShow = false
+      })
+    dataList[idx].isShow = !dataList[idx].isShow
+    if (dataList[idx].isShow) {
+      utils.packUp(dataList, idx);
+    }
+    t.setData({
+      replyRCol: dataList,
+    })
+  },
+
 
   bindReply(e){
     let t = this,
@@ -236,6 +273,8 @@ Page({
           item.followType = true;
           item.replyType = false;
           item.focusType = false;
+          item.reportType = false;
+          item.reportPopType = false;
         })
         //给评论列表初始化状态
         for(let i = 0;i < list.length; i++){
@@ -348,7 +387,7 @@ Page({
       page: t.data.pageIndex,
       per_page: 10
     })
-    this.categories()
+    t.categories()
     t.setData({
       navH: app.globalData.navHeight,
       villageIdx,

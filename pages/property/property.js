@@ -9,39 +9,39 @@ Page({
    */
   data: {
     list: [{
-      text: '绑定房屋',
-      icon: '/static/icon/bdxq.jpg',
-    }, {
-      text: '添加家属',
-      icon: '/static/icon/tjjs.jpg',
-    }, {
-      text: '生活缴费',
-      icon: '/static/icon/shjf.jpg',
-    }, {
-      text: '物业报修',
-      icon: '/static/icon/wybx.jpg',
-    }, {
-      text: '云停车场',
-      icon: '/static/icon/ytcc.jpg',
-    }, {
-      text: '投诉建议',
-      icon: '/static/icon/tsjy.jpg',
-    }, {
-      text: '公告通知',
-      icon: '/static/icon/ggtz.jpg',
-    }, {
-      text: '应急电话',
-      icon: '/static/icon/yjbj.jpg',
-    },{
-      text: '我的体温',
-      icon: '/static/icon/wdtw.jpg',
-    },{
-      text: '体温上报',
-      icon: '/static/icon/twsb.jpg',
-    },{
-      text: '疫情举报',
-      icon: '/static/icon/yqsb.jpg',
-    },
+        text: '绑定房屋',
+        icon: '/static/icon/bdxq.jpg',
+      }, {
+        text: '添加家属',
+        icon: '/static/icon/tjjs.jpg',
+      }, {
+        text: '生活缴费',
+        icon: '/static/icon/shjf.jpg',
+      }, {
+        text: '物业报修',
+        icon: '/static/icon/wybx.jpg',
+      }, {
+        text: '云停车场',
+        icon: '/static/icon/ytcc.jpg',
+      }, {
+        text: '投诉建议',
+        icon: '/static/icon/tsjy.jpg',
+      }, {
+        text: '公告通知',
+        icon: '/static/icon/ggtz.jpg',
+      }, {
+        text: '应急电话',
+        icon: '/static/icon/yjbj.jpg',
+      }, {
+        text: '我的体温',
+        icon: '/static/icon/wdtw.jpg',
+      }, {
+        text: '体温上报',
+        icon: '/static/icon/twsb.jpg',
+      }, {
+        text: '疫情举报',
+        icon: '/static/icon/yqsb.jpg',
+      },
       //   ,{
       //     text:'访客通行',
       //     icon:'/static/icon/fktx.jpg',
@@ -61,25 +61,57 @@ Page({
     title: '',
     backType: false,
     navH: 0,
+    newsList:[
+      {
+        title: '生鲜冰袋，该怎么处置？',
+        date: '2021年01月19日',
+        source: '人民政协网',
+        image: 'https://tc.mg.cool/uploads/bingdai.jpeg'
+      },{
+      title: '父老乡亲请注意！现在播送一条重要通知！',
+      date: '2021年01月16日',
+      source: '央广网官方账号',
+      image: 'https://tc.mg.cool/uploads/tongzhi01.jpeg'
+    },{
+      title: '还能回家过年不？钟南山有一说一，官方权威发声，24省密集发倡议',
+      date: '2021年01月13日',
+      source: '日月军武',
+      image: 'https://tc.mg.cool/uploads/huijia01.jpeg'
+    },{
+      title: '严格防控举措 以实际行动保障人民群众生命安全和身体健康',
+      date: '2021年01月04日',
+      source: '交通运输部官方账号',
+      image: 'https://tc.mg.cool/uploads/jiaotong.jpeg'
+    }]
+  },
+
+  bindNewsList(e){
+    let t = this,
+    idx = e.currentTarget.dataset.idx
+    wx.navigateTo({
+      url: '/pages/property/newsDetails/newsDetails?idx='+idx,
+    })
   },
 
   changeClose(res) {
-      let villageList = utils.getItem('villageList'),
+    let villageList = utils.getItem('villageList'),
       villageIdx = utils.getItem('villageIdx'),
       t = this
-    if(villageIdx&&villageIdx!=0){
+    if (villageIdx && villageIdx != 0) {
       t.setData({
         villageList,
         villageIdx
       })
-      t.houseExist({community_identifier:villageList[villageIdx].community_identifier})
+      t.houseExist({
+        community_identifier: villageList[villageIdx].community_identifier
+      })
     }
     this.setData({
       changeCellType: res.detail.changeCellType,
       title: res.detail.community_name
     })
   },
-  
+
   changePopupType(res) {
     this.setData({
       changeCellType: res.detail
@@ -112,7 +144,9 @@ Page({
       if (res.data.code == 0) {
         let list = [],
           oldList = res.data.data
-        list = oldList.unshift({ community_name: '请选择' })
+        list = oldList.unshift({
+          community_name: '请选择'
+        })
         t.setData({
           villageList: oldList
         })
@@ -274,51 +308,58 @@ Page({
       idx = e.currentTarget.dataset.idx,
       userRoles = utils.getItem('userRoles'),
       arr = []
-      switch (idx) {
-        case 6://公告通知
-          wx.navigateTo({
-            url: '/pages/notice/notice',
-          }); 
-          break;
-        case 7://应急电话
-          wx.navigateTo({
-            url: '/pages/phoneCall/phoneCall',
-          });
-          break;
-          return
-      }
+    switch (idx) {
+      case 6: //公告通知
+        wx.navigateTo({
+          url: '/pages/notice/notice',
+        });
+        break;
+      case 7: //应急电话
+        wx.navigateTo({
+          url: '/pages/phoneCall/phoneCall',
+        });
+        break;
+        return
+    }
     for (let i = 0; i < userRoles.length; i++) {
       let arrN = userRoles[i].name;
       arr.push(arrN)
     }
     if (tocken && tocken != '') {
       if (idx == 1 || idx == 2 || idx == 3 || idx == 4 || idx == 5) {
-        if(t.data.houseExist){
+        if (t.data.houseExist) {
           if (arr.includes('HouseMember')) {
             switch (idx) {
-              case 1://添加家属
+              case 1: //添加家属
                 wx.navigateTo({
                   url: '/pages/bindCell/bindCell?type=family',
                 });
                 // utils.showToast("功能正在开发中","none")
                 break;
-              case 2://生活缴费
+              case 2: //生活缴费
                 wx.navigateTo({
                   url: '/pages/lifePay/lifePay',
                 });
-  
+
                 break;
-              case 3://物业报修
+              case 3: //物业报修
                 wx.navigateTo({
                   url: '/pages/repair/repair',
                 });
-  
+
                 break;
-              case 4://云停车场
-                utils.showToast("功能正在开发中", "none")
-  
+              case 4: //云停车场
+                wx.navigateToMiniProgram({
+                  appId: 'wx90d02216a88a39d6',
+                  path: 'pages/index/index?app_guid=43682ab0a9cecea5c78b259b97a5ab97',
+                  // envVersion: 'develop',
+                  success(res) {
+                    // 打开成功
+                  }
+                })
+
                 break;
-              case 5://投诉建议
+              case 5: //投诉建议
                 wx.navigateTo({
                   url: '/pages/proposal/proposal',
                 });
@@ -329,30 +370,30 @@ Page({
           } else if (arr.includes('Shenheing')) {
             utils.showToast('需要等待物业审核通过才能访问', 'none')
           }
-        }else{
-            utils.showToast('您在'+t.data.villageList[t.data.villageIdx].community_name+'没有房屋或者房屋正在审核中', 'none')
-       
-          
+        } else {
+          utils.showToast('您在' + t.data.villageList[t.data.villageIdx].community_name + '没有房屋或者房屋正在审核中', 'none')
+
+
         }
       }
 
       switch (idx) {
-        case 0://绑定小区
+        case 0: //绑定小区
           wx.navigateTo({
             url: '/pages/bindCell/bindCell?type=owner',
           });
           break;
-          case 8://我的体温
+        case 8: //我的体温
           wx.navigateTo({
             url: '/pages/epidemic/wdtw/wdtw',
           });
           break;
-          case 9://体温上报
+        case 9: //体温上报
           wx.navigateTo({
             url: '/pages/epidemic/twsb/twsb',
           });
           break;
-          case 10://疫情举报
+        case 10: //疫情举报
           wx.navigateTo({
             url: '/pages/epidemic/report/report',
           });
@@ -363,7 +404,7 @@ Page({
         url: '/pages/login/login',
       })
     }
-    
+
   },
 
 
@@ -390,18 +431,18 @@ Page({
 
   //检测用户在该小区是否有房屋
 
-  houseExist(param){
-    api.houseExist(param,(res)=>{
+  houseExist(param) {
+    api.houseExist(param, (res) => {
       let code = res.data.code
-      if(code == 0){
+      if (code == 0) {
         this.setData({
-          houseExist:true
+          houseExist: true
         })
-      }else if(code == 1){
+      } else if (code == 1) {
         utils.showToast(res.data.msg)
-      }else{
+      } else {
         this.setData({
-          houseExist:false
+          houseExist: false
         })
       }
     })
@@ -411,9 +452,9 @@ Page({
    */
   onLoad: function (options) {
     let arr = [],
-    t = this,
-    token = utils.getItem('accessToken'),
-    userRoles = utils.getItem('userRoles')
+      t = this,
+      token = utils.getItem('accessToken'),
+      userRoles = utils.getItem('userRoles')
     for (let i = 0; i < userRoles.length; i++) {
       let arrN = userRoles[i].name;
       arr.push(arrN)
@@ -432,13 +473,13 @@ Page({
               wx.navigateTo({
                 url: '/pages/login/login?type=activation',
               })
-            }else{
+            } else {
               console.log('有token')
               t.setData({
                 activationType: true
               })
             }
-            
+
           } else if (res.cancel) {
             utils.showToast("如果想再次激活必须绑定小区", 'none')
           }
@@ -464,7 +505,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
     let token = utils.getItem('accessToken'),
       userRoles = utils.getItem('userRoles'),
       tipsNone = utils.getItem('tipsNone'),
@@ -472,22 +513,24 @@ Page({
       villageIdx = utils.getItem('villageIdx'),
       t = this,
       arr = []
-      t.getRoles()
-      t.getPins()
+    t.getRoles()
+    t.getPins()
     t.setData({
       navH: app.globalData.navHeight,
       villageList,
       villageIdx
     })
-    
-    if(villageIdx&&villageIdx!=0){
-      t.houseExist({community_identifier:villageList[villageIdx].community_identifier})
-      t.setData({
-        changeCellType:false
+
+    if (villageIdx && villageIdx != 0) {
+      t.houseExist({
+        community_identifier: villageList[villageIdx].community_identifier
       })
-    }else{
       t.setData({
-        changeCellType:true
+        changeCellType: false
+      })
+    } else {
+      t.setData({
+        changeCellType: true
       })
     }
 
@@ -496,7 +539,7 @@ Page({
       arr.push(arrN)
     }
     // console.log(arr)
-    if (tipsNone&&tipsNone == 'none') {
+    if (tipsNone && tipsNone == 'none') {
       t.setData({
         popupTips: false
       })

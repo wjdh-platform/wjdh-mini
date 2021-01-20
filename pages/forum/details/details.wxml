@@ -1,2 +1,99 @@
-<!--pages/forum/details/details.wxml-->
-<text>pages/forum/details/details.wxml</text>
+<view class="" style="padding-top:{{navH}}px">
+  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType"
+    title="{{title}}" bindcloseBtn="closeBtn">
+  </change-cell>
+  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
+  <view class="listColumn">
+    <view class="userCol">
+      <image src="../../../static/image/userImg.png" class="userImg"></image>
+      <view class="userCont">
+        <view class="userName">喵喵</view>
+        <view class="userTime">2021.0202</view>
+      </view>
+      <view class="followList" bindtap="bindFollow" data-idx="{{index}}">
+        <view class="follewIcon"></view>关注
+      </view>
+      <!-- <view class="followList" wx:if="{{item.followType}}" bindtap="bindFollow" data-idx="{{index}}">
+        <view class="follewIcon"></view>关注
+      </view>
+      <view class="followList grey" wx:else bindtap="bindFollow" data-idx="{{index}}">
+        <view class="follewedIcon"></view>已关注
+      </view> -->
+    </view>
+    <view class="contentCol">
+      <view class="title">测试测试测试</view>
+      <view class="forumIntro">
+        <rich-text
+          nodes="<p>去年12月15日以来，我国正式开展重点人群的接种工作，迄今为止全国重点人群接种量已近750万剂次，加上之前针对高风险人群接种的160余万剂次，我国已累计开展新冠病毒疫苗接种900多万剂次。新冠疫苗接种是眼下大家普遍关注的话题。部分公众犹豫打不打新冠疫苗，很重要的一个因素就是怕接种后发生不良反应，那么新冠疫苗接种后可能产生哪些不良反应？是否有严重的不良反应报告？↵    接种疫苗后可能的不良反应有哪些？</p>">
+        </rich-text><text catchtap="listMoreCont" data-idx="{{index}}">{{item.contentType?'展开全部':'收起'}}</text>
+      </view>
+    </view>
+    <view class="imageCol">
+      <image src="{{itemI}}" wx:for="{{item.topic_images}}" wx:for-item="itemI" bindtap="listImages" wx:for-index="idx"
+        data-idx="{{idx}}" data-list="{{item.topic_images}}"></image>
+      <image src="../../../static/image/userImg.png"></image>
+      <image src="../../../static/image/userImg.png"></image>
+      <image src="../../../static/image/userImg.png"></image>
+    </view>
+    <view class="interactiveCol">
+      <view class="groupCont" style="top:{{navH}}px" wx:if="{{groupType}}">
+        <view class="groupItem">
+          <view class="item {{item.isShow?'green':''}}" wx:for="{{categoriesData}}" bindtap="bindCategories"
+            data-idx="{{index}}">{{item.category_name}}</view>
+        </view>
+      </view>
+      <view class="fenleiCont" catchtap="fenleiBind">
+        <view class="fenleiIcon">
+          <image src="../../../static/icon/forum/flIcon.png"></image>
+        </view>
+        <view class="fenleiText">{{categoriesType?'论坛分类':categoriesData[categoriesIdx].category_name}}</view>
+      </view>
+      <view class="moreFun" bindtap="moreFun">
+        <image src="../../../static/icon/forum/more.png"></image>
+        <view class="">更多</view>
+      </view>
+      <!-- 举报弹层 -->
+      <view class="moreEventView" wx:if="{{reportType}}">
+        <view class="popupCont">
+          <view class="reportPIcon" catchtap="reportPR">
+            <image src="../../../static/icon/forum/reportIcon.png"></image>
+            <text>举报</text>
+          </view>
+          <view class="replyReason" wx:if="{{reportPopType}}">
+            <view class="replyRTitle">请选择据举报的原因</view>
+            <view class="replyRCol {{itemP.isShow?'green':''}}" wx:for="{{replyRCol}}" catchtap="replyRColBind"
+              wx:for-item="itemP" wx:for-index="idx" data-index="{{index}}" data-idx="{{idx}}">{{itemP.name}}</view>
+          </view>
+          <view class="replyPBtn" catchtap="replyPClose">取消</view>
+        </view>
+      </view>
+      <!-- 举报弹层END -->
+    </view>
+    <view class="replyCont">
+      <view class="replyNum">共33条评论</view>
+    </view>
+    <!-- <view class="replyCol" wx:for="{{item.replies}}" wx:for-item="itemO" wx:for-index="idx"> -->
+    <view class="replyCol">
+      <image class="replyUser" src="../../../static/image/userImg.png"></image>
+      <view class="replyRight">
+        <view class="replyName">喵喵</view>
+        <view class="replyText">
+          <rich-text
+            nodes="<p>去年12月15日以来，我国正式开展重点人群的接种工作，迄今为止全国重点人群接种量已近750万剂次，加上之前针对高风险人群接种的160余万剂次，我国已累计开展新冠病毒疫苗接种900多万剂次。新冠疫苗接种是眼下大家普遍关注的话题。部分公众犹豫打不打新冠疫苗，很重要的一个因素就是怕接种后发生不良反应，那么新冠疫苗接种后可能产生哪些不良反应？是否有严重的不良反应报告？↵    接种疫苗后可能的不良反应有哪些？</p>">
+          </rich-text>
+        </view>
+        <view class="replyOther">
+          <view class="replyTime">2021.02.02</view>
+          <view class="replyZan" catchtap="zanTypeR" data-index="{{index}}" data-idx="{{idx}}">
+            <image src="{{itemO.zanTypeR?zanActive:zanDe}}"></image>
+            <!-- <text>{{itemO.reply_zan_count == 0?'点赞':itemO.reply_zan_count}}</text> -->
+            <text>99</text>
+          </view>
+          <view class="replyReport" catchtap="replyReport">
+            <image src="../../../static/icon/forum/report.png"></image><text>举报</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
