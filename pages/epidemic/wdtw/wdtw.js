@@ -55,11 +55,12 @@ Page({
   //初始化图表
   init_echarts: function () {
     let t = this
-    t.echartsComponnet.init((canvas, width, height) => {
+    t.echartsComponnet.init((canvas, width, height,dpr) => {
       // 初始化图表
       Chart = echarts.init(canvas, null, {
         width: width,
-        height: height
+        height: height,
+        devicePixelRatio: dpr //解决小程序视图模糊的问题，必写
       });
       // Chart.setOption(this.getOption());
       t.setOption(Chart);

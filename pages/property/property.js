@@ -307,7 +307,11 @@ Page({
     let tocken = utils.getItem('accessToken'),
       idx = e.currentTarget.dataset.idx,
       userRoles = utils.getItem('userRoles'),
-      arr = []
+      villageList = utils.getItem('villageList'),
+      villageIdx = utils.getItem('villageIdx'),
+      arr = [],
+      community_identifier = villageList[villageIdx].community_identifier
+      console.log(community_identifier)
     switch (idx) {
       case 6: //公告通知
         wx.navigateTo({
@@ -351,7 +355,7 @@ Page({
               case 4: //云停车场
                 wx.navigateToMiniProgram({
                   appId: 'wx90d02216a88a39d6',
-                  path: 'pages/index/index?app_guid=43682ab0a9cecea5c78b259b97a5ab97',
+                  path: 'pages/index/index?app_guid='+community_identifier,
                   // envVersion: 'develop',
                   success(res) {
                     // 打开成功

@@ -50,7 +50,7 @@
         <view class="orderList">
           <view class="orderDetail" bindtap="orderDetail" data-idx="{{index}}">
             <view class="payName"><text wx:if="{{item.title}}">{{item.title}}</text><text
-                class="introduction">{{item.remark}}</text>
+                class="introduction" wx:if="{{item.remark}}">{{item.remark}}</text>
               <view class="lookMore {{item.isShow?'down':'up'}}">详情</view>
             </view>
             <view class="payNum">{{item.amount}}</view>

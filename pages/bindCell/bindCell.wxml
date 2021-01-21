@@ -19,11 +19,11 @@
         </picker>
         <image class="arrow" src="./../../static/image/arrow.png"></image>
       </view> -->
-      <view class="photoText">
+      <!-- <view class="photoText">
         <image src="./../../static/image/name.png" class="nameIcon"></image>
         <input placeholder="请输入姓名" bindinput="nameBlur" placeholder-class="phototextPP"
           class="phototextP"></input>
-      </view>
+      </view> -->
       <view class="photoText">
         <image src="./../../static/image/photoIcon.png" class="photoIcon"></image>
         <input type="number" placeholder="请输入手机号" bindinput="phoneBlur" placeholder-class="phototextPP"
