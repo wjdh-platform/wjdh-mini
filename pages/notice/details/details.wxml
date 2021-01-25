@@ -3,7 +3,7 @@
   <view class="title">
     <view class="icon"><image src="{{noticeDetails.logo}}"></image></view>
     <view class="title">
-      <view class="text">晨曦家园物业</view>
+      <view class="text">{{noticeDetails.manager}}</view>
       <view class="time">{{noticeDetails.date}}</view>
     </view>
   </view>
@@ -12,6 +12,6 @@
     <rich-text nodes="{{noticeDetails.content}}"></rich-text>
   </view>
   <view class="imgList">
-    <image wx:for="{{noticeDetails.images}}" mode="aspectFit" src="{{item}}" bindtap="previewImage" data-idx="{{index}}"></image>
+    <image wx:for="{{noticeDetails.images}}" mode="aspectFill" src="{{item}}" bindtap="previewImage" data-idx="{{index}}"></image>
   </view>
 </view>

@@ -25,7 +25,8 @@
     "pages/epidemic/report/report",
     "pages/epidemic/twsb/twsb",
     "pages/epidemic/reportList/reportList",
-    "pages/property/newsDetails/newsDetails"
+    "pages/property/newsDetails/newsDetails",
+    "pages/demo/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

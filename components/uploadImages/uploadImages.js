@@ -51,14 +51,24 @@ Component({
       this.triggerEvent('myevent', myEventDetail, myEventOption)//结果返回调用的页面
     },
 
+    previewImg(e){
+      let t = this,
+      idx = e.currentTarget.dataset.idx
+      wx.previewImage({
+        current: t.data.detailPics[idx], 
+        urls: t.data.detailPics
+      })
+    },
+
     uploadDetailImage: function(e) { //这里是选取图片的方法
       var that = this;
       var pics = [];
       var detailPics = that.data.detailPics;
       if (detailPics.length >= that.data.count) {
-        wx.showToast({
-          title: '最多选择' + that.data.count + '张！',
-        })
+        // wx.showToast({
+        //   title: '最多选择' + that.data.count + '张！',
+        // })
+        utils.showToast('最多选择' + that.data.count + '张！','none')
         return;
       }
       wx.chooseImage({

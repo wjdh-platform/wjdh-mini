@@ -24,6 +24,7 @@
 .img-item image {
   width: 214rpx;
   height: 214rpx;
+  border-radius: 10rpx;
 }
 
 .submit-btn {
@@ -49,6 +50,7 @@
   width: 214rpx;
   height: 214rpx;
   background: #F2F2F2;
+  border-radius: 10rpx;
 }
 
 .weui-uploader__input-box:before {

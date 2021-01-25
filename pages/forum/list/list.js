@@ -264,10 +264,13 @@ Page({
         list.forEach((item) => {
           item.topic_images = JSON.parse(item.topic_images)
           if (item.topic_content.length > 100) {
-            item.topic_content_sub = item.topic_content.substr(4, 95) + '...'
+            item.topic_content_sub = item.topic_content.substr(3, 95) + '...'
             item.contentType = true
+            item.contentMoreType = true
           } else {
             item.topic_content_sub = ''
+            item.contentType = false
+            item.contentMoreType = false
           }
           item.zanType = false;
           item.followType = true;
@@ -281,6 +284,16 @@ Page({
           for(let j = 0;j < list[i].replies.length; j++){
             list[i].replies[j].zanTypeR = false
             list[i].replies[j].reportTypeR = false
+            if(list[i].replies[j].reply_content.length>60){
+              // console.log('回复超长')
+              list[i].replies[j].reply_content_sub = list[i].replies[j].reply_content.substr(3, 55) + '...'
+              list[i].replies[j].contentType = true
+              list[i].replies[j].contentMoreType = true
+            }else{
+              list[i].replies[j].reply_content_sub = ''
+              list[i].replies[j].contentType = false
+              list[i].replies[j].contentMoreType = false
+            }
           }
         }
         let arr = [];
@@ -350,14 +363,26 @@ Page({
   },
 
   listMoreCont(e){
-    console.log(e.currentTarget.dataset.idx)
-    let idx = e.currentTarget.dataset.idx,
-         contentType = 'forumList['+idx+'].contentType'
-    // if(this.data.forumList[idx].contentType){
-
-    // }
+    let idx = e.currentTarget.dataset.idx
+        //  contentType = 'forumList['+idx+'].contentType'
     this.setData({
-      [contentType]:!this.data.forumList[idx].contentType
+      ['forumList['+idx+'].contentType']:!this.data.forumList[idx].contentType
+    })
+  },
+
+  listMoreContO(e){
+    let idx = e.currentTarget.dataset.idx,
+         index = e.currentTarget.dataset.index
+    this.setData({
+      ['forumList['+index+'].replies['+idx+'].contentType']:!this.data.forumList[index].replies[idx].contentType
+    })
+  },
+
+  closePopup(e){
+    let idx = e.currentTarget.dataset.idx,
+         index = e.currentTarget.dataset.index
+    this.setData({
+      ['forumList['+index+'].replies['+idx+'].reportTypeR']:false
     })
   },
 
@@ -409,11 +434,18 @@ Page({
 
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
+  //下拉刷新
+  onPullDownRefresh:function(){
+    console.log('下拉刷新')
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    
+    //模拟加载
+    setTimeout(function()
+    {
+      // complete
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+    },1500);
   },
 
   /**
@@ -421,6 +453,11 @@ Page({
    */
   onReachBottom: function () {
     let t = this
+    setTimeout(() => {
+      this.setData({
+        isHideLoadMore: true,
+      })
+    },1000)
     if (t.data.pageIndex < Math.ceil(t.data.totalNum / t.data.pageSize)) {
       t.data.pageIndex++;
       t.setData({

@@ -13,7 +13,10 @@
         <image class="arrow" src="../../../static/image/arrow.png"></image>
       </view>
       <view class="title"><input name="title" class="input" placeholder="输入标题（4～100个汉字）" placeholder-class="placeholder" /></view>
-      <textarea name="content" placeholder-class="placeholder" placeholder="请输入论坛内容（4～2000个汉字）" class="textarea" maxlength="2000" />
+      <textarea name="content" placeholder-class="placeholder" placeholder="请输入论坛内容（4～2000个汉字）" value="{{text_valued}}" bindinput="introduction" class="textarea" maxlength="2000">
+        
+      </textarea>
+      <view class="textNum"><text class="currentWordNumber">{{currentWordNumber|0}}/{{max}}</text></view>
       <view class="updateImg">
         <upload-images bindmyevent="myEventListener" count="{{count}}" uploadUrl="{{uploadUrl}}" showUrl="{{showUrl}}"></upload-images>
       </view>

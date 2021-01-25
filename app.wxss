@@ -20,3 +20,20 @@
 .placeholder{
   color: #C6C6C6;
 }
+
+.closePopup{
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAABNElEQVRIS83WO07EMBRG4W86XptBCEGJKKBDwBKgHhbDAihYAA9RMEgIaiTYDc8GoYscFA2TxIkyAykjO8f35L+2B5jDAZ7woN9nDSs4GWCIY7xiHzc9sbZxhgUcBSio95jHO3Z7gAXkItmKb24EKJ4tnCf6B/Zw3bGyMuQtWRoVoAJ2mVbxM6AlrHLBZVABi5ILjVHZKBMWkMq546CuGgNSa2MSqK3GrP9bBcrVWKurrLwO1KSxUVcb0CSNO/jEVZt2aKqoWFRZ0Ut6uZgaPCuZuaD49mZK1lICPafGvs2J/78DzUTdeLqmEoa6Zuwt3jnNmDPmOytVYZi41Vekq/MWlDVxDNqo8U+OiTa6qnq08eDroqsO9utsCnXruJvF5WQW161hVBQXyEM8TuECuYplnH4BFBaHcgCktmIAAAAASUVORK5CYII=") no-repeat;
+  background-size: cover;
+  position: absolute;
+  right: 30rpx;
+  top: 30rpx;
+  z-index: 10;
+  width: 20rpx;
+  height: 20rpx;
+}
+.rich-img{
+  width: 100%;
+}
+.rich-p{
+  margin-bottom: 15rpx;
+}

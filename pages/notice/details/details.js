@@ -15,6 +15,9 @@ Page({
     api.noticeDetails(param,(res)=>{
       let data = res.data
       if(data.code == 0){
+        console.log(data.data)
+        data.data.content = data.data.content.replace(/\<img/gi, '<img class="rich-img" ');
+        data.data.content = data.data.content.replace(/\<p/gi, '<P class="rich-p" ');
         this.setData({
           noticeDetails:data.data
         })

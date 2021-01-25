@@ -310,8 +310,8 @@ Page({
       villageList = utils.getItem('villageList'),
       villageIdx = utils.getItem('villageIdx'),
       arr = [],
-      community_identifier = villageList[villageIdx].community_identifier
-      console.log(community_identifier)
+      community_identifier = villageList[villageIdx].cloud_parking_community_identifier
+      // console.log('小区id',community_identifier)
     switch (idx) {
       case 6: //公告通知
         wx.navigateTo({
@@ -353,9 +353,11 @@ Page({
 
                 break;
               case 4: //云停车场
+              console.log('小区id',community_identifier)
                 wx.navigateToMiniProgram({
                   appId: 'wx90d02216a88a39d6',
                   path: 'pages/index/index?app_guid='+community_identifier,
+                  // path: 'pages/index/index?app_guid=43682ab0a9cecea5c78b259b97a5ab97',
                   // envVersion: 'develop',
                   success(res) {
                     // 打开成功

@@ -769,7 +769,7 @@ Page({
                       'house_number': data.house_number?data.house_number:data.roomList[data.roomIdx].house_number
                     },
                     name: 'file',
-                    url: 'https://tc.mg.cool/api/v1/people/photo',
+                    url: app.servers+'api/v1/people/photo',
                     success(res) {
                       let data = JSON.parse(res.data)
 

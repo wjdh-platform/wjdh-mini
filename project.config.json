@@ -233,6 +233,12 @@
         {
           "name": "新闻详情",
           "pathName": "pages/property/newsDetails/newsDetails",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "测试",
+          "pathName": "pages/demo/index",
           "scene": null
         }
       ]

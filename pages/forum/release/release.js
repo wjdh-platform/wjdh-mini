@@ -12,11 +12,22 @@ Page({
     title: '',
     backType:true,
     count:4,
-    uploadUrl:'https://tc.mg.cool/api/v1/forum/image',
+    uploadUrl: app.servers+ 'api/v1/forum/image',
     showUrl:'',
     groupingType:false,
-    categoriesType:true
+    categoriesType:true,
+    max: 2000,
   },
+
+  introduction(e){
+    var value = e.detail.value;
+    var len = parseInt(value.length);
+    if (len > this.data.max) return;
+    this.setData({
+      currentWordNumber: len, //当前字数 
+      text_value: value
+    });
+   },
 
   changeClose(res) {
     let villageList = utils.getItem('villageList'),

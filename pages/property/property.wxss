@@ -26,8 +26,10 @@ page{
   height: 20rpx;
 }
 .tabCol image{
-  width: 155rpx;
-  height: 155rpx;
+  /* width: 155rpx;
+  height: 155rpx; */
+  width: 140rpx;
+  height: 140rpx;
 }
 .bindText{
   font-size: 22rpx;
@@ -199,3 +201,14 @@ picker{
 .timeRes text{
   margin: 0 30rpx 0 0;
 }
+.hoverTab{
+  opacity: 0.5;
+  border-radius: 50%;
+  transform: scale(1);
+  transition: all 0.01s ease-in-out;
+ }
+/* .hoverTab:active {
+  transform: scale(0);
+  opacity: .5;
+  transition: 0s;
+ } */
