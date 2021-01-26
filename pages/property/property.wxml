@@ -24,7 +24,7 @@
       <view class="popupTitle">激活手机号</view>
       <view class="closePopup" bindtap="closePopup"></view>
       <view class="photoText">
-        <image src="./../../static/image/name.png" class="photoIcon"></image>
+        <image src="./../../static/image/name.png" class="userIcon photoIcon"></image>
         <input placeholder="请输入姓名" bindinput="nameBlur" placeholder-class="phototextPP" class="phototextP"></input>
       </view>
       <view class="photoText">

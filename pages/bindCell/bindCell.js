@@ -431,9 +431,10 @@ Page({
     // if (t.data.villageIdx == 0) {
     //   utils.showToast("请选择小区", "none")
     // }else 
-    if (t.data.verificationName == '') {
-      utils.showToast("请输入姓名", "none")
-    } else if (t.data.phoneVal == '') {
+    // if (t.data.verificationName == '') {
+    //   utils.showToast("请输入姓1名", "none")
+    // } else 
+    if (t.data.phoneVal == '') {
       utils.showToast("请输入手机号", "none")
     } else if (t.data.codeVal == '') {
       utils.showToast("请输入验证码，并点击验证按钮", "none")
