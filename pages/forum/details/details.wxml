@@ -42,7 +42,8 @@
             data-idx="{{index}}">{{item.category_name}}</view>
         </view>
       </view>
-      <view class="fenleiCont" catchtap="fenleiBind">
+      <view class="fenleiCont">
+        <!-- <view class="fenleiCont" catchtap="fenleiBind"> -->
         <view class="fenleiIcon">
           <image src="../../../static/icon/forum/flIcon.png"></image>
         </view>

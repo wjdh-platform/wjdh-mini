@@ -61,28 +61,6 @@ Page({
     title: '',
     backType: false,
     navH: 0,
-    newsList:[
-      {
-        title: '生鲜冰袋，该怎么处置？',
-        date: '2021年01月19日',
-        source: '人民政协网',
-        image: 'https://tc.mg.cool/uploads/bingdai.jpeg'
-      },{
-      title: '父老乡亲请注意！现在播送一条重要通知！',
-      date: '2021年01月16日',
-      source: '央广网官方账号',
-      image: 'https://tc.mg.cool/uploads/tongzhi01.jpeg'
-    },{
-      title: '还能回家过年不？钟南山有一说一，官方权威发声，24省密集发倡议',
-      date: '2021年01月13日',
-      source: '日月军武',
-      image: 'https://tc.mg.cool/uploads/huijia01.jpeg'
-    },{
-      title: '严格防控举措 以实际行动保障人民群众生命安全和身体健康',
-      date: '2021年01月04日',
-      source: '交通运输部官方账号',
-      image: 'https://tc.mg.cool/uploads/jiaotong.jpeg'
-    }]
   },
 
   bindNewsList(e){
@@ -511,7 +489,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log(app.globalData.imageUrl)
     let token = utils.getItem('accessToken'),
       userRoles = utils.getItem('userRoles'),
       tipsNone = utils.getItem('tipsNone'),
@@ -584,6 +562,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '随时随地 回家看看',
+      imageUrl:''
+    }
   }
 })

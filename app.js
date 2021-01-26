@@ -21,6 +21,7 @@ App({
     villageIdx:0,
     community_name:'',
     navHeight: 0,
-    temperatures:[]
+    temperatures:[],
+    imageUrl:''
   }
 })

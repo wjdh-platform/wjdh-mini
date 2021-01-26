@@ -1,0 +1,57 @@
+/* pages/demo/index.wxss */
+page{
+  padding-top: 150rpx;
+  /* background: blue; */
+  background: rgba(12, 139, 255, .5);
+}
+.clouds{
+  margin-top:320rpx; 
+ }
+ .yun1{
+  width:286rpx;
+  height: 176rpx;
+ }
+
+ .cloud {
+  position: absolute;
+  z-index: 3;
+  width:99px;height:64px; top: 0; 
+  left: 0;
+  top: 150rpx;
+  animation: cloud 5s linear infinite;
+}
+.cloud1{
+  position: absolute;
+  z-index: 3;
+  width:99px;height:64px; top: 0; 
+  right: 0;
+  top: 300rpx;
+  animation: cloud 5s linear infinite;
+}
+.cloud2{
+  position: absolute;
+  z-index: 3;
+  width:99px;height:64px; top: 0; 
+  left: 100rpx;
+  top: 350rpx;
+  animation: cloud 8s linear infinite;
+}
+.cloud3{
+  position: absolute;
+  z-index: 3;
+  width:99px;height:64px; top: 0; 
+  left: 190rpx;
+  top: 200rpx;
+  animation: cloud 4s linear infinite;
+}
+
+@keyframes cloud {
+  from {
+    transform: translate3d(-125rpx, 0, 0);
+  }
+
+  to {
+    transform: translate3d(300rpx, 0, 0);
+  }
+}
+

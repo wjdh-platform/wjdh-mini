@@ -176,6 +176,7 @@ background: #F7F7F7;
   color: #565656;
   line-height: 42rpx;
   position: relative;
+  margin: 15rpx 0 30rpx;
  }
  .forumIntro text,.replyText text{
    position: absolute;

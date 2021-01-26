@@ -41,14 +41,4 @@
       <view class="verificationBtn" bindtap="verificationBtn">确定</view>
     </view>
   </view>
-  <view class="newsList">
-    <view class="newsListTitle"><image src="../../static/image/newsIcon.png"></image>新闻中心</view>
-    <view class="newsCol" wx:for="{{newsList}}" bindtap="bindNewsList" data-idx="{{index}}">
-      <view class="newsLeft">
-        <view class="newsTitle">{{item.title}}</view>
-        <view class="timeRes"><text>{{item.source}}</text><text>{{item.date}}</text></view>
-      </view>
-     <image src="{{item.image}}" class="newsImg" mode="aspectFill"></image>
-    </view>
-  </view>
 </view>
