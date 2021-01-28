@@ -162,5 +162,6 @@ Component({
         title:villageList[villageIdx].community_name
       })
     }
+    console.log(t.pageType)
   }
 })

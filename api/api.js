@@ -238,6 +238,10 @@ export const epidemicReport = (params, cb) => {
 export const epidemicReportList = (params, cb) => {
   request('api/v1/epidemic/reports/list', params, cb, 'POST')
 }
+//获得行政区
+export const district = (params, cb) => {
+  request('api/v1/district', params, cb, 'POST')
+}
 
 
 

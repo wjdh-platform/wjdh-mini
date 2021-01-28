@@ -1,7 +1,17 @@
-<view class="propertyMain" style="padding-top:{{navH}}px">
-  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType" title="{{title}}" bindcloseBtn="closeBtn">
-  </change-cell>
-  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
+<!-- <view class="propertyMain" style="padding-top:{{navH}}px"> -->
+<view class="propertyMain">
+  <view class="clouds">
+    <!-- <image class="cloud" src="https://tc.mg.cool/mini/images/indexBg/cloud1.png"></image>
+   <image class="cloud1" src="https://tc.mg.cool/mini/images/indexBg/cloud2.png"></image>
+   <image class="cloud2" src="https://tc.mg.cool/mini/images/indexBg/cloud5.png"></image>
+   <image class="cloud3" src="https://tc.mg.cool/mini/images/indexBg/cloud4.png"></image>
+   <image class="cloud4" src="https://tc.mg.cool/mini/images/indexBg/cloud7.png"></image> -->
+    <view class="clouds_two"></view>
+    <view class="clouds_one"></view>
+    <view class="clouds_three"></view>
+  </view>
+  <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType"
+    title="{{title}}" bindcloseBtn="closeBtn"></change-cell>
   <view class="activationP" wx:if="{{popupTips}}">
     <view class="activitionCont">
       <view class="popupTitle">温馨提示</view>
@@ -12,13 +22,13 @@
       <view class="tipsBtn" bindtap="tipsNone">已知悉，不再提示</view>
     </view>
   </view>
-  <image class="banner" src='/static/image/banner.jpg'></image>
-  <view class="tabList">
+  <!-- <image class="banner" src='/static/image/banner.jpg'></image> -->
+  <!-- <view class="tabList">
     <view class="tabCol" bindtap="bindCell" wx:for="{{list}}" data-idx="{{index}}" wx:key="index" hover-class="hoverTab">
       <image src="{{item.icon}}"></image>
       <view class="bindText">{{item.text}}</view>
     </view>
-  </view>
+  </view> -->
   <view class="activationP" wx:if="{{activationType}}">
     <view class="activitionCont">
       <view class="popupTitle">激活手机号</view>
@@ -41,4 +51,27 @@
       <view class="verificationBtn" bindtap="verificationBtn">确定</view>
     </view>
   </view>
+  <view class="propertyCont">
+    <view class="tabList">
+      <view class="tabCol" bindtap="bindCell" wx:for="{{list}}" data-idx="{{index}}" wx:key="index"
+        hover-class="hoverTab">
+        <view class="iconBg">
+          <image src="{{item.icon}}"></image>
+        </view>
+        <view class="bindText">{{item.text}}</view>
+      </view>
+      <view class="tabCol">
+        <view class="iconBgO">
+        </view>
+      </view>
+      <view class="tabCol">
+        <view class="iconBgO">
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="sun">
+    <image src="https://tc.mg.cool/mini/images/indexBg/sun.png"></image>
+  </view>
+
 </view>

@@ -131,6 +131,7 @@ Page({
   //滑动事件处理
   touchmove(e) {
     let val = e.currentTarget.dataset
+    console.log(val)
     if(val.houseid&&val.houseid!=''){
     let index = e.currentTarget.dataset.index;
     let startX = this.data.startX;

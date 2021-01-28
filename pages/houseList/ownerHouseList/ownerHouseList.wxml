@@ -36,7 +36,7 @@
       <view class="list" wx:if="{{houseList.length>0}}">
       <view class="listColumn {{item.isActive ? 'active' : ''}}" bindtap="bindListDetail" wx:for="{{houseList}}"
         wx:key="index" data-houseId="{{item.house_id}}" data-shenheId="{{item.shenhe_id}}" data-role="{{item.role}}"
-        bindtouchstart="touchstart" bindtouchmove="touchmove" data-index="{{index}}" data-del="{{item.deleted_at}}">
+        bindtouchstart="touchstart" bindtouchmove="touchmove" data-index="{{index}}" data-del="{{item.deleted_at}}" data-status="{{item.status}}">
         <image class="houseListIcon" src="../../../static/image/houseListIcon.jpg"></image>
         <view class="houseCont">
           <view class="houseName">{{item.introduction}}</view>

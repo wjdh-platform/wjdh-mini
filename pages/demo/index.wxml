@@ -2,9 +2,16 @@
    <image animation="{{animationCloudData}}" class="yun1" src="../../static/image/cloud.png"></image>
   </view> -->
 
-  <view class="clouds">
+  <!-- <view class="clouds">
    <image class="cloud" src="../../static/image/cloud.png"></image>
    <image class="cloud1" src="../../static/image/cloud.png"></image>
    <image class="cloud2" src="../../static/image/cloud.png"></image>
    <image class="cloud3" src="../../static/image/cloud.png"></image>
+  </view> -->
+
+  <view class="sky">
+    <view class="moon"></view>
+    <view class="clouds_two"></view>
+    <view class="clouds_one"></view>
+    <view class="clouds_three"></view>
   </view>

@@ -2,6 +2,8 @@
 page{
   /* padding-top: 130rpx; */
   /* padding-bottom: 100rpx; */
+  background: #59c6ff;
+  overflow: hidden;
 }
 .banner{
   width: 690rpx;
@@ -9,12 +11,12 @@ page{
   height: 350rpx;
   display: block;
 }
-.tabCol{
+/* .tabCol{
   width: 25%;
   display: inline-block;
   text-align: center;
   margin: 16rpx 0 0;
-}
+} */
 .closePopup{
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAABNElEQVRIS83WO07EMBRG4W86XptBCEGJKKBDwBKgHhbDAihYAA9RMEgIaiTYDc8GoYscFA2TxIkyAykjO8f35L+2B5jDAZ7woN9nDSs4GWCIY7xiHzc9sbZxhgUcBSio95jHO3Z7gAXkItmKb24EKJ4tnCf6B/Zw3bGyMuQtWRoVoAJ2mVbxM6AlrHLBZVABi5ILjVHZKBMWkMq546CuGgNSa2MSqK3GrP9bBcrVWKurrLwO1KSxUVcb0CSNO/jEVZt2aKqoWFRZ0Ut6uZgaPCuZuaD49mZK1lICPafGvs2J/78DzUTdeLqmEoa6Zuwt3jnNmDPmOytVYZi41Vekq/MWlDVxDNqo8U+OiTa6qnq08eDroqsO9utsCnXruJvF5WQW161hVBQXyEM8TuECuYplnH4BFBaHcgCktmIAAAAASUVORK5CYII=") no-repeat;
   background-size: cover;
@@ -32,10 +34,11 @@ page{
   height: 140rpx;
 }
 .bindText{
-  font-size: 22rpx;
+  font-size: 26rpx;
   color: #333;
+  /* margin-top: 10rpx; */
   
-  line-height: 22rpx;
+  line-height: 26rpx;
 }
 .activationP{
   position: fixed;
@@ -216,3 +219,165 @@ picker{
   opacity: .5;
   transition: 0s;
  } */
+
+
+
+
+
+
+ .propertyCont{
+   position: absolute;
+   top: 200rpx;
+   background: url('https://tc.mg.cool/mini/images/indexBg/house2.png') no-repeat;
+   background-size: 100% 100%;
+   width: 100%;
+   height: 1321rpx;
+   z-index: 9;
+ }
+ .iconBg{
+   width: 142rpx;
+   height: 103rpx;
+   background: url('https://tc.mg.cool/mini/images/indexBg/window01.png') no-repeat;
+   background-size: 100% 100%;
+   display: flex;
+   justify-content: center;
+   padding-top: 28rpx;
+   box-sizing: border-box;
+ }
+ .iconBgO{
+  width: 142rpx;
+  height: 103rpx;
+  background: url('https://tc.mg.cool/mini/images/indexBg/window02.png') no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 28rpx;
+  box-sizing: border-box;
+ }
+ .tabCol image{
+   width: 40rpx;
+   height: 40rpx;
+ }
+ .tabList{
+   margin-left: 46rpx;
+  padding-top: 370rpx;
+ }
+ .tabCol{
+   display: inline-block;
+   text-align: center;
+   margin-right: 32rpx;
+   margin-bottom: 60rpx;
+   vertical-align: text-top;
+ } 
+ /* .clouds{
+   position: fixed;
+   top: 0;
+   z-index: 6;
+ } */
+ .clouds{
+  /* margin-top:320rpx;  */
+  position: relative;
+  top: 50rpx;
+  height: 600rpx;
+ }
+.sun{
+  position: fixed;
+  top: 0;
+  left: -30rpx;
+  z-index: 1;
+}
+.sun image{
+  width: 300rpx;
+  height:300rpx;
+  animation: twinkling 3s infinite linear
+}
+
+@keyframes twinkling{
+  0%{
+      opacity: 0.7;
+  }
+  50%{
+    opacity: 0.9;
+  }
+  100%{
+      opacity: 1;
+  }
+}
+
+
+
+
+
+.clouds_one {
+  background: url("https://tc.mg.cool/mini/images/indexBg/cloud2.png");
+  background-size: 100% 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width:251rpx;height:112rpx;
+  -webkit-animation: cloud_one 50s linear infinite;
+  -moz-animation: cloud_one 50s linear infinite;
+  -o-animation: cloud_one 50s linear infinite;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0)
+}
+ 
+.clouds_two {
+  background: url("https://tc.mg.cool/mini/images/indexBg/cloud5.png");
+  /* background-size: 100% 100%; */
+  position: absolute;
+  left: 0;
+  top: 0;
+  width:376rpx;height:250rpx;
+  height: 100%;
+  width: 300%;
+  -webkit-animation: cloud_two 75s linear infinite;
+  -moz-animation: cloud_two 75s linear infinite;
+  -o-animation: cloud_two 75s linear infinite;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0)
+}
+ 
+.clouds_three {
+  background: url("https://tc.mg.cool/mini/images/indexBg/cloud4.png");
+  background-size: 100% 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width:558rpx;height:466rpx;
+  -webkit-animation: cloud_three 100s linear infinite;
+  -moz-animation: cloud_three 100s linear infinite;
+  -o-animation: cloud_three 100s linear infinite;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0)
+}
+
+@keyframes cloud_one {
+  0% {
+    left: 750rpx
+  }
+  100% {
+    left: -200%
+  }
+}
+ 
+@keyframes cloud_two {
+  0% {
+    left: 500rpx
+  }
+  100% {
+    left: -200%
+  }
+}
+ 
+@keyframes cloud_three {
+  0% {
+    left: 0
+  }
+  100% {
+    left: -200%
+  }
+}

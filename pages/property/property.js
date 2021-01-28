@@ -10,37 +10,37 @@ Page({
   data: {
     list: [{
         text: '绑定房屋',
-        icon: '/static/icon/bdxq.jpg',
+        icon: '/static/newImg/bdfw.png',
       }, {
         text: '添加家属',
-        icon: '/static/icon/tjjs.jpg',
+        icon: '/static/newImg/tjjs.png',
       }, {
         text: '生活缴费',
-        icon: '/static/icon/shjf.jpg',
+        icon: '/static/newImg/shjf.png',
       }, {
         text: '物业报修',
-        icon: '/static/icon/wybx.jpg',
+        icon: '/static/newImg/wybx.png',
       }, {
         text: '云停车场',
-        icon: '/static/icon/ytcc.jpg',
+        icon: '/static/newImg/ytcc.png',
       }, {
         text: '投诉建议',
-        icon: '/static/icon/tsjy.jpg',
+        icon: '/static/newImg/tsjy.png',
       }, {
         text: '公告通知',
-        icon: '/static/icon/ggtz.jpg',
+        icon: '/static/newImg/ggtz.png',
       }, {
         text: '应急电话',
-        icon: '/static/icon/yjbj.jpg',
+        icon: '/static/newImg/yjdh.png',
       }, {
         text: '我的体温',
-        icon: '/static/icon/wdtw.jpg',
+        icon: '/static/newImg/wdtw.png',
       }, {
         text: '体温上报',
-        icon: '/static/icon/twsb.jpg',
+        icon: '/static/newImg/twsb.png',
       }, {
         text: '疫情举报',
-        icon: '/static/icon/yqsb.jpg',
+        icon: '/static/newImg/yqjb.png',
       },
       //   ,{
       //     text:'访客通行',
@@ -61,6 +61,7 @@ Page({
     title: '',
     backType: false,
     navH: 0,
+    index:'index'
   },
 
   bindNewsList(e){
@@ -561,10 +562,10 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-    return {
-      title: '随时随地 回家看看',
-      imageUrl:''
-    }
-  }
+//   onShareAppMessage: function () {
+//     return {
+//       title: '随时随地 回家看看',
+//       imageUrl:app.globalData.imageUrl
+//     }
+//   }
 })
