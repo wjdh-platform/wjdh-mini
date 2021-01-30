@@ -15,9 +15,10 @@ Page({
     title: '',
     false: false,
     backType: true,
-    listType: true,
+    listType: 0,// 0 为解绑，1为删除，2为其他
     listTypeJB: '解绑',
     listTypeDel: '删除',
+    listTypeDetails: '详情',
     startX: 0, //开始坐标
     startY: 0,
     currentTab:0
@@ -116,23 +117,16 @@ Page({
 
   //手指触摸动作开始 记录起点X坐标
   touchstart(e) {
-
-    let val = e.currentTarget.dataset
-    console.log(val)
-    // if(val.houseid&&val.houseid!=''&&val.status === '审核已通过'){
-      if(val.status === '审核已通过'||val.status === '已解绑'){
       this.setData({
         startX: e.changedTouches[0].clientX,
         startY: e.changedTouches[0].clientY
       })
-    }
+    
     
   },
   //滑动事件处理
   touchmove(e) {
     let val = e.currentTarget.dataset
-    console.log(val)
-    if(val.houseid&&val.houseid!=''){
     let index = e.currentTarget.dataset.index;
     let startX = this.data.startX;
     let startY = this.data.startY;
@@ -145,15 +139,19 @@ Page({
       X: touchMoveX,
       Y: touchMoveY
     });
-    if(val.del&&val.del!=''){
-      this.setData({
-        listType:false
-      })
-    }else{
-      this.setData({
-        listType:true
-      })
-    }
+    if(val.status === '审核已通过'){
+        this.setData({
+          listType:0
+        })
+      }else if(val.status === '已解绑'){
+        this.setData({
+          listType:1
+        })
+      }else{
+        this.setData({
+          listType:2
+        })
+      }
     this.data.houseList.forEach((item, idx) => {
       item.isActive = false;
       if (Math.abs(angle) > 30) return;
@@ -165,7 +163,7 @@ Page({
     this.setData({
       houseList: this.data.houseList
     })
-  }
+  
   },
   /**
 * 计算滑动角度
@@ -184,7 +182,7 @@ Page({
     villageIdx = utils.getItem('villageIdx')
     let idx = e.currentTarget.dataset.index,
       t = this
-      if (t.data.listType) {
+      if (t.data.listType == 0) {
         wx.showModal({
           title: '提示',
           content: '您确定申请解绑房屋吗？',
@@ -203,7 +201,7 @@ Page({
             }
           }
         })
-      }else{
+      }else if(t.data.listType == 1){
         wx.showModal({
           title: '提示',
           content: '您确定删除房屋吗？',
@@ -221,6 +219,23 @@ Page({
             }
           }
         })
+      }else{
+        let id = e.currentTarget.dataset.houseid ? e.currentTarget.dataset.houseid : '',
+      shenhe_id = e.currentTarget.dataset.shenheid ? e.currentTarget.dataset.shenheid : '',
+      role = e.currentTarget.dataset.role ? e.currentTarget.dataset.role : '',
+      del = e.currentTarget.dataset.del ? e.currentTarget.dataset.del:''
+      console.log(e.currentTarget.dataset)
+      if(del!=''){
+        utils.showToast('已经解绑房屋不能查看详情', 'none')
+        return
+      }
+    if (role == '业主' || shenhe_id) {
+      wx.navigateTo({
+        url: '/pages/houseDetails/houseDetails?houseId=' + id + '&role=' + role + '&shenhe_id=' + shenhe_id,
+      })
+    } else if (role != '业主') {
+      utils.showToast('只有业主才能查看房屋详情', 'none')
+    }
       }
     
 

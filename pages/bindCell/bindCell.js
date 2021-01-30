@@ -845,7 +845,8 @@ Page({
       dataList = data.dataList,
       param = {},
       reg = /^1[3456789]\d{9}$/,
-      villageIdx = utils.getItem('villageIdx')
+      villageList = utils.getItem('villageList'),
+    villageIdx = utils.getItem('villageIdx')
     // return false
     if (t.data.pageEntry == 'family') {
       if(t.data.homeListIdx == 0){
@@ -904,6 +905,7 @@ Page({
           shangfang: dataList.shangfang[data.sfjlIdx].key,
           choice:1,
           role: dataList.role[data.shipIdx].key,
+          community_identifier: villageList[villageIdx].community_identifier,
         }
         
       }
@@ -1018,7 +1020,8 @@ Page({
           use: dataList.use[data.fwytIdx].key,
           xingzhi: dataList.xingzhi[data.fwxzIdx].key,
           choice: val.radio ? val.radio : '1',
-          type: dataList.type[data.zhlxIdx].key
+          type: dataList.type[data.zhlxIdx].key,
+          community_identifier: villageList[villageIdx].community_identifier,
         }
         
       }

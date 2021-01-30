@@ -1,46 +1,50 @@
 /* pages/property/property.wxss */
-page{
+page {
   /* padding-top: 130rpx; */
   /* padding-bottom: 100rpx; */
   background: #59c6ff;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
-.banner{
+
+.banner {
   width: 690rpx;
   margin: 0 auto;
   height: 350rpx;
   display: block;
 }
+
 /* .tabCol{
   width: 25%;
   display: inline-block;
   text-align: center;
   margin: 16rpx 0 0;
 } */
-.closePopup{
-  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAABNElEQVRIS83WO07EMBRG4W86XptBCEGJKKBDwBKgHhbDAihYAA9RMEgIaiTYDc8GoYscFA2TxIkyAykjO8f35L+2B5jDAZ7woN9nDSs4GWCIY7xiHzc9sbZxhgUcBSio95jHO3Z7gAXkItmKb24EKJ4tnCf6B/Zw3bGyMuQtWRoVoAJ2mVbxM6AlrHLBZVABi5ILjVHZKBMWkMq546CuGgNSa2MSqK3GrP9bBcrVWKurrLwO1KSxUVcb0CSNO/jEVZt2aKqoWFRZ0Ut6uZgaPCuZuaD49mZK1lICPafGvs2J/78DzUTdeLqmEoa6Zuwt3jnNmDPmOytVYZi41Vekq/MWlDVxDNqo8U+OiTa6qnq08eDroqsO9utsCnXruJvF5WQW161hVBQXyEM8TuECuYplnH4BFBaHcgCktmIAAAAASUVORK5CYII=") no-repeat;
-  background-size: cover;
+/* .closePopup{
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAABNElEQVRIS83WO07EMBRG4W86XptBCEGJKKBDwBKgHhbDAihYAA9RMEgIaiTYDc8GoYscFA2TxIkyAykjO8f35L+2B5jDAZ7woN9nDSs4GWCIY7xiHzc9sbZxhgUcBSio95jHO3Z7gAXkItmKb24EKJ4tnCf6B/Zw3bGyMuQtWRoVoAJ2mVbxM6AlrHLBZVABi5ILjVHZKBMWkMq546CuGgNSa2MSqK3GrP9bBcrVWKurrLwO1KSxUVcb0CSNO/jEVZt2aKqoWFRZ0Ut6uZgaPCuZuaD49mZK1lICPafGvs2J/78DzUTdeLqmEoa6Zuwt3jnNmDPmOytVYZi41Vekq/MWlDVxDNqo8U+OiTa6qnq08eDroqsO9utsCnXruJvF5WQW161hVBQXyEM8TuECuYplnH4BFBaHcgCktmIAAAAASUVORK5CYII=") no-repeat center;
+  background-size: 20rpx 20rpx;
   position: absolute;
   right: 30rpx;
   top: 30rpx;
   z-index: 10;
-  width: 20rpx;
-  height: 20rpx;
-}
-.tabCol image{
+  width: 50rpx;
+  height: 50rpx;
+} */
+.tabCol image {
   /* width: 155rpx;
   height: 155rpx; */
   width: 140rpx;
   height: 140rpx;
 }
-.bindText{
+
+.bindText {
   font-size: 26rpx;
   color: #333;
   /* margin-top: 10rpx; */
-  
+
   line-height: 26rpx;
 }
-.activationP{
+
+.activationP {
   position: fixed;
   left: 0;
   top: 0;
@@ -49,53 +53,62 @@ page{
   background: rgba(0, 0, 0, .4);
   z-index: 99;
 }
-.activitionCont{
+
+.activitionCont {
   width: 522rpx;
   /* height: 461rpx; */
-  padding: 40rpx 30rpx 60rpx;
+  padding: 60rpx;
   background: #fff;
   border-radius: 15rpx;
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
 }
-.popupTitle{
+
+.popupTitle {
   text-align: center;
   color: #333333;
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
-.photoText{
-  border-bottom:  solid 1rpx #E9E9E9;
+
+.photoText {
+  border-bottom: solid 1rpx #E9E9E9;
   padding: 60rpx 0 10rpx;
   position: relative;
 }
-.photoIcon{
+
+.photoIcon {
   width: 22rpx;
   height: 30rpx;
   display: inline-block;
   vertical-align: middle;
   margin-right: 22rpx;
 }
-.userIcon{
+
+.userIcon {
   width: 26rpx;
   height: 26rpx;
 }
-.codeIcon{
+
+.codeIcon {
   width: 24rpx;
   height: 26rpx;
 }
-.phototextP{
+
+.phototextP {
   font-size: 28rpx;
   color: #282828;
   display: inline-block;
   vertical-align: middle;
 }
-.phototextPP{
+
+.phototextPP {
   color: #B1B1B1;
 }
-.codeBtn{
+
+.codeBtn {
   position: absolute;
   right: 0;
   top: 60rpx;
@@ -103,7 +116,8 @@ page{
   font-size: 28rpx;
   color: #50DABE;
 }
-.verificationBtn{
+
+.verificationBtn {
   width: 100%;
   height: 70rpx;
   background: #50DABE;
@@ -114,50 +128,61 @@ page{
   font-size: 28rpx;
   color: #fff;
 }
-.column01{
+
+.column01 {
   display: flex;
   align-items: center;
   border-bottom: solid 1rpx #ececec;
   height: 94rpx;
   margin-top: 20rpx;
 }
-.column01 .title{
+
+.column01 .title {
   font-size: 28rpx;
   color: #424242;
   width: 180rpx;
 }
-.column01 picker{
+
+.column01 picker {
   font-size: 28rpx;
 }
-.arrow{
+
+.arrow {
   width: 14rpx;
   height: 24rpx;
 }
-picker{
+
+picker {
   flex: 1;
   text-align: left;
   font-size: 30rpx;
   color: #424242;
 }
-.tipsText{
-  font-size: 27rpx;
+
+.tipsText {
+  font-size: 30rpx;
+  line-height: 45rpx;
   color: #555;
   margin: 30rpx 0;
 }
-.tipsText text{
+
+.tipsText text {
   display: block;
-  line-height: 40rpx;
+  /* line-height: 40rpx; */
 }
-.tipsBtn{
+
+.tipsBtn {
   /* float: right; */
   text-align: center;
-  font-size: 28rpx;
+  font-size: 30rpx;
   color: #50DABE;
 }
-.newsLeft{
+
+.newsLeft {
   width: 640rpx;
 }
-.newsListTitle{
+
+.newsListTitle {
   border-bottom: solid 1rpx #e9e9e9;
   font-weight: bold;
   padding: 50rpx 0 20rpx;
@@ -166,29 +191,35 @@ picker{
   font-size: 30rpx;
   color: #333;
 }
-.newsListTitle image{
+
+.newsListTitle image {
   width: 30rpx;
   height: 30rpx;
   margin-right: 10rpx;
 }
-.newsCol{
+
+.newsCol {
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: solid 1rpx #e9e9e9;
   padding: 30rpx 0;
 }
-.newsCol:last-child{
+
+.newsCol:last-child {
   border: none;
 }
-.newsImg{
+
+.newsImg {
   width: 320rpx;
   height: 150rpx;
 }
-.newsList{
+
+.newsList {
   padding: 0 30rpx;
 }
-.newsTitle{
+
+.newsTitle {
   font-size: 30rpx;
   color: #333;
   line-height: 45rpx;
@@ -200,107 +231,182 @@ picker{
   line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.timeRes{
+
+.timeRes {
   font-size: 24rpx;
   color: #989898;
   margin-top: 20rpx;
 }
-.timeRes text{
+
+.timeRes text {
   margin: 0 30rpx 0 0;
 }
-.hoverTab{
+
+/* .hoverTab{
   opacity: 0.5;
   border-radius: 50%;
   transform: scale(1);
   transition: all 0.01s ease-in-out;
- }
-/* .hoverTab:active {
-  transform: scale(0);
-  opacity: .5;
-  transition: 0s;
  } */
+.animation {
+  /* opacity: 0.5; */
+  animation: around 1s ease-in-out;
+}
+
+@keyframes around {
+  0% {
+    transform: rotateY(0);
+  }
+
+  50% {
+    transform: rotateY(60deg);
+  }
+
+  100% {
+    transform: rotateY(0);
+  }
+}
 
 
 
 
 
 
- .propertyCont{
-   position: absolute;
-   top: 200rpx;
-   background: url('https://tc.mg.cool/mini/images/indexBg/house2.png') no-repeat;
-   background-size: 100% 100%;
-   width: 100%;
-   height: 1321rpx;
-   z-index: 9;
- }
- .iconBg{
-   width: 142rpx;
-   height: 103rpx;
-   background: url('https://tc.mg.cool/mini/images/indexBg/window01.png') no-repeat;
-   background-size: 100% 100%;
-   display: flex;
-   justify-content: center;
-   padding-top: 28rpx;
-   box-sizing: border-box;
- }
- .iconBgO{
-  width: 142rpx;
-  height: 103rpx;
-  background: url('https://tc.mg.cool/mini/images/indexBg/window02.png') no-repeat;
+
+.propertyCont {
+  position: absolute;
+  top: 200rpx;
+  background: url('https://tc.mg.cool/mini/images/indexBg/house02.png') no-repeat;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 1321rpx;
+  z-index: 9;
+}
+
+.tree {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  background: url('https://face-100k.oss-cn-beijing.aliyuncs.com/wjdh-platform/wjdh-mini/tree.png') no-repeat;
+  background-size: 100% 100%;
+  width: 203rpx;
+  height: 269rpx;
+}
+
+.grass {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
+  background: url('https://face-100k.oss-cn-beijing.aliyuncs.com/wjdh-platform/wjdh-mini/grass.png') no-repeat;
+  background-size: 100% 100%;
+  width: 297rpx;
+  height: 86rpx;
+}
+
+.iconBg {
+  width: 150rpx;
+  height: 97rpx;
+  background: url('https://face-100k.oss-cn-beijing.aliyuncs.com/wjdh-platform/wjdh-mini/window.png') no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 25rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.winLeft {
+  width: 40rpx;
+  height: 100rpx;
+  background: url('https://tc.mg.cool/mini/images/indexBg/winLeft.png') no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  left: 4rpx;
+  top: -4rpx;
+}
+
+.winRight {
+  width: 40rpx;
+  height: 100rpx;
+  background: url('https://tc.mg.cool/mini/images/indexBg/winRight.png') no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  right: 2rpx;
+  top: -4rpx;
+}
+
+.iconBgO {
+  width: 161rpx;
+  height: 111rpx;
+  background: url('https://tc.mg.cool/mini/images/indexBg/window03.png') no-repeat;
   background-size: 100% 100%;
   display: flex;
   justify-content: center;
   padding-top: 28rpx;
   box-sizing: border-box;
- }
- .tabCol image{
-   width: 40rpx;
-   height: 40rpx;
- }
- .tabList{
-   margin-left: 46rpx;
-  padding-top: 370rpx;
- }
- .tabCol{
-   display: inline-block;
-   text-align: center;
-   margin-right: 32rpx;
-   margin-bottom: 60rpx;
-   vertical-align: text-top;
- } 
- /* .clouds{
+}
+
+.tabCol image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.tabList {
+  margin-left: 46rpx;
+  padding-top: 400rpx;
+}
+
+.tabCol {
+  display: inline-block;
+  text-align: center;
+  margin-right: 24rpx;
+  margin-bottom: 60rpx;
+  vertical-align: middle;
+}
+
+.tabCol:last-child {
+  margin-left: -8rpx;
+}
+
+/* .clouds{
    position: fixed;
    top: 0;
    z-index: 6;
  } */
- .clouds{
+.clouds {
   /* margin-top:320rpx;  */
   position: relative;
   top: 50rpx;
   height: 600rpx;
- }
-.sun{
+  overflow: hidden;
+}
+
+.sun {
   position: fixed;
   top: 0;
   left: -30rpx;
   z-index: 1;
 }
-.sun image{
+
+.sun image {
   width: 300rpx;
-  height:300rpx;
+  height: 300rpx;
   animation: twinkling 3s infinite linear
 }
 
-@keyframes twinkling{
-  0%{
-      opacity: 0.7;
+@keyframes twinkling {
+  0% {
+    opacity: 0.7;
   }
-  50%{
+
+  50% {
     opacity: 0.9;
   }
-  100%{
-      opacity: 1;
+
+  100% {
+    opacity: 1;
   }
 }
 
@@ -314,7 +420,8 @@ picker{
   position: absolute;
   right: 0;
   top: 0;
-  width:251rpx;height:112rpx;
+  width: 251rpx;
+  height: 112rpx;
   -webkit-animation: cloud_one 50s linear infinite;
   -moz-animation: cloud_one 50s linear infinite;
   -o-animation: cloud_one 50s linear infinite;
@@ -322,14 +429,15 @@ picker{
   -moz-transform: translate3d(0, 0, 0);
   -o-transform: translate3d(0, 0, 0)
 }
- 
+
 .clouds_two {
   background: url("https://tc.mg.cool/mini/images/indexBg/cloud5.png");
   /* background-size: 100% 100%; */
   position: absolute;
   left: 0;
   top: 0;
-  width:376rpx;height:250rpx;
+  width: 376rpx;
+  height: 250rpx;
   height: 100%;
   width: 300%;
   -webkit-animation: cloud_two 75s linear infinite;
@@ -339,14 +447,15 @@ picker{
   -moz-transform: translate3d(0, 0, 0);
   -o-transform: translate3d(0, 0, 0)
 }
- 
+
 .clouds_three {
   background: url("https://tc.mg.cool/mini/images/indexBg/cloud4.png");
   background-size: 100% 100%;
   position: absolute;
   left: 0;
   top: 0;
-  width:558rpx;height:466rpx;
+  width: 558rpx;
+  height: 466rpx;
   -webkit-animation: cloud_three 100s linear infinite;
   -moz-animation: cloud_three 100s linear infinite;
   -o-animation: cloud_three 100s linear infinite;
@@ -359,25 +468,65 @@ picker{
   0% {
     left: 750rpx
   }
+
   100% {
     left: -200%
   }
 }
- 
+
 @keyframes cloud_two {
   0% {
     left: 500rpx
   }
+
   100% {
     left: -200%
   }
 }
- 
+
 @keyframes cloud_three {
   0% {
     left: 0
   }
+
   100% {
     left: -200%
+  }
+}
+
+
+
+
+
+.shake {
+  animation: shake 3s both infinite;
+}
+
+
+/* 实现抖动 */
+@keyframes shake {
+  15% {
+    -webkit-transform: scale3d(1, 1, 1) rotate3d(0, 0, 1, -6deg);
+    transform: scale3d(1, 1, 1) rotate3d(0, 0, 1, -6deg);
+  }
+
+  26%,
+  28%,
+  30%,
+  32% {
+    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 10deg);
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 10deg);
+  }
+
+  27%,
+  29%,
+  31% {
+    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -10deg);
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -10deg);
+  }
+
+  33% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
 }

@@ -1,261 +1,106 @@
-/* pages/demo/index.wxss */
-page{
-  padding-top: 150rpx;
-  /* background: blue; */
-  background: rgba(12, 139, 255, .5);
-}
-.clouds{
-  margin-top:320rpx; 
+page {
+  background-color: white;
+  
+  }
+  
+   
+  
+  .container {
+  min-height: 100%;
+  
+  padding: 20rpx 0rpx;
+  
+  }
+  
+   
+  
+  .touch-item {
+  font-size: 14px;
+  
+  display: flex;
+  
+  justify-content: space-between;
+  
+  border-bottom:1px solid #ccc;
+  
+  width: 100%;
+  
+  overflow: hidden
+  
+  }
+  
+  .content {
+  width: 100%;
+  
+  padding: 10px;
+  
+  line-height: 22px;
+  
+  margin-right:0;
+  
+  -webkit-transition: all 0.4s;
+  
+  transition: all 0.4s;
+  
+  -webkit-transform: translateX(90px);
+  
+  transform: translateX(90px);
+  
+  margin-left: -90px
+  
+  }
+  
+  .del {
+  background-color: orangered;
+  
+  width: 90px;
+  
+  display: flex;
+  
+  flex-direction: column;
+  
+  align-items: center;
+  
+  justify-content: center;
+  
+  color: #fff;
+  
+  -webkit-transform: translateX(90px);
+  
+  transform: translateX(90px);
+  
+  -webkit-transition: all 0.4s;
+  
+  transition: all 0.4s;
+  
+  }
+  
+  .touch-move-active .content,
+  
+  .touch-move-active .del {
+  -webkit-transform: translateX(0);
+  
+  transform: translateX(0);
+  
+  }
+
+
+
+
+
+
+
+  .dou{
+    height: 100rpx;
+    width: 100rpx;
+    background: chartreuse;
+    animation: shanghua 1s linear forwards;
  }
- .yun1{
-  width:286rpx;
-  height: 176rpx;
- }
-
- .cloud {
-  position: absolute;
-  z-index: 3;
-  width:99px;height:64px; top: 0; 
-  left: 0;
-  top: 150rpx;
-  animation: cloud 5s linear infinite;
-}
-.cloud1{
-  position: absolute;
-  z-index: 3;
-  width:99px;height:64px; top: 0; 
-  right: 0;
-  top: 300rpx;
-  animation: cloud 5s linear infinite;
-}
-.cloud2{
-  position: absolute;
-  z-index: 3;
-  width:99px;height:64px; top: 0; 
-  left: 100rpx;
-  top: 350rpx;
-  animation: cloud 8s linear infinite;
-}
-.cloud3{
-  position: absolute;
-  z-index: 3;
-  width:99px;height:64px; top: 0; 
-  left: 190rpx;
-  top: 200rpx;
-  animation: cloud 4s linear infinite;
-}
-
-@keyframes cloud {
-  from {
-    transform: translate3d(-125rpx, 0, 0);
+@keyframes shanghua{
+  from{
+    height: 20%;
   }
-
-  to {
-    transform: translate3d(300rpx, 0, 0);
+  to{
+    height: 60%;
   }
 }
-
-
-
-
-
-
-.sky {
-  height: 480px;
-  background: #007fd5;
-  position: relative;
-  overflow: hidden;
-  -webkit-animation: sky_background 50s ease-out infinite;
-  -moz-animation: sky_background 50s ease-out infinite;
-  -o-animation: sky_background 50s ease-out infinite;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  -o-transform: translate3d(0, 0, 0)
-}
- 
-.moon {
-  background: url("https://tc.mg.cool/mini/images/indexBg/cloud1.png");
-  position: absolute;
-  left: 0;
-  width:296rpx;height:178rpx;
-  background-size: 100% 100%;
-  -webkit-animation: moon 50s linear infinite;
-  -moz-animation: moon 50s linear infinite;
-  -o-animation: moon 50s linear infinite;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  -o-transform: translate3d(0, 0, 0)
-}
- 
-.clouds_one {
-  background: url("https://tc.mg.cool/mini/images/indexBg/cloud2.png");
-  position: absolute;
-  left: 0;
-  top: 0;
-  width:251rpx;height:112rpx;
-  height: 100%;
-  width: 300%;
-  -webkit-animation: cloud_one 50s linear infinite;
-  -moz-animation: cloud_one 50s linear infinite;
-  -o-animation: cloud_one 50s linear infinite;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  -o-transform: translate3d(0, 0, 0)
-}
- 
-.clouds_two {
-  background: url("https://tc.mg.cool/mini/images/indexBg/cloud5.png");
-  position: absolute;
-  top: 0;
-  width:376rpx;height:250rpx;
-  height: 100%;
-  width: 300%;
-  -webkit-animation: cloud_two 75s linear infinite;
-  -moz-animation: cloud_two 75s linear infinite;
-  -o-animation: cloud_two 75s linear infinite;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  -o-transform: translate3d(0, 0, 0)
-}
- 
-.clouds_three {
-  background: url("https://tc.mg.cool/mini/images/indexBg/cloud4.png");
-  position: absolute;
-  left: 0;
-  top: 0;
-  width:558rpx;height:466rpx;
-  background-size: 100% 100%;
-  -webkit-animation: cloud_three 100s linear infinite;
-  -moz-animation: cloud_three 100s linear infinite;
-  -o-animation: cloud_three 100s linear infinite;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  -o-transform: translate3d(0, 0, 0)
-}
- 
-@-webkit-keyframes sky_background {
-  0% {
-    background: #007fd5;
-    color: #007fd5
-  }
-  50% {
-    background: #000;
-    color: #a3d9ff
-  }
-  100% {
-    background: #007fd5;
-    color: #007fd5
-  }
-}
- 
-@-webkit-keyframes moon {
-  0% {
-    opacity: 0;
-    left: -200% ;-moz-transform: scale(0.5);
-    -webkit-transform: scale(0.5);
-  }
-  50% {
-    opacity: 1;
-    -moz-transform: scale(1);
-    left: 0% ;bottom: 250px;
-    -webkit-transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    bottom: 500px;
-    -moz-transform: scale(0.5);
-    -webkit-transform: scale(0.5);
-  }
-}
- 
-@-webkit-keyframes cloud_one {
-  0% {
-    left: 0
-  }
-  100% {
-    left: -200%
-  }
-}
- 
-@-webkit-keyframes cloud_two {
-  0% {
-    left: 0
-  }
-  100% {
-    left: -200%
-  }
-}
- 
-@-webkit-keyframes cloud_three {
-  0% {
-    left: 0
-  }
-  100% {
-    left: -200%
-  }
-}
- 
-@keyframes sky_background {
-  0% {
-    background: #007fd5;
-    color: #007fd5
-  }
-  50% {
-    background: #000;
-    color: #a3d9ff
-  }
-  100% {
-    background: #007fd5;
-    color: #007fd5
-  }
-}
- 
-@keyframes moon {
-  0% {
-    opacity: 0;
-    left: -200%;
-     -moz-transform: scale(0.5);
-    -webkit-transform: scale(0.5);
-  }
-  50% {
-    opacity: 1;
-    -moz-transform: scale(1);
-    left: 0%;
-     bottom: 250px;
-    -webkit-transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    bottom: 500px;
-    -moz-transform: scale(0.5);
-    -webkit-transform: scale(0.5);
-  }
-}
- 
-@keyframes cloud_one {
-  0% {
-    left: 0
-  }
-  100% {
-    left: -200%
-  }
-}
- 
-@keyframes cloud_two {
-  0% {
-    left: 0
-  }
-  100% {
-    left: -200%
-  }
-}
- 
-@keyframes cloud_three {
-  0% {
-    left: 0
-  }
-  100% {
-    left: -200%
-  }
-}
-

@@ -154,8 +154,10 @@ Page({
   },
 
   shouquan(id,idx){
-    let t = this
-    api.shouquan({ people_house_id:id },(res)=>{
+    let t = this,
+    villageList = utils.getItem('villageList'),
+    villageIdx = utils.getItem('villageIdx')
+    api.shouquan({ people_house_id:id,community_identifier:villageList[villageIdx].community_identifier },(res)=>{
       if(res.data.code == 0){
         utils.showToast(res.data.msg,'none')
         let shouquan = 'detailsData.yibangding['+idx+'].shouquan'

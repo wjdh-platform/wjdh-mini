@@ -11,36 +11,47 @@ Page({
     list: [{
         text: '绑定房屋',
         icon: '/static/newImg/bdfw.png',
+        isActive:false
       }, {
         text: '添加家属',
         icon: '/static/newImg/tjjs.png',
+        isActive:false
       }, {
         text: '生活缴费',
         icon: '/static/newImg/shjf.png',
+        isActive:false
       }, {
         text: '物业报修',
         icon: '/static/newImg/wybx.png',
+        isActive:false
       }, {
         text: '云停车场',
         icon: '/static/newImg/ytcc.png',
+        isActive:false
       }, {
         text: '投诉建议',
         icon: '/static/newImg/tsjy.png',
+        isActive:false
       }, {
         text: '公告通知',
         icon: '/static/newImg/ggtz.png',
+        isActive:false
       }, {
         text: '应急电话',
         icon: '/static/newImg/yjdh.png',
+        isActive:false
       }, {
         text: '我的体温',
         icon: '/static/newImg/wdtw.png',
+        isActive:false
       }, {
         text: '体温上报',
         icon: '/static/newImg/twsb.png',
+        isActive:false
       }, {
         text: '疫情举报',
         icon: '/static/newImg/yqjb.png',
+        isActive:false
       },
       //   ,{
       //     text:'访客通行',
@@ -61,7 +72,32 @@ Page({
     title: '',
     backType: false,
     navH: 0,
-    index:'index'
+    index:'index',
+    shake:false
+  },
+
+  cloud(){
+    utils.showToast('除了记忆，什么都别带走。','none')
+  },
+  sun(){
+    utils.showToast('朝着太阳生长，做一个温暖的人。','none')
+  },
+  iconOther(){
+    utils.showToast('功能暂未开放，敬请期待。 ','none')
+  },
+  tree(){
+    utils.showToast('小区是我家，绿化靠大家。 ','none')
+    this.setData({
+      shake:true
+    })
+    setTimeout(()=>{
+      this.setData({
+        shake:false
+      })
+    },3000)
+  },
+  grass(){
+    utils.showToast('请勿沾花惹草！    ','none')
   },
 
   bindNewsList(e){
@@ -290,105 +326,119 @@ Page({
       villageIdx = utils.getItem('villageIdx'),
       arr = [],
       community_identifier = villageList[villageIdx].cloud_parking_community_identifier
-      // console.log('小区id',community_identifier)
-    switch (idx) {
-      case 6: //公告通知
-        wx.navigateTo({
-          url: '/pages/notice/notice',
-        });
-        break;
-      case 7: //应急电话
-        wx.navigateTo({
-          url: '/pages/phoneCall/phoneCall',
-        });
-        break;
-        return
-    }
-    for (let i = 0; i < userRoles.length; i++) {
-      let arrN = userRoles[i].name;
-      arr.push(arrN)
-    }
-    if (tocken && tocken != '') {
-      if (idx == 1 || idx == 2 || idx == 3 || idx == 4 || idx == 5) {
-        if (t.data.houseExist) {
-          if (arr.includes('HouseMember')) {
-            switch (idx) {
-              case 1: //添加家属
-                wx.navigateTo({
-                  url: '/pages/bindCell/bindCell?type=family',
-                });
-                // utils.showToast("功能正在开发中","none")
-                break;
-              case 2: //生活缴费
-                wx.navigateTo({
-                  url: '/pages/lifePay/lifePay',
-                });
-
-                break;
-              case 3: //物业报修
-                wx.navigateTo({
-                  url: '/pages/repair/repair',
-                });
-
-                break;
-              case 4: //云停车场
-              console.log('小区id',community_identifier)
-                wx.navigateToMiniProgram({
-                  appId: 'wx90d02216a88a39d6',
-                  path: 'pages/index/index?app_guid='+community_identifier,
-                  // path: 'pages/index/index?app_guid=43682ab0a9cecea5c78b259b97a5ab97',
-                  // envVersion: 'develop',
-                  success(res) {
-                    // 打开成功
-                  }
-                })
-
-                break;
-              case 5: //投诉建议
-                wx.navigateTo({
-                  url: '/pages/proposal/proposal',
-                });
-                break;
-            }
-          } else if (arr.includes('NewMember')) {
-            utils.showToast('需要先绑定房屋才能访问', 'none')
-          } else if (arr.includes('Shenheing')) {
-            utils.showToast('需要等待物业审核通过才能访问', 'none')
-          }
-        } else {
-          utils.showToast('您在' + t.data.villageList[t.data.villageIdx].community_name + '没有房屋或者房屋正在审核中', 'none')
-
-
-        }
-      }
-
-      switch (idx) {
-        case 0: //绑定小区
-          wx.navigateTo({
-            url: '/pages/bindCell/bindCell?type=owner',
-          });
-          break;
-        case 8: //我的体温
-          wx.navigateTo({
-            url: '/pages/epidemic/wdtw/wdtw',
-          });
-          break;
-        case 9: //体温上报
-          wx.navigateTo({
-            url: '/pages/epidemic/twsb/twsb',
-          });
-          break;
-        case 10: //疫情举报
-          wx.navigateTo({
-            url: '/pages/epidemic/report/report',
-          });
-          break;
-      }
-    } else {
-      wx.navigateTo({
-        url: '/pages/login/login',
+      t.setData({
+        ['list['+idx+'].isActive']:true
       })
-    }
+      // return
+    setTimeout(()=>{
+      switch (idx) {
+        case 6: //公告通知
+          wx.navigateTo({
+            url: '/pages/notice/notice',
+          });
+          break;
+        case 7: //应急电话
+          wx.navigateTo({
+            url: '/pages/phoneCall/phoneCall',
+          });
+          break;
+          return
+      }
+      for (let i = 0; i < userRoles.length; i++) {
+        let arrN = userRoles[i].name;
+        arr.push(arrN)
+      }
+      if (tocken && tocken != '') {
+        if (idx == 1 || idx == 2 || idx == 3 || idx == 4 || idx == 5) {
+          if (t.data.houseExist) {
+            if (arr.includes('HouseMember')) {
+              switch (idx) {
+                case 1: //添加家属
+                  wx.navigateTo({
+                    url: '/pages/bindCell/bindCell?type=family',
+                  });
+                  // utils.showToast("功能正在开发中","none")
+                  break;
+                case 2: //生活缴费
+                  wx.navigateTo({
+                    url: '/pages/lifePay/lifePay',
+                  });
+  
+                  break;
+                case 3: //物业报修
+                  wx.navigateTo({
+                    url: '/pages/repair/repair',
+                  });
+  
+                  break;
+                case 4: //云停车场
+                console.log('小区id',community_identifier)
+                  wx.navigateToMiniProgram({
+                    appId: 'wx90d02216a88a39d6',
+                    path: 'pages/index/index?app_guid='+community_identifier,
+                    // path: 'pages/index/index?app_guid=43682ab0a9cecea5c78b259b97a5ab97',
+                    // envVersion: 'develop',
+                    success(res) {
+                      // 打开成功
+                    }
+                  })
+  
+                  break;
+                case 5: //投诉建议
+                  wx.navigateTo({
+                    url: '/pages/proposal/proposal',
+                  });
+                  break;
+              }
+            } else if (arr.includes('NewMember')) {
+              utils.showToast('需要先绑定房屋才能访问', 'none')
+              t.setData({
+                ['list['+idx+'].isActive']:false
+              })
+            } else if (arr.includes('Shenheing')) {
+              utils.showToast('需要等待物业审核通过才能访问', 'none')
+              t.setData({
+                ['list['+idx+'].isActive']:false
+              })
+            }
+          } else {
+            utils.showToast('您在' + t.data.villageList[t.data.villageIdx].community_name + '没有房屋或者房屋正在审核中', 'none')
+            t.setData({
+              ['list['+idx+'].isActive']:false
+            })
+  
+          }
+        }
+  
+        switch (idx) {
+          case 0: //绑定小区
+            wx.navigateTo({
+              url: '/pages/bindCell/bindCell?type=owner',
+            });
+            break;
+          case 8: //我的体温
+            wx.navigateTo({
+              url: '/pages/epidemic/wdtw/wdtw',
+            });
+            break;
+          case 9: //体温上报
+            wx.navigateTo({
+              url: '/pages/epidemic/twsb/twsb',
+            });
+            break;
+          case 10: //疫情举报
+            wx.navigateTo({
+              url: '/pages/epidemic/report/report',
+            });
+            break;
+        }
+      } else {
+        wx.navigateTo({
+          url: '/pages/login/login',
+        })
+      }
+    },1000)
+    
 
   },
 

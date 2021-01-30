@@ -25,8 +25,8 @@
         <view class="houseType shenheing" wx:if="{{item.status == '解绑审核中'||item.status == '审核中'}}">{{item.status}}
         </view>
         <view class="houseType" wx:if="{{item.status == '审核已通过'}}">{{item.status}}</view>
-        <view class="delList" data-index="{{index}}" catchtap="del" data-del="{{item.deleted_at}}">
-          {{listType?listTypeJB:listTypeDel}}</view>
+        <view class="delList" data-index="{{index}}" catchtap="del" data-del="{{item.deleted_at}}"  data-houseId="{{item.house_id}}" data-shenheId="{{item.shenhe_id}}" data-role="{{item.role}}">
+          {{listType == 0?listTypeJB:listType == 1?listTypeDel:listTypeDetails}}</view>
 
       </view>
     </view>
@@ -48,8 +48,8 @@
         <view class="houseType shenheing" wx:if="{{item.status == '解绑审核中'||item.status == '审核中'}}">{{item.status}}
         </view>
         <view class="houseType" wx:if="{{item.status == '审核已通过'}}">{{item.status}}</view>
-        <view class="delList" data-index="{{index}}" catchtap="del" data-del="{{item.deleted_at}}">
-          {{listType?listTypeJB:listTypeDel}}</view>
+        <view class="delList" data-index="{{index}}" catchtap="del" data-del="{{item.deleted_at}}"  data-houseId="{{item.house_id}}" data-shenheId="{{item.shenhe_id}}" data-role="{{item.role}}">
+          {{listType == 0?listTypeJB:listType == 1?listTypeDel:listTypeDetails}}</view>
 
       </view>
     </view>

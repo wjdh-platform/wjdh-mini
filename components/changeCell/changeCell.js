@@ -116,6 +116,7 @@ Component({
          provinces = [],
         citys = [],
         countys = []
+        
         t.setData({
           condition:!this.data.condition,
           value:[0,0,0]
@@ -241,6 +242,17 @@ Component({
         utils.showToast('请选择小区', 'none')
       }
     },
+    districtData(){
+
+      api.district({}, (res) => {
+        console.log(res.data.data)
+        
+        this.setData({
+          districtData: res.data.data
+        })
+      })
+    }
+    
   
 
   },
@@ -252,7 +264,7 @@ Component({
       villageList = utils.getItem('villageList'),
       villageIdx = utils.getItem('villageIdx')
     t.getsize();
-    
+    t.districtData()
     if (villageIdx) {
       t.setData({
         villageList,
@@ -265,13 +277,7 @@ Component({
       })
     } else {
     
-      api.district({}, (res) => {
-        console.log(res.data.data)
-        
-        t.setData({
-          districtData: res.data.data
-        })
-      })
+      
 
       
     }
