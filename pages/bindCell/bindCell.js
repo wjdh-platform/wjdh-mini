@@ -686,7 +686,7 @@ Page({
           })
         } else {
           t.setData({
-            yezhuNumType: true,
+            // yezhuNumType: true,
             moshiZyType: false,
             ziyouYZphone: false
           })
@@ -704,12 +704,12 @@ Page({
             pageType: false,
             yezhuShip: true,
             moshiZyType: false,
-            yezhuNumType: true,
+            // yezhuNumType: true,
             // bindPeo:false
           })
         } else {
           t.setData({
-            yezhuNumType: false,
+            // yezhuNumType: false,
             moshiZyType: false,
             ziyouYZphone: false
           })
