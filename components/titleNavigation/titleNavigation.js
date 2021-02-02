@@ -60,10 +60,12 @@ Component({
       let t = this,
       idx = e.currentTarget.dataset.idx,
       dataList = t.data.myCommunities
-      dataList[idx].isActive = !dataList[idx].isActive
-      if (dataList[idx].isActive) {
+      dataList[idx].isShow = !dataList[idx].isShow
+      if (dataList[idx].isShow) {
         utils.packUp(dataList, idx);
       }
+      utils.setItem('villageList',dataList)
+      utils.setItem('villageIdx',idx)
       t.setData({
         titleIdx:idx,
         myCommunities: dataList,
@@ -186,24 +188,27 @@ Component({
     let t = this,
       villageList = utils.getItem('villageList'),
       villageIdx = utils.getItem('villageIdx')
+      api.myCommunities({},(res)=>{
+        let data = res.data,
+        list = data.data
+        if(data.code == 0){
+          list.forEach((item)=>{
+            item.isShow = false
+          })
+          this.setData({
+            myCommunities:list
+            // myCommunities:[{community_name: "晨曦家园", community_identifier: "00001",isActive:false},{community_name: "碧桂园", community_identifier: "00001",isActive:false}]
+          })
+        }
+      })
     if (villageIdx&&villageIdx != 0) {
       t.setData({
         title:villageList[villageIdx].community_name,
         navH:app.globalData.navHeight
       })
+    }else{
+
     }
-    api.myCommunities({},(res)=>{
-      let data = res.data,
-      list = data.data
-      if(data.code == 0){
-        list.forEach((item)=>{
-          item.isActive = false
-        })
-        this.setData({
-          // myCommunities:list
-          myCommunities:[{community_name: "晨曦家园", community_identifier: "00001",isActive:false},{community_name: "碧桂园", community_identifier: "00001",isActive:false}]
-        })
-      }
-    })
+    
   }
 })

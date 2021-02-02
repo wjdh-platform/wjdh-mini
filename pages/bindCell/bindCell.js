@@ -496,7 +496,7 @@ Page({
           t.setData({
             popupType: false
           })
-          t.getBuildingsList(villageList, villageIdx)
+          // t.getBuildingsList(villageList, villageIdx)
         }
       })
     }
@@ -522,8 +522,8 @@ Page({
     t.setData({
       villageIdx: idx
     })
-    utils.setItem('villageIdx',idx)
-    utils.setItem('villageList',list)
+    // utils.setItem('villageIdx',idx)
+    // utils.setItem('villageList',list)
     api.getBuildings({
       community_indentifier: list[idx].community_identifier
     }, (res) => {
@@ -688,7 +688,7 @@ Page({
           t.setData({
             yezhuNumType: true,
             moshiZyType: false,
-            ziyouYZphone: true
+            ziyouYZphone: false
           })
         }
       } else {
@@ -704,14 +704,14 @@ Page({
             pageType: false,
             yezhuShip: true,
             moshiZyType: false,
-            yezhuNumType: false,
+            yezhuNumType: true,
             // bindPeo:false
           })
         } else {
           t.setData({
-            yezhuNumType: true,
+            yezhuNumType: false,
             moshiZyType: false,
-            ziyouYZphone: true
+            ziyouYZphone: false
           })
         }
       }

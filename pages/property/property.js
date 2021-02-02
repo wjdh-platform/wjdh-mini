@@ -125,7 +125,7 @@ Page({
     }
     this.setData({
       changeCellType: res.detail.changeCellType,
-      title: res.detail.community_name
+      cellName: res.detail.community_name
     })
   },
 
@@ -347,7 +347,12 @@ Page({
           }
           if (tocken && tocken != '') {
             // if (idx == 1 || idx == 2 || idx == 3 || idx == 4 || idx == 5) {
-
+              if(idx == 0){
+                wx.navigateTo({
+                  url: '/pages/bindCell/bindCell?type=owner',
+                });
+                return
+              }
             if (arr.includes('HouseMember')) {
               if (t.data.houseExist) {
                 switch (idx) {
@@ -446,13 +451,7 @@ Page({
               })
             }
           
-          switch (idx) {
-            case 0: //绑定小区
-              wx.navigateTo({
-                url: '/pages/bindCell/bindCell?type=owner',
-              });
-              break;
-          }
+          
         } else {
           wx.navigateTo({
             url: '/pages/login/login',
