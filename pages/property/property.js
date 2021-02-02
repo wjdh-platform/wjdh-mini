@@ -341,76 +341,84 @@ Page({
       // utils.ButtonClicked(t)
 
       setTimeout(() => {
-        for (let i = 0; i < userRoles.length; i++) {
-          let arrN = userRoles[i].name;
-          arr.push(arrN)
-        }
-        if (tocken && tocken != '') {
-          // if (idx == 1 || idx == 2 || idx == 3 || idx == 4 || idx == 5) {
-          if (t.data.houseExist) {
+          for (let i = 0; i < userRoles.length; i++) {
+            let arrN = userRoles[i].name;
+            arr.push(arrN)
+          }
+          if (tocken && tocken != '') {
+            // if (idx == 1 || idx == 2 || idx == 3 || idx == 4 || idx == 5) {
+
             if (arr.includes('HouseMember')) {
-              switch (idx) {
-                case 1: //添加家属
-                  wx.navigateTo({
-                    url: '/pages/bindCell/bindCell?type=family',
-                  });
-                  // utils.showToast("功能正在开发中","none")
-                  break;
-                case 2: //生活缴费
-                  wx.navigateTo({
-                    url: '/pages/lifePay/lifePay',
-                  });
+              if (t.data.houseExist) {
+                switch (idx) {
+                  case 1: //添加家属
+                    wx.navigateTo({
+                      url: '/pages/bindCell/bindCell?type=family',
+                    });
+                    // utils.showToast("功能正在开发中","none")
+                    break;
+                  case 2: //生活缴费
+                    wx.navigateTo({
+                      url: '/pages/lifePay/lifePay',
+                    });
 
-                  break;
-                case 3: //物业报修
-                  wx.navigateTo({
-                    url: '/pages/repair/repair',
-                  });
+                    break;
+                  case 3: //物业报修
+                    wx.navigateTo({
+                      url: '/pages/repair/repair',
+                    });
 
-                  break;
-                case 4: //云停车场
-                  // console.log('小区id', community_identifier)
-                  // wx.navigateToMiniProgram({
-                  //   appId: 'wx90d02216a88a39d6',
-                  //   path: 'pages/index/index?app_guid=' + community_identifier,
-                  //   // path: 'pages/index/index?app_guid=43682ab0a9cecea5c78b259b97a5ab97',
-                  //   // envVersion: 'develop',
-                  //   success(res) {
-                  //     // 打开成功
-                  //   }
-                  // })
-                  utils.showToast("功能正在开发中", "none")
-                  break;
-                case 5: //投诉建议
-                  wx.navigateTo({
-                    url: '/pages/proposal/proposal',
-                  });
-                  break;
-                case 6: //公告通知
-                  wx.navigateTo({
-                    url: '/pages/notice/notice',
-                  });
-                  break;
-                case 7: //应急电话
-                  wx.navigateTo({
-                    url: '/pages/phoneCall/phoneCall',
-                  });
-                  break;
-                case 8: //我的体温
-                  wx.navigateTo({
-                    url: '/pages/epidemic/wdtw/wdtw',
-                  });
-                  break;
-                case 9: //体温上报
-                  wx.navigateTo({
-                    url: '/pages/epidemic/twsb/twsb',
-                  });
-                  break;
-                case 10: //疫情举报
-                  wx.navigateTo({
-                    url: '/pages/epidemic/report/report',
-                  });
-                  break;
+                    break;
+                  case 4: //云停车场
+                    // console.log('小区id', community_identifier)
+                    // wx.navigateToMiniProgram({
+                    //   appId: 'wx90d02216a88a39d6',
+                    //   path: 'pages/index/index?app_guid=' + community_identifier,
+                    //   // path: 'pages/index/index?app_guid=43682ab0a9cecea5c78b259b97a5ab97',
+                    //   // envVersion: 'develop',
+                    //   success(res) {
+                    //     // 打开成功
+                    //   }
+                    // })
+                    utils.showToast("功能正在开发中", "none")
+                    break;
+                  case 5: //投诉建议
+                    wx.navigateTo({
+                      url: '/pages/proposal/proposal',
+                    });
+                    break;
+                  case 6: //公告通知
+                    wx.navigateTo({
+                      url: '/pages/notice/notice',
+                    });
+                    break;
+                  case 7: //应急电话
+                    wx.navigateTo({
+                      url: '/pages/phoneCall/phoneCall',
+                    });
+                    break;
+                  case 8: //我的体温
+                    wx.navigateTo({
+                      url: '/pages/epidemic/wdtw/wdtw',
+                    });
+                    break;
+                  case 9: //体温上报
+                    wx.navigateTo({
+                      url: '/pages/epidemic/twsb/twsb',
+                    });
+                    break;
+                  case 10: //疫情举报
+                    wx.navigateTo({
+                      url: '/pages/epidemic/report/report',
+                    });
+                    break;
+                }
+              } else {
+                utils.showToast('您在' + t.data.villageList[t.data.villageIdx].community_name + '没有房屋或者房屋正在审核中', 'none')
+                t.setData({
+                  ['list[' + idx + '].isActive']: false
+                })
+
               }
             } else if (arr.includes('NewMember')) {
               // utils.showToast('需要先绑定房屋才能访问', 'none')
@@ -437,15 +445,7 @@ Page({
                 ['list[' + idx + '].isActive']: false
               })
             }
-          } else {
-            utils.showToast('您在' + t.data.villageList[t.data.villageIdx].community_name + '没有房屋或者房屋正在审核中', 'none')
-            t.setData({
-              ['list[' + idx + '].isActive']: false
-            })
-
-          }
-          // }
-
+          
           switch (idx) {
             case 0: //绑定小区
               wx.navigateTo({
@@ -459,215 +459,215 @@ Page({
           })
         }
       }, 1000)
-    }
-    setTimeout(() => {
-      t.setData({
-        ['list[' + idx + '].isActive']: false,
-        buttonClicked: false
-      })
-    }, 1000)
-  },
-
-
-  getRoles() {
-    api.getRoles({}, (res) => {
-      if (res.data.code == 0) {
-        utils.setItem('userRoles', res.data.data)
-      } else {
-
-      }
-    })
-  },
-
-  bindvillageList(e) {
-    this.setData({
-      villageIdx: e.detail.value
-    })
-  },
-
-  closePopup() {
-    console.log(111)
-    this.setData({
-      activationType: !this.data.activationType
-    })
-  },
-
-  //检测用户在该小区是否有房屋
-
-  houseExist(param) {
-    api.houseExist(param, (res) => {
-      let code = res.data.code
-      if (code == 0) {
-        this.setData({
-          houseExist: true
-        })
-      } else if (code == 1) {
-        utils.showToast(res.data.msg)
-      } else {
-        this.setData({
-          houseExist: false
-        })
-      }
-    })
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    let arr = [],
-      t = this,
-      token = utils.getItem('accessToken'),
-      userRoles = utils.getItem('userRoles')
-    console.log('激活参数', options)
-    for (let i = 0; i < userRoles.length; i++) {
-      let arrN = userRoles[i].name;
-      arr.push(arrN)
-    }
-
-    //  t.getVillage()   //先判断token 有token就是首页，没有token弹框
-    if (options.type == 'share') {
-      if (!userRoles) {
-        wx.navigateTo({
-          url: '/pages/login/login?type=activation',
-        })
-      } else {
-        if (arr.includes('NewMember')) {
-          wx.showModal({
-            title: '提示',
-            content: '是否确认激活？', //话术待商榷
-            // showCancel:true,
-            success(res) {
-              if (res.confirm) {
-                t.setData({
-                  activationType: true
-                })
-              } else if (res.cancel) {
-                utils.showToast("如果想再次激活必须绑定小区", 'none')
-              }
-            }
-          })
-        }
-      }
-    }
-
-
-
-    // if (options.type == 'houseDetails' && (!arr.includes('HouseMember'))) {
-    //   wx.showModal({
-    //     title: '提示',
-    //     content: '是否确认激活？',//话术待商榷
-    //     // showCancel:true,
-    //     success(res) {
-    //       if (res.confirm) {
-    //         if (!token) {
-    //           console.log('没有token')
-    //           wx.navigateTo({
-    //             url: '/pages/login/login?type=activation',
-    //           })
-    //         } else {
-    //           console.log('有token')
-    //           t.setData({
-    //             activationType: true
-    //           })
-    //         }
-
-    //       } else if (res.cancel) {
-    //         utils.showToast("如果想再次激活必须绑定小区", 'none')
-    //       }
-    //     }
-    //   })
-    // }
-
-
-
-
-
-  },
-
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    let token = utils.getItem('accessToken'),
-      userRoles = utils.getItem('userRoles'),
-      tipsNone = utils.getItem('tipsNone'),
-      villageList = utils.getItem('villageList'),
-      villageIdx = utils.getItem('villageIdx'),
-      t = this,
-      arr = []
-    t.getRoles()
-    t.getPins()
+  }
+  setTimeout(() => {
     t.setData({
-      navH: app.globalData.navHeight,
-
+      ['list[' + idx + '].isActive']: false,
+      buttonClicked: false
     })
+  }, 1000)
+},
 
-    if (villageIdx && villageIdx != 0) {
-      t.houseExist({
-        community_identifier: villageList[villageIdx].community_identifier
+
+getRoles() {
+  api.getRoles({}, (res) => {
+    if (res.data.code == 0) {
+      utils.setItem('userRoles', res.data.data)
+    } else {
+
+    }
+  })
+},
+
+bindvillageList(e) {
+  this.setData({
+    villageIdx: e.detail.value
+  })
+},
+
+closePopup() {
+  console.log(111)
+  this.setData({
+    activationType: !this.data.activationType
+  })
+},
+
+//检测用户在该小区是否有房屋
+
+houseExist(param) {
+  api.houseExist(param, (res) => {
+    let code = res.data.code
+    if (code == 0) {
+      this.setData({
+        houseExist: true
       })
-      t.setData({
-        changeCellType: false,
-        villageList,
-        villageIdx,
-        cellName:villageList[villageIdx].community_name
+    } else if (code == 1) {
+      utils.showToast(res.data.msg)
+    } else {
+      this.setData({
+        houseExist: false
+      })
+    }
+  })
+},
+/**
+ * 生命周期函数--监听页面加载
+ */
+onLoad: function (options) {
+  let arr = [],
+    t = this,
+    token = utils.getItem('accessToken'),
+    userRoles = utils.getItem('userRoles')
+  console.log('激活参数', options)
+  for (let i = 0; i < userRoles.length; i++) {
+    let arrN = userRoles[i].name;
+    arr.push(arrN)
+  }
+
+  //  t.getVillage()   //先判断token 有token就是首页，没有token弹框
+  if (options.type == 'share') {
+    if (!userRoles) {
+      wx.navigateTo({
+        url: '/pages/login/login?type=activation',
       })
     } else {
-      t.setData({
-        changeCellType: true
-      })
+      if (arr.includes('NewMember')) {
+        wx.showModal({
+          title: '提示',
+          content: '是否确认激活？', //话术待商榷
+          // showCancel:true,
+          success(res) {
+            if (res.confirm) {
+              t.setData({
+                activationType: true
+              })
+            } else if (res.cancel) {
+              utils.showToast("如果想再次激活必须绑定小区", 'none')
+            }
+          }
+        })
+      }
     }
+  }
 
-    for (let i = 0; i < userRoles.length; i++) {
-      let arrN = userRoles[i].name;
-      arr.push(arrN)
-    }
-    // console.log(arr)
-    if (tipsNone && tipsNone == 'none') {
-      t.setData({
-        popupTips: false
-      })
-    }
-  },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
 
-  },
+  // if (options.type == 'houseDetails' && (!arr.includes('HouseMember'))) {
+  //   wx.showModal({
+  //     title: '提示',
+  //     content: '是否确认激活？',//话术待商榷
+  //     // showCancel:true,
+  //     success(res) {
+  //       if (res.confirm) {
+  //         if (!token) {
+  //           console.log('没有token')
+  //           wx.navigateTo({
+  //             url: '/pages/login/login?type=activation',
+  //           })
+  //         } else {
+  //           console.log('有token')
+  //           t.setData({
+  //             activationType: true
+  //           })
+  //         }
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
+  //       } else if (res.cancel) {
+  //         utils.showToast("如果想再次激活必须绑定小区", 'none')
+  //       }
+  //     }
+  //   })
+  // }
 
-  },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
 
-  },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
 
-  },
+},
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {}
+
+/**
+ * 生命周期函数--监听页面初次渲染完成
+ */
+onReady: function () {
+
+},
+
+/**
+ * 生命周期函数--监听页面显示
+ */
+onShow: function () {
+  let token = utils.getItem('accessToken'),
+    userRoles = utils.getItem('userRoles'),
+    tipsNone = utils.getItem('tipsNone'),
+    villageList = utils.getItem('villageList'),
+    villageIdx = utils.getItem('villageIdx'),
+    t = this,
+    arr = []
+  t.getRoles()
+  t.getPins()
+  t.setData({
+    navH: app.globalData.navHeight,
+
+  })
+
+  if (villageIdx && villageIdx != 0) {
+    t.houseExist({
+      community_identifier: villageList[villageIdx].community_identifier
+    })
+    t.setData({
+      changeCellType: false,
+      villageList,
+      villageIdx,
+      cellName: villageList[villageIdx].community_name
+    })
+  } else {
+    t.setData({
+      changeCellType: true
+    })
+  }
+
+  for (let i = 0; i < userRoles.length; i++) {
+    let arrN = userRoles[i].name;
+    arr.push(arrN)
+  }
+  // console.log(arr)
+  if (tipsNone && tipsNone == 'none') {
+    t.setData({
+      popupTips: false
+    })
+  }
+},
+
+/**
+ * 生命周期函数--监听页面隐藏
+ */
+onHide: function () {
+
+},
+
+/**
+ * 生命周期函数--监听页面卸载
+ */
+onUnload: function () {
+
+},
+
+/**
+ * 页面相关事件处理函数--监听用户下拉动作
+ */
+onPullDownRefresh: function () {
+
+},
+
+/**
+ * 页面上拉触底事件的处理函数
+ */
+onReachBottom: function () {
+
+},
+
+/**
+ * 用户点击右上角分享
+ */
+onShareAppMessage: function () {}
 })
