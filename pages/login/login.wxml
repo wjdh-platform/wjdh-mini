@@ -5,7 +5,7 @@
   <!--登录模块-->
   <view class="loginCont">
     <view class="loginWidth">
-      <view class="helloText">欢迎使用万家灯火小程序</view>
+      <view class="helloText">欢迎使用云家家小程序</view>
       <view class="helloText02">不辜负每一次的相遇</view>
     </view>
     <view class="phoneLogin" wx:if="{{loginType}}">

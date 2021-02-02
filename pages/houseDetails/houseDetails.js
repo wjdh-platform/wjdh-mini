@@ -11,7 +11,10 @@ Page({
     currentTab:0,
     changeCellType:false,
     title:'',
-    false:false
+    false:false,
+    backType: true,
+    titleNavName:'小区详情',
+    backType: true,
   },
 
   changeClose(res){
@@ -144,7 +147,8 @@ Page({
     this.setData({
       houseId:options.houseId,
       role: options.role,
-      shenhe_id:options.shenhe_id
+      shenhe_id:options.shenhe_id,
+      navH: app.globalData.navHeight
     })
       if(options.houseId!=''){
         this.getHouseDetails()
@@ -296,7 +300,7 @@ Page({
     console.log()
     if (res.from === 'button') {
       // 来自页面内转发按钮
-      console.log(res.target)
+      console.log('通过按钮触发')
     }
     return {
       title: '邀请您加入'+this.data.detailsData.introduction,

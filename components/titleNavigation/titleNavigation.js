@@ -1,4 +1,5 @@
 const systemInfo = wx.getSystemInfoSync();
+const app = getApp();
 import * as api from '../../api/api'
 import utils from '../../utils/util.js'
 Component({
@@ -20,6 +21,10 @@ Component({
     },
     backType:{
       type:Boolean
+    },
+    titleNavName:{
+      type: String,
+      value: ''
     }
   },
   data: {
@@ -29,10 +34,13 @@ Component({
     menuStyle: '',
     barHeight:"",
     navHeight:"",
-    title:''
+    title:'',
+    titleType:false,
+    titleMoreType:false,
+    titleIdx:0
   },
   methods: {
-
+    
     //返回上一页
     returnPage() {
       wx.navigateBack();
@@ -40,6 +48,26 @@ Component({
       let prevPage = pages[pages.length - 2];  //上一个页面
       prevPage .setData({//获取上级页面传的参数
           title:this.data.title
+      })
+    },
+
+    bindTitle(){
+      this.setData({
+        titleType:!this.data.titleType
+      })
+    },
+    bindTitleText(e){
+      let t = this,
+      idx = e.currentTarget.dataset.idx,
+      dataList = t.data.myCommunities
+      dataList[idx].isActive = !dataList[idx].isActive
+      if (dataList[idx].isActive) {
+        utils.packUp(dataList, idx);
+      }
+      t.setData({
+        titleIdx:idx,
+        myCommunities: dataList,
+        titleType:false
       })
     },
     /**
@@ -152,6 +180,7 @@ Component({
         t.triggerEvent('navHeight', t.data.navHeight+t.data.barHeight);
       });   
     },
+    
   },
   attached() {
     let t = this,
@@ -159,9 +188,22 @@ Component({
       villageIdx = utils.getItem('villageIdx')
     if (villageIdx&&villageIdx != 0) {
       t.setData({
-        title:villageList[villageIdx].community_name
+        title:villageList[villageIdx].community_name,
+        navH:app.globalData.navHeight
       })
     }
-    console.log(t.pageType)
+    api.myCommunities({},(res)=>{
+      let data = res.data,
+      list = data.data
+      if(data.code == 0){
+        list.forEach((item)=>{
+          item.isActive = false
+        })
+        this.setData({
+          // myCommunities:list
+          myCommunities:[{community_name: "晨曦家园", community_identifier: "00001",isActive:false},{community_name: "碧桂园", community_identifier: "00001",isActive:false}]
+        })
+      }
+    })
   }
 })

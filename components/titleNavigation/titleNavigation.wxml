@@ -9,12 +9,22 @@
       <view class="return" bindtap="returnPage" wx:if="{{backType}}">
         <!-- <image src="/static/icon/returnIcon.png"></image> -->
         <image src="../../static/image/returnIcon.png"></image>
+        <!-- <text>{{titleNavName}}</text> -->
       </view>
       <!-- <view class="home" bindtap="goHome">
         <image src="../../static/icon/homeIcon.png"></image>
       </view> -->
     </view>
-    <view class="title">{{title!=''?title:'万家灯火'}}</view>{{pageType}}
+    <view class="title" wx:if="{{myCommunities.length>0&&titleNavName!=''}}" bindtap="bindTitle">{{titleNavName}} - <text>{{myCommunities[titleIdx].community_name}}</text><view wx:if="{{myCommunities.length>1}}" class=" {{titleType?'down':'up'}}"></view></view>
+    <view class="title" wx:else>云家家</view>
+    <view class="titleMoreP"  style="top:{{navH}}px" wx:if="{{titleType}}">
+      <view class="itemCont">
+      <view class="item {{item.isActive?'active':''}}"  wx:for="{{myCommunities}}" catchtap="bindTitleText" data-idx="{{index}}">
+        {{item.isActive+item.community_name}}
+      </view>
+      
+      </view>
+    </view>
     <!--  商品详情页结束-->
   </view>
 </view>

@@ -10,7 +10,8 @@ Page({
   data: {
     currentTab:0,
     changeCellType: false,
-    backType:true
+    backType:true,
+    titleNavName:'报修列表'
   },
 
   tabTap(e){

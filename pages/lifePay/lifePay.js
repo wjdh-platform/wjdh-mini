@@ -19,7 +19,8 @@ Page({
     pageIndex: 1,
     pageSize: 10,
     totalNum: 0,
-    orderList: []
+    orderList: [],
+    titleNavName:'生活缴费'
   },
 
   changeClose(res) {
@@ -171,7 +172,7 @@ Page({
           dataArr.forEach(item => {
             item.isShow = false;
             item.checked = false;
-            // item.extra = JSON.parse(item.extra)
+            item.extra = JSON.parse(item.extra)
           })
           let arr = [];
           if (t.data.pageIndex == 1) {

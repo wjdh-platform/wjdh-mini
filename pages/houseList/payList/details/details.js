@@ -16,7 +16,8 @@ Page({
       let data = res.data,
       extra = {}
       if(data.code == 0){
-        extra = JSON.parse(data.data.extra)
+        // extra = JSON.parse(data.data.extra)
+        extra = data.data.extra
         this.setData({
           orderDetail: data.data,
           extra

@@ -11,7 +11,8 @@ Page({
 
     changeCellType:false,
     title:'',
-    backType:true
+    backType:true,
+    titleNavName:'公告通知'
   },
 
   

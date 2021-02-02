@@ -13,7 +13,8 @@ Page({
 
     changeCellType: false,
     title:'',
-    backType:true
+    backType:true,
+    titleNavName:'物业报修'
   },
 
   changeClose(res) {

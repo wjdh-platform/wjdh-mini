@@ -2,6 +2,7 @@
     "component":true,
     "usingComponents": {
       "change-cell":"/components/changeCell/changeCell",
-      "title-Navigation": "/components/titleNavigation/titleNavigation"
+      "title-Navigation": "/components/titleNavigation/titleNavigation",
+      "picker-view":"/components/pickerUp/pickerUp"
     }
 }

@@ -11,7 +11,8 @@ Page({
     currentTab:0,
     changeCellType: false,
     backType:true,
-    homeListDis:false
+    homeListDis:false,
+    titleNavName:'投诉建议列表'
   },
 
   tabTap(e){

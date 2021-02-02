@@ -304,3 +304,48 @@ radio .wx-radio-input{
   box-sizing: border-box;
   border-bottom: solid 1rpx #ececec;
 }
+
+
+
+.up::after{
+  content: '';
+  display: inline-block;
+  width:0;
+  height:0;
+  border-right:10rpx solid transparent;
+  border-left:10rpx solid transparent;
+  border-top:10rpx solid #747474;
+  margin-left: 10rpx;
+}
+.down::after{
+  content: '';
+  display: inline-block;
+  width:0;
+  height:0;
+  border-right:10rpx solid transparent;
+  border-left:10rpx solid transparent;
+  border-bottom:10rpx solid #747474;
+  margin-left: 10rpx;
+}
+.changePicker{
+  flex: 1;
+}
+.houseListCol{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 30rpx;
+  color: #424242;
+  /* padding: 40rpx 30rpx; */
+}
+.houseType{
+  color: #50DABE;
+  font-size: 30rpx;
+}
+
+.fail{
+  color: red;
+}
+.shenheing{
+  color:#EAC100;
+}

@@ -3,7 +3,7 @@
   <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType"
     title="{{title}}" bindcloseBtn="closeBtn">
   </change-cell>
-  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
+  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}" titleNavName="{{titleNavName}}"></title-Navigation>
   <view class="tabCont">
     <view class="tabs  {{currentTab == 0?'active':''}}" data-current="0" bindtap="tabTap">已解决</view>
     <view class="tabs {{currentTab == 1?'active':''}}" data-current="1" bindtap="tabTap">未解决</view>

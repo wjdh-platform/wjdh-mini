@@ -1,5 +1,5 @@
 <!--components/changeCell/changeCell.wxml-->
-<view>
+<view wx:if="{{changeCellType}}">
   <view class="changeCellPopup" wx:if="{{changeCellType}}">
     <view class="changeCont">
       <view class="closePopup" bindtap="closePopup"></view>

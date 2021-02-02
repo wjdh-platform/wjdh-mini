@@ -21,7 +21,8 @@ Page({
     listTypeDetails: '详情',
     startX: 0, //开始坐标
     startY: 0,
-    currentTab:0
+    currentTab:0,
+    titleNavName:'房屋列表'
   },
 
   changeClose(res) {

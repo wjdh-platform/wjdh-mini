@@ -1,6 +1,6 @@
 <!--pages/houseDetails/houseDetails.wxml-->
-<view class="houseDetails">
-  <title-Navigation detail="true" title="{{title}}"></title-Navigation>
+<view class="houseDetails" style="padding-top:{{navH}}px">
+  <title-Navigation detail="true" title="{{title}}" titleNavName="{{titleNavName}}" backType="{{backType}}"></title-Navigation>
   <change-cell changeCellType="{{changeCellType}}" 
   bindchangeClose="changeClose" bindchangePopupType="changePopupType" buildingsType="{{buildingsType}}"
   title="{{title}}" wx:if="{{false}}"></change-cell>

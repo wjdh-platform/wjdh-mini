@@ -11,7 +11,8 @@ Page({
 
     changeCellType: false,
     title: '',
-    backType:true
+    backType:true,
+    titleNavName:'疫情举报列表'
   },
 
   changeClose(res) {

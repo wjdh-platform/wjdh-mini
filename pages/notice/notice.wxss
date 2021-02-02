@@ -31,9 +31,9 @@ page{
   padding: 100rpx 0;
 }
 .title{
-  font-size: 28rpx;
+  font-size: 30rpx;
   color: #333;
-  line-height: 28rpx;
+  line-height: 30rpx;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
@@ -44,7 +44,7 @@ width: 94%;
 }
 .name,.time,.date{
   display: inline-block;
-  font-size: 22rpx;
+  font-size: 26rpx;
   color: #B2B2B2;
   margin-right: 20rpx;
 }

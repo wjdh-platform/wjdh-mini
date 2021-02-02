@@ -46,6 +46,7 @@ function packUp(data, index) {
 }
 
 
+
 module.exports = {
   // formatTime: formatTime,
   setItem: setItem,
@@ -53,7 +54,5 @@ module.exports = {
   removeItem: removeItem,
   checkLogin: checkLogin,
   showToast,
-  // token,
-  // codeToken,
   packUp,
 }

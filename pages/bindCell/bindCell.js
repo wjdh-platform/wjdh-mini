@@ -49,9 +49,14 @@ Page({
     inputDisable: false,
     // placeholder:'业主只能是使用拍照识别身份证',
     villageIdxP: 0,
-    bindListP: [
-      { id: 1, name: '为本人绑定' },
-      { id: 0, name: '为他人绑定' }
+    bindListP: [{
+        id: 1,
+        name: '为本人绑定'
+      },
+      {
+        id: 0,
+        name: '为他人绑定'
+      }
     ],
     bindListPIdx: 0,
     bindPeo: false,
@@ -63,38 +68,56 @@ Page({
     changeCellType: false,
     homeListIdx: 0,
     homeListDis: false,
-    backType:true,
-    bigJobsText:'',
-    smallJobsText:'',
-    jobsText:'',
-    bigJobsType:true,
-    smallJobsType:false,
-    jobsType:false,
-    jobsPopup:false,
-    jobOther:false
+    backType: true,
+    bigJobsText: '',
+    smallJobsText: '',
+    jobsText: '',
+    bigJobsType: true,
+    smallJobsType: false,
+    jobsType: false,
+    jobsPopup: false,
+    jobOther: false,
+    houseListType: false,
+    titleNavName: '',
+    yezhuNumType: false,
+    moshiZyType: false,
+    ziyouYZphone: false,
+    condition:false,
+    provinces: [],
+    province: "",
+    citys: [],
+    city: "",
+    countys: [],
+    county: '',
   },
 
-  jobsPopupTab(){
+  houseListType() {
+    this.setData({
+      houseListType: !this.data.houseListType
+    })
+  },
+
+  jobsPopupTab() {
     // console.log(11)
     this.getIndustries()
     this.setData({
-      jobsPopup:true,
-      bigJobsType:true,
-      smallJobsType:false,
-      jobsType:false,
+      jobsPopup: true,
+      bigJobsType: true,
+      smallJobsType: false,
+      jobsType: false,
     })
   },
 
   bindHomeList(e) {
     let val = e.detail.value,
-         t = this
+      t = this
     this.setData({
       homeListIdx: val,
-      community_identifier:t.data.homeList[val].community_identifier,
-      building_number:t.data.homeList[val].building_number,
-      unit_number:t.data.homeList[val].unit_number,
-      floor_number:t.data.homeList[val].floor_number,
-      house_number:t.data.homeList[val].house_number
+      community_identifier: t.data.homeList[val].community_identifier,
+      building_number: t.data.homeList[val].building_number,
+      unit_number: t.data.homeList[val].unit_number,
+      floor_number: t.data.homeList[val].floor_number,
+      house_number: t.data.homeList[val].house_number
     })
   },
 
@@ -105,28 +128,31 @@ Page({
       villageIdx = utils.getItem('villageIdx'),
       userRoles = utils.getItem('userRoles'),
       arr = []
-      for (let i = 0; i < userRoles.length; i++) {
-        let arrN = userRoles[i].name;
-        arr.push(arrN)
-      }
-      if (arr.includes('NewMember')) {
-        t.setData({
-          popupType: true
-        })
-      } else {
-        t.setData({
-          popupType: false
-        })
-        t.getBuildingsList(villageList, villageIdx)
-      }
+    for (let i = 0; i < userRoles.length; i++) {
+      let arrN = userRoles[i].name;
+      arr.push(arrN)
+    }
+    if (arr.includes('NewMember')) {
+      t.setData({
+        popupType: true
+      })
+    } else {
+      t.setData({
+        popupType: false
+      })
+      t.getBuildingsList(villageList, villageIdx)
+    }
     t.setData({
-      changeCellType:res.detail.changeCellType,
-      title:res.detail.community_name,
+      changeCellType: res.detail.changeCellType,
+      title: res.detail.community_name,
     })
     if (villageIdx != 0) {
       if (t.data.pageEntry == 'family') {
-        t.housesJiashuList({ community_identifier: villageList[villageIdx].community_identifier,type:'shouquan' })
-        
+        t.housesJiashuList({
+          community_identifier: villageList[villageIdx].community_identifier,
+          type: 'shouquan'
+        })
+
       } else {
         t.getBuildingsList(villageList, villageIdx)
       }
@@ -172,9 +198,11 @@ Page({
   },
 
   bindShip(e) {
-    let t = this
+    let t = this,
+      villageList = utils.getItem('villageList'),
+      villageIdx = utils.getItem('villageIdx')
     console.log(e.detail.value)
-    if(t.data.pageEntry == 'family'){
+    if (t.data.pageEntry == 'family') {
       t.setData({
         ownerType: false,
         inputDisable: false,
@@ -183,12 +211,13 @@ Page({
         'examineData.photo': '',
         inputDisable: false,
         shipIdx: e.detail.value,
-        job:'',
-        jobOther:false
+        job: '',
+        jobOther: false
       })
       return
     }
-    if (e.detail.value != "1") {//非业主外
+
+    if (e.detail.value != "1") { //非业主外
       t.setData({
         ownerType: false,
         inputDisable: false,
@@ -197,27 +226,33 @@ Page({
         'examineData.photo': '',
         inputDisable: false,
       })
-    } else {//业主
+    } else { //业主
       t.setData({
         ownerType: true,
         inputDisable: true,
         bindPeo: false,
         examineData: utils.getItem('examineData'),
         inputDisable: true,
-        who:1,
-        
+        who: 1,
+
       })
     }
 
 
     t.setData({
       shipIdx: e.detail.value,
-      job:'',
-        jobOther:false,
-        bigJobsText:'',
-        smallJobsText:'',
-        jobsText:''
+      job: '',
+      jobOther: false,
+      bigJobsText: '',
+      smallJobsText: '',
+      jobsText: ''
     })
+    if (t.data.villageList[t.data.villageIdx].community_manage_status == '自由管理模式') {
+      t.setData({
+        bindPeo: false,
+      })
+
+    }
 
   },
 
@@ -289,7 +324,7 @@ Page({
   //手机号失焦
   phoneBlur(e) {
     let t = this,
-         val = e.detail.value.replace(/\s*/g, "")
+      val = e.detail.value.replace(/\s*/g, "")
     if (val.length == 11) {
       if (!/^1[3456789]\d{9}$/.test(val)) {
         utils.showToast("请输入正确的手机号", "none")
@@ -327,8 +362,8 @@ Page({
   //业主获取验证码
   obtainCodeYZ() {
     let that = this,
-    villageList = utils.getItem('villageList'),
-    villageIdx = utils.getItem('villageIdx'),
+      villageList = utils.getItem('villageList'),
+      villageIdx = utils.getItem('villageIdx'),
       data = that.data,
       phone = data.yezhuOldPhone,
       currentTime = data.currentTimeYZ,
@@ -487,14 +522,20 @@ Page({
     t.setData({
       villageIdx: idx
     })
-    api.getBuildings({ community_indentifier: list[idx].community_identifier }, (res) => {
+    utils.setItem('villageIdx',idx)
+    utils.setItem('villageList',list)
+    api.getBuildings({
+      community_indentifier: list[idx].community_identifier
+    }, (res) => {
       let data = res.data
       if (data.code == 1) {
         utils.showToast(res.data.msg, "none")
       } else if (data.code == 0 && data.data.length > 0) {
         let list = [],
           oldList = data.data
-        list = oldList.unshift({ building_name: '请选择' })
+        list = oldList.unshift({
+          building_name: '请选择'
+        })
         t.setData({
           buildingsList: oldList,
           buildingsType: true,
@@ -524,14 +565,18 @@ Page({
     t.setData({
       buildingsIdx: e.detail.value
     })
-    api.getUnits({ building_id: list[idx].id }, (res) => {
+    api.getUnits({
+      building_id: list[idx].id
+    }, (res) => {
       let data = res.data
       if (data.code == 1) {
         utils.showToast(res.data.msg, "none")
       } else if (data.code == 0 && data.data.length > 0) {
         let list = [],
           oldList = data.data
-        list = oldList.unshift({ unit_name: '请选择' })
+        list = oldList.unshift({
+          unit_name: '请选择'
+        })
         t.setData({
           unitsList: oldList,
           unitsType: true,
@@ -557,14 +602,18 @@ Page({
     t.setData({
       unitsIdx: e.detail.value
     })
-    api.getFloor({ unit_id: list[idx].id }, (res) => {
+    api.getFloor({
+      unit_id: list[idx].id
+    }, (res) => {
       let data = res.data
       if (data.code == 1) {
         utils.showToast(res.data.msg, "none")
       } else if (data.code == 0 && data.data.length > 0) {
         let list = [],
           oldList = data.data
-        list = oldList.unshift({ floor_name: '请选择' })
+        list = oldList.unshift({
+          floor_name: '请选择'
+        })
         t.setData({
           floorList: oldList,
           floorType: true,
@@ -587,14 +636,18 @@ Page({
     t.setData({
       floorIdx: e.detail.value
     })
-    api.getRoom({ floor_id: list[idx].id }, (res) => {
+    api.getRoom({
+      floor_id: list[idx].id
+    }, (res) => {
       let data = res.data
       if (data.code == 1) {
         utils.showToast(res.data.msg, "none")
       } else if (data.code == 0) {
         let list = [],
           oldList = data.data
-        list = oldList.unshift({ house_name: '请选择' })
+        list = oldList.unshift({
+          house_name: '请选择'
+        })
         t.setData({
           roomList: oldList,
           roomType: true,
@@ -606,12 +659,16 @@ Page({
   bindRoomList(e) {
     let t = this,
       list = t.data.roomList,
-      idx = e.detail.value
+      idx = e.detail.value,
+      villageList = utils.getItem('villageList'),
+      villageIdx = utils.getItem('villageIdx')
 
     t.setData({
       roomIdx: e.detail.value
     })
-    api.yezhu({ id: list[idx].id }, (res) => {
+    api.yezhu({
+      id: list[idx].id
+    }, (res) => {
       let data = res.data
       if (data.code == 1) {
         utils.showToast(res.data.msg, "none")
@@ -620,26 +677,60 @@ Page({
           encryptionPhone: data.data.phone,
           yezhuOldPhone: data.data.people_phone
         })
+        if (t.data.villageList[t.data.villageIdx].community_manage_status == '自由管理模式') {
+          t.setData({
+            pageType: false,
+            yezhuShip: true,
+            moshiZyType: true,
+            // bindPeo:false
+          })
+        } else {
+          t.setData({
+            yezhuNumType: true,
+            moshiZyType: false,
+            ziyouYZphone: true
+          })
+        }
       } else {
         t.setData({
           pageType: false,
           // ownerType:true,
           shipType: true,
           encryptionPhone: '',
-          yezhuOldPhone: ''
+          yezhuOldPhone: '',
         })
+        if (t.data.villageList[t.data.villageIdx].community_manage_status == '自由管理模式') {
+          t.setData({
+            pageType: false,
+            yezhuShip: true,
+            moshiZyType: false,
+            yezhuNumType: false,
+            // bindPeo:false
+          })
+        } else {
+          t.setData({
+            yezhuNumType: true,
+            moshiZyType: false,
+            ziyouYZphone: true
+          })
+        }
       }
     })
+
+    //根据接口返回当前什么模式
+
   },
 
   //获取小区名字
   getVillage() {
     let t = this
-    api.getVillage({}, (res) => {
+    api.getVillage({county_id:t.data.cellId}, (res) => {
       if (res.data.code == 0) {
         let list = [],
           oldList = res.data.data
-        list = oldList.unshift({ community_name: '请选择' })
+        list = oldList.unshift({
+          community_name: '请选择'
+        })
         t.setData({
           villageList: oldList
         })
@@ -652,14 +743,17 @@ Page({
     let t = this
     api.bellInitialize({}, (res) => {
       if (res.data.code == 0) {
-        
+
         let rolesOld = res.data.data.role,
           role = [],
           arrChange
-          if(t.data.pageEntry == 'family'){
-                 arrChange=rolesOld.shift()
-          }
-        role = rolesOld.unshift({ key: '请选择', value: '请选择' })
+        if (t.data.pageEntry == 'family') {
+          arrChange = rolesOld.shift()
+        }
+        role = rolesOld.unshift({
+          key: '请选择',
+          value: '请选择'
+        })
         t.setData({
           dataList: res.data.data,
           'dataList.role': rolesOld
@@ -710,10 +804,15 @@ Page({
 
 
 
+  
+
+
+
+
   addImg(e) {
     var _this = this,
       data = _this.data
-    if (data.roomIdx == 0&&data.homeListIdx ==0) {
+    if (data.roomIdx == 0 && data.homeListIdx == 0) {
       utils.showToast('请先选择要绑定的房子', 'none')
       return
     }
@@ -763,14 +862,14 @@ Page({
                   wx.uploadFile({
                     filePath: res.tempFilePath,
                     formData: {
-                      'community_identifier': data.community_identifier?data.community_identifier:villageList[villageIdx].community_identifier,
-                      'building_number': data.building_number?data.building_number:data.buildingsList[data.buildingsIdx].building_number,
-                      'unit_number': data.unit_number?data.unit_number:data.unitsList[data.unitsIdx].unit_number,
-                      'floor_number': data.floor_number?data.floor_number:data.floorList[data.floorIdx].floor_number,
-                      'house_number': data.house_number?data.house_number:data.roomList[data.roomIdx].house_number
+                      'community_identifier': data.community_identifier ? data.community_identifier : data.villageList[data.villageIdx].community_identifier,
+                      'building_number': data.building_number ? data.building_number : data.buildingsList[data.buildingsIdx].building_number,
+                      'unit_number': data.unit_number ? data.unit_number : data.unitsList[data.unitsIdx].unit_number,
+                      'floor_number': data.floor_number ? data.floor_number : data.floorList[data.floorIdx].floor_number,
+                      'house_number': data.house_number ? data.house_number : data.roomList[data.roomIdx].house_number
                     },
                     name: 'file',
-                    url: app.servers+'api/v1/people/photo',
+                    url: app.servers + 'api/v1/people/photo',
                     success(res) {
                       let data = JSON.parse(res.data)
 
@@ -778,7 +877,7 @@ Page({
                         photoUrl: data.data
                       }, () => {
                         wx.hideLoading({
-                          success: (res) => { },
+                          success: (res) => {},
                         })
                       })
                     }
@@ -823,15 +922,17 @@ Page({
     if (e.detail.value == "1") {
       t.setData({
         shipType: true,
-        ownerType:false
+        ownerType: false,
+        yezhuNumType: false
       })
     } else {
       t.setData({
         shipType: false,
-        ownerType:true,
+        ownerType: true,
         pageType: false,
         bindPeo: false,
-        inputDisable: true
+        inputDisable: true,
+        yezhuNumType: true
       })
     }
 
@@ -846,16 +947,15 @@ Page({
       param = {},
       reg = /^1[3456789]\d{9}$/,
       villageList = utils.getItem('villageList'),
-    villageIdx = utils.getItem('villageIdx')
+      villageIdx = utils.getItem('villageIdx')
     // return false
     if (t.data.pageEntry == 'family') {
-      if(t.data.homeListIdx == 0){
-        utils.showToast('请选择房屋','none')
+      if (t.data.homeListIdx == 0) {
+        utils.showToast('请选择房屋', 'none')
         return
       }
       if (data.inputDisable) {
-        if (data.examineData && data.examineData.idcard && data.examineData.name || data.examineData.photo) {
-        } else if (data.idcardData == '') {
+        if (data.examineData && data.examineData.idcard && data.examineData.name || data.examineData.photo) {} else if (data.idcardData == '') {
           utils.showToast('请识别身份信息', 'none')
           return
         } else if (data.photoUrl == '') {
@@ -874,43 +974,41 @@ Page({
           return
         }
       }
-      if(data.jobOther == true&&val.jobName == ''){
+      if (data.jobOther == true && val.jobName == '') {
         utils.showToast('请输入职业', 'none')
         return
       }
       if (!(reg.test(val.phone))) {
         utils.showToast('请输入正确的联系电话', 'none')
         return
-      }
-      else if (val.job == '') {
+      } else if (val.job == '') {
         utils.showToast('请选择职业', 'none')
         return
       } else if (val.company == '') {
         utils.showToast('请输入工作单位', 'none')
         return
-      }
-      else {
+      } else {
         param = {
           who: '0',
           phone: data.phoneVal ? data.phoneVal : val.phone,
           idcard: val.IDNumber ? val.IDNumber : data.idcardData ? data.idcardData.idcard : data.examineData.idcard,
           name: val.userName ? val.userName : data.idcardData ? data.idcardData.name : data.examineData.name,
           photo: data.photoUrl ? data.photoUrl : data.examineData.photo,
-          job: val.jobName&&val.jobName !=''?data.job+ '-'+val.jobName:data.job,
+          job: val.jobName && val.jobName != '' ? data.job + '-' + val.jobName : data.job,
           company: val.company ? val.company : data.examineData.job,
           house_id: data.homeList[data.homeListIdx].people_house_id,
           zzmm: dataList.zzmm[data.zzmmIdx].key,
           tyjr: dataList.tyjr[data.twjrIdx].key,
           dibao: dataList.dibao[data.sfdbIdx].key,
           shangfang: dataList.shangfang[data.sfjlIdx].key,
-          choice:1,
+          choice: 1,
           role: dataList.role[data.shipIdx].key,
-          community_identifier: villageList[villageIdx].community_identifier,
+          community_identifier: data.community_identifier?data.community_identifier:data.villageList[data.villageIdx].community_identifier,
         }
-        
+
       }
     } else {
-      if (villageIdx == 0) {
+      if (data.villageIdx == 0) {
         utils.showToast('请选择小区', 'none')
         return
       } else if (data.buildingsIdx == 0) {
@@ -930,7 +1028,7 @@ Page({
         return
       }
 
-      if (data.verificationPhoneVal == '验证手机号' && data.yezhuOldPhone != '') {
+      if (data.villageList[data.villageIdx].community_manage_status !== '自由管理模式'&&data.verificationPhoneVal == '验证手机号' && data.yezhuOldPhone != '') {
         utils.showToast('请输入业主手机验证码', 'none')
         return
       } else {
@@ -967,7 +1065,7 @@ Page({
           return
         }
       }
-      if(data.jobOther == true&&val.jobName == ''){
+      if (data.jobOther == true && val.jobName == '') {
         utils.showToast('请输入职业', 'none')
         return
       }
@@ -977,16 +1075,13 @@ Page({
       } else if (val.nation == '') {
         utils.showToast('请输入民族', 'none')
         return
-      }
-      else if (!(reg.test(val.phone))) {
+      } else if (!(reg.test(val.phone))) {
         utils.showToast('请输入正确的联系电话', 'none')
         return
-      }
-      else if (val.sex == '') {
+      } else if (val.sex == '') {
         utils.showToast('请输入性别', 'none')
         return
-      }
-      else if (val.birth == '') {
+      } else if (val.birth == '') {
         utils.showToast('请输入生日', 'none')
         return
       } else if (data.job == '') {
@@ -995,8 +1090,7 @@ Page({
       } else if (val.company == '') {
         utils.showToast('请输入工作单位', 'none')
         return
-      }
-      else {
+      } else {
 
         param = {
           who: data.bindListP[data.bindListPIdx].id,
@@ -1012,7 +1106,7 @@ Page({
           tyjr: dataList.tyjr[data.twjrIdx].key,
           dibao: dataList.dibao[data.sfdbIdx].key,
           shangfang: dataList.shangfang[data.sfjlIdx].key,
-          job: val.jobName&&val.jobName !=''?data.job+ '-'+val.jobName:data.job,
+          job: val.jobName && val.jobName != '' ? data.job + '-' + val.jobName : data.job,
           company: val.company ? val.company : data.examineData.job,
           house_id: data.roomIdx == 0 ? '' : data.roomList[data.roomIdx].id,
           role: dataList.role[data.shipIdx].key,
@@ -1021,9 +1115,9 @@ Page({
           xingzhi: dataList.xingzhi[data.fwxzIdx].key,
           choice: val.radio ? val.radio : '1',
           type: dataList.type[data.zhlxIdx].key,
-          community_identifier: villageList[villageIdx].community_identifier,
+          community_identifier: data.villageList[data.villageIdx].community_identifier,
         }
-        
+
       }
     }
 
@@ -1061,33 +1155,39 @@ Page({
 
   getBuildingsList(villageList, villageIdx) {
     let t = this
-    api.getBuildings({ community_indentifier: villageList[villageIdx].community_identifier }, (res) => {
+    api.getBuildings({
+      community_indentifier: villageList[villageIdx].community_identifier
+    }, (res) => {
       let data = res.data
       if (data.code == 1) {
         utils.showToast(res.data.msg, "none")
         // } else if (data.code == 0 && data.data.length > 0) {
       } else if (data.code == 0) {
-        
+
         let list = [],
           oldList = data.data
-          if(oldList.length>0){
-            list = oldList.unshift({ building_name: '请选择' })
-            t.setData({
-              buildingsList: oldList,
-              buildingsType: true,
-              unitsType: true,
-              floorType: true,
-              roomType: true,
-              homeListDis: false,
-            })
-          }else{
-            list = oldList.unshift({ building_name: '该小区暂无可选楼栋' })
-            this.setData({
-              buildingsList: oldList,
-              homeListDis: true,
-            })
-          }
-        
+        if (oldList.length > 0) {
+          list = oldList.unshift({
+            building_name: '请选择'
+          })
+          t.setData({
+            buildingsList: oldList,
+            buildingsType: true,
+            unitsType: true,
+            floorType: true,
+            roomType: true,
+            homeListDis: false,
+          })
+        } else {
+          list = oldList.unshift({
+            building_name: '该小区暂无可选楼栋'
+          })
+          this.setData({
+            buildingsList: oldList,
+            homeListDis: true,
+          })
+        }
+
       }
     })
   },
@@ -1098,9 +1198,11 @@ Page({
         oldList = data.data,
         list = [],
         msgList = []
-        console.log('房间',res)
+      console.log('房间', res)
       if (data.code == 0) {
-        list = oldList.unshift({ introduction: '请选择' })
+        list = oldList.unshift({
+          introduction: '请选择'
+        })
         this.setData({
           homeList: oldList,
           homeListDis: false,
@@ -1108,7 +1210,9 @@ Page({
         })
       } else if (data.code == 2) {
         // utils.showToast(data.msg,'none')
-        list = msgList.unshift({ introduction: '您在该小区没有可管理的房屋' })
+        list = msgList.unshift({
+          introduction: '您在该小区没有可管理的房屋'
+        })
         this.setData({
           homeList: msgList,
           homeListDis: true,
@@ -1117,49 +1221,49 @@ Page({
     })
   },
 
-  getIndustries(){
-    api.industries({},(res)=>{
+  getIndustries() {
+    api.industries({}, (res) => {
       let data = res.data
-      if(data.code == 0){
+      if (data.code == 0) {
         // list = oldList.unshift({industry_name:'请选择'})
-        data.data.forEach((item)=>{
+        data.data.forEach((item) => {
           item.isShow = false
-        }) 
+        })
         this.setData({
-          bigJobsList:data.data
+          bigJobsList: data.data
         })
       }
     })
   },
 
-  smallindustries(param){
-    api.smallindustries(param,(res)=>{
+  smallindustries(param) {
+    api.smallindustries(param, (res) => {
       let data = res.data
-      if(data.code == 0){
+      if (data.code == 0) {
         // list = oldList.unshift({industry_name:'请选择'})
-        data.data.forEach((item)=>{
+        data.data.forEach((item) => {
           item.isShow = false
-        }) 
+        })
         this.setData({
-          smallJobsList:data.data
+          smallJobsList: data.data
         })
       }
     })
 
 
-    
+
   },
 
-  jobs(param){
-    api.jobs(param,(res)=>{
+  jobs(param) {
+    api.jobs(param, (res) => {
       let data = res.data
-      if(data.code == 0){
-        data.data.forEach((item)=>{
+      if (data.code == 0) {
+        data.data.forEach((item) => {
           item.isShow = false
-        }) 
+        })
         // list = oldList.unshift({industry_name:'请选择'})
         this.setData({
-          jobsList:data.data
+          jobsList: data.data
         })
       }
     })
@@ -1173,103 +1277,243 @@ Page({
     }
   },
 
-  bigJobsTab(e){
+  bigJobsTab(e) {
     console.log(e)
     let t = this,
-         idx = e.currentTarget.dataset.idx,
-         id = e.currentTarget.dataset.id,
-         dataList = t.data.bigJobsList
-         dataList[idx].isShow = !dataList[idx].isShow
-         if (dataList[idx].isShow) {
-           t.packUp(dataList, idx);
-         }
-         if(idx != t.data.idx){
-           t.setData({
-             smallJobsText:'',
-             jobsText:''
-           })
-         }
+      idx = e.currentTarget.dataset.idx,
+      id = e.currentTarget.dataset.id,
+      dataList = t.data.bigJobsList
+    dataList[idx].isShow = !dataList[idx].isShow
+    if (dataList[idx].isShow) {
+      t.packUp(dataList, idx);
+    }
+    if (idx != t.data.idx) {
+      t.setData({
+        smallJobsText: '',
+        jobsText: ''
+      })
+    }
     t.setData({
       bigJobsText: t.data.bigJobsList[idx].industry_name,
-      bigJobsType:false,
-      smallJobsType:true,
-      bigJobsList:dataList,
+      bigJobsType: false,
+      smallJobsType: true,
+      bigJobsList: dataList,
       idx,
     })
-    t.smallindustries({industry_id:id})
+    t.smallindustries({
+      industry_id: id
+    })
   },
 
-  smallJobsTab(e){
+  smallJobsTab(e) {
     console.log(e)
     let t = this,
-         idx = e.currentTarget.dataset.idx,
-         id = e.currentTarget.dataset.id,
-         dataList = t.data.smallJobsList
-         dataList[idx].isShow = !dataList[idx].isShow
-         if (dataList[idx].isShow) {
-           t.packUp(dataList, idx);
-         }
+      idx = e.currentTarget.dataset.idx,
+      id = e.currentTarget.dataset.id,
+      dataList = t.data.smallJobsList
+    dataList[idx].isShow = !dataList[idx].isShow
+    if (dataList[idx].isShow) {
+      t.packUp(dataList, idx);
+    }
     t.setData({
       smallJobsText: t.data.smallJobsList[idx].small_industry_name,
-      bigJobsType:false,
-      smallJobsType:false,
-      jobsType:true,
-      smallJobsList:dataList
+      bigJobsType: false,
+      smallJobsType: false,
+      jobsType: true,
+      smallJobsList: dataList
     })
-    t.jobs({small_industry_id:id})
+    t.jobs({
+      small_industry_id: id
+    })
   },
 
 
-  jobsTab(e){
+  jobsTab(e) {
     let t = this,
-         idx = e.currentTarget.dataset.idx,
-         id = e.currentTarget.dataset.id,
-         jobName = e.currentTarget.dataset.name
-         if(jobName.indexOf("其他")!==-1){
-           t.setData({
-            jobOther:true
-           })
-         }else{
-          t.setData({
-            jobOther:false
-           })
-         }
+      idx = e.currentTarget.dataset.idx,
+      id = e.currentTarget.dataset.id,
+      jobName = e.currentTarget.dataset.name
+    if (jobName.indexOf("其他") !== -1) {
+      t.setData({
+        jobOther: true
+      })
+    } else {
+      t.setData({
+        jobOther: false
+      })
+    }
     t.setData({
       jobsText: t.data.jobsList[idx].job_name,
-      job:t.data.bigJobsText+'-'+t.data.smallJobsText+'-'+t.data.jobsList[idx].job_name
+      job: t.data.bigJobsText + '-' + t.data.smallJobsText + '-' + t.data.jobsList[idx].job_name
     })
   },
-  jobsBtnEnter(){
+  jobsBtnEnter() {
     this.setData({
-      jobsPopup:false,
+      jobsPopup: false,
     })
   },
-  jobsBtnClo(){
-    let t =this
+  jobsBtnClo() {
+    let t = this
     t.setData({
-      jobsPopup:false,
-      job:'',
-      bigJobsText:'',
-      smallJobsText:'',
-      jobsText:''
+      jobsPopup: false,
+      job: '',
+      bigJobsText: '',
+      smallJobsText: '',
+      jobsText: ''
     })
+  },
+
+  openPicker(){
+    
+    let t = this,
+       cityData = t.data.districtData,
+         provinces = [],
+        citys = [],
+        countys = []
+        
+        t.setData({
+          condition:!this.data.condition,
+          value:[0,0,0]
+        })
+      
+        utils.removeItem('districtData')
+        utils.removeItem('cityIdx')
+
+        for (let i = 0; i < cityData.length; i++) {
+          provinces.push(cityData[i]);
+        }
+        console.log('省份完成');
+        for (let i = 0; i < cityData[0].cities.length; i++) {
+          citys.push(cityData[0].cities[i])
+        }
+        console.log('city完成');
+        for (let i = 0; i < cityData[0].cities[0].counties.length; i++) {
+          countys.push(cityData[0].cities[0].counties[i])
+        }
+        console.log('区县完成');
+
+        t.setData({
+          'provinces': provinces,
+          'citys': citys,
+          'countys': countys,
+          'province': cityData[0].province_name,
+          'city': cityData[0].cities[0].city_name,
+          'county': cityData[0].cities[0].counties[0].county_name
+        })
+  },
+
+  districtData(){
+
+    api.district({}, (res) => {
+      console.log(res.data.data)
+      
+      this.setData({
+        districtData: res.data.data
+      })
+    })
+  },
+
+  //省
+  provinceChange(e) {
+    this.setData({
+      province: e.detail.province,
+      city: e.detail.city,
+      county: e.detail.county,
+    })
+  },
+  //市
+  cityChange(e) {
+    this.setData({
+      city: e.detail.city,
+      county: e.detail.county,
+    })
+  },
+  //区
+  countyChange(e){
+    console.log(e.detail.county)
+    this.setData({
+      county: e.detail.county,
+    })
+  },
+  //picker展示条件
+  conditionChange(e) {
+    this.setData({
+      condition: e.detail
+    })
+  },
+
+  //小区id
+  cellIdChange(e) {
+    console.log(e.detail)
+    this.setData({
+      cellId: e.detail
+    })
+    this.getVillage();
+  },
+
+  // allMyHouses(){
+  //   api.allMyHouses({},(res)=>{
+  //     let data = res.data
+  //     if(data.code == 0){
+  //       this.setData({
+  //         allMyHouses:data.data
+  //       })
+  //     }
+  //   })
+  // },
+
+  //获取列表
+  housesList(param) {
+    let t = this
+    // return new Promise((resolve, reject) => {
+    api.housesList(param, (res) => {
+      if (res.data.code == 0) {
+        let list = res.data.data
+        if (list.length === 0) {
+          t.setData({
+            listType: false,
+            houseList:list
+          })
+        } else {
+          let newArr = list.map(item => {
+            return { ...item, isActive: false }
+          })
+          t.setData({
+            listType: true,
+          })
+
+          t.setData({
+            houseList: newArr,
+          })
+        }
+      }
+
+    })
+    // })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
     let t = this,
       userRoles = utils.getItem('userRoles'),
       examineData = utils.getItem('examineData'),
       arr = [],
       villageList = utils.getItem('villageList'),
       villageIdx = utils.getItem('villageIdx')
-      t.setData({
-        navH: app.globalData.navHeight,
-      })
+    t.setData({
+      navH: app.globalData.navHeight,
+    })
     t.bellInitialize();
     
+    t.districtData()
+    t.housesList({
+      type: 'bangding',
+      community_identifier: villageList[villageIdx].community_identifier
+    })
+    // t.allMyHouses()
     if (examineData) {
       if (arr.includes('NewMember')) {
         t.setData({
@@ -1283,25 +1527,28 @@ Page({
     }
     if (options.type == 'family') {
       t.setData({
-        examineData:'',
-        inputDisable:false
+        examineData: '',
+        inputDisable: false
       })
-    if(villageIdx&&villageIdx!=0){
+      if (villageIdx && villageIdx != 0) {
         t.setData({
           cellDetail: false,
           pageEntry: 'family'
         })
-        t.housesJiashuList({ community_identifier: villageList[villageIdx].community_identifier ,type:'shouquan'})
+        t.housesJiashuList({
+          community_identifier: villageList[villageIdx].community_identifier,
+          type: 'shouquan'
+        })
         return
-    }else{
-      t.setData({
-        changeCellType:true,
-        pageEntry: 'family'
-      })
-      return
+      } else {
+        t.setData({
+          changeCellType: true,
+          pageEntry: 'family'
+        })
+        return
+      }
     }
-  }
-    
+
     for (let i = 0; i < userRoles.length; i++) {
       let arrN = userRoles[i].name;
       arr.push(arrN)
@@ -1309,11 +1556,13 @@ Page({
 
     if (villageIdx == 0 || villageIdx == '') {
       t.setData({
-        changeCellType: true
+        // changeCellType: true
+        villageIdx:0
       })
     } else {
       t.setData({
-        villageList: app.globalData.villageList,
+        // villageIdx,
+        // villageList
       })
       if (arr.includes('NewMember')) {
         t.setData({
@@ -1323,7 +1572,7 @@ Page({
         t.setData({
           popupType: false
         })
-        t.getBuildingsList(villageList, villageIdx)
+        // t.getBuildingsList(villageList, villageIdx)
       }
     }
   },

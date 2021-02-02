@@ -8,8 +8,30 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    changeCellType: false,
+    title: '',
+    backType:true,
+    titleNavName:'体温上报'
   },
+
+  changeClose(res) {
+    let t = this,
+    villageList = utils.getItem('villageList'),
+      villageIdx = utils.getItem('villageIdx')
+    t.epidemicReportList({
+      community_identifier:villageList[villageIdx].community_identifier
+    })
+  this.setData({
+    changeCellType: res.detail.changeCellType,
+    title: res.detail.community_name
+  })
+},
+
+changePopupType(res) {
+  this.setData({
+    changeCellType: res.detail
+  })
+},
 
   formSubmit(e){
     console.log(e)
@@ -34,7 +56,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let t = this
+    t.setData({
+      navH: app.globalData.navHeight
+    })
   },
 
   /**

@@ -52,7 +52,8 @@ Page({
     ],
     changeCellType:false,
     title:'',
-    backType:true
+    backType:true,
+    titleNavName:'应急电话'
   },
 
   changeClose(res){

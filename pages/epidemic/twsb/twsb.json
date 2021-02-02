@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
-  "navigationStyle":"default",
-  "navigationBarTitleText":"上报体温"
+  "component":true,
+  "usingComponents": {
+    "change-cell":"/components/changeCell/changeCell",
+    "title-Navigation": "/components/titleNavigation/titleNavigation"
+  }
 }

@@ -20,7 +20,8 @@ Page({
     popupType: true,
     changeCellType: false,
     title: '',
-    backType: true
+    backType: true,
+    titleNavName:'投诉建议'
   },
 
   changeClose(res) {

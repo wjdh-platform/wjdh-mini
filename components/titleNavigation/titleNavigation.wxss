@@ -71,9 +71,15 @@
   text-align: center;
   display: inline-block;
   vertical-align: middle;
+  
+  margin-top: 10rpx;
 }
 .title{
   font-size: 28rpx;
+}
+.title text{
+  font-size: 27rpx;
+  color: #333;
 }
 
 /* .navBar .return::after {
@@ -91,7 +97,15 @@
 .navBar .return image {
   width: 18rpx;
   height: 32rpx;
-  margin-top: 16rpx;
+  /* margin-top: 16rpx; */
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+
+.return text{
+  vertical-align: middle;
+  font-size: 26rpx;
+  line-height: 26rpx;
 }
 
 .navBar .home {
@@ -135,3 +149,59 @@
 }
 
 /* 分类结束 */
+
+
+.up{
+  display: inline-block;
+  width:0;
+  height:0;
+  border-right:10rpx solid transparent;
+  border-left:10rpx solid transparent;
+  border-top:10rpx solid #333;
+  margin-left: 10rpx;
+}
+.down{
+  display: inline-block;
+  width:0;
+  height:0;
+  border-right:10rpx solid transparent;
+  border-left:10rpx solid transparent;
+  border-bottom:10rpx solid #333;
+  margin-left: 10rpx;
+}
+.titleMoreP{
+  position: fixed;
+    top: 89rpx;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 4;
+    background: rgba(0,0,0,.26);
+}
+.itemCont{
+  padding: 30rpx 0;
+    background: #fff;
+    overflow: hidden;
+    /* min-height: 400rpx; */
+border-radius: 1rpx 1rpx 30rpx 30rpx;
+box-sizing: border-box;
+}
+.item{
+  text-align: center;
+  font-size: 30rpx;
+  color: #3C3C3C;
+  height: 70rpx;
+  line-height: 70rpx;
+
+}
+.active{
+  color: #50DABE;
+}
+.active::after{
+  content: "";
+  display: inline-block;
+  width: 36rpx;
+  height: 32rpx;
+  background: url("https://face-100k.oss-cn-beijing.aliyuncs.com/wjdh-platform/wjdh-mini/enterIcon.png") no-repeat;
+  background-size: 36rpx 32rpx;
+}

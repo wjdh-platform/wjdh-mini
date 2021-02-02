@@ -39,7 +39,8 @@ Component({
     county: '',
     value: [0, 0, 0],
     values: [0, 0, 0],
-    condition: false
+    condition: false,
+    changeCellType:false
   },
 
 
@@ -271,9 +272,9 @@ Component({
         villageIdx,
         cellType: true,
         cityType: true,
-        province:districtData[cityIdx[0]],
-        city:districtData[cityIdx[0]].cities[cityIdx[1]],
-        county:districtData[cityIdx[0]].cities[cityIdx[1]].counties[cityIdx[2]],
+        // province:districtData[cityIdx[0]],
+        // city:districtData[cityIdx[0]].cities[cityIdx[1]],
+        // county:districtData[cityIdx[0]].cities[cityIdx[1]].counties[cityIdx[2]],
       })
     } else {
     

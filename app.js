@@ -34,7 +34,7 @@ App({
             //你的分享配置
             return {
               title: '随时随地 回家看看',
-              path: '/pages/property/property',
+              path: '/pages/property/property?type=share',
               imageUrl:'https://tc.mg.cool/mini/images/shareImg.jpg'
             };
           }

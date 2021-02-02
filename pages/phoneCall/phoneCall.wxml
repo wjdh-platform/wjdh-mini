@@ -2,7 +2,7 @@
 <view class="phoneCall" style="padding-top:{{navH}}px">
   <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType" title="{{title}}" bindcloseBtn="closeBtn">
   </change-cell>
-  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
+  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}" titleNavName="{{titleNavName}}"></title-Navigation>
   <view class="phoneCallCont" wx:if="{{wyPhone!=''}}">
     <view class="title">物业电话：</view>
     <view class="phoneCont">

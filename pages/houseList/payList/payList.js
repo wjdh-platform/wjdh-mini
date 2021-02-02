@@ -15,7 +15,8 @@ Page({
     changeCellType: false,
     title: '',
     backType: true,
-    houseListIdx: 0
+    houseListIdx: 0,
+    titleNavName:'账单列表'
   },
 
   bindHouseList(e) {

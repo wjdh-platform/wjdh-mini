@@ -242,6 +242,14 @@ export const epidemicReportList = (params, cb) => {
 export const district = (params, cb) => {
   request('api/v1/district', params, cb, 'POST')
 }
+//获得我的小区
+export const myCommunities = (params, cb) => {
+  request('api/v1/myCommunities', params, cb, 'POST')
+}
+//获得我的所有房屋
+export const allMyHouses = (params, cb) => {
+  request('api/v1/allMyHouses', params, cb, 'POST')
+}
 
 
 

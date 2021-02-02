@@ -3,7 +3,11 @@
   <change-cell changeCellType="{{changeCellType}}" 
   bindchangeClose="changeClose" bindchangePopupType="changePopupType" buildingsType="{{buildingsType}}"
   title="{{title}}" bindcloseBtn="closeBtn"></change-cell>
-  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
+  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"  titleNavName="{{titleNavName}}"></title-Navigation>
+  <!-- 选择省市开始 -->
+  <picker-view  provinces="{{provinces}}" citys="{{citys}}" province="{{province}}" city="{{city}}" countys="{{countys}}" county="{{county}}" condition="{{condition}}" cityData="{{districtData}}" bind:conditionState="conditionChange" bind:provinceData="provinceChange" bind:cityData="cityChange" bind:countyData="countyChange"
+  bind:cellId="cellIdChange"></picker-view>
+  <!-- 选择省市结束 -->
   <!-- 校验手机号 -->
   <view class="verificationPhoto" wx:if="{{popupType}}">
     <view class="phoneCode">
@@ -38,9 +42,27 @@
       <view class="verificationBtn" bindtap="verificationBtn">确定</view>
     </view>
   </view>
+  <view class="houseCont" wx:if="{{houseList.length>0}}">
+    <view class="column houseListCol" bindtap="houseListType">
+     <view>已绑定房屋</view>
+      <view class="{{!houseListType?'up':'down'}}"> {{houseListType?'收起':'展开'}}</view>
+    </view>
+    <view class="column houseListCol" wx:for="{{houseList}}" wx:if="{{houseListType}}">
+      <view class="">{{item.introduction}}</view>
+      <view class="houseType fail" wx:if="{{item.status == '未通过审核'}}">{{item.status}}</view>
+        <view class="houseType shenheing" wx:if="{{item.status == '解绑审核中'||item.status == '审核中'}}">{{item.status}}
+        </view>
+        <view class="houseType" wx:if="{{item.status == '审核已通过'}}">{{item.status}}</view>
+    </view>
+  </view>
   <form bindsubmit="submitCell">
     <view class="houseCont" wx:if="{{cellDetail}}">
-     <!--  <view class="column">
+      <view class="column">
+        <view class="title">省市区</view>
+        <view bindtap="openPicker" class="changePicker">{{province?province+' '+ city+' '+  county:'请选择省市区'}}</view>
+        <image class="arrow" src="./../../static/image/arrow.png"></image>
+      </view>
+      <view class="column" wx:if="{{cellId&&cellId!=''}}">
         <view class="title">小区</view>
         <picker bindchange="bindvillageList" value="{{villageIdx}}" range="{{villageList}}" range-key="community_name">
           <view class="picker">
@@ -48,7 +70,7 @@
           </view>
         </picker>
         <image class="arrow" src="./../../static/image/arrow.png"></image>
-      </view> -->
+      </view>
       <!-- <view class="column" wx:if="{{buildingsList&&buildingsType}}"> -->
         <view class="column" wx:if="{{buildingsList}}">
         <view class="title">楼栋</view>
@@ -113,7 +135,7 @@
         <image class="arrow" src="./../../static/image/arrow.png"></image>
       </view>
     </view>
-    <view class="houseCont" wx:if="{{yezhuOldPhone&&yezhuOldPhone!=''&&roomType}}">
+    <view class="houseCont" wx:if="{{yezhuOldPhone&&yezhuOldPhone!=''&&roomType&&ziyouYZphone}}">
       <view class="msgColumn">
         <view class="msgTitle">业主手机号</view>
         <input type="number" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder"
@@ -139,6 +161,31 @@
         <label>
           <radio value="{{dataList.choice[1].key}}" />{{dataList.choice[1].value}}</label>
       </radio-group>
+    </view>
+    <view class="houseCont" wx:if="{{moshiZyType}}">
+      <radio-group name="radio" bindchange="radioChange">
+        <label>
+          <radio value="{{dataList.choice[0].key}}" />{{dataList.choice[0].value}}</label>
+        <label>
+          <radio value="{{dataList.choice[1].key}}" />{{dataList.choice[1].value}}</label>
+      </radio-group>
+    </view>
+    <view class="houseCont" wx:if="{{yezhuNumType}}">
+      <view class="msgColumn">
+        <view class="msgTitle">业主手机号</view>
+        <input type="number" placeholder="请输入" class="inputText" placeholder-class="inputPlaceHolder"
+          value="{{encryptionPhone}}" disabled="true"></input>
+        <view class="codeBtnYZ" bindtap="obtainCodeYZ">{{codeBtnTextYZ}}</view>
+      </view>
+      <view class="msgColumn">
+        <view class="msgTitle">验证码</view>
+        <view class="code">
+          <input type="number" placeholder="请输入验证码" placeholder-class="placeholderClass" bindblur="codeBlurYZ"
+            name="codeValYZ"></input>
+          <view class="codeBtnYZB" bindtap="verificationPhone">{{verificationPhoneVal}}</view>
+        </view>
+
+      </view>
     </view>
 
     <view class="houseCont">

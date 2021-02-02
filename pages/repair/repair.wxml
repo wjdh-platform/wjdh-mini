@@ -2,7 +2,7 @@
 <view class="repair" style="padding-top:{{navH}}px">
   <change-cell changeCellType="{{changeCellType}}" bindchangeClose="changeClose" bindchangePopupType="changePopupType" title="{{title}}" bindcloseBtn="closeBtn">
   </change-cell>
-  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}"></title-Navigation>
+  <title-Navigation detail="true" title="{{title}}" backType="{{backType}}" titleNavName="{{titleNavName}}"></title-Navigation>
   <view wx:if="{{popupType}}">
     <form bindsubmit="addressSub">
       

@@ -12,6 +12,8 @@ Page({
     },
     changeCellType: false,
     title: '',
+    titleNavName:'我的体温',
+    backType:true,
   },
 
   bindYear(e){
